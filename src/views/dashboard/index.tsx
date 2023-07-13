@@ -1,8 +1,18 @@
 import React from 'react';
+import { Box } from '@mantine/core';
 
 function Dashboard() {
   return (
-    <section className="w-full p-5 bg-zinc-300 min-h-full">Dashboard</section>
+    <Box
+      sx={(theme) => ({
+        width: '100%',
+        minHeight: '100%',
+        padding: theme.spacing.xl,
+        backgroundColor: theme.colors.gray[4],
+      })}
+    >
+      Dashboard
+    </Box>
   );
 }
 

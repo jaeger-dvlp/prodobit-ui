@@ -1,10 +1,22 @@
 import React from 'react';
+import { Box } from '@mantine/core';
 
 function Sidebar() {
   return (
-    <div className="w-full max-w-[300px] bg-zinc-200 flex min-h-full p-5 ">
+    <Box
+      className="sidebar"
+      sx={(theme) => ({
+        width: '100%',
+        display: 'flex',
+        maxWidth: '300px',
+        minHeight: '100%',
+        flexDirection: 'column',
+        padding: theme.spacing.xl,
+        backgroundColor: theme.colors.gray[3],
+      })}
+    >
       Sidebar
-    </div>
+    </Box>
   );
 }
 
