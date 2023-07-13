@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
+    "@loadable/component": "^5.15.3",
     "@mantine/core": "^6.0.16",
     "@mantine/dates": "^6.0.16",
     "@mantine/dropzone": "^6.0.16",
@@ -26,11 +27,13 @@
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
     "dayjs": "^1.11.9",
+    "framer-motion": "^10.12.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1"
   },
   "devDependencies": {
+    "@types/loadable__component": "^5.13.4",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
