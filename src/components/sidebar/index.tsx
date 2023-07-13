@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box } from '@mantine/core';
+import { Box, Button } from '@mantine/core';
+import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -15,7 +16,22 @@ function Sidebar() {
         backgroundColor: theme.colors.gray[3],
       })}
     >
-      Sidebar
+      <Box
+        component="ul"
+        sx={{
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <Box component="li">
+          <Button component={NavLink} to="/dashboard" variant="light" fullWidth>
+            Dashboard
+          </Button>
+          <Button component={NavLink} to="/analyzes" variant="light" fullWidth>
+            Analyzes
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 }

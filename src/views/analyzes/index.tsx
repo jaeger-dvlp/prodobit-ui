@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
 
-function Dashboard() {
+function Analyzes() {
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -16,9 +16,9 @@ function Dashboard() {
         padding: theme.spacing.xl,
       })}
     >
-      Dashboard
+      Analyzes
     </Box>
   );
 }
 
-export default Dashboard;
+export default Analyzes;
