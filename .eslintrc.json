@@ -58,6 +58,7 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-props-no-spreading": "off",
+    "import/no-named-default": "off",
     "import/no-extraneous-dependencies": "off"
   }
 }
