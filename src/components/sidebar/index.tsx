@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Image } from '@mantine/core';
 import { useMatch } from 'react-router-dom';
 import MainRouteLink from '@/components/sidebar/MainRouteLink';
+import SidebarProfile from '@/components/sidebar/SidebarProfile';
 import RouteLeftIndicator from '@/components/sidebar/RouteLeftIndicator';
 
 import {
@@ -88,7 +89,6 @@ function Routes() {
           <span>Tasks</span>
         </MainRouteLink>
       </Box>
-
       <RouteLeftIndicator />
     </Box>
   );
@@ -135,7 +135,7 @@ function Sidebar() {
         })}
       />
       <Routes />
-      <Box>Bottom</Box>
+      <SidebarProfile />
     </Box>
   );
 }
