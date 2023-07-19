@@ -44,11 +44,11 @@ function SidebarProfile() {
     <Box
       component="section"
       sx={{
+        padding: 50,
         width: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '75px 75px 50px 50px',
       }}
     >
       <Box
