@@ -12,8 +12,12 @@ function Dashboard() {
       sx={(theme) => ({
         width: '100%',
         minHeight: '100%',
-        backgroundColor: '#fff',
         padding: theme.spacing.xl,
+        backgroundColor: 'transparent',
+        [theme.fn.smallerThan('md')]: {
+          borderRadius: 0,
+          backgroundColor: '#fff',
+        },
       })}
     >
       Dashboard
