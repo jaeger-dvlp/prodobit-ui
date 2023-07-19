@@ -8,7 +8,7 @@
 .sidebar-routes > li ul::after {
   content: '';
   position: absolute;
-  top: -10px;
+  top: -8px;
   left: 0px;
   width: 11px;
   height: 11px;
@@ -18,7 +18,7 @@
   background-position: center;
 }
 
-.sidebar-routes > li ul > li *:not(:last-child)::after {
+.sidebar-routes > li ul li:not(:last-child)::after {
   content: '';
   position: absolute;
   top: 0px;
@@ -29,13 +29,13 @@
   border-left: 2px solid #b1b2b5;
 }
 
-.sidebar-routes > li ul > li > *:last-child::after {
+.sidebar-routes > li ul li:last-child::after {
   content: '';
-  position: absolute;
-  top: -1px;
+  top: 0px;
   left: -36px;
   width: 15px;
-  height: 30px;
+  height: 50%;
+  position: absolute;
   border-bottom: 2px solid #b1b2b5;
   border-left: 2px solid #b1b2b5;
   border-radius: 0px 0px 0px 10px;
