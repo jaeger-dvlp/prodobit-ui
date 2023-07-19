@@ -14,10 +14,6 @@ function Requests() {
         minHeight: '100%',
         padding: theme.spacing.xl,
         backgroundColor: 'transparent',
-        [theme.fn.smallerThan('md')]: {
-          borderRadius: 0,
-          backgroundColor: '#fff',
-        },
       })}
     >
       Requests

@@ -107,9 +107,9 @@ function Sidebar() {
         alignItems: 'start',
         position: 'relative',
         flexDirection: 'column',
+        backgroundColor: '#fff',
         borderRadius: theme.radius.xl,
         justifyContent: 'space-between',
-        backgroundColor: isActiveRoute('/dashboard') ? '#fff' : 'transparent',
         [theme.fn.smallerThan('md')]: {
           top: 0,
           left: 0,

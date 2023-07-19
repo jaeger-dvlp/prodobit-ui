@@ -12,8 +12,8 @@ function Analyzes() {
       sx={(theme) => ({
         width: '100%',
         minHeight: '100%',
-        backgroundColor: '#fff',
         padding: theme.spacing.xl,
+        backgroundColor: 'transparent',
       })}
     >
       Analyzes
