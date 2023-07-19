@@ -3,7 +3,12 @@ import Sidebar from '@/components/sidebar';
 import loadable from '@loadable/component';
 import Loader from '@/components/layout/Loader';
 import { Box, MantineProvider } from '@mantine/core';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  /* Navigate, */
+  Route,
+  Routes,
+  BrowserRouter,
+} from 'react-router-dom';
 
 const LoadableWrapper = (component: any) =>
   loadable(() => component, { fallback: <Loader /> });
@@ -67,6 +72,7 @@ function App() {
               <Route path="/requests" element={<ViewRequests />} />
               <Route path="/tasks" element={<ViewTasks />} />
               <Route path="*" element={<ViewDashboard />} />
+              {/* <Route path="*" element={<Navigate to="/dashboard" /> */}
             </Routes>
           </Box>
         </BrowserRouter>
