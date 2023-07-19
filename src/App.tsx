@@ -10,6 +10,8 @@ const LoadableWrapper = (component: any) =>
 
 const ViewDashboard = LoadableWrapper(import('@/views/dashboard'));
 const ViewAnalyzes = LoadableWrapper(import('@/views/analyzes'));
+const ViewRequests = LoadableWrapper(import('@/views/requests'));
+const ViewTasks = LoadableWrapper(import('@/views/tasks'));
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       withGlobalStyles
       withNormalizeCSS
       theme={{
+        fontFamily: 'Inter, sans-serif',
         colors: {
           foundationgreen: [
             '#EEFCF9',
@@ -35,15 +38,19 @@ function App() {
     >
       <Box
         className="app"
-        sx={{
+        sx={(theme) => ({
           width: '100%',
           display: 'flex',
           minHeight: '100vh',
           position: 'relative',
           flexDirection: 'row',
           justifyContent: 'start',
-          backgroundColor: '#fff',
-        }}
+          backgroundImage: theme.fn.gradient({
+            from: '#E6EDEB',
+            to: '#FEEDEE',
+            deg: 45,
+          }),
+        })}
       >
         <BrowserRouter>
           <Sidebar />
@@ -57,6 +64,8 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<ViewDashboard />} />
               <Route path="/analyzes" element={<ViewAnalyzes />} />
+              <Route path="/requests" element={<ViewRequests />} />
+              <Route path="/tasks" element={<ViewTasks />} />
               <Route path="*" element={<ViewDashboard />} />
             </Routes>
           </Box>
