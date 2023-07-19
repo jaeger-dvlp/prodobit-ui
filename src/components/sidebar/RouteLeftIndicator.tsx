@@ -7,8 +7,12 @@ function RouteLeftIndicator() {
 
   const location = useLocation();
 
-  function HandleIndication() {
+  async function HandleIndication() {
     const el = document.querySelector('.main-route-link-active') as HTMLElement;
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, 200);
+    });
 
     if (el) {
       const Y = el.offsetTop;
@@ -43,7 +47,7 @@ function RouteLeftIndicator() {
         height: 63,
         position: 'absolute',
         borderRadius: '0px 20px 20px 0px',
-        transition: 'all 0.15s ease-in-out',
+        transition: 'all 0.2s ease-in-out',
         backgroundColor: theme.colors.foundationgreen[9],
         [theme.fn.smallerThan('md')]: {
           display: 'none',

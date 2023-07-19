@@ -1,6 +1,7 @@
 import { Button } from '@mantine/core';
+import { NavLink } from 'react-router-dom';
 import { CustomCaret } from '@/components/icons';
-import { NavLink, useMatch } from 'react-router-dom';
+import isRouteActive from '@/common/hooks/isRouteActive';
 
 function MainRouteLink({
   to,
@@ -11,7 +12,7 @@ function MainRouteLink({
   children: React.ReactNode;
   haveSubRoutes?: boolean;
 }) {
-  const routeStatus = useMatch(to);
+  const routeStatus = isRouteActive(to);
 
   return (
     <Button
@@ -22,6 +23,7 @@ function MainRouteLink({
       sx={(theme) => ({
         border: 'none',
         display: 'flex',
+        fontWeight: 700,
         fontSize: '20px',
         borderRadius: 20,
         padding: '20px 30px',
