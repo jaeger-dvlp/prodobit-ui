@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Button, Image } from '@mantine/core';
-import { NavLink, useMatch } from 'react-router-dom';
+import { Box, Image } from '@mantine/core';
+import { useMatch } from 'react-router-dom';
+import MainRouteLink from '@/components/sidebar/MainRouteLink';
+import RouteLeftIndicator from '@/components/sidebar/RouteLeftIndicator';
 
 import {
   TasksIcon,
-  CustomCaret,
   AnalyzesIcon,
   RequestsIcon,
   DashboardIcon,
@@ -16,65 +17,6 @@ const Images = {
 
 function isActiveRoute(route: string) {
   return useMatch(route);
-}
-
-function MainRouteLink({
-  to,
-  children,
-  haveSubRoutes,
-}: {
-  to: string;
-  children: React.ReactNode;
-  haveSubRoutes?: boolean;
-}) {
-  const routeStatus = isActiveRoute(to);
-
-  return (
-    <Button
-      to={to}
-      variant="default"
-      component={NavLink}
-      sx={(theme) => ({
-        border: 'none',
-        display: 'flex',
-        fontSize: '20px',
-        borderRadius: 20,
-        padding: '20px 30px',
-        flexDirection: 'row',
-        alignItems: 'center',
-        position: 'relative',
-        height: 'fit-content',
-        justifyContent: 'start',
-        transition: 'all 0.15s ease-in-out',
-        color: routeStatus ? theme.colors.foundationgreen[9] : '#676668',
-        backgroundColor: routeStatus
-          ? theme.colors.foundationgreen[1]
-          : 'transparent',
-        ':hover': {
-          color: theme.colors.foundationgreen[9],
-          backgroundColor: routeStatus
-            ? theme.colors.foundationgreen[1]
-            : 'transparent',
-        },
-      })}
-    >
-      {children}
-      {haveSubRoutes && (
-        <CustomCaret
-          width={24}
-          style={{
-            right: 30,
-            top: '50%',
-            position: 'absolute',
-            transition: 'all 0.15s ease-in-out',
-            transform: `translateY(-50%) ${
-              routeStatus ? 'rotate(180deg)' : 'rotate(0deg)'
-            }`,
-          }}
-        />
-      )}
-    </Button>
-  );
 }
 
 function Routes() {
@@ -146,6 +88,8 @@ function Routes() {
           <span>Tasks</span>
         </MainRouteLink>
       </Box>
+
+      <RouteLeftIndicator />
     </Box>
   );
 }
