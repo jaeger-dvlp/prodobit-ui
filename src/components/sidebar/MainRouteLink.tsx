@@ -1,10 +1,10 @@
+import React from 'react';
 import { Box, Button } from '@mantine/core';
 import { CustomCaret } from '@/components/icons';
 import { NavLink, useMatch } from 'react-router-dom';
 import { RouteMapItem, SubRouteAnims } from '@/routes';
 import { AnimatePresence, motion } from 'framer-motion';
-import React from 'react';
-import SecondSubRouteLink from './SecondSubLink';
+import SecondSubRouteLink from '@/components/sidebar/SecondSubLink';
 
 function MainRouteLink({
   to,

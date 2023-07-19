@@ -95,7 +95,7 @@ function CustomCaret(props: CustomIconProps) {
 
 function EyeIcon(props: CustomIconProps) {
   return (
-    <svg viewBox="0 0 22 21" {...DefaultProps} {...props} fill="none">
+    <svg viewBox="0 0 22 21" fill="none" {...DefaultProps} {...props}>
       <path
         d="M1.83331 10.2505C1.83331 10.2505 5.16665 3.58383 11 3.58383C16.8333 3.58383 20.1666 10.2505 20.1666 10.2505C20.1666 10.2505 16.8333 16.9172 11 16.9172C5.16665 16.9172 1.83331 10.2505 1.83331 10.2505Z"
         stroke="currentColor"

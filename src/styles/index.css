@@ -1,0 +1,66 @@
+@tailwind components;
+@tailwind utilities;
+
+.sidebar-routes > li ul li,
+.sidebar-routes > li ul li > ul li {
+  position: relative;
+}
+
+.sidebar-routes > li ul::after {
+  content: '';
+  top: -8px;
+  left: 0px;
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI4IiB2aWV3Qm94PSIwIDAgOSA4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMy40MTgyOCAxLjA5ODQxQzMuNTA1MjggMC45NDM3OTcgMy42MzE4NSAwLjgxNTExMSAzLjc4NSAwLjcyNTU1OEMzLjkzODE1IDAuNjM2MDA0IDQuMTEyMzcgMC41ODg4MDYgNC4yODk3OCAwLjU4ODgwNkM0LjQ2NzE5IDAuNTg4ODA2IDQuNjQxNDEgMC42MzYwMDQgNC43OTQ1NiAwLjcyNTU1OEM0Ljk0NzcxIDAuODE1MTExIDUuMDc0MjggMC45NDM3OTcgNS4xNjEyOCAxLjA5ODQxTDcuOTUxMjggNi4wNTg0MUM4LjAzNzAzIDYuMjEwNTUgOC4wODE0NCA2LjM4MjUgOC4wODAwOSA2LjU1NzE0QzguMDc4NzQgNi43MzE3OCA4LjAzMTY3IDYuOTAzMDIgNy45NDM1OCA3LjA1MzgyQzcuODU1NDkgNy4yMDQ2MiA3LjcyOTQ0IDcuMzI5NzIgNy41Nzc5OCA3LjQxNjY3QzcuNDI2NTEgNy41MDM2MiA3LjI1NDkyIDcuNTQ5MzggNy4wODAyOCA3LjU0OTQxSDEuNTAwMjhDMS4zMjU2OSA3LjU0OTQ2IDEuMTU0MTQgNy41MDM4IDEuMDAyNjcgNy40MTY5OEMwLjg1MTIxMSA3LjMzMDE1IDAuNzI1MTE4IDcuMjA1MTggMC42MzY5MzYgNy4wNTQ1MUMwLjU0ODc1NCA2LjkwMzgzIDAuNTAxNTU3IDYuNzMyNjkgMC41MDAwMzggNi41NTgxMUMwLjQ5ODUxOSA2LjM4MzUzIDAuNTQyNzMxIDYuMjExNiAwLjYyODI3OCA2LjA1OTQxTDMuNDE4MjggMS4wOTg0MVoiIGZpbGw9IiNCMUIyQjUiLz4KPC9zdmc+Cg==');
+}
+
+.sidebar-routes > li ul li:not(:last-child)::after {
+  content: '';
+  top: 0px;
+  width: 0px;
+  left: -36px;
+  height: 100%;
+  position: absolute;
+  background: #b1b2b5;
+  border-left: 2px solid #b1b2b5;
+}
+
+.sidebar-routes > li ul li > ul li:not(:last-child)::before {
+  content: '';
+  top: 50%;
+  left: -36px;
+  width: 15px;
+  height: 2px;
+  position: absolute;
+  background: #b1b2b5;
+  transform: translateY(-50%);
+}
+
+.sidebar-routes > li ul li:last-child::after {
+  content: '';
+  top: 0px;
+  left: -36px;
+  width: 15px;
+  height: 50%;
+  position: absolute;
+  border-radius: 0px 0px 0px 10px;
+  border-left: 2px solid #b1b2b5;
+  border-bottom: 2px solid #b1b2b5;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 0px;
+}
+::-webkit-scrollbar-track {
+  background-color: #2ae19e;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: #1c957b;
+}

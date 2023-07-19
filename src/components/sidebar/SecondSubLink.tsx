@@ -1,10 +1,10 @@
-import { Box, Button } from '@mantine/core';
-import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
+import { Box, Button } from '@mantine/core';
+import { CustomCaret } from '@/components/icons';
 import { NavLink, useMatch } from 'react-router-dom';
-import ThirdSubRouteLink from '@/components/sidebar/ThirdSubLink';
 import { RouteMapItem, SubRouteAnims } from '@/routes';
-import { CustomCaret } from '../icons';
+import { AnimatePresence, motion } from 'framer-motion';
+import ThirdSubRouteLink from '@/components/sidebar/ThirdSubLink';
 
 function SecondSubRouteLink({
   to,
@@ -22,7 +22,6 @@ function SecondSubRouteLink({
       <Button
         to={to}
         variant="default"
-        className={`main-route-link ${isActive && 'main-route-link-active'}`}
         component={NavLink}
         sx={(theme) => ({
           border: 'none',
@@ -76,15 +75,15 @@ function SecondSubRouteLink({
             sx={{
               listStyle: 'none',
               position: 'relative',
-              margin: '30px 0px 0px 35px',
+              margin: '25px 0px 0px 22px',
             }}
           >
             {subRoutes.map((thirdSubRoute) => (
-              <Box component="li" key={thirdSubRoute.path}>
+              <React.Fragment key={thirdSubRoute.path}>
                 <ThirdSubRouteLink to={thirdSubRoute.path}>
                   {thirdSubRoute.name}
                 </ThirdSubRouteLink>
-              </Box>
+              </React.Fragment>
             ))}
           </Box>
         )}

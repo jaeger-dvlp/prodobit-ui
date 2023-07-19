@@ -1,5 +1,5 @@
-import { Button } from '@mantine/core';
 import React from 'react';
+import { Box, Button } from '@mantine/core';
 import { NavLink, useMatch } from 'react-router-dom';
 
 function ThirdSubRouteLink({
@@ -7,40 +7,42 @@ function ThirdSubRouteLink({
   children,
 }: {
   to: string;
-
   children: React.ReactNode;
 }) {
   const isActive = useMatch(`${to.endsWith('/') ? to : `${to}/`}*`);
 
   return (
-    <Button
-      to={to}
-      variant="default"
-      className={`main-route-link ${isActive && 'main-route-link-active'}`}
-      component={NavLink}
-      sx={(theme) => ({
-        padding: '10px 0px',
-        border: 'none',
-        display: 'flex',
-        fontWeight: 300,
-        fontSize: '20px',
-        borderRadius: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        position: 'relative',
-        height: 'fit-content',
-        justifyContent: 'start',
-        transition: 'all 0.15s ease-in-out',
-        color: isActive ? '#000' : '#878688',
-        backgroundColor: 'transparent',
-        ':hover': {
-          color: isActive ? '#000' : theme.colors.foundationgreen[9],
+    <Box component="li">
+      <Button
+        to={to}
+        variant="default"
+        component={NavLink}
+        className={`main-route-link ${isActive && 'main-route-link-active'}`}
+        sx={(theme) => ({
+          border: 'none',
+          display: 'flex',
+          marginLeft: -10,
+          fontWeight: 300,
+          fontSize: '20px',
+          borderRadius: 20,
+          padding: '10px 0px',
+          flexDirection: 'row',
+          alignItems: 'center',
+          position: 'relative',
+          height: 'fit-content',
+          justifyContent: 'start',
           backgroundColor: 'transparent',
-        },
-      })}
-    >
-      {children}
-    </Button>
+          transition: 'all 0.15s ease-in-out',
+          color: isActive ? '#000' : '#878688',
+          ':hover': {
+            color: isActive ? '#000' : theme.colors.foundationgreen[9],
+            backgroundColor: 'transparent',
+          },
+        })}
+      >
+        {children}
+      </Button>
+    </Box>
   );
 }
 

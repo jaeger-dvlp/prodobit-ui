@@ -1,10 +1,9 @@
 import React from 'react';
+import RoutesMap from '@/routes';
 import { Box, Image } from '@mantine/core';
 import MainRouteLink from '@/components/sidebar/MainRouteLink';
 import SidebarProfile from '@/components/sidebar/SidebarProfile';
 import RouteLeftIndicator from '@/components/sidebar/RouteLeftIndicator';
-
-import RoutesMap from '@/routes';
 
 const Images = {
   logo: '/assets/img/logo.svg',

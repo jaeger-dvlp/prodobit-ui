@@ -1,10 +1,10 @@
 import { Variant } from 'framer-motion';
 
 import {
+  TasksIcon,
+  RequestsIcon,
   AnalyzesIcon,
   DashboardIcon,
-  RequestsIcon,
-  TasksIcon,
 } from '@/components/icons';
 
 export const SubRouteAnims: {
@@ -39,16 +39,16 @@ export const SubRouteAnims: {
       height: 0,
       marginTop: 0,
       transition: {
-        duration: 0.15,
+        duration: 0.2,
       },
     },
     visible: {
       opacity: 1,
       x: 0,
       height: 'fit-content',
-      marginTop: 30,
+      marginTop: 25,
       transition: {
-        duration: 0.15,
+        duration: 0.2,
       },
     },
   },

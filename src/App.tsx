@@ -1,4 +1,3 @@
-import '@/index.css';
 import Sidebar from '@/components/sidebar';
 import loadable from '@loadable/component';
 import Loader from '@/components/layout/Loader';
