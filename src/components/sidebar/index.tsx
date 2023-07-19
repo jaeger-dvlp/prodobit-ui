@@ -125,7 +125,7 @@ function Sidebar() {
         alt="Logo"
         src={Images.logo}
         sx={(theme) => ({
-          margin: 50,
+          margin: '50px 50px 50px 80px',
           width: '100%',
           display: 'block',
           maxWidth: '170px',
