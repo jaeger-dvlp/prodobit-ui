@@ -68,7 +68,7 @@ function App() {
           >
             <Routes>
               <Route path="/dashboard" element={<ViewDashboard />} />
-              <Route path="/analyzes" element={<ViewAnalyzes />} />
+              <Route path="/analytics" element={<ViewAnalyzes />} />
               <Route path="/requests" element={<ViewRequests />} />
               <Route path="/tasks" element={<ViewTasks />} />
               <Route path="*" element={<ViewDashboard />} />
