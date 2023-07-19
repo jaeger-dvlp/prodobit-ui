@@ -1,12 +1,12 @@
 import { Box, Button } from '@mantine/core';
-import { CustomCaret } from '@/components/icons';
-import { NavLink, useMatch } from 'react-router-dom';
-import { RouteMapItem, SubRouteAnims } from '@/routes';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
-import SecondSubRouteLink from './SecondSubLink';
+import { NavLink, useMatch } from 'react-router-dom';
+import ThirdSubRouteLink from '@/components/sidebar/ThirdSubLink';
+import { RouteMapItem, SubRouteAnims } from '@/routes';
+import { CustomCaret } from '../icons';
 
-function MainRouteLink({
+function SecondSubRouteLink({
   to,
   children,
   subRoutes,
@@ -27,16 +27,16 @@ function MainRouteLink({
         sx={(theme) => ({
           border: 'none',
           display: 'flex',
-          fontWeight: 700,
+          fontWeight: 500,
           fontSize: '20px',
-          borderRadius: 20,
-          padding: '20px 30px',
+          borderRadius: 10,
           flexDirection: 'row',
           alignItems: 'center',
           position: 'relative',
           height: 'fit-content',
           justifyContent: 'start',
           transition: 'all 0.15s ease-in-out',
+          padding: `14.5px 20px 14.5px ${isActive ? '20px' : '0px'}`,
           color: isActive ? theme.colors.foundationgreen[9] : '#676668',
           backgroundColor: isActive
             ? theme.colors.foundationgreen[1]
@@ -54,7 +54,7 @@ function MainRouteLink({
           <CustomCaret
             width={24}
             style={{
-              right: 30,
+              right: '20px',
               top: '50%',
               position: 'absolute',
               transition: 'all 0.15s ease-in-out',
@@ -72,19 +72,19 @@ function MainRouteLink({
             initial="hidden"
             animate="visible"
             component={motion.ul}
-            variants={SubRouteAnims.seconds}
+            variants={SubRouteAnims.thirds}
             sx={{
               listStyle: 'none',
               position: 'relative',
               margin: '30px 0px 0px 35px',
             }}
           >
-            {subRoutes.map(({ path, name, subRoutes: innerSubRoutes }) => (
-              <React.Fragment key={path}>
-                <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
-                  {name}
-                </SecondSubRouteLink>
-              </React.Fragment>
+            {subRoutes.map((thirdSubRoute) => (
+              <Box component="li" key={thirdSubRoute.path}>
+                <ThirdSubRouteLink to={thirdSubRoute.path}>
+                  {thirdSubRoute.name}
+                </ThirdSubRouteLink>
+              </Box>
             ))}
           </Box>
         )}
@@ -93,4 +93,4 @@ function MainRouteLink({
   );
 }
 
-export default MainRouteLink;
+export default SecondSubRouteLink;
