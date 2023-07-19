@@ -14,8 +14,8 @@ const DefaultProps: CustomIconProps = {
   className: '',
   style: {},
   xmlns: 'http://www.w3.org/2000/svg',
-  fill: 'currentColor',
-  color: 'currentColor',
+  fill: 'none',
+  color: 'none',
 };
 
 function DashboardIcon(props: CustomIconProps) {
@@ -78,4 +78,19 @@ function TasksIcon(props: CustomIconProps) {
   );
 }
 
-export { DashboardIcon, AnalyzesIcon, RequestsIcon, TasksIcon };
+function CustomCaret(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 25" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M19.92 15.6389L13.4 9.11885C12.63 8.34885 11.37 8.34885 10.6 9.11885L4.08002 15.6389"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export { DashboardIcon, AnalyzesIcon, RequestsIcon, TasksIcon, CustomCaret };
