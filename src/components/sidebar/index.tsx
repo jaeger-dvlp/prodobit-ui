@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Image } from '@mantine/core';
-import { useMatch } from 'react-router-dom';
 import MainRouteLink from '@/components/sidebar/MainRouteLink';
 import SidebarProfile from '@/components/sidebar/SidebarProfile';
 import RouteLeftIndicator from '@/components/sidebar/RouteLeftIndicator';
@@ -15,10 +14,6 @@ import {
 const Images = {
   logo: '/assets/img/logo.svg',
 };
-
-function isActiveRoute(route: string) {
-  return useMatch(route);
-}
 
 function Routes() {
   return (
