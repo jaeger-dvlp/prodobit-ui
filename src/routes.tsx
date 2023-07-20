@@ -1,4 +1,5 @@
 import { Variant } from 'framer-motion';
+import { BsGrid3X3GapFill } from 'react-icons/bs';
 
 import {
   TasksIcon,
@@ -75,6 +76,18 @@ const RoutesMap: RouteMapItem[] = [
     path: '/dashboard',
     name: 'Dashboard',
     icon: <DashboardIcon {...IconProps} />,
+  },
+  {
+    path: '/items',
+    name: 'Öğeler',
+    icon: (
+      <BsGrid3X3GapFill
+        size={26}
+        style={{
+          ...IconProps.style,
+        }}
+      />
+    ),
   },
   {
     path: '/analytics',

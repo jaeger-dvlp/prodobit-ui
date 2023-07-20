@@ -13,6 +13,7 @@ const LoadableWrapper = (component: any) =>
   loadable(() => component, { fallback: <Loader /> });
 
 const ViewDashboard = LoadableWrapper(import('@/views/dashboard'));
+const ViewItems = LoadableWrapper(import('@/views/items'));
 const ViewAnalyzes = LoadableWrapper(import('@/views/analyzes'));
 const ViewRequests = LoadableWrapper(import('@/views/requests'));
 const ViewTasks = LoadableWrapper(import('@/views/tasks'));
@@ -67,6 +68,7 @@ function App() {
           >
             <Routes>
               <Route path="/dashboard" element={<ViewDashboard />} />
+              <Route path="/items" element={<ViewItems />} />
               <Route path="/analytics" element={<ViewAnalyzes />} />
               <Route path="/requests" element={<ViewRequests />} />
               <Route path="/tasks" element={<ViewTasks />} />

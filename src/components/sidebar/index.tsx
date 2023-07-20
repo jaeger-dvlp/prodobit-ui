@@ -92,12 +92,32 @@ function Sidebar() {
 
   return (
     <>
+      <Image
+        alt="Logo"
+        src={Images.logo}
+        sx={(theme) => ({
+          margin: 50,
+          zIndex: 150,
+          marginLeft: 80,
+          display: 'block',
+          marginBottom: 50,
+          maxWidth: '170px',
+          position: 'absolute',
+          transition: 'all 0.15s ease-in-ot',
+          [theme.fn.smallerThan('md')]: {
+            margin: 30,
+            marginLeft: 45,
+            maxWidth: '120px',
+          },
+        })}
+      />
       <SidebarButton collapseSidebar={collapseSidebar} />
       <Box
         className="sidebar"
         sx={(theme) => ({
           padding: 0,
           width: '100%',
+          paddingTop: 150,
           height: '100vh',
           display: 'flex',
           maxWidth: '400px',
@@ -107,13 +127,14 @@ function Sidebar() {
           backgroundColor: '#fff',
           borderTopRightRadius: 80,
           borderBottomRightRadius: 80,
-          transition: 'transform 0.3s ease-in-out',
           justifyContent: 'space-between',
+          transition: 'transform 0.3s ease-in-out',
           [theme.fn.smallerThan('md')]: {
             top: 0,
             left: 0,
             zIndex: 100,
-            maxWidth: '80%',
+            paddingTop: 90,
+            maxWidth: 'calc(100% - 81px)',
             position: 'fixed',
             backgroundColor: '#fff',
             borderTopRightRadius: 50,
@@ -123,23 +144,6 @@ function Sidebar() {
           },
         })}
       >
-        <Image
-          alt="Logo"
-          src={Images.logo}
-          sx={(theme) => ({
-            margin: 50,
-            width: '100%',
-            marginLeft: 80,
-            marginBottom: 50,
-            display: 'block',
-            maxWidth: '170px',
-            [theme.fn.smallerThan('md')]: {
-              margin: 30,
-              marginLeft: 45,
-              maxWidth: '120px',
-            },
-          })}
-        />
         <Routes />
         <SidebarProfile />
       </Box>

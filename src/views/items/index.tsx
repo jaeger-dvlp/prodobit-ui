@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
 
-function Analyzes() {
+function Items() {
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -10,9 +10,9 @@ function Analyzes() {
       animate={{ opacity: 1 }}
       component={motion.div}
       sx={(theme) => ({
-        padding: 60,
         width: '100%',
         minHeight: '100%',
+        padding: 60,
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
           padding: 45,
@@ -20,9 +20,9 @@ function Analyzes() {
         },
       })}
     >
-      Analyzes
+      Items
     </Box>
   );
 }
 
-export default Analyzes;
+export default Items;

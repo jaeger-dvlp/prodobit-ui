@@ -25,6 +25,7 @@ function MainRouteLink({
         className={`main-route-link ${isActive && 'main-route-link-active'}`}
         component={NavLink}
         sx={(theme) => ({
+          height: 'auto',
           border: 'none',
           display: 'flex',
           fontWeight: 700,
@@ -34,7 +35,6 @@ function MainRouteLink({
           flexDirection: 'row',
           alignItems: 'center',
           position: 'relative',
-          height: 'fit-content',
           justifyContent: 'start',
           transition: 'all 0.15s ease-in-out',
           color: isActive ? theme.colors.foundationgreen[9] : '#676668',
