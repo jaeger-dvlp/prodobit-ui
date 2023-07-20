@@ -43,7 +43,11 @@ function Routes() {
   );
 }
 
-function SidebarButton({ collapseSidebar }: { collapseSidebar: any }) {
+function SidebarButton({
+  collapseSidebar,
+}: {
+  collapseSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <Button
       onClick={() => collapseSidebar((prev) => !prev)}
