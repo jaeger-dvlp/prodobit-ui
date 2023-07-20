@@ -52,7 +52,7 @@ function App() {
           backgroundImage: theme.fn.gradient({
             from: '#E6EDEB',
             to: '#FEEDEE',
-            deg: 45,
+            deg: 130,
           }),
         })}
       >
