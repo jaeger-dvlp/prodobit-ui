@@ -47,6 +47,11 @@ function MainRouteLink({
               ? theme.colors.foundationgreen[1]
               : 'transparent',
           },
+          [theme.fn.smallerThan('md')]: {
+            fontSize: '15px',
+            borderRadius: 15,
+            padding: '12.5px 20px',
+          },
         })}
       >
         {children}

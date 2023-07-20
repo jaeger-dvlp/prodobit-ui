@@ -46,6 +46,11 @@ function SecondSubRouteLink({
               ? theme.colors.foundationgreen[1]
               : 'transparent',
           },
+          [theme.fn.smallerThan('md')]: {
+            borderRadius: 7,
+            fontSize: '15px',
+            padding: `10.5px 15px 10.5px ${isActive ? '15px' : '0px'}`,
+          },
         })}
       >
         {children}

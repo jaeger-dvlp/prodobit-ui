@@ -57,6 +57,7 @@ function SidebarProfile() {
           gap: 20,
           width: '100%',
           display: 'flex',
+          maxWidth: '300px',
           flexDirection: 'column',
         }}
       >
@@ -66,6 +67,7 @@ function SidebarProfile() {
             gap: 0,
             width: '100%',
             display: 'flex',
+
             alignItems: 'center',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -83,10 +85,16 @@ function SidebarProfile() {
             }}
           >
             <Image
-              height={65}
-              width={65}
               src={Images.tempAvatar}
               fit="contain"
+              styles={(theme) => ({
+                root: {
+                  maxWidth: '60px',
+                  [theme.fn.smallerThan('md')]: {
+                    maxWidth: '40px',
+                  },
+                },
+              })}
             />
             <Box
               component="section"
@@ -99,10 +107,28 @@ function SidebarProfile() {
                 justifyContent: 'start',
               }}
             >
-              <Title order={2} fs="25px" c="#424385">
+              <Title
+                order={2}
+                c="#424385"
+                sx={(theme) => ({
+                  fontSize: '25px',
+                  [theme.fn.smallerThan('md')]: {
+                    fontSize: '17px',
+                  },
+                })}
+              >
                 Fatih G.
               </Title>
-              <Text mt={-5} fs="15px" c="#878688">
+              <Text
+                mt={-5}
+                c="#878688"
+                sx={(theme) => ({
+                  fontSize: '15px',
+                  [theme.fn.smallerThan('md')]: {
+                    fontSize: '12px',
+                  },
+                })}
+              >
                 Senior Designer
               </Text>
             </Box>
@@ -126,7 +152,7 @@ function SidebarProfile() {
         </Box>
         <Box
           component="ul"
-          sx={{
+          sx={(theme) => ({
             gap: 36,
             margin: 0,
             padding: 0,
@@ -136,7 +162,10 @@ function SidebarProfile() {
             alignItems: 'center',
             flexDirection: 'row',
             justifyContent: 'center',
-          }}
+            [theme.fn.smallerThan('md')]: {
+              gap: 1,
+            },
+          })}
         >
           <Button
             onClick={() => {

@@ -38,6 +38,10 @@ function ThirdSubRouteLink({
             color: isActive ? '#000' : theme.colors.foundationgreen[9],
             backgroundColor: 'transparent',
           },
+          [theme.fn.smallerThan('md')]: {
+            fontSize: '15px',
+            padding: '5px 0px',
+          },
         })}
       >
         {children}
