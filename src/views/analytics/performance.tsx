@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { NavbarWBreadCrumbs } from '@/components/layout/navbar';
 
-function Requests() {
+function AnalyticsPerformance() {
   const Route = RoutesMap.find(
-    (route: RouteMapItem) => route.path === '/requests',
+    (route: RouteMapItem) => route.path === '/analytics',
   );
-
+  const Route2 = Route?.subRoutes?.find(
+    (route: RouteMapItem) => route.path === '/analytics/performance',
+  );
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -16,9 +18,9 @@ function Requests() {
       animate={{ opacity: 1 }}
       component={motion.div}
       sx={(theme) => ({
+        padding: 60,
         width: '100%',
         minHeight: '100%',
-        padding: 60,
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
           padding: 45,
@@ -27,7 +29,7 @@ function Requests() {
       })}
     >
       <NavbarWBreadCrumbs
-        paths={[Route].map((route) => ({
+        paths={[Route, Route2].map((route) => ({
           path: route?.path,
           name: route?.name || '?',
         }))}
@@ -36,4 +38,4 @@ function Requests() {
   );
 }
 
-export default Requests;
+export default AnalyticsPerformance;

@@ -1,8 +1,14 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
+import RoutesMap, { RouteMapItem } from '@/routes';
+import { NavbarWBreadCrumbs } from '@/components/layout/navbar';
 
 function Items() {
+  const Route = RoutesMap.find(
+    (route: RouteMapItem) => route.path === '/items',
+  );
+
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -20,7 +26,18 @@ function Items() {
         },
       })}
     >
-      Items
+      <NavbarWBreadCrumbs
+        paths={[
+          Route,
+          {
+            path: '/items',
+            name: 'Öğe Listesi',
+          },
+        ].map((route) => ({
+          path: route?.path,
+          name: route?.name || '?',
+        }))}
+      />
     </Box>
   );
 }

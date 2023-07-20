@@ -1,8 +1,14 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
+import { NavbarWBreadCrumbs } from '@/components/layout/navbar';
+import RoutesMap, { RouteMapItem } from '@/routes';
 
-function Analyzes() {
+function Analytics() {
+  const Route = RoutesMap.find(
+    (route: RouteMapItem) => route.path === '/analytics',
+  );
+
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -20,9 +26,14 @@ function Analyzes() {
         },
       })}
     >
-      Analyzes
+      <NavbarWBreadCrumbs
+        paths={[Route].map((route) => ({
+          path: route?.path,
+          name: route?.name || '?',
+        }))}
+      />
     </Box>
   );
 }
 
-export default Analyzes;
+export default Analytics;
