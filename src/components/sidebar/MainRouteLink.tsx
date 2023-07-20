@@ -8,17 +8,19 @@ import SecondSubRouteLink from '@/components/sidebar/SecondSubLink';
 
 function MainRouteLink({
   to,
+  name,
   children,
   subRoutes,
 }: {
   to: string;
+  name: string;
   children: React.ReactNode;
   subRoutes?: RouteMapItem[];
 }) {
   const isActive = useMatch(`${to.endsWith('/') ? to : `${to}/`}*`);
 
   return (
-    <Box component="li">
+    <Box component="li" p={0} m={0}>
       <Button
         to={to}
         variant="default"
@@ -55,6 +57,7 @@ function MainRouteLink({
         })}
       >
         {children}
+        <span>{name}</span>
         {subRoutes && (
           <CustomCaret
             width={24}
@@ -84,13 +87,15 @@ function MainRouteLink({
               margin: '30px 0px 0px 35px',
             }}
           >
-            {subRoutes.map(({ path, name, subRoutes: innerSubRoutes }) => (
-              <React.Fragment key={path}>
-                <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
-                  {name}
-                </SecondSubRouteLink>
-              </React.Fragment>
-            ))}
+            {subRoutes.map(
+              ({ path, name: subRouteName, subRoutes: innerSubRoutes }) => (
+                <React.Fragment key={path}>
+                  <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
+                    {subRouteName}
+                  </SecondSubRouteLink>
+                </React.Fragment>
+              ),
+            )}
           </Box>
         )}
       </AnimatePresence>

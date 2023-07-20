@@ -31,9 +31,13 @@ function Routes() {
       {RoutesMap.map(({ path, name, icon: Icon, subRoutes }) => {
         return (
           <React.Fragment key={path}>
-            <MainRouteLink to={path} subRoutes={subRoutes} key={path}>
+            <MainRouteLink
+              to={path}
+              subRoutes={subRoutes}
+              key={path}
+              name={name}
+            >
               {Icon}
-              <span>{name}</span>
             </MainRouteLink>
           </React.Fragment>
         );
