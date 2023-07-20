@@ -1,22 +1,7 @@
+import Views from '@/views';
 import Sidebar from '@/components/sidebar';
-import loadable from '@loadable/component';
-import Loader from '@/components/layout/Loader';
 import { Box, MantineProvider } from '@mantine/core';
-import {
-  /* Navigate, */
-  Route,
-  Routes,
-  BrowserRouter,
-} from 'react-router-dom';
-
-const LoadableWrapper = (component: any) =>
-  loadable(() => component, { fallback: <Loader /> });
-
-const ViewDashboard = LoadableWrapper(import('@/views/dashboard'));
-const ViewItems = LoadableWrapper(import('@/views/items'));
-const ViewAnalyzes = LoadableWrapper(import('@/views/analyzes'));
-const ViewRequests = LoadableWrapper(import('@/views/requests'));
-const ViewTasks = LoadableWrapper(import('@/views/tasks'));
+import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
@@ -67,13 +52,36 @@ function App() {
             }}
           >
             <Routes>
-              <Route path="/dashboard" element={<ViewDashboard />} />
-              <Route path="/items" element={<ViewItems />} />
-              <Route path="/analytics" element={<ViewAnalyzes />} />
-              <Route path="/requests" element={<ViewRequests />} />
-              <Route path="/tasks" element={<ViewTasks />} />
-              <Route path="*" element={<ViewDashboard />} />
-              {/* <Route path="*" element={<Navigate to="/dashboard" /> */}
+              <Route path="/dashboard" element={<Views.Dashboard />} />
+              <Route path="/items" element={<Views.Items />} />
+              <Route path="/analytics" element={<Views.Analytics.Index />} />
+              <Route
+                path="/analytics/sales"
+                element={<Views.Analytics.Sales />}
+              />
+              <Route
+                path="/analytics/gn-analytics"
+                element={<Views.Analytics.GnAnalytics.Index />}
+              />
+              <Route
+                path="/analytics/gn-analytics/general"
+                element={<Views.Analytics.GnAnalytics.General />}
+              />
+              <Route
+                path="/analytics/gn-analytics/tasks"
+                element={<Views.Analytics.GnAnalytics.Tasks />}
+              />
+              <Route
+                path="/analytics/gn-analytics/jobs"
+                element={<Views.Analytics.GnAnalytics.Jobs />}
+              />
+              <Route
+                path="/analytics/performance"
+                element={<Views.Analytics.Performance />}
+              />
+              <Route path="/requests" element={<Views.Requests />} />
+              <Route path="/tasks" element={<Views.Tasks />} />
+              <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
           </Box>
         </BrowserRouter>
