@@ -1,27 +1,68 @@
-import { motion } from 'framer-motion';
-import { Box, Button, useMantineTheme } from '@mantine/core';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Variant, motion } from 'framer-motion';
+import { Box, Button, Text, useMantineTheme } from '@mantine/core';
 import { CalendarIcon, NotificationIcon, SearchIcon } from '@/components/icons';
 
-const motionVariants = {
-  initial: {
-    opacity: 0,
+type VariantFor = 'initial' | 'animate' | 'exit';
+
+const motionVariants: {
+  [key: string]: {
+    [key in VariantFor]: Variant;
+  };
+} = {
+  middleChilds: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+    },
+    exit: {
+      opacity: 0,
+    },
   },
-  animate: {
-    opacity: 1,
+  buttons: {
+    initial: {
+      opacity: 0,
+      x: 20,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+    },
+    exit: {
+      opacity: 0,
+      x: 20,
+    },
   },
-  exit: {
-    opacity: 0,
+  breadCrumbs: {
+    initial: {
+      opacity: 0,
+      x: -20,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+    },
+    exit: {
+      opacity: 0,
+      x: -20,
+    },
   },
 };
 
-export default function DefaultNavbar({
-  children,
+function Navbar({
+  paths,
+  withButtons = true,
   middleChilds = null,
-  withButtons = false,
 }: {
-  children: React.ReactNode | React.ReactNode[];
-  middleChilds?: React.ReactNode | React.ReactNode[];
+  paths?: {
+    path?: string;
+    name: string;
+  }[];
   withButtons?: boolean;
+  middleChilds?: React.ReactNode | React.ReactNode[];
 }) {
   const mantineTheme = useMantineTheme();
 
@@ -52,14 +93,81 @@ export default function DefaultNavbar({
         justifyContent: 'space-between',
       }}
     >
-      {children}
+      {paths && (
+        <Box
+          className="bb-list"
+          component="ul"
+          sx={{
+            gap: 19,
+            margin: 0,
+            padding: 0,
+            display: 'flex',
+            listStyle: 'none',
+            width: 'fit-content',
+          }}
+        >
+          {paths.map((path, i) => (
+            <Box
+              exit="exit"
+              initial="initial"
+              animate="animate"
+              className="bb-btn"
+              key={`bb-btn-${i}`}
+              component={motion.li}
+              variants={motionVariants.breadCrumbs}
+              transition={{ duration: 0.2, delay: i * 0.2 }}
+              sx={{
+                margin: 0,
+                padding: 0,
+                width: 'fit-content',
+                height: 'auto',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Button
+                type="button"
+                variant="default"
+                component={path?.path ? NavLink : ('button' as any)}
+                {...(path.path && {
+                  to: path.path,
+                })}
+                sx={(theme) => ({
+                  margin: 0,
+                  padding: 0,
+                  borer: 'none',
+                  border: 'none',
+                  fontWeight: 400,
+                  color: '#878688',
+                  fontSize: '22px',
+                  backgroundColor: 'transparent',
+                  transition: 'color 0.15s ease-in-out',
+                  ':hover': {
+                    color: '#000',
+                    backgroundColor: 'transparent',
+                  },
+                  [theme.fn.smallerThan('md')]: {
+                    fontSize: '18px',
+                  },
+                })}
+              >
+                <Text p={0} m={0} span>
+                  {path.name}
+                </Text>
+              </Button>
+            </Box>
+          ))}
+        </Box>
+      )}
       {!middleChilds && (
         <Box
           exit="exit"
           initial="initial"
           animate="animate"
           component={motion.span}
-          variants={motionVariants}
+          variants={motionVariants.middleChilds}
           transition={{
             delay: 0.3,
             duration: 0.3,
@@ -77,7 +185,7 @@ export default function DefaultNavbar({
           initial="initial"
           animate="animate"
           component={motion.span}
-          variants={motionVariants}
+          variants={motionVariants.middleChilds}
           transition={{
             delay: 0.3,
             duration: 0.3,
@@ -110,7 +218,11 @@ export default function DefaultNavbar({
       )}
       {withButtons && (
         <Box
-          component="ul"
+          exit="exit"
+          initial="initial"
+          animate="animate"
+          component={motion.ul}
+          variants={motionVariants.buttons}
           sx={{
             gap: 5,
             margin: 0,
@@ -179,3 +291,5 @@ export default function DefaultNavbar({
     </Box>
   );
 }
+
+export default Navbar;
