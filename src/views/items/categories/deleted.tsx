@@ -4,9 +4,17 @@ import { motion } from 'framer-motion';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import NavbarWBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
 
-function Items() {
+function ItemsCategoriesDeleted() {
   const Route = RoutesMap.find(
     (route: RouteMapItem) => route.path === '/items',
+  );
+
+  const Route2 = Route?.subRoutes?.find(
+    (route: RouteMapItem) => route.path === '/items/categories',
+  );
+
+  const Route3 = Route2?.subRoutes?.find(
+    (route: RouteMapItem) => route.path === '/items/categories/deleted',
   );
 
   return (
@@ -27,7 +35,7 @@ function Items() {
       })}
     >
       <NavbarWBreadCrumbs
-        paths={[Route].map((route) => ({
+        paths={[Route, Route2, Route3].map((route) => ({
           path: route?.path,
           name: route?.name || '?',
         }))}
@@ -37,4 +45,4 @@ function Items() {
   );
 }
 
-export default Items;
+export default ItemsCategoriesDeleted;
