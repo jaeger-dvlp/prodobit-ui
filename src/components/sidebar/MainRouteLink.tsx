@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button } from '@mantine/core';
 import { CustomCaret } from '@/components/icons';
+import { Box, Button, Text } from '@mantine/core';
 import { NavLink, useMatch } from 'react-router-dom';
 import { RouteMapItem, SubRouteAnims } from '@/routes';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -91,7 +91,9 @@ function MainRouteLink({
               ({ path, name: subRouteName, subRoutes: innerSubRoutes }) => (
                 <React.Fragment key={path}>
                   <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
-                    {subRouteName}
+                    <Text span p={0} m={0} lh={1.2}>
+                      {subRouteName}
+                    </Text>
                   </SecondSubRouteLink>
                 </React.Fragment>
               ),

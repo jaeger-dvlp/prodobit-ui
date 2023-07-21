@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button } from '@mantine/core';
 import { CustomCaret } from '@/components/icons';
+import { Box, Button, Text } from '@mantine/core';
 import { NavLink, useMatch } from 'react-router-dom';
 import { RouteMapItem, SubRouteAnims } from '@/routes';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -35,7 +35,7 @@ function SecondSubRouteLink({
           height: 'fit-content',
           justifyContent: 'start',
           transition: 'all 0.15s ease-in-out',
-          padding: `14.5px 20px 14.5px ${isActive ? '20px' : '0px'}`,
+          padding: `10px 20px 10px ${isActive ? '20px' : '0px'}`,
           color: isActive ? theme.colors.foundationgreen[9] : '#676668',
           backgroundColor: isActive
             ? theme.colors.foundationgreen[1]
@@ -86,7 +86,9 @@ function SecondSubRouteLink({
             {subRoutes.map((thirdSubRoute) => (
               <React.Fragment key={thirdSubRoute.path}>
                 <ThirdSubRouteLink to={thirdSubRoute.path}>
-                  {thirdSubRoute.name}
+                  <Text span p={0} m={0} lh={1.2}>
+                    {thirdSubRoute.name}
+                  </Text>
                 </ThirdSubRouteLink>
               </React.Fragment>
             ))}
