@@ -9,6 +9,8 @@ type Props = {
     path?: string;
     name: string;
   }[];
+  middleChilds?: React.ReactNode | React.ReactNode[];
+  withButtons?: boolean;
 };
 
 const BreadcrumbAnimations: {
@@ -28,9 +30,13 @@ const BreadcrumbAnimations: {
   },
 };
 
-function WithBreadCrumbs({ paths }: Props) {
+function WithBreadCrumbs({
+  paths,
+  middleChilds = null,
+  withButtons = false,
+}: Props) {
   return (
-    <DefaultNavbar>
+    <DefaultNavbar middleChilds={middleChilds} withButtons={withButtons}>
       <Box
         className="bb-list"
         component="ul"
@@ -86,7 +92,7 @@ function WithBreadCrumbs({ paths }: Props) {
                   backgroundColor: 'transparent',
                 },
                 [theme.fn.smallerThan('md')]: {
-                  fontSize: '17px',
+                  fontSize: '18px',
                 },
               })}
             >
