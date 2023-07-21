@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Box, Button } from '@mantine/core';
+import { Box, Button, Text } from '@mantine/core';
 import { Variant, motion } from 'framer-motion';
 import DefaultNavbar from '@/components/layout/navbar/default';
 
@@ -96,7 +96,9 @@ function WithBreadCrumbs({
                 },
               })}
             >
-              {path.name}
+              <Text p={0} m={0} span>
+                {path.name}
+              </Text>
             </Button>
           </Box>
         ))}
