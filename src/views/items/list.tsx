@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Box, Text } from '@mantine/core';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import NavbarWBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
+import Navbar from '@/components/layout/Navbar';
 
 function ItemCountDisplay({ itemCount }: { itemCount: number }) {
   if (itemCount === 0) {
@@ -67,7 +67,7 @@ function ItemsList() {
         },
       })}
     >
-      <NavbarWBreadCrumbs
+      <Navbar
         paths={[Route, Route2].map((route) => ({
           path: route?.path,
           name: route?.name || '?',

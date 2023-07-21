@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import NavbarWBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
+import Navbar from '@/components/layout/Navbar';
 
 function Dashboard() {
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/dashboard');
@@ -24,7 +24,7 @@ function Dashboard() {
         },
       })}
     >
-      <NavbarWBreadCrumbs
+      <Navbar
         paths={[Route].map((route) => ({
           path: route?.path,
           name: route?.name || '?',
