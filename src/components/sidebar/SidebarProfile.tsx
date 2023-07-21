@@ -1,22 +1,9 @@
 /* eslint-disable no-alert */
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  Image,
-  Text,
-  Title,
-  useMantineTheme,
-} from '@mantine/core';
+import { Box, Button, Image, Text, Title, useMantineTheme } from '@mantine/core';
 
-import {
-  EyeIcon,
-  InfoIcon,
-  LockIcon,
-  PencilIcon,
-  SwitchIcon,
-} from '@/components/icons';
+import { EyeIcon, InfoIcon, LockIcon, PencilIcon, SwitchIcon } from '@/components/icons';
 
 const Images = {
   tempAvatar: '/assets/img/temp-avatar.svg',

@@ -1,11 +1,6 @@
 import { Variant } from 'framer-motion';
 
-import {
-  TasksIcon,
-  RequestsIcon,
-  AnalyzesIcon,
-  DashboardIcon,
-} from '@/components/icons';
+import { TasksIcon, RequestsIcon, AnalyzesIcon, DashboardIcon } from '@/components/icons';
 
 export const SubRouteAnims: {
   [key: string]: {

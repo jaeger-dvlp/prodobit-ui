@@ -30,12 +30,6 @@
     "@/public/*": ["./public/*"]
   },
   "exclude": ["./node_modules/**/*"],
-  "include": [
-    "src",
-    "vite.config.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "./.eslintrc.json"
-  ],
+  "include": ["src", "vite.config.ts", "**/*.ts", "**/*.tsx", "./.eslintrc.json"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

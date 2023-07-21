@@ -30,11 +30,7 @@ const BreadcrumbAnimations: {
   },
 };
 
-function WithBreadCrumbs({
-  paths,
-  middleChilds = null,
-  withButtons = false,
-}: Props) {
+function WithBreadCrumbs({ paths, middleChilds = null, withButtons = false }: Props) {
   return (
     <DefaultNavbar middleChilds={middleChilds} withButtons={withButtons}>
       <Box

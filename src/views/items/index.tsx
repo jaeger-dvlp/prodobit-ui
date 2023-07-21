@@ -5,9 +5,7 @@ import RoutesMap, { RouteMapItem } from '@/routes';
 import NavbarWBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
 
 function Items() {
-  const Route = RoutesMap.find(
-    (route: RouteMapItem) => route.path === '/items',
-  );
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
 
   return (
     <Box

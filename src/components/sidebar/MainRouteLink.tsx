@@ -40,14 +40,10 @@ function MainRouteLink({
           justifyContent: 'start',
           transition: 'all 0.15s ease-in-out',
           color: isActive ? theme.colors.foundationgreen[9] : '#676668',
-          backgroundColor: isActive
-            ? theme.colors.foundationgreen[1]
-            : 'transparent',
+          backgroundColor: isActive ? theme.colors.foundationgreen[1] : 'transparent',
           ':hover': {
             color: theme.colors.foundationgreen[9],
-            backgroundColor: isActive
-              ? theme.colors.foundationgreen[1]
-              : 'transparent',
+            backgroundColor: isActive ? theme.colors.foundationgreen[1] : 'transparent',
           },
           [theme.fn.smallerThan('md')]: {
             fontSize: '15px',
@@ -66,9 +62,7 @@ function MainRouteLink({
               top: '50%',
               position: 'absolute',
               transition: 'all 0.15s ease-in-out',
-              transform: `translateY(-50%) ${
-                isActive ? 'rotate(180deg)' : 'rotate(0deg)'
-              }`,
+              transform: `translateY(-50%) ${isActive ? 'rotate(180deg)' : 'rotate(0deg)'}`,
             }}
           />
         )}
@@ -87,17 +81,15 @@ function MainRouteLink({
               margin: '30px 0px 0px 35px',
             }}
           >
-            {subRoutes.map(
-              ({ path, name: subRouteName, subRoutes: innerSubRoutes }) => (
-                <React.Fragment key={path}>
-                  <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
-                    <Text span p={0} m={0} lh={1.2}>
-                      {subRouteName}
-                    </Text>
-                  </SecondSubRouteLink>
-                </React.Fragment>
-              ),
-            )}
+            {subRoutes.map(({ path, name: subRouteName, subRoutes: innerSubRoutes }) => (
+              <React.Fragment key={path}>
+                <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
+                  <Text span p={0} m={0} lh={1.2}>
+                    {subRouteName}
+                  </Text>
+                </SecondSubRouteLink>
+              </React.Fragment>
+            ))}
           </Box>
         )}
       </AnimatePresence>

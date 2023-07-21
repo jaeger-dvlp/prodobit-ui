@@ -2,13 +2,7 @@ import React from 'react';
 import { Box, Button } from '@mantine/core';
 import { NavLink, useMatch } from 'react-router-dom';
 
-function ThirdSubRouteLink({
-  to,
-  children,
-}: {
-  to: string;
-  children: React.ReactNode;
-}) {
+function ThirdSubRouteLink({ to, children }: { to: string; children: React.ReactNode }) {
   const isActive = useMatch(`${to.endsWith('/') ? to : `${to}/`}*`);
 
   return (
