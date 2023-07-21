@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import { NavbarWBreadCrumbs } from '@/components/layout/navbar';
+import NavbarWBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
 
 function AnalyticsGnAnalyticsTasks() {
   const Route = RoutesMap.find(

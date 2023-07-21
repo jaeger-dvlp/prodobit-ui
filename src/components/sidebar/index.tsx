@@ -23,7 +23,7 @@ function Routes() {
         overflow: 'auto',
         listStyle: 'none',
         position: 'relative',
-        [theme.fn.smallerThan('lg')]: {
+        [theme.fn.smallerThan('md')]: {
           padding: 25,
         },
       })}
@@ -96,37 +96,18 @@ function Sidebar() {
 
   return (
     <>
-      <Image
-        alt="Logo"
-        src={Images.logo}
-        sx={(theme) => ({
-          margin: 50,
-          zIndex: 150,
-          marginLeft: 80,
-          display: 'block',
-          marginBottom: 50,
-          maxWidth: '170px',
-          position: 'absolute',
-          transition: 'all 0.15s ease-in-ot',
-          [theme.fn.smallerThan('md')]: {
-            margin: 30,
-            marginLeft: 45,
-            maxWidth: '120px',
-          },
-        })}
-      />
       <SidebarButton collapseSidebar={collapseSidebar} />
       <Box
         className="sidebar"
         sx={(theme) => ({
+          top: 0,
           padding: 0,
           width: '100%',
-          paddingTop: 150,
           height: '100vh',
           display: 'flex',
           maxWidth: '400px',
+          position: 'sticky',
           alignItems: 'start',
-          position: 'relative',
           flexDirection: 'column',
           backgroundColor: '#fff',
           borderTopRightRadius: 80,
@@ -137,7 +118,6 @@ function Sidebar() {
             top: 0,
             left: 0,
             zIndex: 100,
-            paddingTop: 90,
             maxWidth: 'calc(100% - 81px)',
             position: 'fixed',
             backgroundColor: '#fff',
@@ -148,6 +128,25 @@ function Sidebar() {
           },
         })}
       >
+        <Image
+          alt="Logo"
+          src={Images.logo}
+          sx={(theme) => ({
+            marginTop: 50,
+            marginLeft: 80,
+            marginBottom: 50,
+            display: 'block',
+            maxWidth: '170px',
+            position: 'relative',
+            transition: 'all 0.15s ease-in-ot',
+            [theme.fn.smallerThan('md')]: {
+              marginTop: 30,
+              marginLeft: 45,
+              marginBottom: 30,
+              maxWidth: '120px',
+            },
+          })}
+        />
         <Routes />
         <SidebarProfile />
       </Box>

@@ -1,4 +1,22 @@
-/* eslint-disable import/prefer-default-export */
-import WithBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
+import { Box } from '@mantine/core';
 
-export { WithBreadCrumbs as NavbarWBreadCrumbs };
+export default function DefaultNavbar({
+  children,
+}: {
+  children: React.ReactNode | React.ReactNode[];
+}) {
+  return (
+    <Box
+      component="nav"
+      sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      {children}
+    </Box>
+  );
+}

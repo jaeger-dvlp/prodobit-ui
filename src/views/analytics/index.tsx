@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
-import { NavbarWBreadCrumbs } from '@/components/layout/navbar';
+import NavbarWBreadCrumbs from '@/components/layout/navbar/withBreadCrumbs';
 import RoutesMap, { RouteMapItem } from '@/routes';
 
 function Analytics() {

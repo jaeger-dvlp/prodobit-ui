@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Box, Button } from '@mantine/core';
 import { Variant, motion } from 'framer-motion';
+import DefaultNavbar from '@/components/layout/navbar/default';
 
 type Props = {
   paths: {
@@ -26,27 +27,6 @@ const BreadcrumbAnimations: {
     x: -20,
   },
 };
-
-function DefaultNavbar({
-  children,
-}: {
-  children: React.ReactNode | React.ReactNode[];
-}) {
-  return (
-    <Box
-      component="nav"
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      {children}
-    </Box>
-  );
-}
 
 function WithBreadCrumbs({ paths }: Props) {
   return (
