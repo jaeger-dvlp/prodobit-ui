@@ -5,6 +5,8 @@ import Loader from '@/components/layout/Loader';
 const LoadableWrapper = (component: any) =>
   loadable(() => component, { fallback: <Loader /> });
 
+const Login = LoadableWrapper(import('@/views/auth/login'));
+
 const Dashboard = LoadableWrapper(import('@/views/dashboard'));
 const Items = LoadableWrapper(import('@/views/items'));
 const ItemsList = LoadableWrapper(import('@/views/items/list'));
@@ -24,6 +26,9 @@ const Requests = LoadableWrapper(import('@/views/requests'));
 const Tasks = LoadableWrapper(import('@/views/tasks'));
 
 const Views = {
+  Auth: {
+    Login,
+  },
   Dashboard,
   Items: {
     Index: Items,
