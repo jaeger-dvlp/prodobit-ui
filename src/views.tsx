@@ -7,39 +7,34 @@ const LoadableWrapper = (component: any) =>
 
 const Dashboard = LoadableWrapper(import('@/views/dashboard'));
 const Items = LoadableWrapper(import('@/views/items'));
-const Analytics = LoadableWrapper(import('@/views/analytics'));
-const AnalyticsSales = LoadableWrapper(import('@/views/analytics/sales'));
-const AnalyticsGnAnalytics = LoadableWrapper(
-  import('@/views/analytics/gn-analytics'),
+const ItemsList = LoadableWrapper(import('@/views/items/list'));
+const ItemsCategories = LoadableWrapper(import('@/views/items/categories'));
+const ItemsCategoriesList = LoadableWrapper(
+  import('@/views/items/categories/list'),
 );
-const AnalyticsGnAnalyticsGeneral = LoadableWrapper(
-  import('@/views/analytics/gn-analytics/general'),
+const ItemsCategoriesDeleted = LoadableWrapper(
+  import('@/views/items/categories/deleted'),
 );
-const AnalyticsGnAnalyticsTasks = LoadableWrapper(
-  import('@/views/analytics/gn-analytics/tasks'),
+const ItemsCategoriesJobs = LoadableWrapper(
+  import('@/views/items/categories/jobs'),
 );
-const AnalyticsGnAnalyticsJobs = LoadableWrapper(
-  import('@/views/analytics/gn-analytics/jobs'),
-);
-const AnalyticsPerformance = LoadableWrapper(
-  import('@/views/analytics/performance'),
-);
+const ItemsPerformance = LoadableWrapper(import('@/views/items/performance'));
+
 const Requests = LoadableWrapper(import('@/views/requests'));
 const Tasks = LoadableWrapper(import('@/views/tasks'));
 
 const Views = {
   Dashboard,
-  Items,
-  Analytics: {
-    Index: Analytics,
-    Sales: AnalyticsSales,
-    GnAnalytics: {
-      Index: AnalyticsGnAnalytics,
-      General: AnalyticsGnAnalyticsGeneral,
-      Tasks: AnalyticsGnAnalyticsTasks,
-      Jobs: AnalyticsGnAnalyticsJobs,
+  Items: {
+    Index: Items,
+    List: ItemsList,
+    Categories: {
+      Index: ItemsCategories,
+      List: ItemsCategoriesList,
+      Deleted: ItemsCategoriesDeleted,
+      Jobs: ItemsCategoriesJobs,
     },
-    Performance: AnalyticsPerformance,
+    Performance: ItemsPerformance,
   },
   Requests,
   Tasks,
