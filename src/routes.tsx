@@ -1,5 +1,4 @@
 import { Variant } from 'framer-motion';
-import { BsGridFill } from 'react-icons/bs';
 
 import {
   TasksIcon,
@@ -80,37 +79,32 @@ const RoutesMap: RouteMapItem[] = [
   {
     path: '/items',
     name: 'Öğeler',
-    icon: <BsGridFill size={IconProps.width} {...IconProps} />,
-  },
-  {
-    path: '/analytics',
-    name: 'Analizler',
     icon: <AnalyzesIcon {...IconProps} />,
     subRoutes: [
       {
-        path: '/analytics/sales',
-        name: 'Satış',
+        path: '/items/list',
+        name: 'Öğe Listesi',
       },
       {
-        path: '/analytics/gn-analytics',
-        name: 'Genel Analiz',
+        path: '/items/categories',
+        name: 'Kategoriler',
         subRoutes: [
           {
-            path: '/analytics/gn-analytics/general',
-            name: 'Genel',
+            path: '/items/categories/list',
+            name: 'Kategori Listesi',
           },
           {
-            path: '/analytics/gn-analytics/tasks',
-            name: 'Görevler',
+            path: '/items/categories/deleted',
+            name: 'Silinenler',
           },
           {
-            path: '/analytics/gn-analytics/jobs',
+            path: '/items/categories/jobs',
             name: 'İşler',
           },
         ],
       },
       {
-        path: '/analytics/performance',
+        path: '/items/performance',
         name: 'Performans',
       },
     ],

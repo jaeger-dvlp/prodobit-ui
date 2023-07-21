@@ -53,31 +53,27 @@ function App() {
           >
             <Routes>
               <Route path="/dashboard" element={<Views.Dashboard />} />
-              <Route path="/items" element={<Views.Items />} />
-              <Route path="/analytics" element={<Views.Analytics.Index />} />
+              <Route path="/items" element={<Views.Items.Index />} />
+              <Route path="/items/list" element={<Views.Items.List />} />
               <Route
-                path="/analytics/sales"
-                element={<Views.Analytics.Sales />}
+                path="/items/categories"
+                element={<Views.Items.Categories.Index />}
               />
               <Route
-                path="/analytics/gn-analytics"
-                element={<Views.Analytics.GnAnalytics.Index />}
+                path="/items/categories/list"
+                element={<Views.Items.Categories.List />}
               />
               <Route
-                path="/analytics/gn-analytics/general"
-                element={<Views.Analytics.GnAnalytics.General />}
+                path="/items/categories/deleted"
+                element={<Views.Items.Categories.Deleted />}
               />
               <Route
-                path="/analytics/gn-analytics/tasks"
-                element={<Views.Analytics.GnAnalytics.Tasks />}
+                path="/items/categories/jobs"
+                element={<Views.Items.Categories.Jobs />}
               />
               <Route
-                path="/analytics/gn-analytics/jobs"
-                element={<Views.Analytics.GnAnalytics.Jobs />}
-              />
-              <Route
-                path="/analytics/performance"
-                element={<Views.Analytics.Performance />}
+                path="/items/performance"
+                element={<Views.Items.Performance />}
               />
               <Route path="/requests" element={<Views.Requests />} />
               <Route path="/tasks" element={<Views.Tasks />} />
