@@ -1,13 +1,24 @@
 import React from 'react';
-import { Box, Button } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
+import { Box, Button, Text } from '@mantine/core';
 
 function Login() {
   return (
-    <Box p={5}>
-      Not made yet, go to{' '}
+    <Box
+      component="section"
+      sx={{
+        gap: 10,
+        display: 'flex',
+        minWidth: '100%',
+        minHeight: '100%',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <Text align="center">Login View</Text>
       <Button variant="link" bg="foundationgreen" component={NavLink} to="/dashboard">
-        Dashboard
+        Go to Dashboard
       </Button>
     </Box>
   );

@@ -16,7 +16,7 @@ function ItemsPerformance() {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      component={motion.div}
+      component={motion.section}
       sx={(theme) => ({
         width: '100%',
         minHeight: '100%',

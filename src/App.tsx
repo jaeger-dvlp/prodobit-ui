@@ -20,8 +20,8 @@ function App() {
         </Route>
         <Route element={<AppLayout />}>
           <Route path="/login" element={<Views.Auth.Login />} />
-          <Route path="/*" element={<Navigate to="/login" />} />
         </Route>
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import RoutesMap from '@/routes';
+import { motion } from 'framer-motion';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { Box, Button, Image } from '@mantine/core';
 import MainRouteLink from '@/components/sidebar/MainRouteLink';
@@ -93,6 +94,24 @@ function Sidebar() {
     <>
       <SidebarButton collapseSidebar={collapseSidebar} />
       <Box
+        component={motion.aside}
+        variants={{
+          initial: {
+            opacity: 0,
+          },
+          animate: {
+            opacity: 1,
+          },
+          exit: {
+            opacity: 0,
+          },
+        }}
+        exit="exit"
+        initial="initial"
+        animate="animate"
+        transition={{
+          duration: 0.2,
+        }}
         className="sidebar"
         sx={(theme) => ({
           top: 0,

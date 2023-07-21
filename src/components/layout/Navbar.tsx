@@ -184,7 +184,7 @@ function Navbar({
           exit="exit"
           initial="initial"
           animate="animate"
-          component={motion.span}
+          component={motion.section}
           variants={motionVariants.middleChilds}
           transition={{
             delay: 0.3,
@@ -200,6 +200,7 @@ function Navbar({
           }}
         >
           <Box
+            component="span"
             sx={{
               width: '100%',
               height: '2px',
@@ -208,6 +209,7 @@ function Navbar({
           />
           {middleChilds}
           <Box
+            component="span"
             sx={{
               width: '100%',
               height: '2px',
