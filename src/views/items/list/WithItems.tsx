@@ -6,10 +6,22 @@ import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
 
 import { MockItemsCategories } from 'mockdata';
+import ItemsTable from '@/components/views/itemslist/ItemsTable';
 
 export type ItemCategory = {
+  id: number;
   name: string;
   slug: string;
+};
+
+export type Item = {
+  id: number;
+  image: string;
+  name: string;
+  code: string;
+  category: string;
+  status: string;
+  created_at: string;
 };
 
 function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
@@ -141,13 +153,16 @@ function TopBar() {
       >
         <Title
           order={1}
-          sx={{
+          sx={(theme) => ({
             color: '#000',
             fontWeight: 300,
             marginRight: 20,
             fontSize: '64px',
             position: 'relative',
-          }}
+            [theme.fn.smallerThan('md')]: {
+              fontSize: '32px',
+            },
+          })}
         >
           Öğeler
           <Button
@@ -178,9 +193,10 @@ function TopBar() {
           sx={{
             gap: 10,
             display: 'flex',
+            flexWrap: 'wrap',
             width: 'fit-content',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'start',
           }}
         >
           <AddButtons onItemAdd={() => null} onCategoryAdd={() => null} />
@@ -215,6 +231,7 @@ function WithItemsView() {
       }}
     >
       <TopBar />
+      <ItemsTable />
     </Box>
   );
 }

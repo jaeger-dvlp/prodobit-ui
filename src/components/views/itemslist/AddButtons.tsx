@@ -26,6 +26,10 @@ function AddButtons({
           border: `1px solid ${theme.colors.foundationgreen[6]}`,
           backgroundColor: `${theme.colors.foundationgreen[6]}!important`,
           ':hover': { filter: 'brightness(0.8)' },
+          [theme.fn.smallerThan('md')]: {
+            fontSize: '18px',
+            padding: '15px 25px',
+          },
         })}
       >
         <Text
@@ -52,6 +56,10 @@ function AddButtons({
           color: theme.colors.foundationgreen[9],
           border: `1px solid ${theme.colors.foundationgreen[6]}`,
           ':hover': { filter: 'brightness(0.8)' },
+          [theme.fn.smallerThan('md')]: {
+            fontSize: '18px',
+            padding: '15px 25px',
+          },
         })}
       >
         <Text
