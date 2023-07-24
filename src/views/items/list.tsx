@@ -4,6 +4,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import Navbar from '@/components/layout/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Box, Button, Image, Text } from '@mantine/core';
+import DevMode from '@/components/misc/DevMode';
 
 function AddButtons({
   onItemAdd,
@@ -159,11 +160,12 @@ function NoItemsView() {
   );
 }
 
+function ItemsView() {
+  return 'Items View';
+}
+
 function ItemsList() {
-  const [
-    itemCount,
-    // ,setItemCount
-  ] = React.useState(2500);
+  const [itemCount, setItemCount] = React.useState(0);
 
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
 
@@ -194,7 +196,17 @@ function ItemsList() {
         withButtons
         middleChilds={<ItemCountDisplay itemCount={itemCount} />}
       />
-      <NoItemsView />
+      {itemCount === 0 ? <NoItemsView /> : <ItemsView />}
+
+      <DevMode>
+        <Button
+          type="button"
+          variant="default"
+          onClick={() => setItemCount(itemCount === 0 ? 2500 : 0)}
+        >
+          <Text>Set item count {itemCount === 0 ? 2500 : 0}</Text>
+        </Button>
+      </DevMode>
     </Box>
   );
 }
