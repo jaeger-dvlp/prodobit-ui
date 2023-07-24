@@ -84,14 +84,20 @@ function Navbar({
   return (
     <Box
       component="nav"
-      sx={{
+      sx={(theme) => ({
         gap: 20,
         width: '100%',
         display: 'flex',
+        flexWrap: 'nowrap',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-      }}
+        [theme.fn.smallerThan('md')]: {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+        },
+      })}
     >
       {paths && (
         <Box

@@ -48,7 +48,7 @@ function RouteLeftIndicator() {
         position: 'absolute',
         borderRadius: '0px 20px 20px 0px',
         transition: 'all 0.2s ease-in-out',
-        backgroundColor: theme.colors.foundationgreen[9],
+        backgroundColor: theme.colors.foundationgreen[4],
         [theme.fn.smallerThan('md')]: {
           display: 'none',
         },
