@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Text } from '@mantine/core';
+import { Box, Text } from '@mantine/core';
 import { BsFillGearFill } from 'react-icons/bs';
 
 type Props = {
@@ -17,19 +17,23 @@ function DevMode({ children }: Props) {
         position: 'fixed',
       }}
     >
-      <Button
+      <Box
         p={10}
         h="auto"
-        radius="md"
         tabIndex={0}
         color="gray"
         pos="relative"
-        variant="filled"
         sx={(theme) => ({
           opacity: 0.5,
+          color: 'white',
           overflow: 'visible',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           boxShadow: theme.shadows.lg,
           transition: 'all .15s ease',
+          borderRadius: theme.radius.md,
+          backgroundColor: theme.colors.gray[9],
           '.dev-mode-childs': {
             opacity: 0,
             visibility: 'hidden',
@@ -83,7 +87,7 @@ function DevMode({ children }: Props) {
         >
           <BsFillGearFill size={30} />
         </Text>
-      </Button>
+      </Box>
     </Box>
   );
 }
