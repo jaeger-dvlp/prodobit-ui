@@ -54,7 +54,7 @@ function SidebarButton({
       variant="default"
       sx={(theme) => ({
         top: 10,
-        right: 10,
+        right: 35,
         padding: 10,
         zIndex: 200,
         height: 'auto',
@@ -132,7 +132,7 @@ function Sidebar() {
             top: 0,
             left: 0,
             zIndex: 100,
-            maxWidth: 'calc(100% - 81px)',
+            maxWidth: 'calc(100% - 106px)',
             position: 'fixed',
             backgroundColor: '#fff',
             borderTopRightRadius: 50,

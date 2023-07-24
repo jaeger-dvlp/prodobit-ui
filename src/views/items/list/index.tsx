@@ -57,9 +57,9 @@ function ItemsList() {
       animate={{ opacity: 1 }}
       component={motion.section}
       sx={(theme) => ({
+        padding: 0,
         width: '100%',
-        minHeight: '100%',
-        padding: 60,
+        height: '100%',
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
           padding: 45,
@@ -67,14 +67,21 @@ function ItemsList() {
         },
       })}
     >
-      <Navbar
-        paths={[Route, Route2].map((route) => ({
-          path: route?.path,
-          name: route?.name || '?',
-        }))}
-        withButtons
-        middleChilds={<ItemCountDisplay itemCount={itemCount} />}
-      />
+      <Box
+        sx={{
+          padding: 60,
+          width: '100%',
+        }}
+      >
+        <Navbar
+          paths={[Route, Route2].map((route) => ({
+            path: route?.path,
+            name: route?.name || '?',
+          }))}
+          withButtons
+          middleChilds={<ItemCountDisplay itemCount={itemCount} />}
+        />
+      </Box>
       {itemCount === 0 ? <NoItemsView /> : <WithItemsView />}
 
       <DevMode>
@@ -83,7 +90,7 @@ function ItemsList() {
           variant="default"
           onClick={() => setItemCount(itemCount === 0 ? 2500 : 0)}
         >
-          <Text>Set item count {itemCount === 0 ? 2500 : 0}</Text>
+          <Text>Öğe sayısını {itemCount === 0 ? 2500 : 0} yap.</Text>
         </Button>
       </DevMode>
     </Box>

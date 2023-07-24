@@ -10,11 +10,15 @@ function DevMode({ children }: Props) {
   return (
     <Box
       sx={{
-        right: 20,
+        margin: 0,
+        right: 40,
         bottom: 20,
-        zIndex: 9999,
         padding: 0,
+        zIndex: 9999,
+        display: 'flex',
         position: 'fixed',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <Box
