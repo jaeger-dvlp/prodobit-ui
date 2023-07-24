@@ -27,8 +27,8 @@ function AddButtons({
           borderRadius: 100,
           padding: '20px 30px',
           transition: 'all .15s ease',
-          border: `1px solid ${theme.colors.foundationgreen[9]}`,
-          backgroundColor: `${theme.colors.foundationgreen[9]}!important`,
+          border: `1px solid ${theme.colors.foundationgreen[6]}`,
+          backgroundColor: `${theme.colors.foundationgreen[6]}!important`,
           ':hover': { filter: 'brightness(0.8)' },
         })}
       >
@@ -54,7 +54,7 @@ function AddButtons({
           transition: 'all .15s ease',
           backgroundColor: `white!important`,
           color: theme.colors.foundationgreen[9],
-          border: `1px solid ${theme.colors.foundationgreen[9]}`,
+          border: `1px solid ${theme.colors.foundationgreen[6]}`,
           ':hover': { filter: 'brightness(0.8)' },
         })}
       >
@@ -138,7 +138,7 @@ function NoItemsView() {
           lineHeight: 1.3,
           fontSize: '45px',
           textAlign: 'center',
-          color: theme.colors.foundationgreen[9],
+          color: theme.colors.foundationgreen[7],
         })}
       >
         Etkin ve Modern Bir Öğe Yönetimi İçin
