@@ -11,7 +11,7 @@ function DevMode({ children }: Props) {
     <Box
       sx={{
         margin: 0,
-        right: 40,
+        right: 20,
         bottom: 20,
         padding: 0,
         zIndex: 9999,

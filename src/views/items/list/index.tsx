@@ -62,8 +62,7 @@ function ItemsList() {
         height: '100%',
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
-          padding: 45,
-          paddingTop: 80,
+          padding: 0,
         },
       })}
     >
@@ -83,7 +82,6 @@ function ItemsList() {
         />
       </Box>
       {itemCount === 0 ? <NoItemsView /> : <WithItemsView />}
-
       <DevMode>
         <Button
           type="button"
