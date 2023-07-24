@@ -1,92 +1,19 @@
-import { motion } from 'framer-motion';
-import { EditIcon } from '@/components/icons';
-import { Box, Button, Divider, Text, Title } from '@mantine/core';
-import AddButtons from '@/components/views/itemslist/AddButtons';
 import React from 'react';
+import { motion } from 'framer-motion';
 import { BsPlusLg } from 'react-icons/bs';
+import { EditIcon } from '@/components/icons';
+import AddButtons from '@/components/views/itemslist/AddButtons';
+import { Box, Button, Divider, Text, Title } from '@mantine/core';
 
-export type Category = {
+import { MockItemsCategories } from 'mockdata';
+
+export type ItemCategory = {
   name: string;
   slug: string;
 };
 
-const MockCategories = [
-  {
-    name: 'Üst Giyim',
-    slug: 'ust-giyim',
-  },
-  {
-    name: 'Alt Giyim',
-    slug: 'alt-giyim',
-  },
-  {
-    name: 'Ayakkabı',
-    slug: 'ayakkabi',
-  },
-  {
-    name: 'Aksesuar',
-    slug: 'aksesuar',
-  },
-  {
-    name: 'Çanta',
-    slug: 'canta',
-  },
-  {
-    name: 'Diğer',
-    slug: 'diger',
-  },
-  {
-    name: 'Üst Giyim',
-    slug: 'ust-giyim',
-  },
-  {
-    name: 'Alt Giyim',
-    slug: 'alt-giyim',
-  },
-  {
-    name: 'Ayakkabı',
-    slug: 'ayakkabi',
-  },
-  {
-    name: 'Aksesuar',
-    slug: 'aksesuar',
-  },
-  {
-    name: 'Çanta',
-    slug: 'canta',
-  },
-  {
-    name: 'Diğer',
-    slug: 'diger',
-  },
-  {
-    name: 'Üst Giyim',
-    slug: 'ust-giyim',
-  },
-  {
-    name: 'Alt Giyim',
-    slug: 'alt-giyim',
-  },
-  {
-    name: 'Ayakkabı',
-    slug: 'ayakkabi',
-  },
-  {
-    name: 'Aksesuar',
-    slug: 'aksesuar',
-  },
-  {
-    name: 'Çanta',
-    slug: 'canta',
-  },
-  {
-    name: 'Diğer',
-    slug: 'diger',
-  },
-];
-
-function CategoriesBar({ categories }: { categories: Category[] }) {
-  const [selectedCs, setSelectedCs] = React.useState<Category[]>([]);
+function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
+  const [selectedCs, setSelectedCs] = React.useState<ItemCategory[]>([]);
 
   return (
     <Box
@@ -105,11 +32,13 @@ function CategoriesBar({ categories }: { categories: Category[] }) {
       <Box
         sx={{
           gap: 10,
+          width: '100%',
           display: 'flex',
           maxWidth: '100%',
-          overflowX: 'auto',
+          overflowX: 'scroll',
+          overflowY: 'hidden',
           flexDirection: 'row',
-          position: 'relative',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
         {categories.map((category, i) => (
@@ -257,7 +186,7 @@ function TopBar() {
           <AddButtons onItemAdd={() => null} onCategoryAdd={() => null} />
         </Box>
       </Box>
-      <CategoriesBar categories={MockCategories} />
+      <CategoriesBar categories={MockItemsCategories} />
       <Box
         sx={{
           top: 0,
