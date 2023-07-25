@@ -323,7 +323,8 @@ function ItemsTable({ items: outerItems }: Props) {
     <Box
       sx={{
         padding: 60,
-        marginTop: 20,
+        paddingTop: 0,
+        marginTop: 40,
         width: '100%',
         display: 'flex',
         maxWidth: '100%',
