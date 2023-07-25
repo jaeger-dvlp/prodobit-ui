@@ -66,7 +66,7 @@ function SidebarButton({
         justifyContent: 'center',
         backgroundColor: '#ffff',
         boxShadow: theme.shadows.xl,
-        color: theme.colors.foundationgreen[9],
+        color: theme.colors.green[9],
         [theme.fn.smallerThan('md')]: {
           display: 'flex',
         },
@@ -78,7 +78,7 @@ function SidebarButton({
           height: 'auto',
           borderRadius: 10,
           width: 'fit-content',
-          backgroundColor: theme.colors.foundationgreen[1],
+          backgroundColor: theme.colors.green[1],
         })}
       >
         <BiMenuAltRight size={25} />

@@ -78,18 +78,16 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
               padding: '15px 40px',
               border: 'none!important',
               transition: 'all .15s ease',
-              color: isFilterCategorySelected(category) ? theme.colors.foundationgreen[9] : 'black',
-              backgroundColor: isFilterCategorySelected(category)
-                ? theme.colors.foundationgreen[2]
-                : 'white',
+              color: isFilterCategorySelected(category) ? theme.colors.green[9] : 'black',
+              backgroundColor: isFilterCategorySelected(category) ? theme.colors.green[2] : 'white',
               ':hover': {
                 backgroundColor: isFilterCategorySelected(category)
-                  ? theme.colors.foundationgreen[2]
-                  : theme.colors.foundationgreen[2],
+                  ? theme.colors.green[2]
+                  : theme.colors.green[2],
 
                 color: isFilterCategorySelected(category)
-                  ? theme.colors.foundationgreen[9]
-                  : theme.colors.foundationgreen[7],
+                  ? theme.colors.green[9]
+                  : theme.colors.green[7],
               },
             })}
           >
@@ -113,7 +111,7 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
           padding: '15px 40px',
           border: 'none!important',
           transition: 'all .15s ease',
-          backgroundColor: `${theme.colors.foundationgreen[9]}!important`,
+          backgroundColor: `${theme.colors.green[9]}!important`,
           ':hover': {
             filter: 'brightness(1.2)',
           },
@@ -195,11 +193,9 @@ function CustomFiltersBar(): React.ReactNode {
                 transition: 'all .15s ease',
                 backgroundColor: 'transparent!important',
                 color:
-                  selectedCF.slug === customFilter.slug
-                    ? theme.colors.foundationgreen[6]
-                    : 'rgba(0,0,0,0.5)',
+                  selectedCF.slug === customFilter.slug ? theme.colors.green[6] : 'rgba(0,0,0,0.5)',
                 ':hover': {
-                  color: theme.colors.foundationgreen[6],
+                  color: theme.colors.green[6],
                 },
                 ':after': {
                   content: '""',
@@ -209,9 +205,7 @@ function CustomFiltersBar(): React.ReactNode {
                   position: 'absolute',
                   transition: 'all .15s ease',
                   backgroundColor:
-                    selectedCF.slug === customFilter.slug
-                      ? theme.colors.foundationgreen[6]
-                      : 'transparent',
+                    selectedCF.slug === customFilter.slug ? theme.colors.green[6] : 'transparent',
                   height: selectedCF.slug === customFilter.slug ? 3 : 0,
                 },
               })}
@@ -281,8 +275,8 @@ function TopBar() {
               backgroundColor: 'transparent',
               transition: 'all 0.1s ease-in-out',
               ':hover': {
-                color: theme.colors.indigo[9],
-                backgroundColor: theme.colors.indigo[1],
+                color: theme.colors.purple[9],
+                backgroundColor: theme.colors.purple[1],
               },
             })}
             variant="default"

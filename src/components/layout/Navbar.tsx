@@ -76,8 +76,8 @@ function Navbar({
     backgroundColor: 'transparent',
     transition: 'all 0.1s ease-in-out',
     ':hover': {
-      color: mantineTheme.colors.indigo[9],
-      backgroundColor: mantineTheme.colors.indigo[1],
+      color: mantineTheme.colors.purple[9],
+      backgroundColor: mantineTheme.colors.purple[1],
     },
   };
 

@@ -29,7 +29,7 @@ function ThirdSubRouteLink({ to, children }: { to: string; children: React.React
           transition: 'all 0.15s ease-in-out',
           color: isActive ? '#000' : '#878688',
           ':hover': {
-            color: isActive ? '#000' : theme.colors.foundationgreen[9],
+            color: isActive ? '#000' : theme.colors.green[9],
             backgroundColor: 'transparent',
           },
           [theme.fn.smallerThan('md')]: {

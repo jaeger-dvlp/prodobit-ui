@@ -36,7 +36,7 @@ function NoItemsView() {
           lineHeight: 1.3,
           fontSize: '45px',
           textAlign: 'center',
-          color: theme.colors.foundationgreen[7],
+          color: theme.colors.green[7],
         })}
       >
         Etkin ve Modern Bir Öğe Yönetimi İçin

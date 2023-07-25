@@ -40,6 +40,8 @@ function ItemsTable({ items: outerItems }: Props) {
           <Box sx={{ gap: 10, display: 'flex', justifyContent: 'start', alignItems: 'center' }}>
             <Image
               width={30}
+              height={30}
+              fit="cover"
               sx={{
                 borderRadius: 100,
                 overflow: 'hidden',
@@ -157,8 +159,8 @@ function ItemsTable({ items: outerItems }: Props) {
                 backgroundColor: 'transparent',
                 transition: 'all 0.1s ease-in-out',
                 ':hover': {
-                  color: theme.colors.indigo[9],
-                  backgroundColor: theme.colors.indigo[1],
+                  color: theme.colors.blue[8],
+                  backgroundColor: theme.colors.blue[1],
                 },
               })}
             >
@@ -176,8 +178,8 @@ function ItemsTable({ items: outerItems }: Props) {
                 backgroundColor: 'transparent',
                 transition: 'all 0.1s ease-in-out',
                 ':hover': {
-                  color: theme.colors.indigo[9],
-                  backgroundColor: theme.colors.indigo[1],
+                  color: theme.colors.red[8],
+                  backgroundColor: theme.colors.red[1],
                 },
               })}
             >
@@ -191,11 +193,11 @@ function ItemsTable({ items: outerItems }: Props) {
                 padding: '10px 17px',
                 backgroundColor: 'transparent',
                 transition: 'all 0.1s ease-in-out',
-                border: `1px solid ${theme.colors.gray[5]}`,
+                border: `1px solid ${theme.colors.gray[4]}`,
                 ':hover': {
-                  color: theme.colors.indigo[9],
-                  borderColor: theme.colors.indigo[5],
-                  backgroundColor: theme.colors.indigo[1],
+                  color: theme.colors.blue[7],
+                  borderColor: theme.colors.blue[4],
+                  backgroundColor: theme.colors.blue[1],
                 },
               })}
             >

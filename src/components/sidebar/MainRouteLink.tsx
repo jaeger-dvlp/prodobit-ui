@@ -39,11 +39,11 @@ function MainRouteLink({
           position: 'relative',
           justifyContent: 'start',
           transition: 'all 0.15s ease-in-out',
-          color: isActive ? theme.colors.foundationgreen[7] : '#878688',
-          backgroundColor: isActive ? theme.colors.foundationgreen[0] : 'transparent',
+          color: isActive ? theme.colors.green[7] : '#878688',
+          backgroundColor: isActive ? theme.colors.green[0] : 'transparent',
           ':hover': {
-            color: theme.colors.foundationgreen[7],
-            backgroundColor: isActive ? theme.colors.foundationgreen[0] : 'transparent',
+            color: theme.colors.green[7],
+            backgroundColor: isActive ? theme.colors.green[0] : 'transparent',
           },
           [theme.fn.smallerThan('md')]: {
             fontSize: '15px',

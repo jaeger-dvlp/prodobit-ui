@@ -17,7 +17,7 @@ function Login() {
       }}
     >
       <Text align="center">Login View</Text>
-      <Button variant="link" bg="foundationgreen" component={NavLink} to="/dashboard">
+      <Button variant="link" bg="green" component={NavLink} to="/dashboard">
         Go to Dashboard
       </Button>
     </Box>
