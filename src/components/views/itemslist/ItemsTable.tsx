@@ -2,12 +2,25 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Item } from '@/views/items/list/WithItems';
-import { EditIconItem, TrashIcon } from '@/components/icons';
 import { Box, Button, Image, Select, Text } from '@mantine/core';
-import { MantineReactTable, useMantineReactTable, type MRT_ColumnDef } from 'mantine-react-table';
+import { MockItems, MockItemsCategories, MockStatuses } from 'mockdata';
+
+import {
+  type MRT_Icons,
+  type MRT_ColumnDef,
+  MantineReactTable,
+  useMantineReactTable,
+} from 'mantine-react-table';
+
+import {
+  TrashIcon,
+  EditIconItem,
+  CustomChevrons,
+  CustomChevronUp,
+  CustomChevronDown,
+} from '@/components/icons';
 
 import 'dayjs/locale/tr';
-import { MockItems, MockItemsCategories, MockStatuses } from 'mockdata';
 
 type Props = {
   items?: Item[];
@@ -47,7 +60,7 @@ function ItemsTable({ items: outerItems }: Props) {
       {
         accessorFn: (item) => MockItemsCategories.find((c) => c.slug === item.category)?.name,
         id: 'item-category',
-        header: 'Kategori',
+        header: `Kategoriler (${MockItemsCategories.length})`,
         enableColumnFilter: true,
         filterVariant: 'autocomplete',
       },
@@ -65,10 +78,15 @@ function ItemsTable({ items: outerItems }: Props) {
               setItems(newItems);
             }}
             variant="default"
+            rightSection={<CustomChevronDown width={12} />}
             styles={{
               root: {
-                maxWidth: '145px',
                 width: 'auto',
+                maxWidth: '145px',
+                svg: {
+                  color: `${MockStatuses.find((status) => status.slug === row.original.status)
+                    ?.color?.[7]}!important`,
+                },
               },
               input: {
                 width: '100%',
@@ -84,8 +102,16 @@ function ItemsTable({ items: outerItems }: Props) {
                 backgroundColor: MockStatuses.find((status) => status.slug === row.original.status)
                   ?.color?.[1],
                 ':hover': {
-                  filter: 'brightness(0.8)',
+                  backgroundColor: MockStatuses.find(
+                    (status) => status.slug === row.original.status,
+                  )?.color?.[2],
                 },
+              },
+              dropdown: {
+                borderRadius: 15,
+              },
+              item: {
+                borderRadius: 10,
               },
             }}
             data={MockStatuses.map((status) => ({
@@ -110,17 +136,17 @@ function ItemsTable({ items: outerItems }: Props) {
         header: 'İşlemler',
         enableSorting: false,
         enableColumnFilter: false,
-        Cell: ({ row }: { row: any }) => (
+        Cell: () => (
           <Box
             sx={{
               gap: 10,
               display: 'flex',
-              justifyContent: 'start',
               alignItems: 'center',
+              justifyContent: 'start',
             }}
           >
             <Button
-              onClick={() => alert(`${row.original.name} edit`)}
+              onClick={() => null}
               sx={(theme) => ({
                 margin: 0,
                 padding: 6,
@@ -139,7 +165,7 @@ function ItemsTable({ items: outerItems }: Props) {
               <EditIconItem width={24} height={24} />
             </Button>
             <Button
-              onClick={() => alert(`${row.original.name} delete`)}
+              onClick={() => null}
               sx={(theme) => ({
                 margin: 0,
                 padding: 6,
@@ -167,8 +193,8 @@ function ItemsTable({ items: outerItems }: Props) {
                 transition: 'all 0.1s ease-in-out',
                 border: `1px solid ${theme.colors.gray[5]}`,
                 ':hover': {
-                  borderColor: theme.colors.indigo[5],
                   color: theme.colors.indigo[9],
+                  borderColor: theme.colors.indigo[5],
                   backgroundColor: theme.colors.indigo[1],
                 },
               })}
@@ -186,12 +212,25 @@ function ItemsTable({ items: outerItems }: Props) {
         ),
       },
     ],
-    [],
+    [items],
   );
+
+  const ReactIcons: Partial<MRT_Icons> = {
+    IconArrowsSort: (props: any) => {
+      return <CustomChevrons {...props} color="rgba(0, 0, 0, 0.7)" width={10} />;
+    },
+    IconSortAscending: (props: any) => (
+      <CustomChevronUp {...props} color="rgba(0, 0, 0, 0.7)" width={10} height={10} />
+    ),
+    IconSortDescending: (props: any) => (
+      <CustomChevronDown {...props} color="rgba(0, 0, 0, 0.7)" width={10} height={10} />
+    ),
+  };
 
   const table = useMantineReactTable({
     columns,
     data: items,
+    icons: ReactIcons,
     enableTopToolbar: false,
     enableBottomToolbar: false,
     enableColumnActions: false,
@@ -200,6 +239,7 @@ function ItemsTable({ items: outerItems }: Props) {
     positionToolbarAlertBanner: 'bottom',
     mantineTableHeadRowProps: {
       sx: {
+        boxShadow: 'none!important',
         backgroundColor: 'transparent',
       },
     },
@@ -217,15 +257,37 @@ function ItemsTable({ items: outerItems }: Props) {
     },
     mantineTableHeadCellProps: {
       sx: {
-        width: '100%',
-        gap: `${200}px!important`,
-        padding: '15px 0px!important',
+        fontWeight: 700,
+        fontSize: '12px',
+        width: '100%!important',
+        padding: '0px!important',
+        '.mantine-TableHeadCell-Content-Labels': {
+          width: '100%!important',
+          padding: '15px 30px 15px 15px!important',
+          justifyContent: 'space-between',
+        },
+        color: 'rgba(0,0,0, 0.5)!important',
+        '> *:not(:last-child)': {
+          '>': {
+            position: 'relative',
+            '::after': {
+              content: '""',
+              width: 1,
+              right: 10,
+              height: 20,
+              top: '50%',
+              position: 'absolute',
+              transform: 'translateY(-50%)',
+              backgroundColor: 'rgba(0,0,0, 0.1)!important',
+            },
+          },
+        },
       },
     },
     mantinePaperProps: {
       sx: {
-        border: 'none!important',
         boxShadow: 'none',
+        border: 'none!important',
         backgroundColor: 'transparent',
       },
     },
@@ -242,15 +304,16 @@ function ItemsTable({ items: outerItems }: Props) {
     mantineTableBodyCellProps: {
       sx: {
         border: 'none!important',
-        padding: '15px 0px!important',
+        padding: '15px 15px!important',
         backgroundColor: 'transparent!important',
       },
     },
     mantineTableBodyRowProps: {
       sx: {
+        borderRadius: '10px!important',
         backgroundColor: 'transparent',
         ':hover': {
-          backgroundColor: 'transparent!important',
+          backgroundColor: 'rgba(0, 0, 0, 0.05)!important',
         },
       },
     },
@@ -261,6 +324,13 @@ function ItemsTable({ items: outerItems }: Props) {
       sx={{
         padding: 60,
         marginTop: 20,
+        width: '100%',
+        display: 'flex',
+        maxWidth: '100%',
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        overflow: 'auto',
       }}
     >
       <MantineReactTable table={table} />
