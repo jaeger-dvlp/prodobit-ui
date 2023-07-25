@@ -1,5 +1,6 @@
+import { ProdobitAppTheme } from '@/components/layout';
+import { MantineColor, MantineThemeColors } from '@mantine/core';
 import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
-import { MantineColor, MantineThemeColors, DEFAULT_THEME as theme } from '@mantine/core';
 
 const MockItemsCategories: ItemCategory[] = [
   {
@@ -97,39 +98,93 @@ const MockItemsCategories: ItemCategory[] = [
 const MockItems: Item[] = [
   {
     id: 0,
-    image: 'https://picsum.photos/200',
+    image: 'https://source.unsplash.com/random/200',
     name: 'Gömlek',
     category: 'ust-giyim',
-    code: 'ABC1230',
+    code: '12ASDFAE',
     status: 'waiting',
-    created_at: '2021-01-01 12:00:00',
+    created_at: '2021-05-15 20:30:00',
   },
   {
     id: 1,
-    image: 'https://picsum.photos/200',
+    image: 'https://source.unsplash.com/random/200',
     name: 'Tişört',
     category: 'ust-giyim',
-    code: 'ABC1231',
-    status: 'inspecting',
-    created_at: '2021-01-01 12:00:00',
+    code: 'QWE1231',
+    status: 'on-process',
+    created_at: '2021-05-15 20:30:00',
   },
   {
     id: 2,
-    image: 'https://picsum.photos/200',
+    image: 'https://source.unsplash.com/random/200',
     name: 'Jeans',
     category: 'alt-giyim',
-    code: 'ABC23431',
-    status: 'on-process',
-    created_at: '2021-01-01 12:00:00',
+    code: 'SAGDFS312',
+    status: 'stuck',
+    created_at: '2021-05-15 20:30:00',
   },
   {
     id: 3,
-    image: 'https://picsum.photos/200',
+    image: 'https://source.unsplash.com/random/200',
     name: 'Nike Air Max',
     category: 'ayakkabi',
-    code: 'ABC123432',
-    status: 'stuck',
-    created_at: '2021-01-01 12:00:00',
+    code: 'ASDAS123',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
+  },
+  {
+    id: 4,
+    image: 'https://source.unsplash.com/random/200',
+    name: 'Gömlek',
+    category: 'ust-giyim',
+    code: 'DSFSD123',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
+  },
+  {
+    id: 5,
+    image: 'https://source.unsplash.com/random/200',
+    name: 'Tişört',
+    category: 'ust-giyim',
+    code: 'J213HNK',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
+  },
+  {
+    id: 6,
+    image: 'https://source.unsplash.com/random/200',
+    name: 'Jeans',
+    category: 'alt-giyim',
+    code: 'XCXZC123',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
+  },
+  {
+    id: 7,
+    image: 'https://source.unsplash.com/random/200',
+    name: 'Nike Air Max',
+    category: 'ayakkabi',
+    code: 'XQWE123',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
+  },
+  {
+    id: 8,
+    image: 'https://source.unsplash.com/random/200',
+    name: 'Gömlek',
+    category: 'ust-giyim',
+    code: 'MDFDAW31',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
+  },
+  {
+    id: 9,
+    image: 'https://source.unsplash.com/random/200',
+    name: 'Tişört',
+    category: 'ust-giyim',
+    code: 'CVFVBDAS',
+    status: 'inspecting',
+    created_at: '2021-05-15 20:30:00',
   },
 ];
 
@@ -143,25 +198,25 @@ const MockStatuses: {
     id: 0,
     slug: 'waiting',
     name: 'Bekliyor',
-    color: theme.colors.yellow,
+    color: ProdobitAppTheme.colors.yellow,
   },
   {
     id: 1,
     slug: 'inspecting',
     name: 'İnceleniyor',
-    color: theme.colors.blue,
+    color: ProdobitAppTheme.colors.blue,
   },
   {
     id: 4,
     slug: 'on-process',
     name: 'İşlemde',
-    color: theme.colors.green,
+    color: ProdobitAppTheme.colors.green,
   },
   {
     id: 3,
     slug: 'stuck',
     name: 'Takıldı',
-    color: theme.colors.red,
+    color: ProdobitAppTheme.colors.red,
   },
 ];
 
@@ -180,6 +235,16 @@ const MockCustomFilters: CustomFilter[] = [
     id: 2,
     name: 'Filtre Adı',
     slug: 'mock-filter-2',
+  },
+  {
+    id: 3,
+    name: 'Filtre Adı',
+    slug: 'mock-filter-3',
+  },
+  {
+    id: 4,
+    name: 'Filtre Adı',
+    slug: 'mock-filter-4',
   },
 ];
 
