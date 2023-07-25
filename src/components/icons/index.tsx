@@ -337,6 +337,31 @@ function CustomChevrons(props: CustomIconProps) {
   );
 }
 
+function DownloadCloudIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 13" fill="none" {...DefaultProps} {...props}>
+      <path d="M5 9L7 11L9 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7 6.5V11" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M11.44 9.54503C11.8747 9.23935 12.2007 8.8031 12.3706 8.2996C12.5406 7.7961 12.5457 7.25154 12.3852 6.74494C12.2247 6.23834 11.9069 5.79607 11.478 5.48231C11.0491 5.16854 10.5314 4.99961 10 5.00003H9.37C9.21962 4.41396 8.93824 3.86965 8.54706 3.40807C8.15587 2.94648 7.66507 2.57966 7.1116 2.3352C6.55813 2.09075 5.95642 1.97504 5.35176 1.99679C4.7471 2.01853 4.15525 2.17716 3.62077 2.46074C3.08629 2.74432 2.62311 3.14545 2.26609 3.63394C1.90907 4.12243 1.66752 4.68555 1.55963 5.2809C1.45173 5.87625 1.4803 6.48833 1.64319 7.07104C1.80607 7.65375 2.09903 8.19192 2.5 8.64503"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomFilterBarsIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 11" fill="none" {...DefaultProps} {...props}>
+      <path d="M1 1.5H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M1 5.5H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M1 9.5H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -357,4 +382,6 @@ export {
   CustomChevronDown,
   CustomChevronUp,
   CustomChevrons,
+  DownloadCloudIcon,
+  CustomFilterBarsIcon,
 };
