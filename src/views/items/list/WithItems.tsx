@@ -27,6 +27,8 @@ export type Item = {
 function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
   const [selectedCs, setSelectedCs] = React.useState<ItemCategory[]>([]);
 
+  const isFilterCategorySelected = (category: ItemCategory) => selectedCs.includes(category);
+
   return (
     <Box
       sx={{
@@ -59,7 +61,7 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
             variant="default"
             key={`items-c-button-${i}`}
             onClick={() => {
-              if (selectedCs.includes(category)) {
+              if (isFilterCategorySelected(category)) {
                 setSelectedCs(selectedCs.filter((c) => c !== category));
               } else {
                 setSelectedCs((cs) => [...cs, category]);
@@ -76,16 +78,16 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
               padding: '15px 40px',
               border: 'none!important',
               transition: 'all .15s ease',
-              color: selectedCs.includes(category) ? theme.colors.foundationgreen[9] : 'black',
-              backgroundColor: selectedCs.includes(category)
+              color: isFilterCategorySelected(category) ? theme.colors.foundationgreen[9] : 'black',
+              backgroundColor: isFilterCategorySelected(category)
                 ? theme.colors.foundationgreen[2]
                 : 'white',
               ':hover': {
-                backgroundColor: selectedCs.includes(category)
+                backgroundColor: isFilterCategorySelected(category)
                   ? theme.colors.foundationgreen[2]
                   : theme.colors.foundationgreen[2],
 
-                color: selectedCs.includes(category)
+                color: isFilterCategorySelected(category)
                   ? theme.colors.foundationgreen[9]
                   : theme.colors.foundationgreen[7],
               },
@@ -101,16 +103,16 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
         sx={(theme) => ({
           marginTop: 2,
           height: 'auto',
-          minHeight: '53px',
           marginBottom: 2,
           fontWeight: 400,
           lineHeight: 1.2,
           fontSize: '15px',
+          color: '#FFD973',
+          minHeight: '53px',
           borderRadius: 100,
           padding: '15px 40px',
           border: 'none!important',
           transition: 'all .15s ease',
-          color: '#FFD973',
           backgroundColor: `${theme.colors.foundationgreen[9]}!important`,
           ':hover': {
             filter: 'brightness(1.2)',
@@ -136,8 +138,8 @@ function TopBar() {
         display: 'grid',
         alignItems: 'start',
         position: 'relative',
-        gridTemplateColumns: 'repeat(1, minmax(0, 1fr)',
         justifyContent: 'space-between',
+        gridTemplateColumns: 'repeat(1, minmax(0, 1fr)',
       }}
     >
       <Box
@@ -214,8 +216,8 @@ function TopBar() {
           pointerEvents: 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'right top',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 50%, black 100%)',
           backgroundImage: 'url(/assets/img/items-bg.webp)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 50%, black 100%)',
         }}
       />
     </Box>
@@ -224,15 +226,10 @@ function TopBar() {
 
 function WithItemsView() {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <>
       <TopBar />
       <ItemsTable />
-    </Box>
+    </>
   );
 }
 

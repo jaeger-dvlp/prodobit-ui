@@ -60,6 +60,8 @@ function ItemsList() {
         padding: 0,
         width: '100%',
         height: '100%',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(1, minmax(0, 1fr)',
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
           padding: 0,

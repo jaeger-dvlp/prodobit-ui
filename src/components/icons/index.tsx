@@ -288,6 +288,55 @@ function TrashIcon(props: CustomIconProps) {
   );
 }
 
+function CustomChevronDown(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M9.96 4.47501L6.7 7.73501C6.315 8.12001 5.685 8.12001 5.3 7.73501L2.04 4.47501"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomChevronUp(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 12" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M10.21 7.52501L6.95 4.26501C6.565 3.88001 5.935 3.88001 5.55 4.26501L2.29 7.52501"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomChevrons(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M10.21 7.52501L6.95 4.26501C6.565 3.88001 5.935 3.88001 5.55 4.26501L2.29 7.52501"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.21 16.475L6.95 19.735C6.565 20.12 5.935 20.12 5.55 19.735L2.29 16.475"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -305,4 +354,7 @@ export {
   EditIcon,
   EditIconItem,
   TrashIcon,
+  CustomChevronDown,
+  CustomChevronUp,
+  CustomChevrons,
 };
