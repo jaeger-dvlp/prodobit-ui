@@ -24,7 +24,7 @@ function Loader() {
           backgroundColor: theme.colors.gray[2],
         })}
       >
-        <LoadingCircle color="green.9" />
+        <LoadingCircle color="green.9" sx={{ animation: 'spin 1s linear infinite' }} />
       </Box>
     </AnimatePresence>
   );

@@ -35,6 +35,8 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
       sx={{
         gap: 20,
         zIndex: 2,
+        margin: 0,
+        padding: 0,
         top: '100%',
         display: 'flex',
         maxWidth: '100%',
@@ -45,6 +47,7 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
       }}
     >
       <Box
+        component="section"
         sx={{
           gap: 10,
           width: '100%',
