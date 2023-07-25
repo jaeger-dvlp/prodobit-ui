@@ -1,4 +1,4 @@
-import { ProdobitAppTheme } from '@/components/layout';
+import { ProdobitAppTheme } from '@/theme';
 import { MantineColor, MantineThemeColors } from '@mantine/core';
 import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
 
