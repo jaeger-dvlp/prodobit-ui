@@ -12,6 +12,7 @@ function NoItemsView() {
       component={motion.section}
       sx={{
         gap: 40,
+        padding: 30,
         width: '100%',
         height: '100%',
         display: 'flex',
