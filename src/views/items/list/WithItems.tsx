@@ -7,6 +7,7 @@ import { Box, Button, Divider, Text, Title } from '@mantine/core';
 
 import { MockCustomFilters, MockItemsCategories } from 'mockdata';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
+import Toolbar from '@/components/views/itemslist/Toolbar';
 
 export type ItemCategory = {
   id: number;
@@ -324,6 +325,7 @@ function WithItemsView() {
       <TopBar />
       <CustomFiltersBar />
       <ItemsTable />
+      <Toolbar />
     </>
   );
 }
