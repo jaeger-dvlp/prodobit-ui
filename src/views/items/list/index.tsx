@@ -1,12 +1,12 @@
 import React from 'react';
+import { MockItems } from 'mockdata';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
+import DevMode from '@/components/misc/DevMode';
 import { Box, Button, Text } from '@mantine/core';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import NoItemsView from '@/views/items/list/NoItems';
 import WithItemsView from '@/views/items/list/WithItems';
-
-import DevMode from '@/components/misc/DevMode';
 
 function ItemCountDisplay({ itemCount }: { itemCount: number }) {
   if (itemCount === 0) {
@@ -45,7 +45,7 @@ function ItemCountDisplay({ itemCount }: { itemCount: number }) {
 }
 
 function ItemsList() {
-  const [itemCount, setItemCount] = React.useState(0);
+  const [items, setItems] = React.useState(MockItems);
 
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
   const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/list');
@@ -80,17 +80,17 @@ function ItemsList() {
             name: route?.name || '?',
           }))}
           withButtons
-          middleChilds={<ItemCountDisplay itemCount={itemCount} />}
+          middleChilds={<ItemCountDisplay itemCount={items.length} />}
         />
       </Box>
-      {itemCount === 0 ? <NoItemsView /> : <WithItemsView />}
+      {items.length === 0 ? <NoItemsView /> : <WithItemsView />}
       <DevMode>
         <Button
           type="button"
           variant="default"
-          onClick={() => setItemCount(itemCount === 0 ? 2500 : 0)}
+          onClick={() => setItems(items?.length === 0 ? MockItems : [])}
         >
-          <Text>Öğe sayısını {itemCount === 0 ? 2500 : 0} yap.</Text>
+          <Text>Öğe sayısını {items?.length === 0 ? 'arttır.' : 'sıfırla.'} </Text>
         </Button>
       </DevMode>
     </Box>
