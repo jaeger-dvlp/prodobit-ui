@@ -1,4 +1,4 @@
-import { Item, ItemCategory } from '@/views/items/list/WithItems';
+import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
 import { MantineColor, MantineThemeColors, DEFAULT_THEME as theme } from '@mantine/core';
 
 const MockItemsCategories: ItemCategory[] = [
@@ -165,4 +165,22 @@ const MockStatuses: {
   },
 ];
 
-export { MockItemsCategories, MockItems, MockStatuses };
+const MockCustomFilters: CustomFilter[] = [
+  {
+    id: 0,
+    name: 'Tümü',
+    slug: 'all',
+  },
+  {
+    id: 1,
+    name: 'Filtre Adı',
+    slug: 'mock-filter-1',
+  },
+  {
+    id: 2,
+    name: 'Filtre Adı',
+    slug: 'mock-filter-2',
+  },
+];
+
+export { MockItemsCategories, MockItems, MockStatuses, MockCustomFilters };
