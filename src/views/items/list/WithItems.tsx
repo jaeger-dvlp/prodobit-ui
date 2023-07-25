@@ -5,7 +5,7 @@ import { EditIcon } from '@/components/icons';
 import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
 
-import { MockItemsCategories } from 'mockdata';
+import { MockCustomFilters, MockItemsCategories } from 'mockdata';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 
 export type ItemCategory = {
@@ -125,6 +125,106 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
   );
 }
 
+export type CustomFilter = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+function CustomFiltersBar(): React.ReactNode {
+  const [customFilters] = React.useState<CustomFilter[]>(MockCustomFilters);
+  const [selectedCF, setSelectedCF] = React.useState<CustomFilter>(
+    MockCustomFilters.find((cf) => cf.slug === 'all') as CustomFilter,
+  );
+  return (
+    <Box
+      sx={(theme) => ({
+        gap: 35,
+        width: '100%',
+        marginTop: 70,
+        display: 'flex',
+        padding: '0px 60px',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        [theme.fn.smallerThan('md')]: {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        },
+      })}
+    >
+      <Title
+        order={2}
+        sx={{
+          color: 'black',
+          fontSize: '31px',
+          fontWeight: 300,
+          lineHeight: 1.2,
+          minWidth: 'fit-content',
+        }}
+      >
+        Öğe Listesi
+      </Title>
+      <Box
+        component="ul"
+        sx={{
+          gap: 10,
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          display: 'flex',
+          listStyle: 'none',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+        }}
+      >
+        {customFilters.map((customFilter) => (
+          <Box key={`cf-${customFilter.id}`} component="li">
+            <Button
+              type="button"
+              variant="default"
+              onClick={() => setSelectedCF(customFilter)}
+              sx={(theme) => ({
+                height: 'auto',
+                fontSize: '18px',
+                fontWeight: 500,
+                padding: '12px 21px',
+                position: 'relative',
+                border: 'none!important',
+                transition: 'all .15s ease',
+                backgroundColor: 'transparent!important',
+                color:
+                  selectedCF.slug === customFilter.slug
+                    ? theme.colors.foundationgreen[6]
+                    : 'rgba(0,0,0,0.5)',
+                ':hover': {
+                  color: theme.colors.foundationgreen[6],
+                },
+                ':after': {
+                  content: '""',
+                  left: 0,
+                  bottom: -3,
+                  width: '100%',
+                  position: 'absolute',
+                  transition: 'all .15s ease',
+                  backgroundColor:
+                    selectedCF.slug === customFilter.slug
+                      ? theme.colors.foundationgreen[6]
+                      : 'transparent',
+                  height: selectedCF.slug === customFilter.slug ? 3 : 0,
+                },
+              })}
+            >
+              {customFilter.name}
+            </Button>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}
+
 function TopBar() {
   return (
     <Box
@@ -228,6 +328,7 @@ function WithItemsView() {
   return (
     <>
       <TopBar />
+      <CustomFiltersBar />
       <ItemsTable />
     </>
   );
