@@ -169,9 +169,11 @@ function Toolbar({ sorting, setSorting, selectedCF, customFilters, setSelectedCF
                 margin: 0,
                 padding: 0,
                 width: 'auto',
+                height: '100%',
                 display: 'flex',
                 maxWidth: '110px',
                 position: 'relative',
+
                 alignItems: 'stretch',
                 '> div': {
                   margin: 0,
