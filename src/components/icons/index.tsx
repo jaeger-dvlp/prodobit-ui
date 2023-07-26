@@ -362,6 +362,97 @@ function CustomFilterBarsIcon(props: CustomIconProps) {
   );
 }
 
+function PGCHright(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 13" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M4.74762 10.46L8.00762 7.19998C8.39262 6.81498 8.39262 6.18498 8.00762 5.79998L4.74762 2.53998"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PGCHEndRight(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 13" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M2.1463 10.46L5.4063 7.19998C5.7913 6.81498 5.7913 6.18498 5.4063 5.79998L2.1463 2.53998"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.69507 10.46L8.95507 7.19998C9.34007 6.81498 9.34007 6.18498 8.95507 5.79998L5.69507 2.53998"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="10.7546"
+        y1="2.48905"
+        x2="10.928"
+        y2="10.4893"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PGCHleft(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 13" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M7.83762 10.46L4.57762 7.19998C4.19262 6.81498 4.19262 6.18498 4.57762 5.79998L7.83762 2.53998"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PGCHEndLeft(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 13" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M10.4389 10.46L7.1789 7.19998C6.7939 6.81498 6.7939 6.18498 7.1789 5.79998L10.4389 2.53998"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.89014 10.46L3.63014 7.19998C3.24514 6.81498 3.24514 6.18498 3.63014 5.79998L6.89014 2.53998"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="0.5"
+        y1="-0.5"
+        x2="8.50211"
+        y2="-0.5"
+        transform="matrix(-0.0216692 0.999765 0.999765 0.0216692 2.34137 2)"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -384,4 +475,8 @@ export {
   CustomChevrons,
   DownloadCloudIcon,
   CustomFilterBarsIcon,
+  PGCHright,
+  PGCHEndRight,
+  PGCHleft,
+  PGCHEndLeft,
 };
