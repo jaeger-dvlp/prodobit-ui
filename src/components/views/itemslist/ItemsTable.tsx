@@ -24,9 +24,10 @@ import 'dayjs/locale/tr';
 
 type Props = {
   items?: Item[];
+  sorting: boolean | string;
 };
 
-function ItemsTable({ items: outerItems }: Props) {
+function ItemsTable({ items: outerItems, sorting }: Props) {
   const [items, setItems] = React.useState<Item[]>(outerItems || MockItems);
 
   const columns = React.useMemo<MRT_ColumnDef<Item>[]>(
@@ -236,7 +237,9 @@ function ItemsTable({ items: outerItems }: Props) {
     enableTopToolbar: false,
     enableBottomToolbar: false,
     enableColumnActions: false,
-    initialState: { showColumnFilters: false },
+    initialState: {
+      showColumnFilters: false,
+    },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
     mantineTableHeadRowProps: {
@@ -320,6 +323,24 @@ function ItemsTable({ items: outerItems }: Props) {
       },
     },
   });
+
+  React.useEffect(() => {
+    (() => {
+      let customSorting: boolean | string = sorting;
+
+      if (sorting === true) customSorting = true;
+
+      if (!sorting) customSorting = false;
+
+      if (sorting === 'reset') return table.resetSorting();
+
+      const sortedCols = columns.map((column) => ({
+        id: column?.id || '',
+        desc: !!customSorting,
+      }));
+      return table.setSorting(sortedCols);
+    })();
+  }, [columns, sorting, table]);
 
   return (
     <Box

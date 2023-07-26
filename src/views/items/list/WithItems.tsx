@@ -133,11 +133,15 @@ export type CustomFilter = {
   slug: string;
 };
 
-function CustomFiltersBar(): React.ReactNode {
-  const [customFilters] = React.useState<CustomFilter[]>(MockCustomFilters);
-  const [selectedCF, setSelectedCF] = React.useState<CustomFilter>(
-    MockCustomFilters.find((cf) => cf.slug === 'all') as CustomFilter,
-  );
+function CustomFiltersBar({
+  selectedCF,
+  customFilters,
+  setSelectedCF,
+}: {
+  selectedCF: CustomFilter | null;
+  customFilters: CustomFilter[];
+  setSelectedCF: React.Dispatch<React.SetStateAction<CustomFilter | null>>;
+}): React.ReactNode {
   return (
     <Box
       sx={(theme) => ({
@@ -181,6 +185,39 @@ function CustomFiltersBar(): React.ReactNode {
           justifyContent: 'flex-start',
         }}
       >
+        <Box component="li">
+          <Button
+            type="button"
+            variant="default"
+            onClick={() => setSelectedCF(null)}
+            sx={(theme) => ({
+              height: 'auto',
+              fontSize: '18px',
+              fontWeight: 500,
+              padding: '12px 21px',
+              position: 'relative',
+              border: 'none!important',
+              transition: 'all .15s ease',
+              backgroundColor: 'transparent!important',
+              color: !selectedCF ? theme.colors.green[6] : 'rgba(0,0,0,0.5)',
+              ':hover': {
+                color: theme.colors.green[6],
+              },
+              ':after': {
+                content: '""',
+                left: 0,
+                bottom: -3,
+                width: '100%',
+                position: 'absolute',
+                transition: 'all .15s ease',
+                backgroundColor: !selectedCF ? theme.colors.green[6] : 'transparent',
+                height: !selectedCF ? 3 : 0,
+              },
+            })}
+          >
+            Tümü
+          </Button>
+        </Box>
         {customFilters.map((customFilter) => (
           <Box key={`cf-${customFilter.id}`} component="li">
             <Button
@@ -197,7 +234,9 @@ function CustomFiltersBar(): React.ReactNode {
                 transition: 'all .15s ease',
                 backgroundColor: 'transparent!important',
                 color:
-                  selectedCF.slug === customFilter.slug ? theme.colors.green[6] : 'rgba(0,0,0,0.5)',
+                  selectedCF?.slug === customFilter?.slug
+                    ? theme.colors.green[6]
+                    : 'rgba(0,0,0,0.5)',
                 ':hover': {
                   color: theme.colors.green[6],
                 },
@@ -209,8 +248,8 @@ function CustomFiltersBar(): React.ReactNode {
                   position: 'absolute',
                   transition: 'all .15s ease',
                   backgroundColor:
-                    selectedCF.slug === customFilter.slug ? theme.colors.green[6] : 'transparent',
-                  height: selectedCF.slug === customFilter.slug ? 3 : 0,
+                    selectedCF?.slug === customFilter.slug ? theme.colors.green[6] : 'transparent',
+                  height: selectedCF?.slug === customFilter.slug ? 3 : 0,
                 },
               })}
             >
@@ -323,12 +362,26 @@ function TopBar() {
 }
 
 function WithItemsView() {
+  const [sorting, setSorting] = React.useState<boolean | string>('reset');
+  const [customFilters] = React.useState<CustomFilter[]>(MockCustomFilters);
+  const [selectedCF, setSelectedCF] = React.useState<CustomFilter | null>(null);
+
   return (
     <>
       <TopBar />
-      <CustomFiltersBar />
-      <ItemsTable />
-      <Toolbar />
+      <CustomFiltersBar
+        selectedCF={selectedCF}
+        customFilters={customFilters}
+        setSelectedCF={setSelectedCF}
+      />
+      <ItemsTable sorting={sorting} />
+      <Toolbar
+        sorting={sorting}
+        setSorting={setSorting}
+        customFilters={customFilters}
+        selectedCF={selectedCF}
+        setSelectedCF={setSelectedCF}
+      />
     </>
   );
 }
