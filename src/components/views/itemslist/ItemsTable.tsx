@@ -12,6 +12,8 @@ import {
   useMantineReactTable,
 } from 'mantine-react-table';
 
+import { MRT_Localization_TR } from 'mantine-react-table/locales/tr';
+
 import {
   TrashIcon,
   EditIconItem,
@@ -25,9 +27,13 @@ import 'dayjs/locale/tr';
 type Props = {
   items?: Item[];
   sorting: boolean | string;
+  pagination: {
+    page: number;
+    perPage: string;
+  };
 };
 
-function ItemsTable({ items: outerItems, sorting }: Props) {
+function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
   const [items, setItems] = React.useState<Item[]>(outerItems || MockItems);
 
   const columns = React.useMemo<MRT_ColumnDef<Item>[]>(
@@ -234,6 +240,8 @@ function ItemsTable({ items: outerItems, sorting }: Props) {
     columns,
     data: items,
     icons: ReactIcons,
+    localization: MRT_Localization_TR,
+    enablePagination: true,
     enableTopToolbar: false,
     enableBottomToolbar: false,
     enableColumnActions: false,
@@ -341,6 +349,15 @@ function ItemsTable({ items: outerItems, sorting }: Props) {
       return table.setSorting(sortedCols);
     })();
   }, [columns, sorting, table]);
+
+  React.useEffect(() => {
+    (() => {
+      table.setPagination({
+        pageIndex: pagination.page,
+        pageSize: parseInt(pagination.perPage, 10),
+      });
+    })();
+  }, [pagination, table]);
 
   return (
     <Box
