@@ -362,6 +362,7 @@ function TopBar() {
 }
 
 function WithItemsView() {
+  const [pagination, setPagination] = React.useState({ page: 0, perPage: '5' });
   const [sorting, setSorting] = React.useState<boolean | string>('reset');
   const [customFilters] = React.useState<CustomFilter[]>(MockCustomFilters);
   const [selectedCF, setSelectedCF] = React.useState<CustomFilter | null>(null);
@@ -374,13 +375,15 @@ function WithItemsView() {
         customFilters={customFilters}
         setSelectedCF={setSelectedCF}
       />
-      <ItemsTable sorting={sorting} />
+      <ItemsTable sorting={sorting} pagination={pagination} />
       <Toolbar
         sorting={sorting}
         setSorting={setSorting}
         customFilters={customFilters}
         selectedCF={selectedCF}
         setSelectedCF={setSelectedCF}
+        pagination={pagination}
+        setPagination={setPagination}
       />
     </>
   );
