@@ -223,26 +223,21 @@ const MockStatuses: {
 const MockCustomFilters: CustomFilter[] = [
   {
     id: 0,
-    name: 'Tümü',
-    slug: 'all',
-  },
-  {
-    id: 1,
     name: 'Filtre Adı',
     slug: 'mock-filter-1',
   },
   {
-    id: 2,
+    id: 1,
     name: 'Filtre Adı',
     slug: 'mock-filter-2',
   },
   {
-    id: 3,
+    id: 2,
     name: 'Filtre Adı',
     slug: 'mock-filter-3',
   },
   {
-    id: 4,
+    id: 3,
     name: 'Filtre Adı',
     slug: 'mock-filter-4',
   },
