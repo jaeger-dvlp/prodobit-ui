@@ -1,6 +1,16 @@
 import React from 'react';
 import { ProdobitAppColors } from '@/theme';
-import { Box, Button, Checkbox, MantineTheme, Select, Sx, Text, TextInput } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  MantineTheme,
+  Select,
+  Sx,
+  Text,
+  TextInput,
+} from '@mantine/core';
 
 import {
   SearchIcon,
@@ -9,6 +19,10 @@ import {
   CustomFilterBarsIcon,
   CustomChevronUp,
   CustomChevrons,
+  PGCHEndRight,
+  PGCHright,
+  PGCHleft,
+  PGCHEndLeft,
 } from '@/components/icons';
 import { CustomFilter } from '@/views/items/list/WithItems';
 
@@ -47,6 +61,19 @@ const ButtonSX: Sx = (t: MantineTheme) => ({
   },
 });
 
+type PaginationProps = {
+  pagination: {
+    page: number;
+    perPage: string;
+  };
+  setPagination: React.Dispatch<
+    React.SetStateAction<{
+      page: number;
+      perPage: string;
+    }>
+  >;
+};
+
 type Props = {
   sorting: boolean | string;
   setSorting: React.Dispatch<React.SetStateAction<boolean | string>>;
@@ -55,7 +82,195 @@ type Props = {
   setSelectedCF: React.Dispatch<React.SetStateAction<CustomFilter | null>>;
 };
 
-function Toolbar({ sorting, setSorting, selectedCF, customFilters, setSelectedCF }: Props) {
+function Pagination({ pagination, setPagination }: PaginationProps) {
+  const getCurrentPG = React.useCallback(() => {
+    const current = pagination.page + 1;
+    if (current < 10) return `0${current}`;
+
+    return current;
+  }, [pagination]);
+
+  const PGbtnSX: Sx = (t: MantineTheme) => ({
+    padding: 5,
+    height: 'auto',
+    border: 'none',
+    borderRadius: 5,
+    transition: 'all .15s ease',
+    backgroundColor: 'transparent',
+    ':hover': {
+      color: t.colors.gray[9],
+      backgroundColor: t.colors.gray[3],
+    },
+  });
+
+  const onPgRightClick = React.useCallback(() => {
+    setPagination((prev) => ({ ...prev, page: prev.page + 1 }));
+  }, [setPagination]);
+
+  const onPgLeftClick = React.useCallback(() => {
+    setPagination((prev) => ({
+      ...prev,
+      page: prev.page === 0 ? 0 : prev.page - 1,
+    }));
+  }, [setPagination]);
+
+  const onPgRightEndClick = React.useCallback(() => {
+    setPagination((prev) => ({
+      ...prev,
+      page: prev.page + 5,
+    }));
+  }, [setPagination]);
+
+  const onPgLeftEndClick = React.useCallback(() => {
+    setPagination((prev) => ({
+      ...prev,
+      page: prev.page - 5 < 0 ? 0 : prev.page - 5,
+    }));
+  }, [setPagination]);
+
+  return (
+    <Box
+      sx={{
+        ...ToolbarInnerContainerSX,
+        flexDirection: 'row',
+        width: 'calc(30% - 4px)',
+      }}
+    >
+      <Box
+        sx={{
+          gap: 3,
+          display: 'flex',
+          width: 'fit-content',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}
+      >
+        <Button onClick={onPgLeftEndClick} variant="default" sx={PGbtnSX}>
+          <PGCHEndLeft width={12} height={12} />
+        </Button>
+        <Button onClick={onPgLeftClick} variant="default" sx={PGbtnSX}>
+          <PGCHleft width={12} height={12} />
+        </Button>
+        <Text
+          sx={(t) => ({
+            fontWeight: 700,
+            borderRadius: 18,
+            fontSize: '15px',
+            padding: '5px 8px',
+            lineHeight: '18px',
+            textAlign: 'center',
+            color: t.colors.gray[8],
+            border: '1px solid rgba(0, 0, 0, 0.20)',
+          })}
+        >
+          {getCurrentPG()}
+        </Text>
+        <Button onClick={onPgRightClick} variant="default" sx={PGbtnSX}>
+          <PGCHright width={12} height={12} />
+        </Button>
+        <Button onClick={onPgRightEndClick} variant="default" sx={PGbtnSX}>
+          <PGCHEndRight width={12} height={12} />
+        </Button>
+      </Box>
+      <Box sx={{ padding: 0, margin: 0, height: '100%', maxHeight: '70%' }}>
+        <Divider
+          color="rgba(0, 0, 0, 0.20)"
+          sx={{ margin: '0px 10px', height: '100%' }}
+          orientation="vertical"
+        />
+      </Box>
+      <Select
+        label="Gösterim"
+        styles={(t) => ({
+          root: {
+            padding: 0,
+            height: '100%',
+            display: 'flex',
+            position: 'relative',
+            alignItems: 'stretch',
+            maxWidth: 'fit-content',
+            flexDirection: 'column',
+          },
+          wrapper: {
+            margin: 0,
+            padding: 0,
+            height: '100%',
+          },
+          label: {
+            bottom: -6,
+            zIndex: 2,
+            fontWeight: 300,
+            fontSize: '12px',
+            position: 'relative',
+            lineHeight: '14.4px',
+            pointerEvents: 'none',
+            color: t.colors.gray[8],
+          },
+          input: {
+            zIndex: 1,
+            maxWidth: 55,
+            height: '100%',
+            border: 'none',
+            fontWeight: 500,
+            fontSize: '15px',
+            width: 'fit-content',
+            color: t.colors.gray[8],
+            padding: '0px!important',
+            backgroundColor: 'transparent',
+          },
+          rightSection: {
+            right: 15,
+            width: 20,
+            margin: 0,
+            top: '50%',
+            padding: 0,
+            height: '100%',
+            transform: 'translateY(-50%)',
+          },
+          dropdown: {
+            borderRadius: 15,
+          },
+          item: {
+            borderRadius: 10,
+          },
+        })}
+        defaultValue={pagination.perPage}
+        onChange={(val: string) => {
+          setPagination((prev) => ({ ...prev, perPage: val }));
+        }}
+        data={[
+          {
+            value: '5',
+            label: '5',
+          },
+          {
+            value: '10',
+            label: '10',
+          },
+          {
+            value: '30',
+            label: '30',
+          },
+          {
+            value: '50',
+            label: '50',
+          },
+        ]}
+      />
+    </Box>
+  );
+}
+
+function Toolbar({
+  sorting,
+  setSorting,
+  selectedCF,
+  customFilters,
+  setSelectedCF,
+  pagination,
+  setPagination,
+}: Props & PaginationProps) {
   const [sortCounter, setSortCounter] = React.useState(0);
   const [searchFocused, setSearchFocused] = React.useState(false);
 
@@ -81,6 +296,7 @@ function Toolbar({ sorting, setSorting, selectedCF, customFilters, setSelectedCF
       sx={{
         left: 0,
         bottom: 0,
+        zIndex: 20,
         padding: 20,
         width: '100%',
         display: 'flex',
@@ -173,7 +389,6 @@ function Toolbar({ sorting, setSorting, selectedCF, customFilters, setSelectedCF
                 display: 'flex',
                 maxWidth: '110px',
                 position: 'relative',
-
                 alignItems: 'stretch',
                 '> div': {
                   margin: 0,
@@ -245,14 +460,7 @@ function Toolbar({ sorting, setSorting, selectedCF, customFilters, setSelectedCF
             <DownloadCloudIcon width={12} height={12} />
           </Button>
         </Box>
-        <Box
-          sx={{
-            ...ToolbarInnerContainerSX,
-            width: 'calc(30% - 4px)',
-          }}
-        >
-          todo-pagination
-        </Box>
+        <Pagination pagination={pagination} setPagination={setPagination} />
       </Box>
     </Box>
   );
