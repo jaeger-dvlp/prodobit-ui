@@ -8,6 +8,7 @@ import { Box, Button, Divider, Text, Title } from '@mantine/core';
 import { MockCustomFilters, MockItemsCategories } from 'mockdata';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import Toolbar from '@/components/views/itemslist/Toolbar';
+import TableWrapper from '@/components/context/Table.context';
 
 export type ItemCategory = {
   id: number;
@@ -368,7 +369,7 @@ function WithItemsView() {
   const [selectedCF, setSelectedCF] = React.useState<CustomFilter | null>(null);
 
   return (
-    <>
+    <TableWrapper>
       <TopBar />
       <CustomFiltersBar
         selectedCF={selectedCF}
@@ -385,7 +386,7 @@ function WithItemsView() {
         pagination={pagination}
         setPagination={setPagination}
       />
-    </>
+    </TableWrapper>
   );
 }
 
