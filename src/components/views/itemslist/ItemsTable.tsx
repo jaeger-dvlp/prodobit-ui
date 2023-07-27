@@ -2,7 +2,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Item } from '@/views/items/list/WithItems';
-import { Box, Button, Image, Select, Text } from '@mantine/core';
+import { Box, Button, Image, Select, Text, useMantineTheme } from '@mantine/core';
 import { MockItems, MockItemsCategories, MockStatuses } from 'mockdata';
 
 import {
@@ -34,6 +34,7 @@ type Props = {
 };
 
 function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
+  const t = useMantineTheme();
   const [items, setItems] = React.useState<Item[]>(outerItems || MockItems);
 
   const columns = React.useMemo<MRT_ColumnDef<Item>[]>(
@@ -225,15 +226,9 @@ function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
   );
 
   const ReactIcons: Partial<MRT_Icons> = {
-    IconArrowsSort: (props: any) => {
-      return <CustomChevrons {...props} color="rgba(0, 0, 0, 0.7)" width={10} />;
-    },
-    IconSortAscending: (props: any) => (
-      <CustomChevronUp {...props} color="rgba(0, 0, 0, 0.7)" width={10} height={10} />
-    ),
-    IconSortDescending: (props: any) => (
-      <CustomChevronDown {...props} color="rgba(0, 0, 0, 0.7)" width={10} height={10} />
-    ),
+    IconArrowsSort: (props: any) => <CustomChevrons {...props} width={15} height={15} />,
+    IconSortAscending: (props: any) => <CustomChevronUp {...props} width={15} height={15} />,
+    IconSortDescending: (props: any) => <CustomChevronDown {...props} width={15} height={15} />,
   };
 
   const table = useMantineReactTable({
@@ -278,8 +273,24 @@ function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
           width: '100%!important',
           padding: '15px 30px 15px 15px!important',
           justifyContent: 'space-between',
+          '.mantine-Indicator-indicator.mantine-Indicator-common': {
+            display: 'none!important',
+          },
         },
         color: 'rgba(0,0,0, 0.5)!important',
+        'button.mantine-UnstyledButton-root.mantine-ActionIcon-root': {
+          margin: 0,
+          padding: 3,
+          width: 20,
+          height: 20,
+          backgroundColor: 'transparent',
+          color: `${t.colors.gray[6]}!important`,
+          transition: 'color 0.1s ease-in-out, background-color 0.1s ease-in-out',
+          ':hover': {
+            color: `${t.colors.gray[9]}`,
+            backgroundColor: `${t.colors.gray[3]}`,
+          },
+        },
         '> *:not(:last-child)': {
           '>': {
             position: 'relative',
