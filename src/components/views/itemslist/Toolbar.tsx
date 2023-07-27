@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExportToCsv } from 'export-to-csv';
 import { ProdobitAppColors } from '@/theme';
 import {
   Box,
@@ -25,6 +26,7 @@ import {
   PGCHEndLeft,
 } from '@/components/icons';
 import { CustomFilter } from '@/views/items/list/WithItems';
+import { useTable } from '@/components/context/Table.context';
 
 const ToolbarInnerContainerSX: Sx = {
   gap: 5,
@@ -271,8 +273,27 @@ function Toolbar({
   pagination,
   setPagination,
 }: Props & PaginationProps) {
+  const { table } = useTable<any>();
   const [sortCounter, setSortCounter] = React.useState(0);
   const [searchFocused, setSearchFocused] = React.useState(false);
+
+  const onDownloadClick = React.useCallback(() => {
+    const rows = table?.getRowModel().rows;
+    const columns = table?.getAllColumns();
+
+    const csvExporter = new ExportToCsv({
+      useBom: true,
+      showLabels: true,
+      quoteStrings: '"',
+      fieldSeparator: ',',
+      decimalSeparator: '.',
+      useKeysAsHeaders: false,
+      filename: 'prodobit-export',
+      headers: columns?.map((c) => c.header),
+    });
+
+    csvExporter.generateCsv(rows?.map((row) => row.original));
+  }, [table]);
 
   const ChangeSort = React.useCallback(() => {
     setSortCounter((prev) => (prev === 2 ? 0 : prev + 1));
@@ -453,7 +474,7 @@ function Toolbar({
               }
             })()}
           </Button>
-          <Button variant="default" sx={ButtonSX}>
+          <Button onClick={onDownloadClick} variant="default" sx={ButtonSX}>
             <Text p={0} m={0} mr={4}>
               İndir
             </Text>
