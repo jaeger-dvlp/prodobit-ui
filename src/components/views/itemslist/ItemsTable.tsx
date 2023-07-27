@@ -23,6 +23,7 @@ import {
 } from '@/components/icons';
 
 import 'dayjs/locale/tr';
+import { useTable } from '@/components/context/Table.context';
 
 type Props = {
   items?: Item[];
@@ -35,6 +36,7 @@ type Props = {
 
 function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
   const t = useMantineTheme();
+  const { setTable } = useTable<Item>();
   const [items, setItems] = React.useState<Item[]>(outerItems || MockItems);
 
   const columns = React.useMemo<MRT_ColumnDef<Item>[]>(
@@ -369,6 +371,10 @@ function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
       });
     })();
   }, [pagination, table]);
+
+  React.useEffect(() => {
+    if (table) setTable(table);
+  }, [setTable, table]);
 
   return (
     <Box
