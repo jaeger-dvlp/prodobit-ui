@@ -14,8 +14,6 @@ const TableContext = React.createContext<TableContextProps<any>>({
 export default function TableWrapper({ children }: { children: React.ReactNode }) {
   const [table, setTable] = React.useState<MRT_TableInstance<any> | null>(null);
 
-  console.log(table);
-
   const value = React.useMemo(() => ({ table, setTable }), [table, setTable]);
 
   return <TableContext.Provider value={value}>{children}</TableContext.Provider>;
