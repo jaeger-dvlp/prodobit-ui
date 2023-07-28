@@ -27,6 +27,8 @@ import {
 } from '@/components/icons';
 import { CustomFilter } from '@/views/items/list/WithItems';
 import { useTable } from '@/components/context/Table.context';
+import { BsXLg } from 'react-icons/bs';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const ToolbarInnerContainerSX: Sx = {
   gap: 5,
@@ -347,7 +349,6 @@ function Toolbar({
         >
           <TextInput
             maw={searchFocused ? 300 : 150}
-            onBlur={() => setSearchFocused(false)}
             onFocus={() => setSearchFocused(true)}
             icon={<SearchIcon width={15} height={15} color={ProdobitAppColors.green[6]} />}
             placeholder="Her Şey Ara"
@@ -367,6 +368,38 @@ function Toolbar({
               transition: 'all .3s ease-in-out',
             }}
           />
+          <AnimatePresence mode="wait">
+            {searchFocused && (
+              <Button
+                key="close-s-bar"
+                variant="default"
+                variants={{
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1 },
+                  exit: { opacity: 0 },
+                }}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                sx={(t) => ({
+                  padding: 5,
+                  height: 'auto',
+                  border: 'none',
+                  borderRadius: 5,
+                  color: t.colors.red[6],
+                  backgroundColor: 'transparent',
+                  transition: 'all .15s ease-in-out',
+                  ':hover': {
+                    backgroundColor: t.colors.red[1],
+                  },
+                })}
+                component={motion.button}
+                onClick={() => setSearchFocused(false)}
+              >
+                <BsXLg size={20} />
+              </Button>
+            )}
+          </AnimatePresence>
           <Button
             onClick={(e) => {
               const checkbox = e.currentTarget.querySelector(
