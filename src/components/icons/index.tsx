@@ -453,6 +453,29 @@ function PGCHEndLeft(props: CustomIconProps) {
   );
 }
 
+function ImageIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 16" fill="none" {...DefaultProps} {...props}>
+      <rect
+        x="9.42459"
+        y="4.66663"
+        width="2.66667"
+        height="2.66667"
+        rx="1.33333"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M3.90333 11.4676L5.06259 10.3083C6.14593 9.22497 7.90237 9.22498 8.9857 10.3083L10.145 11.4676M10.145 11.4676L10.6145 10.998C11.4796 10.1329 12.9008 10.1974 13.684 11.1372L13.9593 11.4676M10.145 11.4676L11.8788 13.2014M2.99319 10.033C2.67952 8.69583 2.67952 7.30417 2.99319 5.96695C3.42752 4.11534 4.87327 2.66958 6.72489 2.23525C8.06211 1.92158 9.45377 1.92158 10.791 2.23525C12.6426 2.66958 14.0884 4.11534 14.5227 5.96696C14.8364 7.30417 14.8364 8.69583 14.5227 10.033C14.0884 11.8847 12.6426 13.3304 10.791 13.7647C9.45376 14.0784 8.06211 14.0784 6.72489 13.7647C4.87328 13.3304 3.42752 11.8847 2.99319 10.033Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -479,4 +502,5 @@ export {
   PGCHEndRight,
   PGCHleft,
   PGCHEndLeft,
+  ImageIcon,
 };
