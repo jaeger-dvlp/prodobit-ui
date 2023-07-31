@@ -27,16 +27,11 @@ import { useTable } from '@/components/context/Table.context';
 
 type Props = {
   items?: Item[];
-  sorting: boolean | string;
-  pagination: {
-    page: number;
-    perPage: string;
-  };
 };
 
-function ItemsTable({ items: outerItems, sorting, pagination }: Props) {
+function ItemsTable({ items: outerItems }: Props) {
   const t = useMantineTheme();
-  const { setTable } = useTable<Item>();
+  const { setTable, sorting, pagination } = useTable<Item>();
   const [items, setItems] = React.useState<Item[]>(outerItems || MockItems);
 
   const columns = React.useMemo<MRT_ColumnDef<Item>[]>(

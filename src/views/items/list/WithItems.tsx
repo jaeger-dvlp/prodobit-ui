@@ -2,13 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BsPlusLg } from 'react-icons/bs';
 import { EditIcon } from '@/components/icons';
+import { MockItemsCategories } from 'mockdata';
+import TableWrapper, { useTable } from '@/components/context/Table.context';
+import ItemsToolbar from '@/components/views/itemslist/Toolbar';
+import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
-
-import { MockCustomFilters, MockItemsCategories } from 'mockdata';
-import ItemsTable from '@/components/views/itemslist/ItemsTable';
-import Toolbar from '@/components/views/itemslist/Toolbar';
-import TableWrapper from '@/components/context/Table.context';
 
 export type ItemCategory = {
   id: number;
@@ -134,15 +133,8 @@ export type CustomFilter = {
   slug: string;
 };
 
-function CustomFiltersBar({
-  selectedCF,
-  customFilters,
-  setSelectedCF,
-}: {
-  selectedCF: CustomFilter | null;
-  customFilters: CustomFilter[];
-  setSelectedCF: React.Dispatch<React.SetStateAction<CustomFilter | null>>;
-}): React.ReactNode {
+function CustomFiltersBar(): React.ReactNode {
+  const { selectedCF, setSelectedCF, customFilters } = useTable();
   return (
     <Box
       sx={(theme) => ({
@@ -363,29 +355,12 @@ function TopBar() {
 }
 
 function WithItemsView() {
-  const [pagination, setPagination] = React.useState({ page: 0, perPage: '5' });
-  const [sorting, setSorting] = React.useState<boolean | string>('reset');
-  const [customFilters] = React.useState<CustomFilter[]>(MockCustomFilters);
-  const [selectedCF, setSelectedCF] = React.useState<CustomFilter | null>(null);
-
   return (
     <TableWrapper>
       <TopBar />
-      <CustomFiltersBar
-        selectedCF={selectedCF}
-        customFilters={customFilters}
-        setSelectedCF={setSelectedCF}
-      />
-      <ItemsTable sorting={sorting} pagination={pagination} />
-      <Toolbar
-        sorting={sorting}
-        setSorting={setSorting}
-        customFilters={customFilters}
-        selectedCF={selectedCF}
-        setSelectedCF={setSelectedCF}
-        pagination={pagination}
-        setPagination={setPagination}
-      />
+      <CustomFiltersBar />
+      <ItemsTable />
+      <ItemsToolbar />
     </TableWrapper>
   );
 }
