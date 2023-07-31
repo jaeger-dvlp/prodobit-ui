@@ -54,6 +54,7 @@ export interface RouteMapItem {
   name: string;
   icon?: React.ReactNode;
   subRoutes?: RouteMapItem[];
+  viewInSidebar: boolean;
 }
 
 const IconProps = {
@@ -70,37 +71,50 @@ const RoutesMap: RouteMapItem[] = [
     path: '/dashboard',
     name: 'Dashboard',
     icon: <DashboardIcon {...IconProps} />,
+    viewInSidebar: true,
   },
   {
     path: '/items',
     name: 'Öğeler',
     icon: <AnalyzesIcon {...IconProps} />,
+    viewInSidebar: true,
     subRoutes: [
+      {
+        path: '/items/edit',
+        name: 'Öğe Düzenle',
+        viewInSidebar: false,
+      },
       {
         path: '/items/list',
         name: 'Öğe Listesi',
+        viewInSidebar: true,
       },
       {
         path: '/items/categories',
         name: 'Kategoriler',
+        viewInSidebar: true,
         subRoutes: [
           {
             path: '/items/categories/list',
             name: 'Kategori Listesi',
+            viewInSidebar: true,
           },
           {
             path: '/items/categories/deleted',
             name: 'Silinenler',
+            viewInSidebar: true,
           },
           {
             path: '/items/categories/jobs',
             name: 'İşler',
+            viewInSidebar: true,
           },
         ],
       },
       {
         path: '/items/performance',
         name: 'Performans',
+        viewInSidebar: true,
       },
     ],
   },
@@ -108,11 +122,13 @@ const RoutesMap: RouteMapItem[] = [
     path: '/requests',
     name: 'Talepler',
     icon: <RequestsIcon {...IconProps} />,
+    viewInSidebar: true,
   },
   {
     path: '/tasks',
     name: 'Görevler',
     icon: <TasksIcon {...IconProps} />,
+    viewInSidebar: true,
   },
 ];
 
