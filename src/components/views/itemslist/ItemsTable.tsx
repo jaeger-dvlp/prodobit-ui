@@ -170,19 +170,24 @@ function ItemsTable({ items: outerItems }: Props) {
           >
             <Tooltip label="Düzenle">
               <Button
-                onClick={() => navigate(`/items/edit/${row.original.id}`)}
+                onClick={() =>
+                  navigate(`/items/edit/${row.original.id}`, {
+                    state: {
+                      item: row.original,
+                    },
+                  })
+                }
                 sx={(theme) => ({
                   margin: 0,
                   padding: 6,
                   border: 'none',
-                  color: 'black',
+                  color: theme.colors.gray[9],
                   borderRadius: 10,
                   height: 'fit-content',
                   backgroundColor: 'transparent',
                   transition: 'all 0.1s ease-in-out',
                   ':hover': {
-                    color: theme.colors.blue[8],
-                    backgroundColor: theme.colors.blue[1],
+                    backgroundColor: theme.colors.gray[4],
                   },
                 })}
               >
@@ -196,7 +201,7 @@ function ItemsTable({ items: outerItems }: Props) {
                   margin: 0,
                   padding: 6,
                   border: 'none',
-                  color: 'black',
+                  color: theme.colors.gray[9],
                   borderRadius: 10,
                   height: 'fit-content',
                   backgroundColor: 'transparent',
