@@ -9,6 +9,7 @@ const Login = LoadableWrapper(import('@/views/auth/login'));
 const Dashboard = LoadableWrapper(import('@/views/dashboard'));
 const Items = LoadableWrapper(import('@/views/items'));
 const ItemsList = LoadableWrapper(import('@/views/items/list'));
+const ItemsEdit = LoadableWrapper(import('@/views/items/edit'));
 const ItemsCategories = LoadableWrapper(import('@/views/items/categories'));
 const ItemsCategoriesList = LoadableWrapper(import('@/views/items/categories/list'));
 const ItemsCategoriesDeleted = LoadableWrapper(import('@/views/items/categories/deleted'));
@@ -26,6 +27,7 @@ const Views = {
   Items: {
     Index: Items,
     List: ItemsList,
+    Edit: ItemsEdit,
     Categories: {
       Index: ItemsCategories,
       List: ItemsCategoriesList,
