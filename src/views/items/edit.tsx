@@ -6,71 +6,110 @@ import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Item } from '@/views/items/list/WithItems';
-import { Box, Button, Sx, Text } from '@mantine/core';
+import { Box, Button, Image, Sx, Text } from '@mantine/core';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
 import { ImageIcon, InfoIcon, ScanBarcodeIcon, TimerIcon } from '@/components/icons';
 
 import 'dayjs/locale/tr';
 
-function BarcodeTag({ barcode }: { barcode?: string }) {
+function ItemMainInfo() {
+  const { item } = useEdit<Item>();
   return (
-    <Box
-      sx={{
-        gap: 10,
-        borderRadius: 5,
-        display: 'flex',
-        padding: '7px 10px',
-        flexDirection: 'row',
-        alignItems: 'center',
-        color: t.colors.blue[7],
-        justifyContent: 'center',
-        backgroundColor: t.colors.blue[0],
-        border: `1px solid ${t.colors.blue[0]}`,
-      }}
-    >
-      <ScanBarcodeIcon width={12} height={12} />
-      <Text
+    <>
+      <Box
         sx={{
-          fontWeight: 600,
-          fontSize: '12px',
-          lineHeight: '14.4px',
-          color: t.colors.blue[5],
+          gap: 6,
+          display: 'flex',
+          flexWrap: 'wrap',
+          width: 'fit-content',
+          alignContent: 'center',
+          justifyContent: 'center',
         }}
       >
-        {barcode}
-      </Text>
-    </Box>
-  );
-}
-
-function CreateDateTag({ created_at }: { created_at?: string }) {
-  return (
-    <Box
-      sx={{
-        gap: 5,
-        borderRadius: 5,
-        display: 'flex',
-        padding: '7px 10px',
-        flexDirection: 'row',
-        alignItems: 'center',
-        color: t.colors.blue[5],
-        justifyContent: 'center',
-        backgroundColor: 'transparent',
-        border: `1px solid ${t.colors.blue[2]}`,
-      }}
-    >
-      <TimerIcon width={12} height={12} />
-      <Text
+        <Box
+          sx={{
+            gap: 10,
+            borderRadius: 5,
+            display: 'flex',
+            padding: '7px 10px',
+            flexDirection: 'row',
+            alignItems: 'center',
+            color: t.colors.blue[7],
+            justifyContent: 'center',
+            backgroundColor: t.colors.blue[0],
+            border: `1px solid ${t.colors.blue[0]}`,
+          }}
+        >
+          <ScanBarcodeIcon width={12} height={12} />
+          <Text
+            sx={{
+              fontWeight: 600,
+              fontSize: '12px',
+              lineHeight: '14.4px',
+              color: t.colors.blue[5],
+            }}
+          >
+            {item?.code}
+          </Text>
+        </Box>
+        <Box
+          sx={{
+            gap: 5,
+            borderRadius: 5,
+            display: 'flex',
+            padding: '7px 10px',
+            flexDirection: 'row',
+            alignItems: 'center',
+            color: t.colors.blue[5],
+            justifyContent: 'center',
+            backgroundColor: 'transparent',
+            border: `1px solid ${t.colors.blue[2]}`,
+          }}
+        >
+          <TimerIcon width={12} height={12} />
+          <Text
+            sx={{
+              fontWeight: 600,
+              fontSize: '12px',
+              lineHeight: '14.4px',
+            }}
+          >
+            {dayjs(item?.created_at)
+              .locale('tr')
+              .format('DD MMMM YYYY - HH:mm')}
+          </Text>
+        </Box>
+      </Box>
+      <Box
         sx={{
-          fontWeight: 600,
-          fontSize: '12px',
-          lineHeight: '14.4px',
+          gap: 20,
+          marginTop: 20,
+          display: 'flex',
+          flexDirection: 'row',
+          wdith: 'fit-content',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
         }}
       >
-        {dayjs(created_at).locale('tr').format('DD MMMM YYYY - HH:mm')}
-      </Text>
-    </Box>
+        <Image fit="cover" width={58} height={58} radius={100} alt={item?.name} src={item?.image} />
+        <Text
+          sx={{
+            color: '#000',
+            maxWidth: 326,
+            fontWeight: 500,
+            fontSize: '26px',
+            lineHeight: '31.2px',
+            [t.fn.smallerThan('md')]: {
+              fontSize: '20px',
+              lineHeight: '24px',
+            },
+          }}
+        >
+          {item?.name}
+        </Text>
+      </Box>
+    </>
   );
 }
 
@@ -188,7 +227,8 @@ function EditItem() {
 
       <Box
         sx={{
-          padding: 60,
+          gap: 40,
+          padding: 50,
           marginTop: 70,
           height: '100%',
           widght: '100%',
@@ -210,19 +250,7 @@ function EditItem() {
             justifyContent: 'flex-start',
           }}
         >
-          <Box
-            sx={{
-              gap: 6,
-              display: 'flex',
-              flexWrap: 'wrap',
-              width: 'fit-content',
-              alignContent: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <BarcodeTag barcode={item?.code} />
-            <CreateDateTag created_at={item?.created_at} />
-          </Box>
+          <ItemMainInfo />
         </Box>
       </Box>
     </Box>
