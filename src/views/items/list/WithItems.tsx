@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 import { BsPlusLg } from 'react-icons/bs';
 import { EditIcon } from '@/components/icons';
 import { MockItemsCategories } from 'mockdata';
-import TableWrapper, { useTable } from '@/components/context/Table.context';
 import ItemsToolbar from '@/components/views/itemslist/Toolbar';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
+import TableWrapper, { useTable } from '@/components/context/Table.context';
 
 export type ItemCategory = {
   id: number;
