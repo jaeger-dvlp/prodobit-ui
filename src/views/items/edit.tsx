@@ -1,15 +1,22 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { MockItems } from 'mockdata';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
+import { MockItems, MockStatuses } from 'mockdata';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Item } from '@/views/items/list/WithItems';
-import { Box, Button, Image, Sx, Text } from '@mantine/core';
+import { Box, Button, Image, Menu, Sx, Text } from '@mantine/core';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
-import { ImageIcon, InfoIcon, ScanBarcodeIcon, TimerIcon } from '@/components/icons';
+
+import {
+  CustomChevronDown,
+  ImageIcon,
+  InfoIcon,
+  ScanBarcodeIcon,
+  TimerIcon,
+} from '@/components/icons';
 
 import 'dayjs/locale/tr';
 
@@ -113,6 +120,150 @@ function ItemMainInfo() {
   );
 }
 
+function ItemStatusBar() {
+  const { item, setItem } = useEdit<Item>();
+  const ItemStatus = MockStatuses.find((elm) => elm.slug === item?.status);
+
+  const StatusMenuTargetSX: Sx = {
+    gap: 6,
+    margin: 0,
+    color: '#000',
+    height: 'auto',
+    border: 'none',
+    display: 'flex',
+    fontWeight: 400,
+    fontSize: '12px',
+    cursor: 'pointer',
+    padding: '0px 20px',
+    lineHeight: '14.4px',
+    flexDirection: 'column',
+    backgroundColor: 'transparent!important',
+    borderRight: '1px solid rgba(0, 0, 0, 0.20)',
+    '.icon': {
+      transition: 'all 0.2s ease-in-out',
+    },
+    ':hover .icon': {
+      transform: 'rotate(-180deg)',
+    },
+    '.st-sc': {
+      gap: 5,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    '.st-t': {
+      minWidth: 100,
+      borderRadius: 5,
+      fontWeight: 500,
+      padding: '5px 14px',
+      color: ItemStatus?.color[7],
+      transition: 'all 0.2s ease-in-out',
+      backgroundColor: ItemStatus?.color[1],
+    },
+  };
+
+  return (
+    <Box
+      component="ul"
+      sx={{
+        gap: 10,
+        margin: 0,
+        marginTop: 40,
+        width: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: '18px 20px',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Box
+        component="li"
+        sx={{
+          display: 'flex',
+          alignItems: 'start',
+          justifyContent: 'center',
+        }}
+      >
+        <Menu
+          position="bottom"
+          transitionProps={{
+            duration: 300,
+            transition: 'pop-top-left',
+          }}
+        >
+          <Menu.Target>
+            <Box
+              component="button"
+              sx={{
+                ...StatusMenuTargetSX,
+                paddingLeft: 0,
+              }}
+            >
+              <Box className="st-sc">
+                <Text>Statü</Text>
+                <CustomChevronDown className="icon" width={12} height={12} />
+              </Box>
+              <Box className="st-t">
+                <Text>{ItemStatus?.name}</Text>
+              </Box>
+            </Box>
+          </Menu.Target>
+          <Menu.Dropdown
+            m={0}
+            p={0}
+            miw={100}
+            sx={{
+              borderRadius: 5,
+              overflow: 'hidden',
+              boxShadow: t.shadows.xl,
+              backgroundColor: t.colors.gray[0],
+              border: `1px solid ${t.colors.gray[3]}`,
+              'button:not(:last-child)': {
+                borderBottom: `1px solid ${t.colors.gray[3]}`,
+              },
+            }}
+          >
+            {MockStatuses.map((status) => (
+              <Menu.Item
+                key={status.id}
+                component="button"
+                onClick={() => setItem({ ...(item as Item), status: status.slug })}
+                sx={{
+                  gap: 0,
+                  margin: 0,
+                  borderRadius: 0,
+                  display: 'flex',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  padding: '5px 10px',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  transition: 'all .15s ease-in-out',
+                  ':hover': {
+                    backgroundColor: status.color[1],
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    fontWeight: 500,
+                    borderRadius: 5,
+                    color: status.color[7],
+                  }}
+                >
+                  <Text>{status.name}</Text>
+                </Box>
+              </Menu.Item>
+            ))}
+          </Menu.Dropdown>
+        </Menu>
+      </Box>
+    </Box>
+  );
+}
+
 function EditItem() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -156,8 +307,8 @@ function EditItem() {
     alignContent: 'center',
     color: t.colors.gray[8],
     justifyContent: 'center',
-    opacity: view === viewName ? 1 : 0.6,
     transition: 'all 200ms ease-in-out',
+    opacity: view === viewName ? 1 : 0.6,
     backgroundColor: view === viewName ? t.colors.gray[3] : 'transparent',
     ':hover': {
       backgroundColor: view === viewName ? t.colors.gray[3] : t.colors.gray[2],
@@ -251,6 +402,7 @@ function EditItem() {
           }}
         >
           <ItemMainInfo />
+          <ItemStatusBar />
         </Box>
       </Box>
     </Box>
