@@ -29,13 +29,15 @@ function Routes() {
         },
       })}
     >
-      {RoutesMap.map(({ path, name, icon: Icon, subRoutes }) => {
+      {RoutesMap.map(({ path, name, icon: Icon, subRoutes, viewInSidebar }) => {
         return (
-          <React.Fragment key={path}>
-            <MainRouteLink to={path} subRoutes={subRoutes} key={path} name={name}>
-              {Icon}
-            </MainRouteLink>
-          </React.Fragment>
+          viewInSidebar && (
+            <React.Fragment key={path}>
+              <MainRouteLink to={path} subRoutes={subRoutes} key={path} name={name}>
+                {Icon}
+              </MainRouteLink>
+            </React.Fragment>
+          )
         );
       })}
       <RouteLeftIndicator />

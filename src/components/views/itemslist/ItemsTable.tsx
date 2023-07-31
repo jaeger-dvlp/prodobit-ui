@@ -1,18 +1,20 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 import { Item } from '@/views/items/list/WithItems';
-import { Box, Button, Image, Select, Text, useMantineTheme } from '@mantine/core';
+import { useTable } from '@/components/context/Table.context';
+import { MRT_Localization_TR } from 'mantine-react-table/locales/tr';
 import { MockItems, MockItemsCategories, MockStatuses } from 'mockdata';
+import { Box, Button, Image, Select, Text, Tooltip, useMantineTheme } from '@mantine/core';
 
 import {
   type MRT_Icons,
   type MRT_ColumnDef,
   MantineReactTable,
   useMantineReactTable,
+  MRT_Row,
 } from 'mantine-react-table';
-
-import { MRT_Localization_TR } from 'mantine-react-table/locales/tr';
 
 import {
   TrashIcon,
@@ -23,7 +25,6 @@ import {
 } from '@/components/icons';
 
 import 'dayjs/locale/tr';
-import { useTable } from '@/components/context/Table.context';
 
 type Props = {
   items?: Item[];
@@ -31,6 +32,7 @@ type Props = {
 
 function ItemsTable({ items: outerItems }: Props) {
   const t = useMantineTheme();
+  const navigate = useNavigate();
   const { setTable, sorting, pagination } = useTable<Item>();
   const [items, setItems] = React.useState<Item[]>(outerItems || MockItems);
 
@@ -41,7 +43,13 @@ function ItemsTable({ items: outerItems }: Props) {
         id: 'item-name',
         header: 'Öğe Tanımı',
         filterVariant: 'autocomplete',
-        Cell: ({ renderedCellValue, row }: { renderedCellValue: any; row: any }) => (
+        Cell: ({
+          renderedCellValue,
+          row,
+        }: {
+          renderedCellValue: number | string | React.ReactNode;
+          row: MRT_Row<Item>;
+        }) => (
           <Box sx={{ gap: 10, display: 'flex', justifyContent: 'start', alignItems: 'center' }}>
             <Image
               width={30}
@@ -77,7 +85,13 @@ function ItemsTable({ items: outerItems }: Props) {
         header: 'Statüler',
         enableColumnFilter: true,
         filterVariant: 'autocomplete',
-        Cell: ({ renderedCellValue, row }: { renderedCellValue: any; row: any }) => (
+        Cell: ({
+          renderedCellValue,
+          row,
+        }: {
+          renderedCellValue: number | string | React.ReactNode;
+          row: MRT_Row<Item>;
+        }) => (
           <Select
             onChange={(e: string) => {
               const newItems = [...items];
@@ -125,7 +139,7 @@ function ItemsTable({ items: outerItems }: Props) {
               value: status.slug,
               label: status.name,
             }))}
-            defaultValue={renderedCellValue}
+            defaultValue={renderedCellValue as string}
           />
         ),
       },
@@ -135,15 +149,17 @@ function ItemsTable({ items: outerItems }: Props) {
         header: 'Eklenme Tarihi',
         enableColumnFilter: true,
         filterVariant: 'autocomplete',
-        Cell: ({ renderedCellValue }: { renderedCellValue: any }) =>
-          dayjs(renderedCellValue).locale('tr').format('DD MMMM / HH:mm'),
+        Cell: ({ renderedCellValue }: { renderedCellValue: number | string | React.ReactNode }) =>
+          dayjs(renderedCellValue as string)
+            .locale('tr')
+            .format('DD MMMM / HH:mm'),
       },
       {
         id: 'item-actions',
         header: 'İşlemler',
         enableSorting: false,
         enableColumnFilter: false,
-        Cell: () => (
+        Cell: ({ row }: { row: MRT_Row<Item> }) => (
           <Box
             sx={{
               gap: 10,
@@ -152,44 +168,48 @@ function ItemsTable({ items: outerItems }: Props) {
               justifyContent: 'start',
             }}
           >
-            <Button
-              onClick={() => null}
-              sx={(theme) => ({
-                margin: 0,
-                padding: 6,
-                border: 'none',
-                color: 'black',
-                borderRadius: 10,
-                height: 'fit-content',
-                backgroundColor: 'transparent',
-                transition: 'all 0.1s ease-in-out',
-                ':hover': {
-                  color: theme.colors.blue[8],
-                  backgroundColor: theme.colors.blue[1],
-                },
-              })}
-            >
-              <EditIconItem width={24} height={24} />
-            </Button>
-            <Button
-              onClick={() => null}
-              sx={(theme) => ({
-                margin: 0,
-                padding: 6,
-                border: 'none',
-                color: 'black',
-                borderRadius: 10,
-                height: 'fit-content',
-                backgroundColor: 'transparent',
-                transition: 'all 0.1s ease-in-out',
-                ':hover': {
-                  color: theme.colors.red[8],
-                  backgroundColor: theme.colors.red[1],
-                },
-              })}
-            >
-              <TrashIcon width={24} height={24} />
-            </Button>
+            <Tooltip label="Düzenle">
+              <Button
+                onClick={() => navigate(`/items/edit/${row.original.id}`)}
+                sx={(theme) => ({
+                  margin: 0,
+                  padding: 6,
+                  border: 'none',
+                  color: 'black',
+                  borderRadius: 10,
+                  height: 'fit-content',
+                  backgroundColor: 'transparent',
+                  transition: 'all 0.1s ease-in-out',
+                  ':hover': {
+                    color: theme.colors.blue[8],
+                    backgroundColor: theme.colors.blue[1],
+                  },
+                })}
+              >
+                <EditIconItem width={24} height={24} />
+              </Button>
+            </Tooltip>
+            <Tooltip label="Sil">
+              <Button
+                onClick={() => null}
+                sx={(theme) => ({
+                  margin: 0,
+                  padding: 6,
+                  border: 'none',
+                  color: 'black',
+                  borderRadius: 10,
+                  height: 'fit-content',
+                  backgroundColor: 'transparent',
+                  transition: 'all 0.1s ease-in-out',
+                  ':hover': {
+                    color: theme.colors.red[8],
+                    backgroundColor: theme.colors.red[1],
+                  },
+                })}
+              >
+                <TrashIcon width={24} height={24} />
+              </Button>
+            </Tooltip>
             <Button
               variant="default"
               sx={(theme) => ({
@@ -219,7 +239,7 @@ function ItemsTable({ items: outerItems }: Props) {
         ),
       },
     ],
-    [items],
+    [items, navigate],
   );
 
   const ReactIcons: Partial<MRT_Icons> = {

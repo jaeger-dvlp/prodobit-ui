@@ -77,15 +77,18 @@ function SecondSubRouteLink({
               margin: '25px 0px 0px 22px',
             }}
           >
-            {subRoutes.map((thirdSubRoute) => (
-              <React.Fragment key={thirdSubRoute.path}>
-                <ThirdSubRouteLink to={thirdSubRoute.path}>
-                  <Text span p={0} m={0} lh={1.2}>
-                    {thirdSubRoute.name}
-                  </Text>
-                </ThirdSubRouteLink>
-              </React.Fragment>
-            ))}
+            {subRoutes.map(
+              (thirdSubRoute) =>
+                thirdSubRoute.viewInSidebar && (
+                  <React.Fragment key={thirdSubRoute.path}>
+                    <ThirdSubRouteLink to={thirdSubRoute.path}>
+                      <Text span p={0} m={0} lh={1.2}>
+                        {thirdSubRoute.name}
+                      </Text>
+                    </ThirdSubRouteLink>
+                  </React.Fragment>
+                ),
+            )}
           </Box>
         )}
       </AnimatePresence>

@@ -81,15 +81,18 @@ function MainRouteLink({
               margin: '30px 0px 0px 35px',
             }}
           >
-            {subRoutes.map(({ path, name: subRouteName, subRoutes: innerSubRoutes }) => (
-              <React.Fragment key={path}>
-                <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
-                  <Text span p={0} m={0} lh={1.2}>
-                    {subRouteName}
-                  </Text>
-                </SecondSubRouteLink>
-              </React.Fragment>
-            ))}
+            {subRoutes.map(
+              ({ path, name: subRouteName, subRoutes: innerSubRoutes, viewInSidebar }) =>
+                viewInSidebar && (
+                  <React.Fragment key={path}>
+                    <SecondSubRouteLink to={path} subRoutes={innerSubRoutes}>
+                      <Text span p={0} m={0} lh={1.2}>
+                        {subRouteName}
+                      </Text>
+                    </SecondSubRouteLink>
+                  </React.Fragment>
+                ),
+            )}
           </Box>
         )}
       </AnimatePresence>
