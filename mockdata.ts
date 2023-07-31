@@ -126,7 +126,7 @@ const MockItems: Item[] = [
   {
     id: 3,
     image: 'https://source.unsplash.com/random/200',
-    name: 'Nike Air Max',
+    name: 'Adidas AX2S Terrex Erkek Outdoor Ayakkabı',
     category: 'ayakkabi',
     code: 'ASDAS123',
     status: 'inspecting',
