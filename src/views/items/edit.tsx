@@ -1,20 +1,22 @@
 import React from 'react';
 import { MockItems } from 'mockdata';
-import { Item } from '@/views/items/list/WithItems';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Box, Button, Sx, Text } from '@mantine/core';
-import Navbar from '@/components/layout/Navbar';
 import { motion } from 'framer-motion';
-import RoutesMap, { RouteMapItem } from '@/routes';
+import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
+import RoutesMap, { RouteMapItem } from '@/routes';
+import { Item } from '@/views/items/list/WithItems';
+import { Box, Button, Sx, Text } from '@mantine/core';
 import { ImageIcon, InfoIcon } from '@/components/icons';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
 
 function EditItem() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [item, setItem] = React.useState<Item | null>(null);
+  const { item, setItem } = useEdit<Item>();
   const [view, setView] = React.useState<'info' | 'docs'>('info');
+
   const routeItem = state?.item;
 
   React.useEffect(() => {
@@ -32,7 +34,7 @@ function EditItem() {
 
       return navigate('/items');
     })();
-  }, [id, navigate, routeItem]);
+  }, [id, navigate, routeItem, setItem]);
 
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
   const SubRoute = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/edit');
@@ -118,8 +120,26 @@ function EditItem() {
           </Box>
         }
       />
+
+      <Box
+        sx={{
+          padding: 60,
+          marginTop: 70,
+          widght: '100%',
+          borderRadius: 40,
+          backgroundColor: t.colors.gray[0],
+        }}
+      >
+        {item?.name}
+      </Box>
     </Box>
   );
 }
 
-export default EditItem;
+export default function EditItemWrapper() {
+  return (
+    <EditWrapper>
+      <EditItem />
+    </EditWrapper>
+  );
+}
