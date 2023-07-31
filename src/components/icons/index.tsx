@@ -476,6 +476,82 @@ function ImageIcon(props: CustomIconProps) {
   );
 }
 
+function ScanBarcodeIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M1 4.5V3.25C1 2.005 2.005 1 3.25 1H4.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.5 1H8.75C9.995 1 11 2.005 11 3.25V4.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11 8V8.75C11 9.995 9.995 11 8.75 11H8"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.5 11H3.25C2.005 11 1 9.995 1 8.75V7.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.25 3.5V4.5C5.25 5 5 5.25 4.5 5.25H3.5C3 5.25 2.75 5 2.75 4.5V3.5C2.75 3 3 2.75 3.5 2.75H4.5C5 2.75 5.25 3 5.25 3.5Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.25 3.5V4.5C9.25 5 9 5.25 8.5 5.25H7.5C7 5.25 6.75 5 6.75 4.5V3.5C6.75 3 7 2.75 7.5 2.75H8.5C9 2.75 9.25 3 9.25 3.5Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.25 7.5V8.5C5.25 9 5 9.25 4.5 9.25H3.5C3 9.25 2.75 9 2.75 8.5V7.5C2.75 7 3 6.75 3.5 6.75H4.5C5 6.75 5.25 7 5.25 7.5Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.25 7.5V8.5C9.25 9 9 9.25 8.5 9.25H7.5C7 9.25 6.75 9 6.75 8.5V7.5C6.75 7 7 6.75 7.5 6.75H8.5C9 6.75 9.25 7 9.25 7.5Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function TimerIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M10.375 6.625C10.375 9.04 8.415 11 6 11C3.585 11 1.625 9.04 1.625 6.625C1.625 4.21 3.585 2.25 6 2.25C8.415 2.25 10.375 4.21 10.375 6.625Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M6 4V6.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M4.5 1H7.5"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -503,4 +579,6 @@ export {
   PGCHleft,
   PGCHEndLeft,
   ImageIcon,
+  ScanBarcodeIcon,
+  TimerIcon,
 };
