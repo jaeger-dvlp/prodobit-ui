@@ -102,6 +102,14 @@ export const ProdobitAppColors: Record<string, string[]> = {
 export const ProdobitAppTheme: MantineTheme = {
   ...DEFAULT_THEME,
   fontFamily: 'Inter, sans-serif',
+  components: {
+    ...DEFAULT_THEME.components,
+    Tooltip: {
+      defaultProps: {
+        withArrow: true,
+      },
+    },
+  },
   colors: {
     ...DEFAULT_THEME.colors,
     ...ProdobitAppColors,
