@@ -1,6 +1,51 @@
 import { ProdobitAppTheme } from '@/theme';
 import { MantineColor, MantineThemeColors } from '@mantine/core';
 import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
+import { ThreeBarsOne, ThreeBarsThree, ThreeBarsTwo } from '@/components/icons';
+
+export type MockStockStatus = {
+  id: number;
+  Icon: any;
+  text: string;
+  color: MantineThemeColors[MantineColor];
+  condition: string;
+  excount: number;
+};
+
+const MockStockStatuses: MockStockStatus[] = [
+  {
+    id: 0,
+    Icon: ThreeBarsOne,
+    text: 'Stokta Yok',
+    color: ProdobitAppTheme.colors.red,
+    condition: 'lower-than-1',
+    excount: 0,
+  },
+  {
+    id: 1,
+    Icon: ThreeBarsOne,
+    text: 'Kritik',
+    color: ProdobitAppTheme.colors.red,
+    condition: 'lower-than-10',
+    excount: 9,
+  },
+  {
+    id: 2,
+    Icon: ThreeBarsTwo,
+    text: 'Orta',
+    color: ProdobitAppTheme.colors.orange,
+    condition: 'lower-than-20',
+    excount: 19,
+  },
+  {
+    id: 3,
+    Icon: ThreeBarsThree,
+    text: 'Yeterli',
+    color: ProdobitAppTheme.colors.green,
+    condition: 'greater-than-20',
+    excount: 21,
+  },
+];
 
 const MockItemsCategories: ItemCategory[] = [
   {
@@ -103,6 +148,7 @@ const MockItems: Item[] = [
     category: 'ust-giyim',
     code: '12ASDFAE',
     status: 'waiting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -112,6 +158,7 @@ const MockItems: Item[] = [
     category: 'ust-giyim',
     code: 'QWE1231',
     status: 'on-process',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -121,6 +168,7 @@ const MockItems: Item[] = [
     category: 'alt-giyim',
     code: 'SAGDFS312',
     status: 'stuck',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -130,6 +178,7 @@ const MockItems: Item[] = [
     category: 'ayakkabi',
     code: 'ASDAS123',
     status: 'inspecting',
+    count: 1,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -139,6 +188,7 @@ const MockItems: Item[] = [
     category: 'ust-giyim',
     code: 'DSFSD123',
     status: 'inspecting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -148,6 +198,7 @@ const MockItems: Item[] = [
     category: 'ust-giyim',
     code: 'J213HNK',
     status: 'inspecting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -157,6 +208,7 @@ const MockItems: Item[] = [
     category: 'alt-giyim',
     code: 'XCXZC123',
     status: 'inspecting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -166,6 +218,7 @@ const MockItems: Item[] = [
     category: 'ayakkabi',
     code: 'XQWE123',
     status: 'inspecting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -175,6 +228,7 @@ const MockItems: Item[] = [
     category: 'ust-giyim',
     code: 'MDFDAW31',
     status: 'inspecting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
   {
@@ -184,6 +238,7 @@ const MockItems: Item[] = [
     category: 'ust-giyim',
     code: 'CVFVBDAS',
     status: 'inspecting',
+    count: 20,
     created_at: '2021-05-15 20:30:00',
   },
 ];
@@ -243,4 +298,4 @@ const MockCustomFilters: CustomFilter[] = [
   },
 ];
 
-export { MockItemsCategories, MockItems, MockStatuses, MockCustomFilters };
+export { MockItemsCategories, MockItems, MockStatuses, MockCustomFilters, MockStockStatuses };
