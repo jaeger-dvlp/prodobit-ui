@@ -582,6 +582,147 @@ function ThreeBarsThree(props: CustomIconProps) {
   );
 }
 
+function ReceiptIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M3.92582 11.4917C4.40416 10.9784 5.13332 11.0192 5.55332 11.5792L6.14249 12.3667C6.61499 12.9909 7.37916 12.9909 7.85166 12.3667L8.44082 11.5792C8.86082 11.0192 9.58999 10.9784 10.0683 11.4917C11.1067 12.6001 11.9525 12.2326 11.9525 10.6809V4.10675C11.9583 1.75591 11.41 1.16675 9.20499 1.16675H4.79499C2.58999 1.16675 2.04166 1.75591 2.04166 4.10675V10.6751C2.04166 12.2326 2.89332 12.5942 3.92582 11.4917Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.66666 4.08325H9.33332"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.25 6.41675H8.75"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MaterialIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 15 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M13.3333 3.00424V4.57925C13.3333 5.89175 12.8083 6.41675 11.4958 6.41675H9.92083C8.60833 6.41675 8.08333 5.89175 8.08333 4.57925V3.00424C8.08333 1.69174 8.60833 1.16675 9.92083 1.16675H11.4958C12.8083 1.16675 13.3333 1.69174 13.3333 3.00424Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.91667 9.42075V10.9958C6.91667 12.3083 6.39167 12.8333 5.07917 12.8333H3.50417C2.19167 12.8333 1.66667 12.3083 1.66667 10.9958V9.42075C1.66667 8.10825 2.19167 7.58325 3.50417 7.58325H5.07917C6.39167 7.58325 6.91667 8.10825 6.91667 9.42075Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.6383 6.41658V7.94491C10.6383 9.51407 10.0142 10.1382 8.445 10.1382H6.91666V9.42074C6.91666 8.10824 6.39166 7.58324 5.07916 7.58324H4.36166V6.05491C4.36166 4.48574 4.98583 3.86157 6.55499 3.86157H8.08333V4.57908C8.08333 5.89158 8.60833 6.41658 9.92083 6.41658H10.6383Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function TagIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M2.43244 8.92497L5.07494 11.5675C6.15994 12.6525 7.92161 12.6525 9.01244 11.5675L11.5733 9.00663C12.6583 7.92163 12.6583 6.15997 11.5733 5.06913L8.92494 2.43247C8.37077 1.8783 7.60661 1.5808 6.82494 1.62163L3.90827 1.76163C2.74161 1.81413 1.81411 2.74163 1.75577 3.90247L1.61577 6.81913C1.58077 7.60663 1.87827 8.3708 2.43244 8.92497Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.5416 6.99992C6.34702 6.99992 6.99993 6.347 6.99993 5.54159C6.99993 4.73617 6.34702 4.08325 5.5416 4.08325C4.73619 4.08325 4.08327 4.73617 4.08327 5.54159C4.08327 6.347 4.73619 6.99992 5.5416 6.99992Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PercentageSquareIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 16 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M6.07813 1.16675H9.79688C12.8958 1.16675 14.1354 2.33341 14.1354 5.25008V8.75008C14.1354 11.6667 12.8958 12.8334 9.79688 12.8334H6.07813C2.97917 12.8334 1.73959 11.6667 1.73959 8.75008V5.25008C1.73959 2.33341 2.97917 1.16675 6.07813 1.16675Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.81166 8.90752L9.86508 5.09253"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.06573 6.04925C6.48676 6.04925 6.82807 5.72803 6.82807 5.33176C6.82807 4.9355 6.48676 4.61426 6.06573 4.61426C5.6447 4.61426 5.30338 4.9355 5.30338 5.33176C5.30338 5.72803 5.6447 6.04925 6.06573 6.04925Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.1192 9.38592C10.5402 9.38592 10.8815 9.06468 10.8815 8.66842C10.8815 8.27215 10.5402 7.95093 10.1192 7.95093C9.69815 7.95093 9.35685 8.27215 9.35685 8.66842C9.35685 9.06468 9.69815 9.38592 10.1192 9.38592Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ChartUpIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 8" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M1 6.72487L4.73426 3.30073L7.30298 5.84629L12.2637 1.33154"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7.63565 1.2749H12.2637V5.90298"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ChartDownIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 8" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M1 1.27513L4.73426 4.69927L7.30298 2.15371L12.2637 6.66846"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7.63564 6.7251H12.2637V2.09702"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -614,4 +755,10 @@ export {
   ThreeBarsOne,
   ThreeBarsTwo,
   ThreeBarsThree,
+  ReceiptIcon,
+  MaterialIcon,
+  TagIcon,
+  PercentageSquareIcon,
+  ChartUpIcon,
+  ChartDownIcon,
 };
