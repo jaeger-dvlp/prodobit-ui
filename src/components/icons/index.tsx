@@ -552,6 +552,36 @@ function TimerIcon(props: CustomIconProps) {
   );
 }
 
+function ThreeBarsOne(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 8 10" fill="none" {...DefaultProps} {...props}>
+      <path d="M1 5.5L1 8.50001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M4 3.5L4 8.50002" stroke="#AEADAF" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 1.5L7 8.50002" stroke="#AEADAF" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ThreeBarsTwo(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 8 10" fill="none" {...DefaultProps} {...props}>
+      <path d="M1 5.5L1 8.50001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M4 3.5L4 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 1.5L7 8.50002" stroke="#AEADAF" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ThreeBarsThree(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 8 10" fill="none" {...DefaultProps} {...props}>
+      <path d="M1 5.5L1 8.50001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M4 3.5L4 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 1.5L7 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -581,4 +611,7 @@ export {
   ImageIcon,
   ScanBarcodeIcon,
   TimerIcon,
+  ThreeBarsOne,
+  ThreeBarsTwo,
+  ThreeBarsThree,
 };
