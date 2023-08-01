@@ -250,7 +250,7 @@ const MockItems: Item[] = [
   },
 ];
 
-const MockStatuses: ItemStatus[] = [
+const MockStatuses: TItemStatus[] = [
   {
     id: 0,
     slug: 'waiting',
