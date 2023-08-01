@@ -127,6 +127,7 @@ function ItemStatusBar() {
   const StatusMenuTargetSX: Sx = {
     gap: 6,
     margin: 0,
+    padding: '0px 20px',
     color: '#000',
     height: '100%',
     border: 'none',
@@ -134,7 +135,6 @@ function ItemStatusBar() {
     fontWeight: 400,
     fontSize: '12px',
     cursor: 'pointer',
-    padding: '0px 20px',
     alignItems: 'start',
     lineHeight: '14.4px',
     flexDirection: 'column',
@@ -188,7 +188,7 @@ function ItemStatusBar() {
         width: '100%',
         display: 'flex',
         flexWrap: 'wrap',
-        padding: '18px 20px',
+        padding: '18px 0px',
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -215,7 +215,6 @@ function ItemStatusBar() {
               component="button"
               sx={{
                 ...StatusMenuTargetSX,
-                paddingLeft: 0,
               }}
             >
               <Box className="st-sc">
