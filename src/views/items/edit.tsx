@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
-import { MockItems, MockStatuses } from 'mockdata';
+import { MockItems, MockStatuses, MockStockStatus, MockStockStatuses } from 'mockdata';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Item } from '@/views/items/list/WithItems';
 import { Box, Button, Image, Menu, Sx, Text } from '@mantine/core';
@@ -128,15 +128,17 @@ function ItemStatusBar() {
     gap: 6,
     margin: 0,
     color: '#000',
-    height: 'auto',
+    height: '100%',
     border: 'none',
     display: 'flex',
     fontWeight: 400,
     fontSize: '12px',
     cursor: 'pointer',
     padding: '0px 20px',
+    alignItems: 'start',
     lineHeight: '14.4px',
     flexDirection: 'column',
+    justifyContent: 'center',
     backgroundColor: 'transparent!important',
     borderRight: '1px solid rgba(0, 0, 0, 0.20)',
     '.icon': {
@@ -152,15 +154,29 @@ function ItemStatusBar() {
       justifyContent: 'center',
     },
     '.st-t': {
-      minWidth: 100,
       borderRadius: 5,
       fontWeight: 500,
-      padding: '5px 14px',
-      color: ItemStatus?.color[7],
       transition: 'all 0.2s ease-in-out',
-      backgroundColor: ItemStatus?.color[1],
+    },
+    [t.fn.smallerThan('md')]: {
+      borderRight: 'none',
     },
   };
+
+  const StockStatus = React.useMemo(() => {
+    const itemCount = item?.count || 0;
+
+    if (itemCount === 0)
+      return MockStockStatuses.find(({ condition }) => condition === 'lower-than-1');
+
+    if (itemCount < 10)
+      return MockStockStatuses.find(({ condition }) => condition === 'lower-than-10');
+
+    if (itemCount < 20)
+      return MockStockStatuses.find(({ condition }) => condition === 'lower-than-20');
+
+    return MockStockStatuses.find(({ condition }) => condition === 'greater-than-20');
+  }, [item]) as MockStockStatus;
 
   return (
     <Box
@@ -175,12 +191,13 @@ function ItemStatusBar() {
         padding: '18px 20px',
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
       }}
     >
       <Box
         component="li"
         sx={{
+          height: '100%',
           display: 'flex',
           alignItems: 'start',
           justifyContent: 'center',
@@ -205,7 +222,14 @@ function ItemStatusBar() {
                 <Text>Statü</Text>
                 <CustomChevronDown className="icon" width={12} height={12} />
               </Box>
-              <Box className="st-t">
+              <Box
+                className="st-t"
+                sx={{
+                  padding: '5px 14px',
+                  color: ItemStatus?.color[7],
+                  backgroundColor: ItemStatus?.color[1],
+                }}
+              >
                 <Text>{ItemStatus?.name}</Text>
               </Box>
             </Box>
@@ -254,6 +278,101 @@ function ItemStatusBar() {
                   }}
                 >
                   <Text>{status.name}</Text>
+                </Box>
+              </Menu.Item>
+            ))}
+          </Menu.Dropdown>
+        </Menu>
+      </Box>
+      <Box
+        component="li"
+        sx={{
+          height: '100%',
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+        }}
+      >
+        <Menu
+          position="bottom"
+          transitionProps={{
+            duration: 300,
+            transition: 'pop-top-left',
+          }}
+        >
+          <Menu.Target>
+            <Box
+              component="button"
+              sx={{
+                ...StatusMenuTargetSX,
+              }}
+            >
+              <Box className="st-sc">
+                <Text>Stok</Text>
+                <CustomChevronDown className="icon" width={12} height={12} />
+              </Box>
+              <Box
+                className="st-t"
+                sx={{
+                  gap: 5,
+                  margin: 0,
+                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  color: StockStatus.color[5],
+                  backgroundColor: 'transparent',
+                }}
+              >
+                <StockStatus.Icon width={10} height={10} />
+                <Text>{StockStatus.text}</Text>
+              </Box>
+            </Box>
+          </Menu.Target>
+          <Menu.Dropdown
+            m={0}
+            p={0}
+            miw={100}
+            sx={{
+              borderRadius: 5,
+              overflow: 'hidden',
+              boxShadow: t.shadows.xl,
+              backgroundColor: t.colors.gray[0],
+              border: `1px solid ${t.colors.gray[3]}`,
+              'button:not(:last-child)': {
+                borderBottom: `1px solid ${t.colors.gray[3]}`,
+              },
+            }}
+          >
+            {MockStockStatuses.map((stockStatus) => (
+              <Menu.Item
+                key={stockStatus.id}
+                component="button"
+                onClick={() => setItem({ ...(item as Item), count: stockStatus.excount })}
+                sx={{
+                  gap: 0,
+                  margin: 0,
+                  borderRadius: 0,
+                  display: 'flex',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  padding: '5px 10px',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  transition: 'all .15s ease-in-out',
+                  ':hover': {
+                    backgroundColor: stockStatus.color[1],
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    fontWeight: 500,
+                    borderRadius: 5,
+                    color: stockStatus.color[7],
+                  }}
+                >
+                  <Text>{stockStatus.text}</Text>
                 </Box>
               </Menu.Item>
             ))}
