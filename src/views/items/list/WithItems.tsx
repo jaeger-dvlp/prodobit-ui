@@ -22,6 +22,7 @@ export type Item = {
   code: string;
   category: string;
   status: string;
+  count: number;
   created_at: string;
 };
 
