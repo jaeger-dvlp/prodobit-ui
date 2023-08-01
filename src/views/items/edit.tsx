@@ -731,89 +731,166 @@ function EditItem() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       component={motion.section}
-      sx={(theme) => ({
-        padding: 60,
+      sx={{
         width: '100%',
         overflow: 'auto',
         minHeight: '100%',
         backgroundColor: 'transparent',
-        [theme.fn.smallerThan('md')]: {
-          padding: 45,
-          paddingTop: 80,
-        },
-      })}
+      }}
     >
-      <Navbar
-        paths={[
-          Route,
-          {
-            ...SubRoute,
-            path: `${SubRoute?.path}/${item?.id}`,
-          },
-        ].map((route) => ({
-          path: route?.path,
-          name: route?.name || '?',
-        }))}
-        withButtons
-        middleChilds={
-          <Box
-            sx={{
-              gap: 1,
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              minWidth: 'fit-content',
-              justifyContent: 'center',
-            }}
-          >
-            <Button
-              variant="default"
-              onClick={() => setView('info')}
-              sx={(() => getViewSx('info'))()}
-            >
-              <InfoIcon width={16} height={16} />
-              <Text ml={10}>Bilgiler</Text>
-            </Button>
-            <Button
-              variant="default"
-              onClick={() => setView('docs')}
-              sx={(() => getViewSx('docs'))()}
-            >
-              <ImageIcon width={16} height={16} />
-              <Text ml={10}>Dökümanlar</Text>
-            </Button>
-          </Box>
-        }
-      />
-
       <Box
         sx={{
-          gap: 40,
-          padding: 50,
-          marginTop: 70,
-          height: '100%',
-          widght: '100%',
-          borderRadius: 40,
-          display: 'grid',
-          backgroundColor: t.colors.gray[0],
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+          width: '100%',
+          padding: '60px 60px 0px 60px',
           [t.fn.smallerThan('md')]: {
-            gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+            padding: '80px 45px 0px 45px',
           },
         }}
       >
+        <Navbar
+          paths={[
+            Route,
+            {
+              ...SubRoute,
+              path: `${SubRoute?.path}/${item?.id}`,
+            },
+          ].map((route) => ({
+            path: route?.path,
+            name: route?.name || '?',
+          }))}
+          withButtons
+          middleChilds={
+            <Box
+              sx={{
+                gap: 1,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                minWidth: 'fit-content',
+                justifyContent: 'center',
+              }}
+            >
+              <Button
+                variant="default"
+                onClick={() => setView('info')}
+                sx={(() => getViewSx('info'))()}
+              >
+                <InfoIcon width={16} height={16} />
+                <Text ml={10}>Bilgiler</Text>
+              </Button>
+              <Button
+                variant="default"
+                onClick={() => setView('docs')}
+                sx={(() => getViewSx('docs'))()}
+              >
+                <ImageIcon width={16} height={16} />
+                <Text ml={10}>Dökümanlar</Text>
+              </Button>
+            </Box>
+          }
+        />
+      </Box>
+      <Box
+        sx={{
+          gap: 20,
+          margin: 0,
+          display: 'flex',
+          minWidth: '100%',
+          minHeight: '100%',
+          overflow: 'hidden',
+          flexDirection: 'row',
+          width: 'fit-content',
+          height: 'fit-content',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          padding: '0px 60px 60px 60px',
+          [t.fn.smallerThan('md')]: { padding: '0px 45px 45px 45px' },
+        }}
+      >
         <Box
+          onClick={(e) => {
+            e.stopPropagation();
+            setView('info');
+          }}
+          animate={{
+            opacity: view === 'info' ? 1 : 0.5,
+            x: view === 'info' ? 0 : 'calc(-100% - 20px)',
+          }}
+          component={motion.section}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
           sx={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignContent: 'flex-start',
-            justifyContent: 'flex-start',
+            gap: 40,
+            padding: 50,
+            marginTop: 70,
+            width: 'auto',
+
+            minWidth: '100%',
+            minHeight: '90vh',
+            borderRadius: 40,
+            display: 'grid',
+            backgroundColor: t.colors.gray[0],
+            cursor: view === 'info' ? 'auto' : 'pointer',
+            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+            [t.fn.smallerThan('md')]: {
+              gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+            },
           }}
         >
-          <ItemMainInfo />
-          <ItemStatusBar />
-          <ItemFinancialInfo />
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              minWidth: '100%',
+              flexDirection: 'column',
+              alignContent: 'flex-start',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <ItemMainInfo />
+            <ItemStatusBar />
+            <ItemFinancialInfo />
+          </Box>
+        </Box>
+        <Box
+          onClick={(e) => {
+            e.stopPropagation();
+            setView('docs');
+          }}
+          animate={{
+            opacity: view === 'docs' ? 1 : 0.5,
+            x: view === 'docs' ? 'calc(-100% - 20px)' : '-0%',
+          }}
+          component={motion.section}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          sx={{
+            gap: 40,
+            padding: 50,
+            marginTop: 70,
+            width: 'auto',
+            minWidth: '100%',
+            minHeight: '90vh',
+            borderRadius: 40,
+            display: 'grid',
+            backgroundColor: t.colors.gray[0],
+            cursor: view === 'docs' ? 'auto' : 'pointer',
+            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+            [t.fn.smallerThan('md')]: {
+              gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+            },
+          }}
+        >
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              minWidth: '100%',
+              flexDirection: 'column',
+              alignContent: 'flex-start',
+              justifyContent: 'flex-start',
+            }}
+          >
+            DOCS AREA
+          </Box>
         </Box>
       </Box>
     </Box>
