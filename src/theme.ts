@@ -109,6 +109,14 @@ export const ProdobitAppTheme: MantineTheme = {
         withArrow: true,
       },
     },
+    Menu: {
+      defaultProps: {
+        transitionProps: {
+          duration: 300,
+          transition: 'pop-top-left',
+        },
+      },
+    },
   },
   colors: {
     ...DEFAULT_THEME.colors,
