@@ -3,9 +3,15 @@ import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
-import { MockItems, MockStatuses, MockStockStatus, MockStockStatuses } from 'mockdata';
+import {
+  MockItems,
+  MockItemsCategories,
+  MockStatuses,
+  MockStockStatus,
+  MockStockStatuses,
+} from 'mockdata';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import { Item } from '@/views/items/list/WithItems';
+import { Item, ItemCategory } from '@/views/items/list/WithItems';
 import { Box, Button, Image, Menu, Sx, Text } from '@mantine/core';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
@@ -124,6 +130,19 @@ function ItemStatusBar() {
   const { item, setItem } = useEdit<Item>();
   const ItemStatus = MockStatuses.find((elm) => elm.slug === item?.status);
 
+  const MenuSX: Sx = {
+    borderRadius: 5,
+    maxHeight: 200,
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    boxShadow: t.shadows.xl,
+    backgroundColor: t.colors.gray[0],
+    border: `1px solid ${t.colors.gray[3]}`,
+    'button:not(:last-child)': {
+      borderBottom: `1px solid ${t.colors.gray[3]}`,
+    },
+  };
+
   const StatusMenuTargetSX: Sx = {
     gap: 6,
     margin: 0,
@@ -140,7 +159,6 @@ function ItemStatusBar() {
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: 'transparent!important',
-    borderRight: '1px solid rgba(0, 0, 0, 0.20)',
     '.icon': {
       transition: 'all 0.2s ease-in-out',
     },
@@ -178,38 +196,42 @@ function ItemStatusBar() {
     return MockStockStatuses.find(({ condition }) => condition === 'greater-than-20');
   }, [item]) as MockStockStatus;
 
+  const itemCategory = React.useMemo(() => {
+    const category = MockItemsCategories.find((elm) => elm.slug === item?.category);
+    return category;
+  }, [item]) as ItemCategory;
+
   return (
     <Box
       component="ul"
       sx={{
         gap: 10,
         margin: 0,
-        marginTop: 40,
         width: '100%',
+        marginTop: 40,
         display: 'flex',
         flexWrap: 'wrap',
         padding: '18px 0px',
-        alignItems: 'center',
         flexDirection: 'row',
+        height: 'fit-content',
+        alignItems: 'stretch',
         justifyContent: 'flex-start',
-      }}
-    >
-      <Box
-        component="li"
-        sx={{
-          height: '100%',
+        '> li': {
           display: 'flex',
           alignItems: 'start',
-          justifyContent: 'center',
-        }}
-      >
-        <Menu
-          position="bottom"
-          transitionProps={{
-            duration: 300,
-            transition: 'pop-top-left',
-          }}
-        >
+          justifyContent: 'flex-start',
+          ':nth-child(2)': {
+            borderLeft: `1px solid rgba(0,0,0,0.20)`,
+            borderRight: `1px solid rgba(0,0,0,0.20)`,
+          },
+          [t.fn.smallerThan('lg')]: {
+            border: 'none!important',
+          },
+        },
+      }}
+    >
+      <Box component="li">
+        <Menu position="bottom">
           <Menu.Target>
             <Box
               component="button"
@@ -224,6 +246,7 @@ function ItemStatusBar() {
               <Box
                 className="st-t"
                 sx={{
+                  minWidth: 95,
                   padding: '5px 14px',
                   color: ItemStatus?.color[7],
                   backgroundColor: ItemStatus?.color[1],
@@ -233,21 +256,7 @@ function ItemStatusBar() {
               </Box>
             </Box>
           </Menu.Target>
-          <Menu.Dropdown
-            m={0}
-            p={0}
-            miw={100}
-            sx={{
-              borderRadius: 5,
-              overflow: 'hidden',
-              boxShadow: t.shadows.xl,
-              backgroundColor: t.colors.gray[0],
-              border: `1px solid ${t.colors.gray[3]}`,
-              'button:not(:last-child)': {
-                borderBottom: `1px solid ${t.colors.gray[3]}`,
-              },
-            }}
-          >
+          <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
             {MockStatuses.map((status) => (
               <Menu.Item
                 key={status.id}
@@ -283,22 +292,8 @@ function ItemStatusBar() {
           </Menu.Dropdown>
         </Menu>
       </Box>
-      <Box
-        component="li"
-        sx={{
-          height: '100%',
-          display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-        }}
-      >
-        <Menu
-          position="bottom"
-          transitionProps={{
-            duration: 300,
-            transition: 'pop-top-left',
-          }}
-        >
+      <Box component="li">
+        <Menu position="bottom">
           <Menu.Target>
             <Box
               component="button"
@@ -328,21 +323,7 @@ function ItemStatusBar() {
               </Box>
             </Box>
           </Menu.Target>
-          <Menu.Dropdown
-            m={0}
-            p={0}
-            miw={100}
-            sx={{
-              borderRadius: 5,
-              overflow: 'hidden',
-              boxShadow: t.shadows.xl,
-              backgroundColor: t.colors.gray[0],
-              border: `1px solid ${t.colors.gray[3]}`,
-              'button:not(:last-child)': {
-                borderBottom: `1px solid ${t.colors.gray[3]}`,
-              },
-            }}
-          >
+          <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
             {MockStockStatuses.map((stockStatus) => (
               <Menu.Item
                 key={stockStatus.id}
@@ -372,6 +353,73 @@ function ItemStatusBar() {
                   }}
                 >
                   <Text>{stockStatus.text}</Text>
+                </Box>
+              </Menu.Item>
+            ))}
+          </Menu.Dropdown>
+        </Menu>
+      </Box>
+      <Box component="li">
+        <Menu position="bottom">
+          <Menu.Target>
+            <Box
+              component="button"
+              sx={{
+                ...StatusMenuTargetSX,
+              }}
+            >
+              <Box className="st-sc">
+                <Text>Kategori</Text>
+                <CustomChevronDown className="icon" width={12} height={12} />
+              </Box>
+              <Box
+                className="st-t"
+                sx={{
+                  gap: 5,
+                  margin: 0,
+                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: t.colors.green[6],
+                  justifyContent: 'flex-start',
+                  backgroundColor: 'transparent',
+                }}
+              >
+                <Text>{itemCategory?.name}</Text>
+              </Box>
+            </Box>
+          </Menu.Target>
+          <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
+            {MockItemsCategories.map((category) => (
+              <Menu.Item
+                key={category.id}
+                component="button"
+                onClick={() => setItem({ ...(item as Item), category: category.slug })}
+                sx={{
+                  gap: 0,
+                  margin: 0,
+                  borderRadius: 0,
+                  display: 'flex',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  padding: '5px 10px',
+                  alignItems: 'center',
+                  color: t.colors.gray[7],
+                  justifyContent: 'flex-start',
+                  backgroundColor: 'transparent',
+                  transition: 'all .15s ease-in-out',
+                  ':hover': {
+                    color: t.colors.green[6],
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    fontWeight: 500,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Text>{category.name}</Text>
                 </Box>
               </Menu.Item>
             ))}
