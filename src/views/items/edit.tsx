@@ -3,13 +3,6 @@ import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
-import {
-  MockItems,
-  MockItemsCategories,
-  MockStatuses,
-  MockStockStatus,
-  MockStockStatuses,
-} from 'mockdata';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Item, ItemCategory } from '@/views/items/list/WithItems';
 import { Box, Button, Image, Menu, Sx, Text } from '@mantine/core';
@@ -17,11 +10,20 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
 
 import {
-  CustomChevronDown,
-  ImageIcon,
+  MockItems,
+  TItemStatus,
+  MockStatuses,
+  MockStockStatus,
+  MockStockStatuses,
+  MockItemsCategories,
+} from 'mockdata';
+
+import {
   InfoIcon,
-  ScanBarcodeIcon,
+  ImageIcon,
   TimerIcon,
+  ScanBarcodeIcon,
+  CustomChevronDown,
 } from '@/components/icons';
 
 import 'dayjs/locale/tr';
@@ -128,7 +130,6 @@ function ItemMainInfo() {
 
 function ItemStatusBar() {
   const { item, setItem } = useEdit<Item>();
-  const ItemStatus = MockStatuses.find((elm) => elm.slug === item?.status);
 
   const MenuSX: Sx = {
     borderRadius: 5,
@@ -174,12 +175,17 @@ function ItemStatusBar() {
     '.st-t': {
       borderRadius: 5,
       fontWeight: 500,
-      transition: 'all 0.2s ease-in-out',
+      transition: 'all 0.15s ease-in-out',
     },
     [t.fn.smallerThan('md')]: {
       borderRight: 'none',
     },
   };
+
+  const ItemStatus = React.useMemo(() => {
+    const status = MockStatuses.find((elm) => elm.slug === item?.status);
+    return status;
+  }, [item]) as TItemStatus;
 
   const StockStatus = React.useMemo(() => {
     const itemCount = item?.count || 0;

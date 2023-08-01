@@ -12,6 +12,13 @@ export type MockStockStatus = {
   excount: number;
 };
 
+export type TItemStatus = {
+  id: number;
+  slug: string;
+  name: string;
+  color: MantineThemeColors[MantineColor];
+};
+
 const MockStockStatuses: MockStockStatus[] = [
   {
     id: 0,
@@ -243,12 +250,7 @@ const MockItems: Item[] = [
   },
 ];
 
-const MockStatuses: {
-  id: number;
-  slug: string;
-  name: string;
-  color: MantineThemeColors[MantineColor];
-}[] = [
+const MockStatuses: ItemStatus[] = [
   {
     id: 0,
     slug: 'waiting',
