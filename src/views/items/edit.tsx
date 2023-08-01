@@ -28,6 +28,10 @@ import {
 
 import 'dayjs/locale/tr';
 
+const Images = {
+  tempAvatar: '/assets/img/temp-avatar.svg',
+};
+
 function ItemMainInfo() {
   const { item } = useEdit<Item>();
   return (
@@ -230,6 +234,16 @@ function ItemStatusBar() {
             borderLeft: `1px solid rgba(0,0,0,0.20)`,
             borderRight: `1px solid rgba(0,0,0,0.20)`,
           },
+          ':nth-child(3)': {
+            marginRight: 20,
+          },
+          ':nth-child(4)': {
+            gap: 6,
+            display: 'flex',
+            alignItems: 'flex-end',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          },
           [t.fn.smallerThan('lg')]: {
             border: 'none!important',
           },
@@ -431,6 +445,109 @@ function ItemStatusBar() {
             ))}
           </Menu.Dropdown>
         </Menu>
+      </Box>
+      <Box component="li">
+        <Box
+          sx={{
+            gap: 10,
+            width: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Image
+            src={Images.tempAvatar}
+            alt="Fatih G."
+            width={18}
+            height={18}
+            fit="cover"
+            sx={{
+              borderRadius: 30,
+            }}
+          />
+          <Text
+            sx={{
+              color: '#000',
+              fontWeight: 700,
+              fontSize: '15px',
+              lineHeight: '18px',
+            }}
+          >
+            Fatih G.
+          </Text>
+        </Box>
+        <Box
+          sx={{
+            gap: 3,
+            width: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              gap: 5,
+              display: 'flex',
+              borderRadius: 5,
+              padding: '3px 5px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1px solid rgba(0, 0, 0, 0.10)',
+            }}
+          >
+            <Box
+              sx={{
+                width: 5,
+                height: 5,
+                borderRadius: 5,
+                backgroundColor: t.colors.green[6],
+              }}
+            />
+            <Text
+              sx={{
+                color: t.colors.gray[7],
+                fontWeight: 400,
+                fontSize: '12px',
+                lineHeight: '14.4px',
+              }}
+            >
+              Geçmiş
+            </Text>
+          </Box>
+          <Box
+            sx={{
+              gap: 5,
+              display: 'flex',
+              borderRadius: 5,
+              padding: '3px 5px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1px solid rgba(0, 0, 0, 0.10)',
+            }}
+          >
+            <Image
+              width={5}
+              height={5}
+              src={Images.tempAvatar}
+              alt="Fatih G."
+              sx={{
+                borderRadius: 5,
+              }}
+            />
+            <Text
+              sx={{
+                color: t.colors.gray[7],
+                fontWeight: 400,
+                fontSize: '12px',
+                lineHeight: '14.4px',
+              }}
+            >
+              Kişiler
+            </Text>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
