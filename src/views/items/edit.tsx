@@ -7,12 +7,62 @@ import RoutesMap, { RouteMapItem } from '@/routes';
 import { Item } from '@/views/items/list/WithItems';
 import { Box, Button, Sx, Text } from '@mantine/core';
 import { InfoIcon, ImageIcon } from '@/components/icons';
-import EditTextEditor from '@/components/views/items/edit/TextEditor';
-import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
+import EditItemInfo from '@/components/views/items/edit/Info';
+import EditItemDocs from '@/components/views/items/edit/Docs';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
-import ItemFinancialInfo from '@/components/views/items/edit/ItemFinancialInfo';
+
+function ViewSelector({
+  view,
+  setView,
+}: {
+  view: 'info' | 'docs';
+  setView: React.Dispatch<React.SetStateAction<'info' | 'docs'>>;
+}) {
+  const getViewSx = (viewName: string): Sx => ({
+    gap: '10px',
+    height: 'auto',
+    border: 'none',
+    display: 'flex',
+    fontWeight: 500,
+    fontSize: '15px',
+    borderRadius: 100,
+    lineHeight: '18px',
+    padding: '9px 18px',
+    flexDirection: 'row',
+    alignContent: 'center',
+    color: t.colors.gray[8],
+    justifyContent: 'center',
+    transition: 'all 200ms ease-in-out',
+    opacity: view === viewName ? 1 : 0.6,
+    backgroundColor: view === viewName ? t.colors.gray[3] : 'transparent',
+    ':hover': {
+      backgroundColor: view === viewName ? t.colors.gray[3] : t.colors.gray[2],
+    },
+  });
+
+  return (
+    <Box
+      sx={{
+        gap: 1,
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        minWidth: 'fit-content',
+        justifyContent: 'center',
+      }}
+    >
+      <Button variant="default" onClick={() => setView('info')} sx={(() => getViewSx('info'))()}>
+        <InfoIcon width={16} height={16} />
+        <Text ml={10}>Bilgiler</Text>
+      </Button>
+      <Button variant="default" onClick={() => setView('docs')} sx={(() => getViewSx('docs'))()}>
+        <ImageIcon width={16} height={16} />
+        <Text ml={10}>Dökümanlar</Text>
+      </Button>
+    </Box>
+  );
+}
 
 function EditItem() {
   const { id } = useParams();
@@ -42,28 +92,6 @@ function EditItem() {
 
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
   const SubRoute = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/edit');
-
-  const getViewSx = (viewName: string): Sx => ({
-    gap: '10px',
-    height: 'auto',
-    border: 'none',
-    display: 'flex',
-    fontWeight: 500,
-    fontSize: '15px',
-    borderRadius: 100,
-    lineHeight: '18px',
-    padding: '9px 18px',
-    flexDirection: 'row',
-    alignContent: 'center',
-    color: t.colors.gray[8],
-    justifyContent: 'center',
-    transition: 'all 200ms ease-in-out',
-    opacity: view === viewName ? 1 : 0.6,
-    backgroundColor: view === viewName ? t.colors.gray[3] : 'transparent',
-    ':hover': {
-      backgroundColor: view === viewName ? t.colors.gray[3] : t.colors.gray[2],
-    },
-  });
 
   return (
     <Box
@@ -99,35 +127,7 @@ function EditItem() {
             name: route?.name || '?',
           }))}
           withButtons
-          middleChilds={
-            <Box
-              sx={{
-                gap: 1,
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                minWidth: 'fit-content',
-                justifyContent: 'center',
-              }}
-            >
-              <Button
-                variant="default"
-                onClick={() => setView('info')}
-                sx={(() => getViewSx('info'))()}
-              >
-                <InfoIcon width={16} height={16} />
-                <Text ml={10}>Bilgiler</Text>
-              </Button>
-              <Button
-                variant="default"
-                onClick={() => setView('docs')}
-                sx={(() => getViewSx('docs'))()}
-              >
-                <ImageIcon width={16} height={16} />
-                <Text ml={10}>Dökümanlar</Text>
-              </Button>
-            </Box>
-          }
+          middleChilds={<ViewSelector view={view} setView={setView} />}
         />
       </Box>
       <Box
@@ -189,32 +189,7 @@ function EditItem() {
           component={motion.section}
           transition={{ duration: 1, ease: 'anticipate' }}
         >
-          <Box
-            component="section"
-            sx={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignContent: 'flex-start',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <ItemMainInfo />
-            <ItemStatusBar />
-            <ItemFinancialInfo />
-            <EditTextEditor />
-          </Box>
-          <Box
-            sx={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignContent: 'flex-start',
-              justifyContent: 'flex-start',
-            }}
-          />
+          <EditItemInfo />
         </Box>
         <Box
           onClick={(e) => {
@@ -228,18 +203,7 @@ function EditItem() {
           component={motion.section}
           transition={{ duration: 1, ease: 'anticipate' }}
         >
-          <Box
-            sx={{
-              height: '100%',
-              display: 'flex',
-              minWidth: '100%',
-              flexDirection: 'column',
-              alignContent: 'flex-start',
-              justifyContent: 'flex-start',
-            }}
-          >
-            DOCS AREA
-          </Box>
+          <EditItemDocs />
         </Box>
       </Box>
     </Box>
