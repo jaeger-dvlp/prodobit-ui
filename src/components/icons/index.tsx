@@ -1003,6 +1003,21 @@ function RteAttachmentIcon(props: CustomIconProps) {
   );
 }
 
+function RightIndicatorArrow(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 34" fill="none" {...DefaultProps} {...props}>
+      <g clipPath="url(#clip0_742_16939)">
+        <path d="M0 34H10.79L17.67 17L10.79 0H0L6.88 17L0 34Z" fill="currentColor" />
+      </g>
+      <defs>
+        <clipPath id="clip0_742_16939">
+          <rect width="100%" height="100%" fill="currentColor" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1050,4 +1065,5 @@ export {
   RteAlignCenterIcon,
   RteEmojiIcon,
   RteAttachmentIcon,
+  RightIndicatorArrow,
 };
