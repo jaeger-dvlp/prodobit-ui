@@ -33,6 +33,7 @@ import {
 } from '@/components/icons';
 
 import 'dayjs/locale/tr';
+import EditTextEditor from '@/components/views/items/edit/TextEditor';
 
 const Images = {
   tempAvatar: '/assets/img/temp-avatar.svg',
@@ -838,9 +839,9 @@ function EditItem() {
         >
           <Box
             sx={{
+              width: '100%',
               height: '100%',
               display: 'flex',
-              minWidth: '100%',
               flexDirection: 'column',
               alignContent: 'flex-start',
               justifyContent: 'flex-start',
@@ -849,7 +850,18 @@ function EditItem() {
             <ItemMainInfo />
             <ItemStatusBar />
             <ItemFinancialInfo />
+            <EditTextEditor />
           </Box>
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignContent: 'flex-start',
+              justifyContent: 'flex-start',
+            }}
+          />
         </Box>
         <Box
           onClick={(e) => {
