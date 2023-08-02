@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from '@/components/sidebar';
 import { ProdobitAppTheme } from '@/theme';
 import { Box, MantineProvider } from '@mantine/core';
@@ -10,6 +10,11 @@ type Props = {
 };
 
 function AppLayout({ sidebar = false }: Props) {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={ProdobitAppTheme}>
       <Box
