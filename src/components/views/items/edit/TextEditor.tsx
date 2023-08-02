@@ -265,7 +265,7 @@ function EditTextEditor() {
             backgroundColor: t.colors.yellow[1],
           }}
         >
-          <Text>Toplantı</Text>
+          <Text>Üretim Planı</Text>
           <RightIndicatorArrow />
         </Box>
         <Box
@@ -275,7 +275,7 @@ function EditTextEditor() {
             backgroundColor: t.colors.red[1],
           }}
         >
-          <Text>Toplantı</Text>
+          <Text>Üretim</Text>
           <RightIndicatorArrow />
         </Box>
         <Box
@@ -285,7 +285,7 @@ function EditTextEditor() {
             backgroundColor: t.colors.gray[1],
           }}
         >
-          <Text>Toplantı</Text>
+          <Text>Satış</Text>
         </Box>
       </Box>
     </Box>
