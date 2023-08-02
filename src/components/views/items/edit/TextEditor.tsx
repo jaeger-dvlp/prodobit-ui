@@ -1,8 +1,8 @@
 /* eslint-disable react/function-component-definition */
 import React from 'react';
 import Picker from '@emoji-mart/react';
-import { Box, Button, Sx, Text } from '@mantine/core';
 import { ProdobitAppTheme as t } from '@/theme';
+import { Box, Button, Sx, Text } from '@mantine/core';
 import { BubbleMenu, useEditor } from '@tiptap/react';
 import { RichTextEditor, Link } from '@mantine/tiptap';
 
