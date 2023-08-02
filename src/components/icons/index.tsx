@@ -723,6 +723,286 @@ function ChartDownIcon(props: CustomIconProps) {
   );
 }
 
+function RteBoldIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <g opacity="0.5">
+        <path
+          d="M3.45667 3.68742C3.45667 2.90825 4.09417 2.27075 4.87333 2.27075H8.5C10.3558 2.27075 11.8646 3.7795 11.8646 5.63534C11.8646 7.49117 10.3558 8.99992 8.5 8.99992H3.45667V3.68742Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M3.45667 9H10.1858C12.0417 9 13.5504 10.5088 13.5504 12.3646C13.5504 14.2204 12.0417 15.7292 10.1858 15.7292H4.87333C4.09417 15.7292 3.45667 15.0917 3.45667 14.3125V9V9Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
+  );
+}
+
+function RteItalicIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M6.81416 2.625H13.3662"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.62666 15.375H10.1787"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.0937 2.625L6.90625 15.375"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RteUnderlineIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <g opacity="0.5">
+        <path
+          d="M3.54167 15.375H13.4583"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M3.54167 2.625V7.58333C3.54167 10.3246 5.75876 12.5417 8.5 12.5417C11.2413 12.5417 13.4583 10.3246 13.4583 7.58333V2.625"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
+  );
+}
+
+function RteLinkIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <g opacity="0.5">
+        <path
+          d="M10.6179 12.8959H11.6875C13.8267 12.8959 15.5833 11.1463 15.5833 9.00008C15.5833 6.86091 13.8338 5.10425 11.6875 5.10425H10.6179"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6.375 5.10425H5.3125C3.16625 5.10425 1.41666 6.85383 1.41666 9.00008C1.41666 11.1392 3.16625 12.8959 5.3125 12.8959H6.375"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M5.66666 9H11.3333"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
+  );
+}
+
+function RteAlignLeftIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M2.125 3.6875H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.125 7.22925H8.83292"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.125 10.7708H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.125 14.3125H8.83292"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RteAlignRightIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M2.125 3.6875H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.16708 7.22925H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.125 10.7708H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.16708 14.3125H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RteAlignCenterIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M2.125 3.6875H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.1425 7.22925H11.8575"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.125 10.7708H14.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.1425 14.3125H11.8575"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RteEmojiIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" {...DefaultProps} {...props}>
+      <g opacity="0.6">
+        <path
+          d="M7.5 18.3334H12.5C16.6667 18.3334 18.3333 16.6667 18.3333 12.5001V7.50008C18.3333 3.33341 16.6667 1.66675 12.5 1.66675H7.5C3.33333 1.66675 1.66667 3.33341 1.66667 7.50008V12.5001C1.66667 16.6667 3.33333 18.3334 7.5 18.3334Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M5.83333 6.875C6.66667 7.70833 8.025 7.70833 8.86667 6.875"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M11.1333 6.875C11.9667 7.70833 13.325 7.70833 14.1667 6.875"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M7 10.8333H13C13.4167 10.8333 13.75 11.1666 13.75 11.5833C13.75 13.6583 12.075 15.3333 10 15.3333C7.925 15.3333 6.25 13.6583 6.25 11.5833C6.25 11.1666 6.58333 10.8333 7 10.8333Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
+  );
+}
+
+function RteAttachmentIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" {...DefaultProps} {...props}>
+      <g opacity="0.6">
+        <path
+          d="M10.05 13.7499V9.58325"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M12.0833 11.6667H7.91667"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M18.3333 9.16675V14.1667C18.3333 17.5001 17.5 18.3334 14.1667 18.3334H5.83333C2.5 18.3334 1.66667 17.5001 1.66667 14.1667V5.83341C1.66667 2.50008 2.5 1.66675 5.83333 1.66675H7.08333C8.33333 1.66675 8.60833 2.03341 9.08333 2.66675L10.3333 4.33341C10.65 4.75008 10.8333 5.00008 11.6667 5.00008H14.1667C17.5 5.00008 18.3333 5.83341 18.3333 9.16675Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+        />
+      </g>
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -761,4 +1041,13 @@ export {
   PercentageSquareIcon,
   ChartUpIcon,
   ChartDownIcon,
+  RteBoldIcon,
+  RteItalicIcon,
+  RteUnderlineIcon,
+  RteLinkIcon,
+  RteAlignLeftIcon,
+  RteAlignRightIcon,
+  RteAlignCenterIcon,
+  RteEmojiIcon,
+  RteAttachmentIcon,
 };
