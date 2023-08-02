@@ -150,6 +150,8 @@ function EditTextEditor() {
             >
               <Picker
                 native
+                locale="tr"
+                theme="light"
                 navPosition="bottom"
                 onEmojiSelect={(val: { native: string }) => {
                   editor?.commands.insertContent(val.native);
