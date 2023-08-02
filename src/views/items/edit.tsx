@@ -792,6 +792,15 @@ function EditItem() {
         />
       </Box>
       <Box
+        exit={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.1,
+          duration: 0.5,
+          ease: 'easeInOut',
+        }}
+        component={motion.section}
         sx={{
           gap: 20,
           margin: 0,
@@ -818,17 +827,16 @@ function EditItem() {
             x: view === 'info' ? 0 : 'calc(-100% - 20px)',
           }}
           component={motion.section}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          transition={{ duration: 1, ease: 'anticipate' }}
           sx={{
             gap: 40,
             padding: 50,
             marginTop: 70,
             width: 'auto',
-
-            minWidth: '100%',
-            minHeight: '90vh',
-            borderRadius: 40,
             display: 'grid',
+            minWidth: '100%',
+            borderRadius: 40,
+            minHeight: '90vh',
             backgroundColor: t.colors.gray[0],
             cursor: view === 'info' ? 'auto' : 'pointer',
             gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
@@ -873,16 +881,16 @@ function EditItem() {
             x: view === 'docs' ? 'calc(-100% - 20px)' : '-0%',
           }}
           component={motion.section}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          transition={{ duration: 1, ease: 'anticipate' }}
           sx={{
             gap: 40,
             padding: 50,
             marginTop: 70,
             width: 'auto',
-            minWidth: '100%',
-            minHeight: '90vh',
-            borderRadius: 40,
             display: 'grid',
+            minWidth: '100%',
+            borderRadius: 40,
+            minHeight: '90vh',
             backgroundColor: t.colors.gray[0],
             cursor: view === 'docs' ? 'auto' : 'pointer',
             gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',

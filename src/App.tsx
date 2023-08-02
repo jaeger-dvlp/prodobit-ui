@@ -1,3 +1,4 @@
+import React from 'react';
 import Views from '@/views';
 import AppLayout from '@/components/layout';
 import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
