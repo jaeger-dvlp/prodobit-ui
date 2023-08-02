@@ -1018,6 +1018,314 @@ function RightIndicatorArrow(props: CustomIconProps) {
   );
 }
 
+function DocIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 16" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M15.1667 6.66671V10C15.1667 13.3334 13.8333 14.6667 10.5 14.6667H6.50001C3.16668 14.6667 1.83334 13.3334 1.83334 10V6.00004C1.83334 2.66671 3.16668 1.33337 6.50001 1.33337H9.83334"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.1667 6.66671H12.5C10.5 6.66671 9.83334 6.00004 9.83334 4.00004V1.33337L15.1667 6.66671Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.16666 8.66663H9.16666"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.16666 11.3334H7.83332"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RefreshIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 16" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M15.1667 8.00004C15.1667 11.68 12.18 14.6667 8.50001 14.6667C4.82001 14.6667 2.57334 10.96 2.57334 10.96M2.57334 10.96H5.58668M2.57334 10.96V14.2934M1.83334 8.00004C1.83334 4.32004 4.79334 1.33337 8.50001 1.33337C12.9467 1.33337 15.1667 5.04004 15.1667 5.04004M15.1667 5.04004V1.70671M15.1667 5.04004H12.2067"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RoutingIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 16" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M4.14669 6.00004C5.43535 6.00004 6.48002 4.95537 6.48002 3.66671C6.48002 2.37804 5.43535 1.33337 4.14669 1.33337C2.85802 1.33337 1.81335 2.37804 1.81335 3.66671C1.81335 4.95537 2.85802 6.00004 4.14669 6.00004Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M11.8133 10H13.8133C14.5466 10 15.1466 10.6 15.1466 11.3333V13.3333C15.1466 14.0667 14.5466 14.6667 13.8133 14.6667H11.8133C11.08 14.6667 10.48 14.0667 10.48 13.3333V11.3333C10.48 10.6 11.08 10 11.8133 10Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M8.5 3.33337H10.2867C11.52 3.33337 12.0933 4.86004 11.1667 5.67337L5.84 10.3334C4.91334 11.14 5.48667 12.6667 6.71334 12.6667H8.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.15748 3.66671H4.16518"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.8242 12.3333H12.8319"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function NotesIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 16" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M15.1667 6.66671V10C15.1667 13.3334 13.8333 14.6667 10.5 14.6667H6.50001C3.16668 14.6667 1.83334 13.3334 1.83334 10V6.00004C1.83334 2.66671 3.16668 1.33337 6.50001 1.33337H9.83334"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.1667 6.66671H12.5C10.5 6.66671 9.83334 6.00004 9.83334 4.00004V1.33337L15.1667 6.66671Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.16666 8.66663H9.16666"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.16666 11.3334H7.83332"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function BarcodeIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 8V16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 8V12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 15V16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 8V9"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 8V16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 12V16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18 8V16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function Category2Icon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 10C8.20914 10 10 8.20914 10 6C10 3.79086 8.20914 2 6 2C3.79086 2 2 3.79086 2 6C2 8.20914 3.79086 10 6 10Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18 22C20.2091 22 22 20.2091 22 18C22 15.7909 20.2091 14 18 14C15.7909 14 14 15.7909 14 18C14 20.2091 15.7909 22 18 22Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function Canlde2Icon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M22 17.5H15"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 17.5H2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22 6.5H19"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 6.5H2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 14.5H13C14.1 14.5 15 15 15 16.5V18.5C15 20 14.1 20.5 13 20.5H7C5.9 20.5 5 20 5 18.5V16.5C5 15 5.9 14.5 7 14.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11 3.5H17C18.1 3.5 19 4 19 5.5V7.5C19 9 18.1 9.5 17 9.5H11C9.9 9.5 9 9 9 7.5V5.5C9 4 9.9 3.5 11 3.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomPlusIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M12 5V19"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 12H19"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1066,4 +1374,12 @@ export {
   RteEmojiIcon,
   RteAttachmentIcon,
   RightIndicatorArrow,
+  DocIcon,
+  RefreshIcon,
+  RoutingIcon,
+  NotesIcon,
+  BarcodeIcon,
+  CustomPlusIcon,
+  Category2Icon,
+  Canlde2Icon,
 };
