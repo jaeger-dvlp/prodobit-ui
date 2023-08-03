@@ -1347,6 +1347,50 @@ function CopyIcon(props: CustomIconProps) {
   );
 }
 
+function Cube3dIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 19" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M1.5 7.25V5.75C1.5 3.5 3 2 5.25 2H12.75C15 2 16.5 3.5 16.5 5.75V7.25"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M1.5 11.75V13.25C1.5 15.5 3 17 5.25 17H12.75C15 17 16.5 15.5 16.5 13.25V11.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.02499 7.44507L9 9.74757L12.945 7.46008"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 13.8275V9.73999"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.06998 5.21742L5.66999 6.55244C5.12999 6.85244 4.67999 7.60994 4.67999 8.23244V10.7749C4.67999 11.3974 5.12249 12.1549 5.66999 12.4549L8.06998 13.7899C8.57998 14.0749 9.41999 14.0749 9.93749 13.7899L12.3375 12.4549C12.8775 12.1549 13.3275 11.3974 13.3275 10.7749V8.23244C13.3275 7.60994 12.885 6.85244 12.3375 6.55244L9.93749 5.21742C9.41999 4.92492 8.57998 4.92492 8.06998 5.21742Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1404,4 +1448,5 @@ export {
   Category2Icon,
   Canlde2Icon,
   CopyIcon,
+  Cube3dIcon,
 };
