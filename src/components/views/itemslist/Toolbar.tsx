@@ -46,13 +46,13 @@ const ToolbarInnerContainerSX: Sx = {
 };
 
 const ButtonSX: Sx = (t: MantineTheme) => ({
-  gap: 4,
+  gap: 10,
   height: 'auto',
   border: 'none',
   minHeight: 45,
   display: 'flex ',
   fontWeight: 400,
-  borderRadius: 5,
+  borderRadius: 10,
   fontSize: '15px',
   lineHeight: '18px',
   textAlign: 'center',
@@ -62,8 +62,8 @@ const ButtonSX: Sx = (t: MantineTheme) => ({
   backgroundColor: 'white',
   transition: 'all .15s ease',
   ':hover': {
-    color: t.colors.blue[7],
-    backgroundColor: t.colors.blue[1],
+    color: t.colors.gray[9],
+    backgroundColor: t.colors.gray[3],
   },
 });
 
@@ -427,13 +427,14 @@ function ItemsToolbar() {
               border: 'none',
               fontWeight: 400,
               fontSize: '15px',
+              borderRadius: 10,
               textAlign: 'left',
               lineHeight: '18px',
               padding: '13px 12px',
               transition: 'all .15s ease',
               ':hover': {
-                color: t.colors.blue[7],
-                backgroundColor: t.colors.blue[1],
+                color: t.colors.gray[9],
+                backgroundColor: t.colors.gray[3],
               },
               '::placeholder': {
                 color: '#000',
