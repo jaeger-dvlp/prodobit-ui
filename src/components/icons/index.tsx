@@ -1326,6 +1326,27 @@ function CustomPlusIcon(props: CustomIconProps) {
   );
 }
 
+function CopyIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 17" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M11.3334 9.13758V12.1126C11.3334 14.5917 10.3417 15.5834 7.86252 15.5834H4.88752C2.40835 15.5834 1.41669 14.5917 1.41669 12.1126V9.13758C1.41669 6.65841 2.40835 5.66675 4.88752 5.66675H7.86252C10.3417 5.66675 11.3334 6.65841 11.3334 9.13758Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.5834 4.88758V7.86258C15.5834 10.3417 14.5917 11.3334 12.1125 11.3334H11.3334V9.13758C11.3334 6.65841 10.3417 5.66675 7.86252 5.66675H5.66669V4.88758C5.66669 2.40841 6.65835 1.41675 9.13752 1.41675H12.1125C14.5917 1.41675 15.5834 2.40841 15.5834 4.88758Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1382,4 +1403,5 @@ export {
   CustomPlusIcon,
   Category2Icon,
   Canlde2Icon,
+  CopyIcon,
 };
