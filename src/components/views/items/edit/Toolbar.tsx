@@ -1,8 +1,8 @@
-import { Cube3dIcon, EditIconItem, TrashIcon } from '@/components/icons';
-import ToolbarContainer from '@/components/misc/Toolbar';
+import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
 import { Box, Button, Sx, Text } from '@mantine/core';
-import React from 'react';
+import ToolbarContainer from '@/components/misc/Toolbar';
+import { Cube3dIcon, EditIconItem, TrashIcon } from '@/components/icons';
 
 const ToolbarInnerContainerSX: Sx = {
   gap: 5,
