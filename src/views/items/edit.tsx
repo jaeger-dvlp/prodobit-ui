@@ -11,6 +11,7 @@ import EditItemInfo from '@/components/views/items/edit/Info';
 import EditItemDocs from '@/components/views/items/edit/Docs';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
+import ItemsEditToolbar from '@/components/views/items/edit/Toolbar';
 
 function ViewSelector({
   view,
@@ -95,117 +96,128 @@ function EditItem() {
 
   return (
     <Box
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      component={motion.section}
       sx={{
+        margin: 0,
+        padding: 0,
         width: '100%',
-        overflow: 'auto',
-        minHeight: '100%',
-        backgroundColor: 'transparent',
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
       }}
     >
       <Box
-        sx={{
-          width: '100%',
-          padding: '60px 60px 0px 60px',
-          [t.fn.smallerThan('md')]: {
-            padding: '80px 45px 0px 45px',
-          },
-        }}
-      >
-        <Navbar
-          paths={[
-            Route,
-            {
-              ...SubRoute,
-              path: `${SubRoute?.path}/${item?.id}`,
-            },
-          ].map((route) => ({
-            path: route?.path,
-            name: route?.name || '?',
-          }))}
-          withButtons
-          middleChilds={<ViewSelector view={view} setView={setView} />}
-        />
-      </Box>
-      <Box
-        exit={{ opacity: 0, y: 20 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.1,
-          duration: 0.5,
-          ease: 'easeInOut',
-        }}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         component={motion.section}
         sx={{
-          gap: 20,
-          margin: 0,
-          display: 'flex',
-          minWidth: '100%',
-          minHeight: '100%',
-          overflow: 'hidden',
-          flexDirection: 'row',
-          width: 'fit-content',
-          height: 'fit-content',
-          alignItems: 'flex-start',
-          justifyContent: 'flex-start',
-          padding: '0px 60px 60px 60px',
-          [t.fn.smallerThan('md')]: { padding: '0px 45px 45px 45px' },
-          '> section': {
-            gap: 40,
-            padding: 50,
-            marginTop: 70,
-            width: 'auto',
-            display: 'grid',
-            minWidth: '100%',
-            borderRadius: 40,
-            minHeight: '90vh',
-            backgroundColor: t.colors.gray[0],
-            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-            [t.fn.smallerThan('md')]: {
-              gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-            },
-            ':nth-child(1)': {
-              cursor: view === 'info' ? 'auto' : 'pointer',
-            },
-            ':nth-child(2)': {
-              cursor: view === 'docs' ? 'auto' : 'pointer',
-            },
-          },
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'transparent',
         }}
       >
         <Box
-          onClick={(e) => {
-            e.stopPropagation();
-            setView('info');
+          sx={{
+            width: '100%',
+            padding: '60px 60px 0px 60px',
+            [t.fn.smallerThan('md')]: {
+              padding: '80px 45px 0px 45px',
+            },
           }}
-          animate={{
-            opacity: view === 'info' ? 1 : 0.5,
-            x: view === 'info' ? 0 : 'calc(-100% - 20px)',
-          }}
-          component={motion.section}
-          transition={{ duration: 1, ease: 'anticipate' }}
         >
-          <EditItemInfo />
+          <Navbar
+            paths={[
+              Route,
+              {
+                ...SubRoute,
+                path: `${SubRoute?.path}/${item?.id}`,
+              },
+            ].map((route) => ({
+              path: route?.path,
+              name: route?.name || '?',
+            }))}
+            withButtons
+            middleChilds={<ViewSelector view={view} setView={setView} />}
+          />
         </Box>
         <Box
-          onClick={(e) => {
-            e.stopPropagation();
-            setView('docs');
-          }}
-          animate={{
-            opacity: view === 'docs' ? 1 : 0.5,
-            x: view === 'docs' ? 'calc(-100% - 20px)' : '-0%',
+          exit={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.1,
+            duration: 0.5,
+            ease: 'easeInOut',
           }}
           component={motion.section}
-          transition={{ duration: 1, ease: 'anticipate' }}
+          sx={{
+            gap: 20,
+            margin: 0,
+            display: 'flex',
+            minWidth: '100%',
+            minHeight: '100%',
+            overflow: 'hidden',
+            flexDirection: 'row',
+            width: 'fit-content',
+            height: 'fit-content',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            padding: '0px 60px 60px 60px',
+            [t.fn.smallerThan('md')]: { padding: '0px 45px 45px 45px' },
+            '> section': {
+              gap: 40,
+              padding: 50,
+              marginTop: 70,
+              width: 'auto',
+              display: 'grid',
+              minWidth: '100%',
+              borderRadius: 40,
+              minHeight: '90vh',
+              backgroundColor: t.colors.gray[0],
+              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+              [t.fn.smallerThan('md')]: {
+                gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+              },
+              ':nth-child(1)': {
+                cursor: view === 'info' ? 'auto' : 'pointer',
+              },
+              ':nth-child(2)': {
+                cursor: view === 'docs' ? 'auto' : 'pointer',
+              },
+            },
+          }}
         >
-          <EditItemDocs />
+          <Box
+            onClick={(e) => {
+              e.stopPropagation();
+              setView('info');
+            }}
+            animate={{
+              opacity: view === 'info' ? 1 : 0.5,
+              x: view === 'info' ? 0 : 'calc(-100% - 20px)',
+            }}
+            component={motion.section}
+            transition={{ duration: 1, ease: 'anticipate' }}
+          >
+            <EditItemInfo />
+          </Box>
+          <Box
+            onClick={(e) => {
+              e.stopPropagation();
+              setView('docs');
+            }}
+            animate={{
+              opacity: view === 'docs' ? 1 : 0.5,
+              x: view === 'docs' ? 'calc(-100% - 20px)' : '-0%',
+            }}
+            component={motion.section}
+            transition={{ duration: 1, ease: 'anticipate' }}
+          >
+            <EditItemDocs />
+          </Box>
         </Box>
       </Box>
+      <ItemsEditToolbar />
     </Box>
   );
 }
