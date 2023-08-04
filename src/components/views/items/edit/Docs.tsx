@@ -1,7 +1,12 @@
 import React from 'react';
-import { Box, Button, Text } from '@mantine/core';
 import { ProdobitAppTheme as t } from '@/theme';
-import { CustomPlusIcon } from '@/components/icons';
+import { Box, Button, Text } from '@mantine/core';
+import {
+  CustomPlusIcon,
+  DownloadCloudIcon,
+  FolderIllustration,
+  UploadDocumentIcon,
+} from '@/components/icons';
 
 const mockFolderCt = [
   {
@@ -26,7 +31,7 @@ const mockFolderCt = [
   },
 ];
 
-function CtFolderFilter({
+function FileCtFilter({
   categories,
   currentCategory,
   setCurrentCategory,
@@ -40,18 +45,22 @@ function CtFolderFilter({
       component="section"
       sx={{
         gap: 8,
+        margin: 0,
+        padding: 0,
         width: '100%',
         display: 'flex',
         flexWrap: 'nowrap',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
       }}
     >
       <Box
         component="ul"
         sx={{
           gap: 8,
+          margin: 0,
+          padding: 0,
           height: 'auto',
           width: 'auto',
           display: 'flex',
@@ -105,7 +114,6 @@ function CtFolderFilter({
         variant="default"
         sx={{
           gap: 11,
-
           height: 'auto',
           display: 'flex',
           fontSize: '12px',
@@ -129,6 +137,160 @@ function CtFolderFilter({
   );
 }
 
+function FilesByCategory() {
+  return (
+    <Box
+      sx={{
+        gap: 40,
+        padding: 10,
+        width: '100%',
+        marginTop: 40,
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+      }}
+    >
+      <Box
+        component="ul"
+        sx={{
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '30px 20px',
+          listStyle: 'none',
+        }}
+      >
+        {Array.from({ length: 6 }).map((_, i) => (
+          <Box
+            key={`file-${i}`}
+            sx={{
+              margin: 0,
+              width: '100%',
+              height: 'auto',
+              maxWidth: '150px',
+              padding: '15px 28px',
+              position: 'relative',
+              aspectRatio: '0.75/1',
+              transition: 'all 150ms ease-in-out',
+              ':hover': {
+                transform: 'translateY(-5px)',
+                '.fl-ill': {
+                  fill: 'rgba(0, 0, 0, 0.05)!important',
+                },
+              },
+            }}
+          >
+            <FolderIllustration
+              className="fl-ill"
+              style={{
+                top: 0,
+                left: 0,
+                fill: '#fff',
+                minWidth: '100%',
+                minHeight: '100%',
+                position: 'absolute',
+                pointerEvents: 'none',
+                zIndex: 1,
+                color: 'rgba(0, 0, 0, 0.90)',
+                transition: 'all 150ms ease-in-out',
+              }}
+            />
+            <Box
+              sx={{
+                zIndex: 2,
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'start',
+                flexDirection: 'column',
+                position: 'relative',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Box
+                sx={{
+                  width: '100%',
+                  fontWeight: 400,
+                  display: 'flex',
+                  fontSize: '12px',
+                  alignItems: 'start',
+                  lineHeight: '14.4px',
+                  flexDirection: 'row',
+                  color: t.colors.gray[6],
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text>PDF</Text>
+                <img
+                  src="https://picsum.photos/40/40"
+                  width={40}
+                  height={40}
+                  alt="pdf"
+                  style={{
+                    borderRadius: 5,
+                    boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.2)',
+                    transform: 'translateY(-35%)',
+                  }}
+                />
+              </Box>
+              <Text sx={{ color: 'black', fontWeight: 600 }}>PDF Name</Text>
+              <Button
+                variant="default"
+                sx={{
+                  gap: 10,
+                  margin: 0,
+                  padding: 0,
+                  border: 'none',
+                  display: 'flex',
+                  fontWeight: 400,
+                  lineHeight: '14.4px',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  color: t.colors.gray[7],
+                  justifyItems: 'flex-start',
+                  backgroundColor: 'transparent!important',
+                  ':hover': {
+                    textDecoration: 'underline',
+                  },
+                }}
+              >
+                <DownloadCloudIcon width={16} height={16} />
+                <Text ml={10}>İndir</Text>
+              </Button>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+      <Button
+        variant="default"
+        sx={{
+          gap: 22,
+          width: '100%',
+          color: '#000',
+          height: 'auto',
+          display: 'flex',
+          fontWeight: 400,
+          borderRadius: 15,
+          fontSize: '22px',
+          padding: '20px 10px',
+          alignItems: 'center',
+          border: '1px solid #000 ',
+          justifyContent: 'center',
+          backgroundColor: 'transparent!important',
+        }}
+      >
+        <UploadDocumentIcon width={24} height={24} />
+        <Text color="currentColor" ml={22}>
+          Döküman Ekle
+        </Text>
+      </Button>
+    </Box>
+  );
+}
+
 function EditItemDocs() {
   const [categories] = React.useState(mockFolderCt);
   const [currentCategory, setCurrentCategory] = React.useState('all');
@@ -137,19 +299,21 @@ function EditItemDocs() {
       <Box
         component="section"
         sx={{
+          gap: 0,
           width: '100%',
           height: '100%',
           display: 'flex',
+          alignItems: 'center',
           flexDirection: 'column',
-          alignContent: 'flex-start',
           justifyContent: 'flex-start',
         }}
       >
-        <CtFolderFilter
+        <FileCtFilter
           categories={categories}
           currentCategory={currentCategory}
           setCurrentCategory={setCurrentCategory}
         />
+        <FilesByCategory />
       </Box>
       <Box>Right Col</Box>
     </>
