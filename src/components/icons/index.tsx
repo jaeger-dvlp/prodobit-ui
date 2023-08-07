@@ -1438,6 +1438,99 @@ function UploadDocumentIcon(props: CustomIconProps) {
   );
 }
 
+function UploadImageICon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 25 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M9.5 10C10.6046 10 11.5 9.10457 11.5 8C11.5 6.89543 10.6046 6 9.5 6C8.39543 6 7.5 6.89543 7.5 8C7.5 9.10457 8.39543 10 9.5 10Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.5 2H9.5C4.5 2 2.5 4 2.5 9V15C2.5 20 4.5 22 9.5 22H15.5C20.5 22 22.5 20 22.5 15V10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M16.25 5H21.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M19 7.75V2.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d="M3.17001 18.9501L8.10001 15.6401C8.89001 15.1101 10.03 15.1701 10.74 15.7801L11.07 16.0701C11.85 16.7401 13.11 16.7401 13.89 16.0701L18.05 12.5001C18.83 11.8301 20.09 11.8301 20.87 12.5001L22.5 13.9001"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PenToolIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M7.16662 15.0002H8.84662C9.48662 15.0002 9.89995 14.5468 9.77995 13.9935L9.50662 12.7869H6.50662L6.23329 13.9935C6.11329 14.5135 6.56662 15.0002 7.16662 15.0002Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.50664 12.7801L10.66 11.7534C11.3066 11.1801 11.3333 10.7801 10.82 10.1334L8.78664 7.55344C8.35997 7.01344 7.65997 7.01344 7.23331 7.55344L5.19998 10.1334C4.68664 10.7801 4.68664 11.2001 5.35997 11.7534L6.51331 12.7801"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.00665 7.41333V9.10002"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.43334 3.4601L6.91334 2.94008C6.60001 2.62674 6.60001 2.12011 6.91334 1.80678L7.43334 1.28676C7.74668 0.973424 8.25334 0.973424 8.56667 1.28676L9.08667 1.80678C9.40001 2.12011 9.40001 2.62674 9.08667 2.94008L8.56667 3.4601C8.25334 3.77343 7.74668 3.77343 7.43334 3.4601Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.9667 6.54004H13.7C14.14 6.54004 14.5 6.90005 14.5 7.34005V8.07336C14.5 8.51336 14.14 8.87341 13.7 8.87341H12.9667C12.5267 8.87341 12.1667 8.51336 12.1667 8.07336V7.34005C12.1667 6.90005 12.5267 6.54004 12.9667 6.54004Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.03334 6.54004H2.3C1.86 6.54004 1.5 6.90005 1.5 7.34005V8.07336C1.5 8.51336 1.86 8.87341 2.3 8.87341H3.03334C3.47334 8.87341 3.83333 8.51336 3.83333 8.07336V7.34005C3.83333 6.90005 3.47334 6.54004 3.03334 6.54004Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.36 6.73328L8.82666 3.19995"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.64001 6.73328L7.17335 3.19995"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1498,4 +1591,6 @@ export {
   Cube3dIcon,
   FolderIllustration,
   UploadDocumentIcon,
+  UploadImageICon,
+  PenToolIcon,
 };
