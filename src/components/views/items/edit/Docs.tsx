@@ -518,12 +518,12 @@ const SpecButtons = [
   {
     icon: ImageIcon,
     text: 'Görseller',
-    component: SpecImages,
+    component: () => <SpecImages key="images-spec" />,
   },
   {
     icon: PenToolIcon,
     text: 'Teknik Çizim',
-    component: () => <Box />,
+    component: () => <SpecImages key="tech-images-spec" />,
   },
 ];
 
