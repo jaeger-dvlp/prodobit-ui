@@ -5,9 +5,11 @@ import dayjs from 'dayjs';
 import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import {
   FileTypeImages,
+  MockNotesData,
   MockProgressData,
   MockStatuses,
   MockSupplierData,
+  TNote,
   TProgressData,
 } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
@@ -36,6 +38,7 @@ import {
   CustomCheckIcon,
   DownloadCloudIcon,
   ArrowLineIcon,
+  RightIndicatorArrow,
 } from '@/components/icons';
 
 dayjs.extend(DayjsRelativeTime);
@@ -51,6 +54,11 @@ const motionProps = {
     type: 'spring',
     stiffness: 200,
   },
+};
+
+const getRenderedDate = (date: string) => {
+  const text = dayjs(date).fromNow();
+  return `${text[0].toUpperCase()}${text.slice(1)}`;
 };
 
 function ProductInfoTable() {
@@ -1044,11 +1052,6 @@ function SupplierSpecBox() {
 function ProgressSpecBox() {
   const [progressDatas] = React.useState<TProgressData[]>(MockProgressData.slice().reverse());
 
-  const getRenderedDate = (date: string) => {
-    const text = dayjs(date).fromNow();
-    return `${text[0].toUpperCase()}${text.slice(1)}`;
-  };
-
   function ProgressCompByType({ progressData }: { progressData: TProgressData }) {
     const { type, date } = progressData;
 
@@ -1532,20 +1535,146 @@ function ProgressSpecBox() {
   );
 }
 
-function PlaceholderSpecBox({ text }: { text: string }) {
+function NotesSpecBox() {
+  const [notesData] = React.useState<TNote[]>(MockNotesData);
+
   return (
-    <Box {...motionProps} sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Text
+    <Box
+      {...motionProps}
+      sx={{
+        gap: 30,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+      }}
+    >
+      <EditTextEditor
         sx={{
-          fontSize: '14px',
-          padding: '5px 20px',
-          borderRadius: 100,
-          color: t.colors.blue[7],
-          backgroundColor: t.colors.blue[1],
+          width: '100%',
+          maxWidth: '100%',
+        }}
+      />
+      <Box
+        component="ul"
+        sx={{
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          display: 'flex',
+          borderRadius: 30,
+          listStyle: 'none',
+          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          border: `1px solid ${t.colors.gray[3]}`,
+          '> li:not(:last-child)': {
+            borderBottom: `1px solid ${t.colors.gray[3]}`,
+          },
         }}
       >
-        {text}
-      </Text>
+        {notesData.map((note, i) => (
+          <Box
+            component="li"
+            key={`note-${i}`}
+            sx={{
+              gap: 10,
+              margin: 0,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              padding: '30px 30px 30px 50px',
+            }}
+          >
+            <Box
+              sx={{
+                gap: 10,
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Box
+                sx={{
+                  gap: 10,
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <Image src={note.user.avatar} width={48} height={48} radius={48} fit="contain" />
+                <Box
+                  sx={{
+                    gap: 5,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Text
+                    sx={{
+                      color: '#000',
+                      fontWeight: 400,
+                      fontSize: '15px',
+                      lineHeight: '18px',
+                    }}
+                  >
+                    <strong>
+                      {note.user.name} {note.user.surname.slice(0, 1)}.
+                    </strong>
+                  </Text>
+                  <Text
+                    sx={{
+                      fontWeight: 400,
+                      fontSize: '12px',
+                      lineHeight: '14.4px',
+                      color: t.colors.gray[5],
+                    }}
+                  >
+                    {getRenderedDate(note.date)}
+                  </Text>
+                </Box>
+              </Box>
+              <Button
+                variant="default"
+                sx={{
+                  margin: 0,
+                  padding: 5,
+                  height: 'auto',
+                  border: 'none',
+                  borderRadius: 7,
+                  color: t.colors.gray[5],
+                  backgroundColor: 'transparent',
+                  transition: 'all 0.15s ease',
+                  ':hover': {
+                    background: t.colors.gray[3],
+                  },
+                }}
+              >
+                <EditIcon width={17} height={17} />
+              </Button>
+            </Box>
+            <Text
+              sx={{
+                color: '#000',
+                fontWeight: 400,
+                fontSize: '15px',
+                lineHeight: '18px',
+                padding: '15px 15px 15px 75px',
+              }}
+            >
+              {note.content}
+            </Text>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }
@@ -1569,7 +1698,7 @@ const SpecButtons = [
   {
     icon: NotesIcon,
     text: 'Notlar',
-    component: () => <PlaceholderSpecBox text="Notlar henüz eklenmedi" />,
+    component: NotesSpecBox,
   },
 ];
 
@@ -1594,7 +1723,106 @@ function EditItemInfo() {
         <ItemMainInfo />
         <ItemStatusBar />
         <ItemFinancialInfo />
-        <EditTextEditor />
+        <EditTextEditor
+          sx={{
+            marginTop: 40,
+          }}
+        />
+        <Box
+          component="ul"
+          sx={{
+            margin: 0,
+            padding: 0,
+            marginTop: 40,
+            width: '100%',
+            height: 'auto',
+            display: 'flex',
+            listStyle: 'none',
+            alignItems: 'start',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
+            '> li': {
+              margin: 0,
+              zIndex: 1,
+              padding: 10,
+              minWidth: 125,
+              display: 'flex',
+              fontWeight: 500,
+              fontSize: '12px',
+              overflow: 'visible',
+              textAlign: 'center',
+              width: 'fit-content',
+              position: 'relative',
+              lineHeight: '14.4px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              '> svg': {
+                right: 0,
+                top: '50%',
+                color: '#fff',
+                height: '100%',
+                position: 'absolute',
+                transform: 'translateY(-50%) translateX(50%)',
+              },
+              ':nth-child(1)': {
+                zIndex: 4,
+                borderTopLeftRadius: 50,
+                borderBottomLeftRadius: 50,
+              },
+              ':nth-child(2)': {
+                zIndex: 3,
+              },
+              ':nth-child(3)': {
+                zIndex: 2,
+              },
+              ':nth-child(4)': {
+                zIndex: 1,
+                borderTopRightRadius: 50,
+                borderBottomRightRadius: 50,
+              },
+            },
+          }}
+        >
+          <Box
+            component="li"
+            sx={{
+              color: t.colors.green[6],
+              backgroundColor: t.colors.green[1],
+            }}
+          >
+            <Text>Toplantı</Text>
+            <RightIndicatorArrow />
+          </Box>
+          <Box
+            component="li"
+            sx={{
+              color: t.colors.yellow[7],
+              backgroundColor: t.colors.yellow[1],
+            }}
+          >
+            <Text>Üretim Planı</Text>
+            <RightIndicatorArrow />
+          </Box>
+          <Box
+            component="li"
+            sx={{
+              color: t.colors.red[6],
+              backgroundColor: t.colors.red[1],
+            }}
+          >
+            <Text>Üretim</Text>
+            <RightIndicatorArrow />
+          </Box>
+          <Box
+            component="li"
+            sx={{
+              color: t.colors.gray[6],
+              backgroundColor: t.colors.gray[1],
+            }}
+          >
+            <Text>Satış</Text>
+          </Box>
+        </Box>
       </Box>
       <Box
         sx={{
