@@ -23,6 +23,7 @@ import {
   CustomPlusIcon,
   ExternalUrlIcon,
   CustomChevronDown,
+  InfoIcon,
 } from '@/components/icons';
 
 const motionProps = {
@@ -481,15 +482,62 @@ function SupplierSpecBox() {
                     justifyContent: 'center',
                   }}
                 >
-                  <Text
+                  <Box
                     sx={{
-                      fontSize: '15px',
-                      fontWeight: 500,
-                      lineHeight: '18px',
+                      gap: 8,
+                      display: 'flex',
+                      width: 'fit-content',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
                     }}
                   >
-                    {supplier.companyName}
-                  </Text>
+                    <Text
+                      sx={{
+                        fontSize: '15px',
+                        fontWeight: 500,
+                        lineHeight: '18px',
+                      }}
+                    >
+                      {supplier.companyName}
+                    </Text>
+                    <Box
+                      sx={{
+                        gap: 8,
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Button
+                        variant="default"
+                        sx={{
+                          margin: 0,
+                          padding: 0,
+                          color: '#000',
+                          border: 'none',
+                          height: 'auto',
+                          backgroundColor: 'transparent!important',
+                        }}
+                      >
+                        <InfoIcon width={19} height={19} />
+                      </Button>
+                      <Button
+                        variant="default"
+                        sx={{
+                          margin: 0,
+                          padding: 0,
+                          color: '#000',
+                          border: 'none',
+                          height: 'auto',
+                          backgroundColor: 'transparent!important',
+                        }}
+                      >
+                        <EditIcon width={16} height={16} />
+                      </Button>
+                    </Box>
+                  </Box>
                   <Box
                     sx={{
                       gap: 8,
