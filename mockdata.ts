@@ -19,6 +19,53 @@ export type TItemStatus = {
   color: MantineThemeColors[MantineColor];
 };
 
+export type TProgressData = (
+  | {
+      id: number;
+      type: 'create-item';
+      date: string;
+    }
+  | {
+      id: number;
+      type: 'add-document';
+      date: string;
+      files: {
+        id: number;
+        type: 'ppt' | 'doc' | 'pdf';
+        size: number;
+        name: string;
+        date: string;
+      }[];
+    }
+  | {
+      id: number;
+      type: 'change-item-status';
+      event: {
+        from: string;
+        to: string;
+      };
+      date: string;
+    }
+) & {
+  user: {
+    id: number;
+    name: string;
+    surname: string;
+    avatar: string;
+  };
+};
+
+const MockAvatars = {
+  bitmojiMan1: '/assets/img/avatars/bitmojiMan1.png',
+  bitmojiMan2: '/assets/img/avatars/bitmojiMan2.png',
+  bitmojiWoman1: '/assets/img/avatars/bitmojiWoman1.png',
+};
+
+const FileTypeImages = {
+  ppt: '/assets/img/filetypes/ppt.png',
+  doc: '/assets/img/filetypes/doc.png',
+};
+
 const MockStockStatuses: MockStockStatus[] = [
   {
     id: 0,
@@ -372,6 +419,59 @@ const MockSupplierData = [
   },
 ];
 
+const MockProgressData: TProgressData[] = [
+  {
+    id: 0,
+    type: 'create-item',
+    date: '2023-08-07 14:00:00',
+    user: {
+      id: 0,
+      name: 'Hakan',
+      surname: 'YILMAZ',
+      avatar: MockAvatars.bitmojiMan2,
+    },
+  },
+  {
+    id: 1,
+    type: 'add-document',
+    date: '2023-08-07 14:00:00',
+    files: [
+      {
+        id: 0,
+        type: 'ppt',
+        size: 15230000,
+        name: 'Ürün ve Genel Tanıtım Sunumu',
+        date: '2023-08-08 14:00:00',
+      },
+      {
+        id: 1,
+        type: 'doc',
+        size: 15230000,
+        name: 'Ürün ve Genel Tanıtım Sunumu',
+        date: '2023-08-08 14:00:00',
+      },
+    ],
+    user: {
+      id: 0,
+      name: 'Ekrem',
+      surname: 'KARAKUŞ',
+      avatar: MockAvatars.bitmojiMan1,
+    },
+  },
+  {
+    id: 2,
+    type: 'change-item-status',
+    event: { from: 'stuck', to: 'on-process' },
+    date: '2023-08-07 14:00:00',
+    user: {
+      id: 0,
+      name: 'Esin',
+      surname: 'GENÇ',
+      avatar: MockAvatars.bitmojiWoman1,
+    },
+  },
+];
+
 export {
   MockItemsCategories,
   MockItems,
@@ -379,4 +479,7 @@ export {
   MockCustomFilters,
   MockStockStatuses,
   MockSupplierData,
+  MockProgressData,
+  MockAvatars,
+  FileTypeImages,
 };
