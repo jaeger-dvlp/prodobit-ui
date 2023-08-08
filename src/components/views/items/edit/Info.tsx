@@ -782,7 +782,7 @@ function SupplierSpecBox() {
                                 }}
                               >
                                 <TextInput
-                                  defaultValue={email}
+                                  value={email}
                                   id={`supplier-${i}-person-${person.id}-email-${z}`}
                                   styles={{
                                     input: {
@@ -903,7 +903,7 @@ function SupplierSpecBox() {
                                 }}
                               >
                                 <TextInput
-                                  defaultValue={phoneNumber}
+                                  value={phoneNumber}
                                   id={`supplier-${i}-person-${person.id}-phone-${z}`}
                                   styles={{
                                     input: {
