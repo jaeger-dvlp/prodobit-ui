@@ -3,7 +3,13 @@ import 'dayjs/locale/tr';
 import React from 'react';
 import dayjs from 'dayjs';
 import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
-import { FileTypeImages, MockProgressData, MockSupplierData, TProgressData } from 'mockdata';
+import {
+  FileTypeImages,
+  MockProgressData,
+  MockStatuses,
+  MockSupplierData,
+  TProgressData,
+} from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
@@ -29,6 +35,7 @@ import {
   InfoIcon,
   CustomCheckIcon,
   DownloadCloudIcon,
+  ArrowLineIcon,
 } from '@/components/icons';
 
 dayjs.extend(DayjsRelativeTime);
@@ -1035,7 +1042,7 @@ function SupplierSpecBox() {
 }
 
 function ProgressSpecBox() {
-  const [progressDatas] = React.useState<TProgressData[]>(MockProgressData);
+  const [progressDatas] = React.useState<TProgressData[]>(MockProgressData.slice().reverse());
 
   const getRenderedDate = (date: string) => {
     const text = dayjs(date).fromNow();
@@ -1213,101 +1220,287 @@ function ProgressSpecBox() {
               justifyContent: 'flex-start',
             }}
           >
-            {progressData.files.map((file, y) => {
-              return (
+            {progressData.files.map((file, y) => (
+              <Box
+                component="li"
+                key={`progress-${progressData.id}-file-${y}`}
+                sx={{
+                  gap: 10,
+                  margin: 0,
+                  width: '100%',
+                  display: 'flex',
+                  padding: '20px 15px',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Box
-                  component="li"
-                  key={`progress-${progressData.id}-file-${y}`}
                   sx={{
                     gap: 10,
-                    margin: 0,
-                    width: '100%',
                     display: 'flex',
-                    padding: '20px 15px',
                     alignItems: 'center',
                     flexDirection: 'row',
-                    justifyContent: 'space-between',
+                    justifyContent: 'flex-start',
                   }}
                 >
+                  <Image src={FileTypeImages[file.type]} width={50} height={50} fit="contain" />
                   <Box
                     sx={{
-                      gap: 10,
+                      gap: 5,
                       display: 'flex',
-                      alignItems: 'center',
-                      flexDirection: 'row',
-                      justifyContent: 'flex-start',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      justifyContent: 'center',
                     }}
                   >
-                    <Image src={FileTypeImages[file.type]} width={50} height={50} fit="contain" />
+                    <Text
+                      sx={{
+                        color: '#000',
+                        fontWeight: 600,
+                        fontSize: '15px',
+                        lineHeight: '18px',
+                      }}
+                    >
+                      {file.name.length > 20 ? `${file.name.substring(0, 20)}...` : file.name}
+                    </Text>
                     <Box
                       sx={{
-                        gap: 5,
+                        gap: 10,
                         display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
                       }}
                     >
                       <Text
                         sx={{
-                          color: '#000',
                           fontWeight: 600,
-                          fontSize: '15px',
-                          lineHeight: '18px',
+                          fontSize: '12px',
+                          lineHeight: '14.4px',
+                          color: t.colors.gray[5],
                         }}
                       >
-                        {file.name.length > 20 ? `${file.name.substring(0, 20)}...` : file.name}
+                        {file.size / 1000000} MB
                       </Text>
-                      <Box
+                      <Box w={5} h={5} bg={t.colors.gray[3]} sx={{ borderRadius: 5 }} />
+                      <Text
                         sx={{
-                          gap: 10,
-                          display: 'flex',
-                          alignItems: 'center',
-                          flexDirection: 'row',
-                          justifyContent: 'flex-start',
+                          fontWeight: 400,
+                          fontSize: '12px',
+                          lineHeight: '14.4px',
+                          color: t.colors.gray[5],
                         }}
                       >
-                        <Text
-                          sx={{
-                            fontWeight: 600,
-                            fontSize: '12px',
-                            lineHeight: '14.4px',
-                            color: t.colors.gray[5],
-                          }}
-                        >
-                          {file.size / 1000000} MB
-                        </Text>
-                        <Box w={5} h={5} bg={t.colors.gray[3]} sx={{ borderRadius: 5 }} />
-                        <Text
-                          sx={{
-                            fontWeight: 400,
-                            fontSize: '12px',
-                            lineHeight: '14.4px',
-                            color: t.colors.gray[5],
-                          }}
-                        >
-                          {getRenderedDate(file.date)}
-                        </Text>
-                      </Box>
+                        {getRenderedDate(file.date)}
+                      </Text>
                     </Box>
                   </Box>
-                  <Button
-                    variant="default"
+                </Box>
+                <Button
+                  variant="default"
+                  sx={{
+                    gap: 10,
+                    margin: 0,
+                    borderRadius: 100,
+                    padding: '9px 18px',
+                    color: t.colors.gray[8],
+                    border: `1px solid ${t.colors.gray[5]}`,
+                  }}
+                >
+                  <DownloadCloudIcon width={16} height={16} />
+                  <Text ml={10}>İndir</Text>
+                </Button>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      );
+    }
+
+    if (type === 'change-item-status') {
+      return (
+        <Box
+          component="li"
+          sx={{
+            gap: 10,
+            margin: 0,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'start',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            padding: '30px 30px 30px 50px',
+          }}
+        >
+          <Box
+            sx={{
+              gap: 5,
+              margin: 0,
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Box
+              sx={{
+                gap: 10,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Image
+                src={progressData.user.avatar}
+                width={48}
+                height={48}
+                radius={48}
+                fit="contain"
+              />
+              <Box
+                sx={{
+                  gap: 5,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text
+                  sx={{
+                    color: '#000',
+                    fontWeight: 400,
+                    fontSize: '15px',
+                    lineHeight: '18px',
+                  }}
+                >
+                  <strong>{progressData.user.name}</strong> Öğe Statüsü{' '}
+                  <Text
+                    span
                     sx={{
-                      gap: 10,
-                      margin: 0,
-                      borderRadius: 100,
-                      padding: '9px 18px',
-                      color: t.colors.gray[8],
-                      border: `1px solid ${t.colors.gray[5]}`,
+                      color: t.colors.green[6],
+                      fontWeight: 600,
                     }}
                   >
-                    <DownloadCloudIcon width={16} height={16} />
-                    <Text ml={10}>İndir</Text>
-                  </Button>
+                    {MockStatuses.find(({ slug }) => slug === progressData.event.to)?.name}
+                  </Text>{' '}
+                  Yaptı
+                </Text>
+                <Text
+                  sx={{
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    lineHeight: '14.4px',
+                    color: t.colors.gray[5],
+                  }}
+                >
+                  {getRenderedDate(date)}
+                </Text>
+              </Box>
+            </Box>
+            <CustomCheckIcon
+              style={{
+                color: '#000',
+              }}
+              width={23}
+              height={23}
+            />
+          </Box>
+          <Box
+            component="ul"
+            sx={{
+              gap: 10,
+              margin: 0,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              padding: '0px 10px 0px 60px',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <Box
+              component="li"
+              sx={{
+                gap: 10,
+                margin: 0,
+                padding: 15,
+                width: '100%',
+                display: 'flex',
+                alignItems: 'start',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Text
+                sx={{
+                  color: '#000',
+                  fontWeight: 400,
+                  fontSize: '15px',
+                  lineHeight: '18px',
+                }}
+              >
+                Öğe Statüsü{' '}
+                <strong>
+                  {MockStatuses.find(({ slug }) => slug === progressData.event.from)?.name}&apos;dan{' '}
+                  {MockStatuses.find(({ slug }) => slug === progressData.event.to)?.name}&apos;ye{' '}
+                </strong>
+                Çevirdi.
+              </Text>
+              <Box
+                sx={{
+                  gap: 20,
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <Box
+                  sx={{
+                    gap: 10,
+                    display: 'flex',
+                    fontWeight: 500,
+                    fontSize: '15px',
+                    borderRadius: 10,
+                    padding: '10px 20px',
+                    alignItems: 'center',
+                    color: t.colors.red[5],
+                    justifyContent: 'center',
+                    backgroundColor: t.colors.red[1],
+                  }}
+                >
+                  <span>
+                    {MockStatuses.find(({ slug }) => slug === progressData.event.from)?.name}
+                  </span>
+                  <CustomChevronDown width={14} height={14} />
                 </Box>
-              );
-            })}
+                <ArrowLineIcon width={70} style={{ color: t.colors.gray[4] }} />
+                <Box
+                  sx={{
+                    gap: 10,
+                    display: 'flex',
+                    fontWeight: 500,
+                    fontSize: '15px',
+                    borderRadius: 10,
+                    padding: '10px 20px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: t.colors.green[5],
+                    backgroundColor: t.colors.green[1],
+                  }}
+                >
+                  <span>
+                    {MockStatuses.find(({ slug }) => slug === progressData.event.to)?.name}
+                  </span>
+                  <CustomChevronDown width={14} height={14} />
+                </Box>
+              </Box>
+            </Box>
           </Box>
         </Box>
       );
