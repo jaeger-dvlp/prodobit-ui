@@ -300,4 +300,83 @@ const MockCustomFilters: CustomFilter[] = [
   },
 ];
 
-export { MockItemsCategories, MockItems, MockStatuses, MockCustomFilters, MockStockStatuses };
+const MockSupplierData = [
+  {
+    id: 0,
+    companyName: 'Büsan San. Tic. Ltd. Şti.',
+    webSite: 'https://www.busan.com.tr',
+    gMaps: 'https://goo.gl/maps/qT3cnZCVAiLKcZkj9',
+    avatar: 'https://source.unsplash.com/random/200',
+    persons: [
+      {
+        id: 0,
+        role: 'Üretim Müdürü',
+        fullName: 'Fatih GENÇ',
+        phoneNumbers: ['+90 530 971 07 05', '+90 530 971 07 05'],
+        emailAddresses: ['fatihgnnc@hotmail.com', 'fatihgnnc@hotmail.com'],
+      },
+      {
+        id: 0,
+        role: 'Proje Yöneticisi',
+        fullName: 'Hasan YILDIZ',
+        phoneNumbers: ['+90 555 555 55 55', '+90 555 555 55 55'],
+        emailAddresses: ['hsnyldz@hotmail.com', 'hsnyldz@hotmail.com'],
+      },
+    ],
+  },
+  {
+    id: 0,
+    companyName: 'Büsan San. Tic. Ltd. Şti.',
+    webSite: 'https://www.busan.com.tr',
+    gMaps: 'https://goo.gl/maps/qT3cnZCVAiLKcZkj9',
+    avatar: 'https://source.unsplash.com/random/200',
+    persons: [
+      {
+        id: 0,
+        role: 'Üretim Müdürü',
+        fullName: 'Fatih GENÇ',
+        phoneNumbers: ['+90 530 971 07 05', '+90 530 971 07 05'],
+        emailAddresses: ['fatihgnnc@hotmail.com', 'fatihgnnc@hotmail.com'],
+      },
+      {
+        id: 0,
+        role: 'Proje Yöneticisi',
+        fullName: 'Hasan YILDIZ',
+        phoneNumbers: ['+90 555 555 55 55', '+90 555 555 55 55'],
+        emailAddresses: ['hsnyldz@hotmail.com', 'hsnyldz@hotmail.com'],
+      },
+    ],
+  },
+  {
+    id: 0,
+    companyName: 'Büsan San. Tic. Ltd. Şti.',
+    webSite: 'https://www.busan.com.tr',
+    gMaps: 'https://goo.gl/maps/qT3cnZCVAiLKcZkj9',
+    avatar: 'https://source.unsplash.com/random/200',
+    persons: [
+      {
+        id: 0,
+        role: 'Üretim Müdürü',
+        fullName: 'Fatih GENÇ',
+        phoneNumbers: ['+90 530 971 07 05', '+90 530 971 07 05'],
+        emailAddresses: ['fatihgnnc@hotmail.com', 'fatihgnnc@hotmail.com'],
+      },
+      {
+        id: 0,
+        role: 'Proje Yöneticisi',
+        fullName: 'Hasan YILDIZ',
+        phoneNumbers: ['+90 555 555 55 55', '+90 555 555 55 55'],
+        emailAddresses: ['hsnyldz@hotmail.com', 'hsnyldz@hotmail.com'],
+      },
+    ],
+  },
+];
+
+export {
+  MockItemsCategories,
+  MockItems,
+  MockStatuses,
+  MockCustomFilters,
+  MockStockStatuses,
+  MockSupplierData,
+};
