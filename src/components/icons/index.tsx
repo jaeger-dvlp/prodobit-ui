@@ -1531,6 +1531,27 @@ function PenToolIcon(props: CustomIconProps) {
   );
 }
 
+function ExternalUrlIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 15 16" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M4.375 11.125L10.625 4.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.375 4.875H10.625V11.125"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1593,4 +1614,5 @@ export {
   UploadDocumentIcon,
   UploadImageICon,
   PenToolIcon,
+  ExternalUrlIcon,
 };
