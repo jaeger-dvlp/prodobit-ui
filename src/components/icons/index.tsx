@@ -1552,6 +1552,33 @@ function ExternalUrlIcon(props: CustomIconProps) {
   );
 }
 
+function CustomCheckIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 23 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M19 6.6499L9.655 17.6499L4 10.9941"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ArrowLineIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 59 7" fill="none" {...DefaultProps} {...props}>
+      <path
+        id="Line 39"
+        fill="currentColor"
+        d="M0.113249 3.5L3 6.38675L5.88675 3.5L3 0.613249L0.113249 3.5ZM59 3.5L54 0.613249V6.38675L59 3.5ZM3 4H54.5V3H3V4Z"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1615,4 +1642,6 @@ export {
   UploadImageICon,
   PenToolIcon,
   ExternalUrlIcon,
+  CustomCheckIcon,
+  ArrowLineIcon,
 };
