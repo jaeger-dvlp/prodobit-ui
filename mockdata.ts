@@ -55,6 +55,18 @@ export type TProgressData = (
   };
 };
 
+export type TNote = {
+  id: number;
+  content: string;
+  date: string;
+  user: {
+    id: number;
+    name: string;
+    surname: string;
+    avatar: string;
+  };
+};
+
 const MockAvatars = {
   bitmojiMan1: '/assets/img/avatars/bitmojiMan1.png',
   bitmojiMan2: '/assets/img/avatars/bitmojiMan2.png',
@@ -472,6 +484,33 @@ const MockProgressData: TProgressData[] = [
   },
 ];
 
+const MockNotesData: TNote[] = [
+  {
+    id: 0,
+    content:
+      'Ekram enektarlar koltuğun altında kalıp beni ara. Bacım sen enaktarın neyini anlamıyorsun. Enektarlar koltuğun altında dirim. Enaktar enektar koltuğun altında... Lanetler olsun turkcell’e.',
+    date: '2023-08-07 14:00:00',
+    user: {
+      id: 0,
+      name: 'Fatih',
+      surname: 'GENÇ',
+      avatar: MockAvatars.bitmojiMan1,
+    },
+  },
+  {
+    id: 1,
+    content:
+      'Ekram enektarlar koltuğun altında kalıp beni ara. Bacım sen enaktarın neyini anlamıyorsun. Enektarlar koltuğun altında dirim. Enaktar enektar koltuğun altında... Lanetler olsun turkcell’e.',
+    date: '2023-08-07 14:00:00',
+    user: {
+      id: 0,
+      name: 'Ömer',
+      surname: 'KAYALAR',
+      avatar: MockAvatars.bitmojiMan2,
+    },
+  },
+];
+
 export {
   MockItemsCategories,
   MockItems,
@@ -482,4 +521,5 @@ export {
   MockProgressData,
   MockAvatars,
   FileTypeImages,
+  MockNotesData,
 };
