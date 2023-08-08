@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
+import 'dayjs/locale/tr';
 import React from 'react';
-import { MockSupplierData } from 'mockdata';
+import dayjs from 'dayjs';
+import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
+import { MockProgressData, MockSupplierData, TProgressData } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
@@ -24,7 +27,11 @@ import {
   ExternalUrlIcon,
   CustomChevronDown,
   InfoIcon,
+  CustomCheckIcon,
 } from '@/components/icons';
+
+dayjs.extend(DayjsRelativeTime);
+dayjs.locale('tr');
 
 const motionProps = {
   component: motion.section,
@@ -1026,6 +1033,115 @@ function SupplierSpecBox() {
   );
 }
 
+function ProgressSpecBox() {
+  const [progressDatas] = React.useState<TProgressData[]>(MockProgressData);
+
+  function ProgressCompByType({ progressData }: { progressData: TProgressData }) {
+    const { type, date } = progressData;
+
+    const renderedDate = React.useMemo(() => {
+      const text = dayjs(date).fromNow();
+      return `${text[0].toUpperCase()}${text.slice(1)}`;
+    }, [date]);
+
+    if (type === 'create-item') {
+      return (
+        <Box
+          component="li"
+          sx={{
+            gap: 5,
+            margin: 0,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            padding: '30px 30px 30px 50px',
+            justifyContent: 'space-between',
+            borderBottom: `1px solid ${t.colors.gray[3]}`,
+          }}
+        >
+          <Box
+            sx={{
+              gap: 10,
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <Image
+              src={progressData.user.avatar}
+              width={48}
+              height={48}
+              radius={48}
+              fit="contain"
+            />
+            <Box
+              sx={{
+                gap: 5,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+              }}
+            >
+              <Text
+                sx={{
+                  color: '#000',
+                  fontWeight: 400,
+                  fontSize: '15px',
+                  lineHeight: '18px',
+                }}
+              >
+                <strong>{progressData.user.name}</strong> Öğeyi ekledi.
+              </Text>
+              <Text
+                sx={{
+                  fontWeight: 400,
+                  fontSize: '12px',
+                  lineHeight: '14.4px',
+                  color: t.colors.gray[5],
+                }}
+              >
+                {renderedDate}
+              </Text>
+            </Box>
+          </Box>
+          <CustomCheckIcon
+            style={{
+              color: '#000',
+            }}
+            width={23}
+            height={23}
+          />
+        </Box>
+      );
+    }
+  }
+
+  return (
+    <Box
+      {...motionProps}
+      component={motion.ul}
+      sx={{
+        gap: 45,
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        borderRadius: 30,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        border: `1px solid ${t.colors.gray[3]}`,
+      }}
+    >
+      {progressDatas.map((progress, i) => (
+        <ProgressCompByType progressData={progress} key={`progress-${i}`} />
+      ))}
+    </Box>
+  );
+}
+
 function PlaceholderSpecBox({ text }: { text: string }) {
   return (
     <Box {...motionProps} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -1058,7 +1174,7 @@ const SpecButtons = [
   {
     icon: RoutingIcon,
     text: 'İlerleyiş',
-    component: () => <PlaceholderSpecBox text="İlerleyiş henüz eklenmedi" />,
+    component: ProgressSpecBox,
   },
   {
     icon: NotesIcon,
