@@ -1725,6 +1725,8 @@ function EditItemInfo() {
         <ItemFinancialInfo />
         <EditTextEditor
           sx={{
+            width: '100%',
+            maxWidth: '100%',
             marginTop: 40,
           }}
         />
