@@ -51,13 +51,13 @@ function ItemFinancialInfo() {
         gap: 55,
         margin: 0,
         padding: 0,
+        width: '100%',
         marginTop: 40,
-        maxWidth: 520,
         display: 'flex',
         flexWrap: 'wrap',
         listStyle: 'none',
         alignItems: 'center',
-        justifyContent: 'start',
+        justifyContent: 'space-between',
       }}
     >
       {FinancialSpecs.map(({ icon: Icon, text, value, status, status_value }, i) => (

@@ -104,15 +104,14 @@ function ItemStatusBar() {
         margin: 0,
         width: '100%',
         marginTop: 40,
-        maxWidth: 550,
         display: 'flex',
         flexWrap: 'wrap',
         padding: '18px 0px',
         flexDirection: 'row',
         height: 'fit-content',
         alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        '> li': {
+        justifyContent: 'space-between',
+        '> ul li': {
           display: 'flex',
           alignItems: 'start',
           justifyContent: 'flex-start',
@@ -123,6 +122,11 @@ function ItemStatusBar() {
           ':nth-child(3)': {
             marginRight: 20,
           },
+          [t.fn.smallerThan('lg')]: {
+            border: 'none!important',
+          },
+        },
+        '> li': {
           ':nth-child(4)': {
             gap: 6,
             display: 'flex',
@@ -130,207 +134,219 @@ function ItemStatusBar() {
             flexDirection: 'column',
             justifyContent: 'center',
           },
-          [t.fn.smallerThan('lg')]: {
-            border: 'none!important',
-          },
         },
       }}
     >
-      <Box component="li">
-        <Menu position="bottom">
-          <Menu.Target>
-            <Box
-              component="button"
-              sx={{
-                ...StatusMenuTargetSX,
-              }}
-            >
-              <Box className="st-sc">
-                <Text>Statü</Text>
-                <CustomChevronDown className="icon" width={12} height={12} />
-              </Box>
+      <Box
+        component="ul"
+        sx={{
+          margin: 0,
+          padding: 0,
+
+          display: 'flex',
+          flexWrap: 'wrap',
+          listStyle: 'none',
+          alignItems: 'center',
+          width: 'fit-content',
+          justifyContent: 'flex-start',
+        }}
+      >
+        <Box component="li">
+          <Menu position="bottom">
+            <Menu.Target>
               <Box
-                className="st-t"
-                sx={{
-                  minWidth: 95,
-                  padding: '5px 14px',
-                  color: ItemStatus?.color[7],
-                  backgroundColor: ItemStatus?.color[1],
-                }}
-              >
-                <Text>{ItemStatus?.name}</Text>
-              </Box>
-            </Box>
-          </Menu.Target>
-          <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
-            {MockStatuses.map((status) => (
-              <Menu.Item
-                key={status.id}
                 component="button"
-                onClick={() => setItem({ ...(item as Item), status: status.slug })}
                 sx={{
-                  gap: 0,
-                  margin: 0,
-                  borderRadius: 0,
-                  display: 'flex',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  padding: '5px 10px',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  transition: 'all .15s ease-in-out',
-                  ':hover': {
-                    backgroundColor: status.color[1],
-                  },
+                  ...StatusMenuTargetSX,
                 }}
               >
+                <Box className="st-sc">
+                  <Text>Statü</Text>
+                  <CustomChevronDown className="icon" width={12} height={12} />
+                </Box>
                 <Box
+                  className="st-t"
                   sx={{
-                    fontWeight: 500,
-                    borderRadius: 5,
-                    color: status.color[7],
+                    minWidth: 95,
+                    padding: '5px 14px',
+                    color: ItemStatus?.color[7],
+                    backgroundColor: ItemStatus?.color[1],
                   }}
                 >
-                  <Text>{status.name}</Text>
+                  <Text>{ItemStatus?.name}</Text>
                 </Box>
-              </Menu.Item>
-            ))}
-          </Menu.Dropdown>
-        </Menu>
-      </Box>
-      <Box component="li">
-        <Menu position="bottom">
-          <Menu.Target>
-            <Box
-              component="button"
-              sx={{
-                ...StatusMenuTargetSX,
-              }}
-            >
-              <Box className="st-sc">
-                <Text>Stok</Text>
-                <CustomChevronDown className="icon" width={12} height={12} />
               </Box>
-              <Box
-                className="st-t"
-                sx={{
-                  gap: 5,
-                  margin: 0,
-                  padding: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  color: StockStatus.color[5],
-                  backgroundColor: 'transparent',
-                }}
-              >
-                <StockStatus.Icon width={10} height={10} />
-                <Text>{StockStatus.text}</Text>
-              </Box>
-            </Box>
-          </Menu.Target>
-          <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
-            {MockStockStatuses.map((stockStatus) => (
-              <Menu.Item
-                key={stockStatus.id}
-                component="button"
-                onClick={() => setItem({ ...(item as Item), count: stockStatus.excount })}
-                sx={{
-                  gap: 0,
-                  margin: 0,
-                  borderRadius: 0,
-                  display: 'flex',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  padding: '5px 10px',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  transition: 'all .15s ease-in-out',
-                  ':hover': {
-                    backgroundColor: stockStatus.color[1],
-                  },
-                }}
-              >
-                <Box
+            </Menu.Target>
+            <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
+              {MockStatuses.map((status) => (
+                <Menu.Item
+                  key={status.id}
+                  component="button"
+                  onClick={() => setItem({ ...(item as Item), status: status.slug })}
                   sx={{
+                    gap: 0,
+                    margin: 0,
+                    borderRadius: 0,
+                    display: 'flex',
+                    fontSize: '12px',
                     fontWeight: 500,
-                    borderRadius: 5,
-                    color: stockStatus.color[7],
+                    padding: '5px 10px',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    transition: 'all .15s ease-in-out',
+                    ':hover': {
+                      backgroundColor: status.color[1],
+                    },
                   }}
                 >
-                  <Text>{stockStatus.text}</Text>
-                </Box>
-              </Menu.Item>
-            ))}
-          </Menu.Dropdown>
-        </Menu>
-      </Box>
-      <Box component="li">
-        <Menu position="bottom">
-          <Menu.Target>
-            <Box
-              component="button"
-              sx={{
-                ...StatusMenuTargetSX,
-              }}
-            >
-              <Box className="st-sc">
-                <Text>Kategori</Text>
-                <CustomChevronDown className="icon" width={12} height={12} />
-              </Box>
+                  <Box
+                    sx={{
+                      fontWeight: 500,
+                      borderRadius: 5,
+                      color: status.color[7],
+                    }}
+                  >
+                    <Text>{status.name}</Text>
+                  </Box>
+                </Menu.Item>
+              ))}
+            </Menu.Dropdown>
+          </Menu>
+        </Box>
+        <Box component="li">
+          <Menu position="bottom">
+            <Menu.Target>
               <Box
-                className="st-t"
+                component="button"
                 sx={{
-                  gap: 5,
-                  margin: 0,
-                  padding: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: t.colors.green[6],
-                  justifyContent: 'flex-start',
-                  backgroundColor: 'transparent',
+                  ...StatusMenuTargetSX,
                 }}
               >
-                <Text>{itemCategory?.name}</Text>
+                <Box className="st-sc">
+                  <Text>Stok</Text>
+                  <CustomChevronDown className="icon" width={12} height={12} />
+                </Box>
+                <Box
+                  className="st-t"
+                  sx={{
+                    gap: 5,
+                    margin: 0,
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    color: StockStatus.color[5],
+                    backgroundColor: 'transparent',
+                  }}
+                >
+                  <StockStatus.Icon width={10} height={10} />
+                  <Text>{StockStatus.text}</Text>
+                </Box>
               </Box>
-            </Box>
-          </Menu.Target>
-          <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
-            {MockItemsCategories.map((category) => (
-              <Menu.Item
-                key={category.id}
+            </Menu.Target>
+            <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
+              {MockStockStatuses.map((stockStatus) => (
+                <Menu.Item
+                  key={stockStatus.id}
+                  component="button"
+                  onClick={() => setItem({ ...(item as Item), count: stockStatus.excount })}
+                  sx={{
+                    gap: 0,
+                    margin: 0,
+                    borderRadius: 0,
+                    display: 'flex',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    padding: '5px 10px',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    transition: 'all .15s ease-in-out',
+                    ':hover': {
+                      backgroundColor: stockStatus.color[1],
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontWeight: 500,
+                      borderRadius: 5,
+                      color: stockStatus.color[7],
+                    }}
+                  >
+                    <Text>{stockStatus.text}</Text>
+                  </Box>
+                </Menu.Item>
+              ))}
+            </Menu.Dropdown>
+          </Menu>
+        </Box>
+        <Box component="li">
+          <Menu position="bottom">
+            <Menu.Target>
+              <Box
                 component="button"
-                onClick={() => setItem({ ...(item as Item), category: category.slug })}
                 sx={{
-                  gap: 0,
-                  margin: 0,
-                  borderRadius: 0,
-                  display: 'flex',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  padding: '5px 10px',
-                  alignItems: 'center',
-                  color: t.colors.gray[7],
-                  justifyContent: 'flex-start',
-                  backgroundColor: 'transparent',
-                  transition: 'all .15s ease-in-out',
-                  ':hover': {
+                  ...StatusMenuTargetSX,
+                }}
+              >
+                <Box className="st-sc">
+                  <Text>Kategori</Text>
+                  <CustomChevronDown className="icon" width={12} height={12} />
+                </Box>
+                <Box
+                  className="st-t"
+                  sx={{
+                    gap: 5,
+                    margin: 0,
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
                     color: t.colors.green[6],
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    fontWeight: 500,
-                    borderRadius: 5,
+                    justifyContent: 'flex-start',
+                    backgroundColor: 'transparent',
                   }}
                 >
-                  <Text>{category.name}</Text>
+                  <Text>{itemCategory?.name}</Text>
                 </Box>
-              </Menu.Item>
-            ))}
-          </Menu.Dropdown>
-        </Menu>
+              </Box>
+            </Menu.Target>
+            <Menu.Dropdown m={0} p={0} miw={100} sx={MenuSX}>
+              {MockItemsCategories.map((category) => (
+                <Menu.Item
+                  key={category.id}
+                  component="button"
+                  onClick={() => setItem({ ...(item as Item), category: category.slug })}
+                  sx={{
+                    gap: 0,
+                    margin: 0,
+                    borderRadius: 0,
+                    display: 'flex',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    padding: '5px 10px',
+                    alignItems: 'center',
+                    color: t.colors.gray[7],
+                    justifyContent: 'flex-start',
+                    backgroundColor: 'transparent',
+                    transition: 'all .15s ease-in-out',
+                    ':hover': {
+                      color: t.colors.green[6],
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontWeight: 500,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <Text>{category.name}</Text>
+                  </Box>
+                </Menu.Item>
+              ))}
+            </Menu.Dropdown>
+          </Menu>
+        </Box>
       </Box>
       <Box component="li">
         <Box
