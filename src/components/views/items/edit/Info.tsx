@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Sx, Table, Text } from '@mantine/core';
+import { Box, Button, Image, Sx, Table, Text } from '@mantine/core';
 import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
 import EditTextEditor from '@/components/views/items/edit/TextEditor';
 import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
@@ -13,14 +13,17 @@ import {
   Canlde2Icon,
   Category2Icon,
   CopyIcon,
+  CustomChevronDown,
   CustomPlusIcon,
   DocIcon,
   EditIcon,
+  ExternalUrlIcon,
   NotesIcon,
   RefreshIcon,
   RoutingIcon,
   TrashIcon,
 } from '@/components/icons';
+import { MockSupplierData } from 'mockdata';
 
 const motionProps = {
   component: motion.section,
@@ -88,6 +91,7 @@ function ProductInfoTable() {
     >
       <Table
         sx={{
+          width: '100%!important',
           margin: 0,
           padding: 0,
           th: {
@@ -309,6 +313,561 @@ function InfoSpecBox() {
   );
 }
 
+function SupplierSpecBox() {
+  const [suppliers, setSuppliers] = React.useState(
+    MockSupplierData.map((item) => ({
+      ...item,
+      persons: item.persons.map((person, i) => ({
+        ...person,
+        isActive: i === 0,
+      })),
+      isActive: false,
+    })),
+  );
+
+  const HandleSupplierCollapse = (isActive: boolean, index: number) => {
+    const newSuppliers = suppliers;
+    newSuppliers[index].isActive = !isActive;
+    setSuppliers([...newSuppliers]);
+  };
+
+  const HandleSupplierPersonSelect = (supplierIndex: number, personIndex: number) => {
+    const supplier = suppliers[supplierIndex];
+    const newPersons = supplier.persons.map((person, i) => ({
+      ...person,
+      isActive: i === personIndex,
+    }));
+
+    const newSuppliers = suppliers.map((item, i) => ({
+      ...item,
+      persons: i === supplierIndex ? newPersons : item.persons,
+    }));
+
+    setSuppliers([...newSuppliers]);
+  };
+
+  const getSupplierUrlWithoutProtocol = (url: string) => {
+    const urlWithoutProtocol = url.replace(/(^\w+:|^)\/\//, '');
+    return urlWithoutProtocol;
+  };
+
+  return (
+    <Box {...motionProps}>
+      <Box
+        component="ul"
+        sx={{
+          gap: 40,
+          padding: 30,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'start',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+        }}
+      >
+        {suppliers.map((supplier, i) => (
+          <Box
+            key={`supplier-${i}`}
+            component="li"
+            sx={{
+              margin: 0,
+              padding: 0,
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                gap: 5,
+                margin: 0,
+                padding: 0,
+                width: '100%',
+                border: 'none',
+                height: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: 'transparent!important',
+              }}
+            >
+              <Box
+                sx={{
+                  gap: 15,
+                  margin: 0,
+                  padding: 0,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <Image width={48} height={48} fit="cover" radius={70} src={supplier.avatar} />
+                <Box
+                  sx={{
+                    gap: 8,
+                    margin: 0,
+                    padding: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Text
+                    sx={{
+                      fontSize: '15px',
+                      fontWeight: 500,
+                      lineHeight: '18px',
+                    }}
+                  >
+                    {supplier.companyName}
+                  </Text>
+                  <Box
+                    sx={{
+                      gap: 8,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyItems: 'center',
+                    }}
+                  >
+                    <Text
+                      component="a"
+                      href={supplier.webSite}
+                      sx={{
+                        gap: 4,
+                        display: 'flex',
+                        borderRadius: 5,
+                        fontWeight: 500,
+                        fontSize: '15px',
+                        flexWrap: 'nowrap',
+                        padding: '2px 7px',
+                        lineHeight: '18px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: t.colors.yellow[6],
+                        backgroundColor: t.colors.yellow[1],
+                        ':hover': {
+                          backgroundColor: t.colors.yellow[2],
+                        },
+                      }}
+                    >
+                      <span>{getSupplierUrlWithoutProtocol(supplier.webSite)}</span>
+                      <ExternalUrlIcon width={15} height={15} />
+                    </Text>
+                    <Text
+                      component="a"
+                      href={supplier.gMaps}
+                      sx={{
+                        gap: 4,
+                        display: 'flex',
+                        borderRadius: 5,
+                        fontWeight: 500,
+                        fontSize: '15px',
+                        flexWrap: 'nowrap',
+                        padding: '2px 7px',
+                        lineHeight: '18px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: t.colors.green[5],
+                        backgroundColor: t.colors.green[1],
+                        ':hover': {
+                          backgroundColor: t.colors.green[2],
+                        },
+                      }}
+                    >
+                      <span>Haritada Aç</span>
+                      <ExternalUrlIcon width={15} height={15} />
+                    </Text>
+                  </Box>
+                </Box>
+              </Box>
+              <Button
+                variant="default"
+                sx={{
+                  margin: 0,
+                  padding: 0,
+                  border: 'none',
+                  height: 'auto',
+                  width: 'fit-content',
+                  backgroundColor: 'transparent!important',
+                  rotate: supplier.isActive ? '180deg' : '0deg',
+                  transition: 'all 150ms ease-in-out',
+                }}
+                onClick={() => HandleSupplierCollapse(supplier.isActive, i)}
+              >
+                <CustomChevronDown width={25} height={25} color="#000" />
+              </Button>
+            </Box>
+            <AnimatePresence>
+              {supplier.isActive && (
+                <Box
+                  sx={{
+                    width: '100%',
+                    margin: '20px 0px 20px 0px',
+                    borderTop: `1px solid ${t.colors.gray[3]}`,
+                  }}
+                  component={motion.div}
+                  exit={{ opacity: 0, height: 0, margin: 0 }}
+                  initial={{ opacity: 0, height: 0, margin: 0 }}
+                  animate={{ opacity: 1, height: 'auto', margin: '20px 0px 20px 0px' }}
+                >
+                  <Box
+                    mt={20}
+                    sx={{
+                      gap: 40,
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Box
+                      component="ul"
+                      sx={{
+                        gap: 6,
+                        margin: 0,
+                        padding: 0,
+                        width: '40%',
+                        display: 'flex',
+                        alignItems: 'stretch',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                      }}
+                    >
+                      {supplier.persons.map((person, y) => (
+                        <Box
+                          component="li"
+                          key={`supplier-${i}-person-${y}`}
+                          sx={{
+                            display: 'flex',
+                            padding: '13px 15px',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            transition: 'all 150ms ease-in-out',
+                            backgroundColor: person.isActive ? t.colors.blue[0] : 'transparent',
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              gap: 5,
+                              margin: 0,
+                              padding: 0,
+                              display: 'flex',
+                              alignItems: 'flex-start',
+                              flexDirection: 'column',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <Text
+                              sx={{
+                                fontWeight: 600,
+                                fontSize: '12px',
+                                lineHeight: '14.4px',
+                                color: t.colors.gray[9],
+                              }}
+                            >
+                              {person.role}
+                            </Text>
+                            <Text
+                              sx={{
+                                opacity: 0.5,
+                                fontWeight: 400,
+                                fontSize: '12px',
+                                lineHeight: '14.4px',
+                                color: t.colors.gray[9],
+                              }}
+                            >
+                              {person.fullName}
+                            </Text>
+                          </Box>
+                          <Button
+                            variant="default"
+                            sx={{
+                              margin: 0,
+                              padding: 3,
+                              borderRadius: 5,
+                              border: 'none',
+                              width: 'auto',
+                              height: 'auto',
+                              backgroundColor: 'transparent',
+                              transition: 'all 150ms ease-in-out',
+                              ':hover': {
+                                backgroundColor: t.colors.gray[3],
+                              },
+                            }}
+                            onClick={() => HandleSupplierPersonSelect(i, y)}
+                          >
+                            <EditIcon width={22} height={22} />
+                          </Button>
+                        </Box>
+                      ))}
+                      <Button
+                        variant="default"
+                        sx={{
+                          opacity: 0.5,
+                          width: '100%',
+                          color: '#000',
+                          height: 'auto',
+                          border: 'none',
+                          display: 'flex',
+                          fontWeight: 400,
+                          fontSize: '15px',
+                          lineHeight: '18px',
+                          flexDirection: 'row',
+                          padding: '13px 15px',
+                          transition: 'all 150ms ease-in-out',
+                          borderTop: `1px solid ${t.colors.gray[3]}`,
+                          ':hover': {
+                            opacity: 1,
+                          },
+                        }}
+                      >
+                        <CustomPlusIcon width={37} height={37} />
+                        <Text
+                          ml={6}
+                          sx={{
+                            whiteSpace: 'pre-wrap',
+                          }}
+                        >
+                          {'Yeni Kişi\nKaydı Ekle'}
+                        </Text>
+                      </Button>
+                    </Box>
+
+                    {(() => {
+                      const person = supplier.persons.find((p) => p.isActive);
+                      if (!person) return null;
+
+                      return (
+                        <Box
+                          component={motion.div}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          sx={{
+                            gap: 15,
+                            width: '60%',
+                            display: 'flex',
+                            alignItems: 'stretch',
+                            flexDirection: 'column',
+                            justifyContent: 'flex-start',
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              gap: 5,
+                              display: 'flex',
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                            }}
+                          >
+                            <Text
+                              sx={{
+                                color: '#000',
+                                fontWeight: 400,
+                                fontSize: '18px',
+                                lineHeight: '21.6px',
+                              }}
+                            >
+                              E-Mail
+                            </Text>
+                            <Button
+                              variant="default"
+                              sx={{
+                                padding: '5px 10px',
+                                color: '#000',
+                                border: 'none',
+                                height: 'auto',
+                              }}
+                            >
+                              <CustomPlusIcon width={18} height={18} />
+                            </Button>
+                          </Box>
+                          <Box
+                            component="ul"
+                            sx={{
+                              gap: 7,
+                              margin: 0,
+                              padding: 0,
+                              display: 'flex',
+                              flexDirection: 'column',
+                            }}
+                          >
+                            {person.emailAddresses.map((email, z) => (
+                              <Box
+                                component="li"
+                                key={`supplier-${i}-person-${person.id}-email-${z}`}
+                                sx={{
+                                  margin: 0,
+                                  display: 'flex',
+                                  fontWeight: 400,
+                                  borderRadius: 45,
+                                  fontSize: '15px',
+                                  lineHeight: '18px',
+                                  padding: '10px 16px',
+                                  alignItems: 'center',
+                                  flexDirection: 'row',
+                                  justifyContent: 'space-between',
+                                  border: `1px solid ${t.colors.gray[3]}`,
+                                }}
+                              >
+                                <Text>{email}</Text>
+                                <Box
+                                  sx={{
+                                    gap: 9,
+                                    display: 'flex',
+                                    width: 'fit-content',
+                                    alignItems: 'center',
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                  }}
+                                >
+                                  <Button
+                                    variant="default"
+                                    sx={{
+                                      padding: 0,
+                                      border: 'none',
+                                      height: 'auto',
+                                      color: t.colors.gray[6],
+                                      backgroundColor: 'transparent',
+                                    }}
+                                  >
+                                    <EditIcon width={15} height={15} />
+                                  </Button>
+                                  <Button
+                                    variant="default"
+                                    sx={{
+                                      padding: 0,
+                                      border: 'none',
+                                      height: 'auto',
+                                      color: t.colors.gray[6],
+                                      backgroundColor: 'transparent',
+                                    }}
+                                  >
+                                    <CopyIcon width={15} height={15} />
+                                  </Button>
+                                </Box>
+                              </Box>
+                            ))}
+                          </Box>
+                          <Box
+                            sx={{
+                              gap: 5,
+                              display: 'flex',
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                            }}
+                          >
+                            <Text
+                              sx={{
+                                color: '#000',
+                                fontWeight: 400,
+                                fontSize: '18px',
+                                lineHeight: '21.6px',
+                              }}
+                            >
+                              Telefon
+                            </Text>
+                            <Button
+                              variant="default"
+                              sx={{
+                                padding: '5px 10px',
+                                color: '#000',
+                                border: 'none',
+                                height: 'auto',
+                              }}
+                            >
+                              <CustomPlusIcon width={18} height={18} />
+                            </Button>
+                          </Box>
+                          <Box
+                            component="ul"
+                            sx={{
+                              gap: 7,
+                              margin: 0,
+                              padding: 0,
+                              display: 'flex',
+                              flexDirection: 'column',
+                            }}
+                          >
+                            {person.phoneNumbers.map((phone, z) => (
+                              <Box
+                                component="li"
+                                key={`supplier-${i}-person-${person.id}-email-${z}`}
+                                sx={{
+                                  margin: 0,
+                                  display: 'flex',
+                                  fontWeight: 400,
+                                  borderRadius: 45,
+                                  fontSize: '15px',
+                                  lineHeight: '18px',
+                                  padding: '10px 16px',
+                                  alignItems: 'center',
+                                  flexDirection: 'row',
+                                  justifyContent: 'space-between',
+                                  border: `1px solid ${t.colors.gray[3]}`,
+                                }}
+                              >
+                                <Text>{phone}</Text>
+                                <Box
+                                  sx={{
+                                    gap: 9,
+                                    display: 'flex',
+                                    width: 'fit-content',
+                                    alignItems: 'center',
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                  }}
+                                >
+                                  <Button
+                                    variant="default"
+                                    sx={{
+                                      padding: 0,
+                                      border: 'none',
+                                      height: 'auto',
+                                      color: t.colors.gray[6],
+                                      backgroundColor: 'transparent',
+                                    }}
+                                  >
+                                    <EditIcon width={15} height={15} />
+                                  </Button>
+                                  <Button
+                                    variant="default"
+                                    sx={{
+                                      padding: 0,
+                                      border: 'none',
+                                      height: 'auto',
+                                      color: t.colors.gray[6],
+                                      backgroundColor: 'transparent',
+                                    }}
+                                  >
+                                    <CopyIcon width={15} height={15} />
+                                  </Button>
+                                </Box>
+                              </Box>
+                            ))}
+                          </Box>
+                        </Box>
+                      );
+                    })()}
+                  </Box>
+                </Box>
+              )}
+            </AnimatePresence>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}
+
 function PlaceholderSpecBox({ text }: { text: string }) {
   return (
     <Box {...motionProps} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -336,7 +895,7 @@ const SpecButtons = [
   {
     icon: RefreshIcon,
     text: 'Tedarikçiler',
-    component: () => <PlaceholderSpecBox text="Tedarikçiler henüz eklenmedi" />,
+    component: SupplierSpecBox,
   },
   {
     icon: RoutingIcon,
@@ -364,7 +923,7 @@ function EditItemInfo() {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignContent: 'flex-start',
+          alignItems: 'flex-start',
           justifyContent: 'flex-start',
         }}
       >
@@ -380,7 +939,7 @@ function EditItemInfo() {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignContent: 'flex-start',
+          alignItems: 'stretch',
           justifyContent: 'flex-start',
         }}
       >
