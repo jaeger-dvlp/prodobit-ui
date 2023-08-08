@@ -2,7 +2,7 @@
 import React from 'react';
 import Picker from '@emoji-mart/react';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Sx, Text } from '@mantine/core';
+import { Box, Button, Sx } from '@mantine/core';
 import { BubbleMenu, useEditor } from '@tiptap/react';
 import { RichTextEditor, Link } from '@mantine/tiptap';
 
@@ -24,7 +24,6 @@ import {
   RteAlignRightIcon,
   RteAttachmentIcon,
   RteAlignCenterIcon,
-  RightIndicatorArrow,
 } from '@/components/icons';
 
 const BoldIcon = () => <RteBoldIcon width={20} height={20} />;
@@ -35,7 +34,7 @@ const AlignLeftIcon = () => <RteAlignLeftIcon width={20} height={20} />;
 const AlignCenterIcon = () => <RteAlignCenterIcon width={20} height={20} />;
 const AlignRightIcon = () => <RteAlignRightIcon width={20} height={20} />;
 
-function EditTextEditor() {
+function EditTextEditor({ sx }: { sx?: Sx }) {
   const editor = useEditor({
     extensions: [
       Link,
@@ -74,6 +73,7 @@ function EditTextEditor() {
         alignItems: 'flex-end',
         flexDirection: 'column',
         justifyContent: 'center',
+        ...sx,
       }}
     >
       <RichTextEditor
@@ -81,7 +81,6 @@ function EditTextEditor() {
         placeholder="Yorumunu yaz.."
         sx={{
           width: '100%',
-          marginTop: 40,
           border: 'none',
           borderRadius: 10,
           padding: '10px 20px',
@@ -192,101 +191,6 @@ function EditTextEditor() {
         >
           Yayınla
         </Button>
-      </Box>
-      <Box
-        component="ul"
-        sx={{
-          margin: 0,
-          padding: 0,
-          marginTop: 40,
-          width: '100%',
-          height: 'auto',
-          display: 'flex',
-          listStyle: 'none',
-          alignItems: 'start',
-          flexWrap: 'wrap',
-          justifyContent: 'flex-start',
-          '> li': {
-            margin: 0,
-            zIndex: 1,
-            padding: 10,
-            minWidth: 125,
-            display: 'flex',
-            fontWeight: 500,
-            fontSize: '12px',
-            overflow: 'visible',
-            textAlign: 'center',
-            width: 'fit-content',
-            position: 'relative',
-            lineHeight: '14.4px',
-            alignItems: 'center',
-            justifyContent: 'center',
-            '> svg': {
-              right: 0,
-              top: '50%',
-              color: '#fff',
-              height: '100%',
-              position: 'absolute',
-              transform: 'translateY(-50%) translateX(50%)',
-            },
-            ':nth-child(1)': {
-              zIndex: 4,
-              borderTopLeftRadius: 50,
-              borderBottomLeftRadius: 50,
-            },
-            ':nth-child(2)': {
-              zIndex: 3,
-            },
-            ':nth-child(3)': {
-              zIndex: 2,
-            },
-            ':nth-child(4)': {
-              zIndex: 1,
-              borderTopRightRadius: 50,
-              borderBottomRightRadius: 50,
-            },
-          },
-        }}
-      >
-        <Box
-          component="li"
-          sx={{
-            color: t.colors.green[6],
-            backgroundColor: t.colors.green[1],
-          }}
-        >
-          <Text>Toplantı</Text>
-          <RightIndicatorArrow />
-        </Box>
-        <Box
-          component="li"
-          sx={{
-            color: t.colors.yellow[7],
-            backgroundColor: t.colors.yellow[1],
-          }}
-        >
-          <Text>Üretim Planı</Text>
-          <RightIndicatorArrow />
-        </Box>
-        <Box
-          component="li"
-          sx={{
-            color: t.colors.red[6],
-            backgroundColor: t.colors.red[1],
-          }}
-        >
-          <Text>Üretim</Text>
-          <RightIndicatorArrow />
-        </Box>
-        <Box
-          component="li"
-          sx={{
-            color: t.colors.gray[6],
-            backgroundColor: t.colors.gray[1],
-          }}
-        >
-          <Text>Satış</Text>
-        </Box>
       </Box>
     </Box>
   );
