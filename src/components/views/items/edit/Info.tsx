@@ -3,7 +3,7 @@ import 'dayjs/locale/tr';
 import React from 'react';
 import dayjs from 'dayjs';
 import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
-import { MockProgressData, MockSupplierData, TProgressData } from 'mockdata';
+import { FileTypeImages, MockProgressData, MockSupplierData, TProgressData } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
@@ -28,6 +28,7 @@ import {
   CustomChevronDown,
   InfoIcon,
   CustomCheckIcon,
+  DownloadCloudIcon,
 } from '@/components/icons';
 
 dayjs.extend(DayjsRelativeTime);
@@ -1036,13 +1037,13 @@ function SupplierSpecBox() {
 function ProgressSpecBox() {
   const [progressDatas] = React.useState<TProgressData[]>(MockProgressData);
 
+  const getRenderedDate = (date: string) => {
+    const text = dayjs(date).fromNow();
+    return `${text[0].toUpperCase()}${text.slice(1)}`;
+  };
+
   function ProgressCompByType({ progressData }: { progressData: TProgressData }) {
     const { type, date } = progressData;
-
-    const renderedDate = React.useMemo(() => {
-      const text = dayjs(date).fromNow();
-      return `${text[0].toUpperCase()}${text.slice(1)}`;
-    }, [date]);
 
     if (type === 'create-item') {
       return (
@@ -1057,7 +1058,6 @@ function ProgressSpecBox() {
             flexDirection: 'row',
             padding: '30px 30px 30px 50px',
             justifyContent: 'space-between',
-            borderBottom: `1px solid ${t.colors.gray[3]}`,
           }}
         >
           <Box
@@ -1103,7 +1103,7 @@ function ProgressSpecBox() {
                   color: t.colors.gray[5],
                 }}
               >
-                {renderedDate}
+                {getRenderedDate(date)}
               </Text>
             </Box>
           </Box>
@@ -1117,6 +1117,201 @@ function ProgressSpecBox() {
         </Box>
       );
     }
+
+    if (type === 'add-document') {
+      return (
+        <Box
+          component="li"
+          sx={{
+            gap: 10,
+            margin: 0,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'start',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            padding: '30px 30px 30px 50px',
+          }}
+        >
+          <Box
+            sx={{
+              gap: 5,
+              margin: 0,
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Box
+              sx={{
+                gap: 10,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Image
+                src={progressData.user.avatar}
+                width={48}
+                height={48}
+                radius={48}
+                fit="contain"
+              />
+              <Box
+                sx={{
+                  gap: 5,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text
+                  sx={{
+                    color: '#000',
+                    fontWeight: 400,
+                    fontSize: '15px',
+                    lineHeight: '18px',
+                  }}
+                >
+                  <strong>{progressData.user.name}</strong> Dökümanlara{' '}
+                  <strong>{progressData.files.length} Yeni</strong> Dosya ekledi.
+                </Text>
+                <Text
+                  sx={{
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    lineHeight: '14.4px',
+                    color: t.colors.gray[5],
+                  }}
+                >
+                  {getRenderedDate(date)}
+                </Text>
+              </Box>
+            </Box>
+            <CustomCheckIcon
+              style={{
+                color: '#000',
+              }}
+              width={23}
+              height={23}
+            />
+          </Box>
+          <Box
+            component="ul"
+            sx={{
+              gap: 10,
+              margin: 0,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              padding: '0px 10px 0px 60px',
+              justifyContent: 'flex-start',
+            }}
+          >
+            {progressData.files.map((file, y) => {
+              return (
+                <Box
+                  component="li"
+                  key={`progress-${progressData.id}-file-${y}`}
+                  sx={{
+                    gap: 10,
+                    margin: 0,
+                    width: '100%',
+                    display: 'flex',
+                    padding: '20px 15px',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      gap: 10,
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}
+                  >
+                    <Image src={FileTypeImages[file.type]} width={50} height={50} fit="contain" />
+                    <Box
+                      sx={{
+                        gap: 5,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          color: '#000',
+                          fontWeight: 600,
+                          fontSize: '15px',
+                          lineHeight: '18px',
+                        }}
+                      >
+                        {file.name.length > 20 ? `${file.name.substring(0, 20)}...` : file.name}
+                      </Text>
+                      <Box
+                        sx={{
+                          gap: 10,
+                          display: 'flex',
+                          alignItems: 'center',
+                          flexDirection: 'row',
+                          justifyContent: 'flex-start',
+                        }}
+                      >
+                        <Text
+                          sx={{
+                            fontWeight: 600,
+                            fontSize: '12px',
+                            lineHeight: '14.4px',
+                            color: t.colors.gray[5],
+                          }}
+                        >
+                          {file.size / 1000000} MB
+                        </Text>
+                        <Box w={5} h={5} bg={t.colors.gray[3]} sx={{ borderRadius: 5 }} />
+                        <Text
+                          sx={{
+                            fontWeight: 400,
+                            fontSize: '12px',
+                            lineHeight: '14.4px',
+                            color: t.colors.gray[5],
+                          }}
+                        >
+                          {getRenderedDate(file.date)}
+                        </Text>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Button
+                    variant="default"
+                    sx={{
+                      gap: 10,
+                      margin: 0,
+                      borderRadius: 100,
+                      padding: '9px 18px',
+                      color: t.colors.gray[8],
+                      border: `1px solid ${t.colors.gray[5]}`,
+                    }}
+                  >
+                    <DownloadCloudIcon width={16} height={16} />
+                    <Text ml={10}>İndir</Text>
+                  </Button>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
+      );
+    }
   }
 
   return (
@@ -1124,15 +1319,17 @@ function ProgressSpecBox() {
       {...motionProps}
       component={motion.ul}
       sx={{
-        gap: 45,
         margin: 0,
         padding: 0,
         display: 'flex',
         borderRadius: 30,
-        alignItems: 'center',
+        alignItems: 'start',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         border: `1px solid ${t.colors.gray[3]}`,
+        '> li:not(:last-child)': {
+          borderBottom: `1px solid ${t.colors.gray[3]}`,
+        },
       }}
     >
       {progressDatas.map((progress, i) => (
