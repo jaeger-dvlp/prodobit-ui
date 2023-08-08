@@ -155,7 +155,6 @@ function EditItem() {
             margin: 0,
             display: 'flex',
             minWidth: '100%',
-            minHeight: '100%',
             overflow: 'hidden',
             flexDirection: 'row',
             width: 'fit-content',
@@ -172,7 +171,6 @@ function EditItem() {
               display: 'grid',
               minWidth: '100%',
               borderRadius: 40,
-              minHeight: '90vh',
               backgroundColor: t.colors.gray[0],
               gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
               [t.fn.smallerThan('md')]: {
