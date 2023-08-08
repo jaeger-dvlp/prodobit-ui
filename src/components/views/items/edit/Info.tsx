@@ -1,29 +1,29 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { MockSupplierData } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Image, Sx, Table, Text } from '@mantine/core';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
 import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
 import EditTextEditor from '@/components/views/items/edit/TextEditor';
 import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
 import ItemFinancialInfo from '@/components/views/items/edit/ItemFinancialInfo';
 
 import {
+  DocIcon,
+  CopyIcon,
+  EditIcon,
+  NotesIcon,
+  TrashIcon,
+  RefreshIcon,
+  RoutingIcon,
   BarcodeIcon,
   Canlde2Icon,
   Category2Icon,
-  CopyIcon,
-  CustomChevronDown,
   CustomPlusIcon,
-  DocIcon,
-  EditIcon,
   ExternalUrlIcon,
-  NotesIcon,
-  RefreshIcon,
-  RoutingIcon,
-  TrashIcon,
+  CustomChevronDown,
 } from '@/components/icons';
-import { MockSupplierData } from 'mockdata';
 
 const motionProps = {
   component: motion.section,
@@ -314,6 +314,7 @@ function InfoSpecBox() {
 }
 
 function SupplierSpecBox() {
+  const [view, setView] = React.useState<'suppliers' | 'manufacturers'>('suppliers');
   const [suppliers, setSuppliers] = React.useState(
     MockSupplierData.map((item) => ({
       ...item,
@@ -352,12 +353,75 @@ function SupplierSpecBox() {
   };
 
   return (
-    <Box {...motionProps}>
+    <Box
+      {...motionProps}
+      sx={{
+        gap: 45,
+        padding: 30,
+        display: 'flex',
+        borderRadius: 30,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        border: `1px solid ${t.colors.gray[3]}`,
+      }}
+    >
       <Box
-        component="ul"
+        sx={{
+          gap: 20,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'start',
+          justifyContent: 'center',
+        }}
+      >
+        <Button
+          variant="default"
+          onClick={() => setView('suppliers')}
+          sx={{
+            margin: 0,
+            padding: 0,
+            border: 'none',
+            height: 'auto',
+            fontWeight: 600,
+            fontSize: '18px',
+            lineHeight: '21.6px',
+            transition: 'all 150ms ease-in-out',
+            opacity: view === 'suppliers' ? 1 : 0.5,
+            backgroundColor: 'transparent!important',
+            color: view === 'suppliers' ? t.colors.blue[6] : '#000',
+          }}
+        >
+          <Text>Tedarikçi Detayları</Text>
+        </Button>
+        <Button
+          variant="default"
+          onClick={() => setView('manufacturers')}
+          sx={{
+            margin: 0,
+            padding: 0,
+            border: 'none',
+            height: 'auto',
+            fontWeight: 600,
+            fontSize: '18px',
+            lineHeight: '21.6px',
+            transition: 'all 150ms ease-in-out',
+            opacity: view === 'manufacturers' ? 1 : 0.5,
+            backgroundColor: 'transparent!important',
+            color: view === 'manufacturers' ? t.colors.blue[6] : '#000',
+          }}
+        >
+          <Text>Üretici Detayları</Text>
+        </Button>
+      </Box>
+      <Box
+        {...motionProps}
+        component={motion.ul}
+        key={`suppliers-${view}`}
         sx={{
           gap: 40,
-          padding: 30,
+          margin: 0,
+          padding: 0,
           width: '100%',
           display: 'flex',
           alignItems: 'start',
@@ -710,14 +774,24 @@ function SupplierSpecBox() {
                                   borderRadius: 45,
                                   fontSize: '15px',
                                   lineHeight: '18px',
-                                  padding: '10px 16px',
+                                  padding: '5px 16px',
                                   alignItems: 'center',
                                   flexDirection: 'row',
                                   justifyContent: 'space-between',
                                   border: `1px solid ${t.colors.gray[3]}`,
                                 }}
                               >
-                                <Text>{email}</Text>
+                                <TextInput
+                                  defaultValue={email}
+                                  id={`supplier-${i}-person-${person.id}-email-${z}`}
+                                  styles={{
+                                    input: {
+                                      margin: 0,
+                                      padding: 0,
+                                      border: 'none',
+                                    },
+                                  }}
+                                />
                                 <Box
                                   sx={{
                                     gap: 9,
@@ -730,6 +804,15 @@ function SupplierSpecBox() {
                                 >
                                   <Button
                                     variant="default"
+                                    onClick={() => {
+                                      const Input = document.querySelector(
+                                        `#supplier-${i}-person-${person.id}-email-${z}`,
+                                      ) as HTMLInputElement;
+
+                                      if (Input) {
+                                        Input.focus();
+                                      }
+                                    }}
                                     sx={{
                                       padding: 0,
                                       border: 'none',
@@ -742,6 +825,10 @@ function SupplierSpecBox() {
                                   </Button>
                                   <Button
                                     variant="default"
+                                    onClick={() => {
+                                      const value = email;
+                                      navigator.clipboard.writeText(value);
+                                    }}
                                     sx={{
                                       padding: 0,
                                       border: 'none',
@@ -797,7 +884,7 @@ function SupplierSpecBox() {
                               flexDirection: 'column',
                             }}
                           >
-                            {person.phoneNumbers.map((phone, z) => (
+                            {person.phoneNumbers.map((phoneNumber, z) => (
                               <Box
                                 component="li"
                                 key={`supplier-${i}-person-${person.id}-email-${z}`}
@@ -808,14 +895,24 @@ function SupplierSpecBox() {
                                   borderRadius: 45,
                                   fontSize: '15px',
                                   lineHeight: '18px',
-                                  padding: '10px 16px',
+                                  padding: '5px 16px',
                                   alignItems: 'center',
                                   flexDirection: 'row',
                                   justifyContent: 'space-between',
                                   border: `1px solid ${t.colors.gray[3]}`,
                                 }}
                               >
-                                <Text>{phone}</Text>
+                                <TextInput
+                                  defaultValue={phoneNumber}
+                                  id={`supplier-${i}-person-${person.id}-phone-${z}`}
+                                  styles={{
+                                    input: {
+                                      margin: 0,
+                                      padding: 0,
+                                      border: 'none',
+                                    },
+                                  }}
+                                />
                                 <Box
                                   sx={{
                                     gap: 9,
@@ -828,6 +925,15 @@ function SupplierSpecBox() {
                                 >
                                   <Button
                                     variant="default"
+                                    onClick={() => {
+                                      const Input = document.querySelector(
+                                        `#supplier-${i}-person-${person.id}-phone-${z}`,
+                                      ) as HTMLInputElement;
+
+                                      if (Input) {
+                                        Input.focus();
+                                      }
+                                    }}
                                     sx={{
                                       padding: 0,
                                       border: 'none',
@@ -840,6 +946,10 @@ function SupplierSpecBox() {
                                   </Button>
                                   <Button
                                     variant="default"
+                                    onClick={() => {
+                                      const value = phoneNumber;
+                                      navigator.clipboard.writeText(value);
+                                    }}
                                     sx={{
                                       padding: 0,
                                       border: 'none',
