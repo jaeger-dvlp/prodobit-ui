@@ -106,6 +106,7 @@ function ItemStatusBar() {
         marginTop: 40,
         display: 'flex',
         flexWrap: 'wrap',
+        listStyle: 'none',
         padding: '18px 0px',
         flexDirection: 'row',
         height: 'fit-content',
@@ -142,7 +143,6 @@ function ItemStatusBar() {
         sx={{
           margin: 0,
           padding: 0,
-
           display: 'flex',
           flexWrap: 'wrap',
           listStyle: 'none',
