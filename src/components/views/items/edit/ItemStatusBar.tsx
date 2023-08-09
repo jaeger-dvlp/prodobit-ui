@@ -105,23 +105,25 @@ function ItemStatusBar() {
         width: '100%',
         marginTop: 40,
         display: 'flex',
+        padding: '18px',
         flexWrap: 'wrap',
+        borderRadius: 15,
         listStyle: 'none',
-        padding: '18px 0px',
         flexDirection: 'row',
         height: 'fit-content',
         alignItems: 'stretch',
         justifyContent: 'space-between',
+        backgroundColor: t.colors.gray[2],
         '> ul li': {
           display: 'flex',
           alignItems: 'start',
           justifyContent: 'flex-start',
+          ':nth-child(1) button': {
+            paddingLeft: `0px!important`,
+          },
           ':nth-child(2)': {
             borderLeft: `1px solid rgba(0,0,0,0.20)`,
             borderRight: `1px solid rgba(0,0,0,0.20)`,
-          },
-          ':nth-child(3)': {
-            marginRight: 20,
           },
           [t.fn.smallerThan('lg')]: {
             border: 'none!important',
@@ -348,14 +350,23 @@ function ItemStatusBar() {
           </Menu>
         </Box>
       </Box>
-      <Box component="li">
+      <Box
+        component="li"
+        sx={{
+          gap: 6,
+          display: 'flex',
+          alignItems: 'flex-end',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
         <Box
           sx={{
             gap: 10,
             width: 'auto',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
           }}
         >
           <Image
