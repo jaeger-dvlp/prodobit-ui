@@ -1,9 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Navbar from '@/components/layout/Navbar';
 import { Box, Image, Text } from '@mantine/core';
+import { Item } from '@/views/items/list/WithItems';
 import AddButtons from '@/components/views/itemslist/AddButtons';
+import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';
 
-function NoItemsView() {
+function NoItemsView({
+  items,
+  paths,
+}: {
+  items: Item[];
+  paths: { path?: string; name: string }[];
+}) {
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -21,6 +30,13 @@ function NoItemsView() {
         justifyContent: 'center',
       }}
     >
+      <Navbar
+        sx={{ padding: 30 }}
+        withButtons
+        paths={paths}
+        middleChilds={<ItemCountDisplay itemCount={items.length} />}
+      />
+
       <Image
         fit="contain"
         src="/assets/img/no-item.svg"

@@ -4,11 +4,13 @@ import { BsPlusLg } from 'react-icons/bs';
 import { EditIcon } from '@/components/icons';
 import { MockItemsCategories } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
+import Navbar from '@/components/layout/Navbar';
 import ItemsToolbar from '@/components/views/itemslist/Toolbar';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
 import TableWrapper, { useTable } from '@/components/context/Table.context';
+import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';
 
 export type ItemCategory = {
   id: number;
@@ -265,7 +267,7 @@ function TopBar() {
       animate={{ opacity: 1 }}
       component={motion.section}
       sx={{
-        padding: 60,
+        padding: 0,
         width: '100%',
         display: 'grid',
         alignItems: 'start',
@@ -337,6 +339,34 @@ function TopBar() {
         </Box>
       </Box>
       <CategoriesBar categories={MockItemsCategories} />
+    </Box>
+  );
+}
+
+function NavbarGroup({
+  items,
+  paths,
+}: {
+  items: Item[];
+  paths: { path?: string; name: string }[];
+}) {
+  return (
+    <Box
+      sx={{
+        gap: 90,
+        padding: 60,
+        width: '100%',
+        display: 'flex',
+        position: 'relative',
+        flexDirection: 'column',
+      }}
+    >
+      <Navbar
+        withButtons
+        paths={paths}
+        middleChilds={<ItemCountDisplay itemCount={items.length} />}
+      />
+      <TopBar />
       <Box
         sx={{
           top: 0,
@@ -356,10 +386,16 @@ function TopBar() {
   );
 }
 
-function WithItemsView() {
+function WithItemsView({
+  items,
+  paths,
+}: {
+  items: Item[];
+  paths: { path?: string; name: string }[];
+}) {
   return (
     <TableWrapper>
-      <TopBar />
+      <NavbarGroup items={items} paths={paths} />
       <CustomFiltersBar />
       <ItemsTable />
       <ItemsToolbar />

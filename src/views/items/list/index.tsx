@@ -1,52 +1,14 @@
 import React from 'react';
 import { MockItems } from 'mockdata';
 import { motion } from 'framer-motion';
-import Navbar from '@/components/layout/Navbar';
 import DevMode from '@/components/misc/DevMode';
 import { Box, Button, Text } from '@mantine/core';
-import RoutesMap, { RouteMapItem } from '@/routes';
 import NoItemsView from '@/views/items/list/NoItems';
 import WithItemsView from '@/views/items/list/WithItems';
-
-function ItemCountDisplay({ itemCount }: { itemCount: number }) {
-  if (itemCount === 0) {
-    return (
-      <Text
-        sx={(theme) => ({
-          color: '#39373A',
-          fontSize: '22px',
-          fontWeight: 400,
-          [theme.fn.smallerThan('md')]: {
-            fontSize: '18px',
-          },
-        })}
-        miw="fit-content"
-      >
-        Öğe Bulunamadı
-      </Text>
-    );
-  }
-
-  return (
-    <Text
-      sx={(theme) => ({
-        color: '#39373A',
-        fontSize: '22px',
-        fontWeight: 400,
-        [theme.fn.smallerThan('md')]: {
-          fontSize: '18px',
-        },
-      })}
-      miw="fit-content"
-    >
-      <Text component="b">{itemCount}</Text> Öğe Bulundu
-    </Text>
-  );
-}
+import RoutesMap, { RouteMapItem } from '@/routes';
 
 function ItemsList() {
   const [items, setItems] = React.useState(MockItems);
-
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
   const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/list');
 
@@ -70,22 +32,23 @@ function ItemsList() {
         },
       })}
     >
-      <Box
-        sx={{
-          padding: 60,
-          width: '100%',
-        }}
-      >
-        <Navbar
+      {items.length === 0 ? (
+        <NoItemsView
+          items={items}
           paths={[Route, Route2].map((route) => ({
             path: route?.path,
             name: route?.name || '?',
           }))}
-          withButtons
-          middleChilds={<ItemCountDisplay itemCount={items.length} />}
         />
-      </Box>
-      {items.length === 0 ? <NoItemsView /> : <WithItemsView />}
+      ) : (
+        <WithItemsView
+          items={items}
+          paths={[Route, Route2].map((route) => ({
+            path: route?.path,
+            name: route?.name || '?',
+          }))}
+        />
+      )}
       <DevMode>
         <Button
           type="button"
