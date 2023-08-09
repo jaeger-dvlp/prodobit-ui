@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { BsPlusLg } from 'react-icons/bs';
 import { EditIcon } from '@/components/icons';
 import { MockItemsCategories } from 'mockdata';
+import { ProdobitAppTheme as t } from '@/theme';
 import ItemsToolbar from '@/components/views/itemslist/Toolbar';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
@@ -299,7 +300,7 @@ function TopBar() {
         >
           Öğeler
           <Button
-            sx={(theme) => ({
+            sx={{
               top: 0,
               right: -32,
               margin: 0,
@@ -312,10 +313,10 @@ function TopBar() {
               backgroundColor: 'transparent',
               transition: 'all 0.1s ease-in-out',
               ':hover': {
-                color: theme.colors.purple[9],
-                backgroundColor: theme.colors.purple[1],
+                color: t.colors.gray[9],
+                backgroundColor: t.colors.gray[3],
               },
-            })}
+            }}
             variant="default"
           >
             <EditIcon width={16} height={16} />

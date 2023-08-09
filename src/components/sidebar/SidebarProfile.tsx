@@ -1,8 +1,7 @@
 /* eslint-disable no-alert */
 import React from 'react';
-
-import { Box, Button, Image, Text, Title, useMantineTheme } from '@mantine/core';
-
+import { ProdobitAppTheme as t } from '@/theme';
+import { Box, Button, Image, Text, Title } from '@mantine/core';
 import { EyeIcon, InfoIcon, LockIcon, PencilIcon, SwitchIcon } from '@/components/icons';
 
 const Images = {
@@ -10,8 +9,6 @@ const Images = {
 };
 
 function SidebarProfile() {
-  const mantineTheme = useMantineTheme();
-
   const ProfileButtonStyles = {
     margin: 0,
     padding: 6,
@@ -22,8 +19,8 @@ function SidebarProfile() {
     backgroundColor: 'transparent',
     transition: 'all 0.1s ease-in-out',
     ':hover': {
-      color: mantineTheme.colors.purple[9],
-      backgroundColor: mantineTheme.colors.purple[1],
+      color: t.colors.gray[9],
+      backgroundColor: t.colors.gray[3],
     },
   };
 
@@ -119,14 +116,7 @@ function SidebarProfile() {
               </Text>
             </Box>
           </Box>
-          <Button
-            onClick={() => {
-              alert('Profile button clicked.');
-            }}
-            type="button"
-            variant="default"
-            sx={ProfileButtonStyles}
-          >
+          <Button type="button" variant="default" sx={ProfileButtonStyles}>
             <EyeIcon
               style={{
                 width: 20,
@@ -154,9 +144,6 @@ function SidebarProfile() {
           })}
         >
           <Button
-            onClick={() => {
-              alert('Pencil button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"
@@ -171,9 +158,6 @@ function SidebarProfile() {
             />
           </Button>
           <Button
-            onClick={() => {
-              alert('Lock button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"
@@ -188,9 +172,6 @@ function SidebarProfile() {
             />
           </Button>
           <Button
-            onClick={() => {
-              alert('Switch button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"
@@ -205,9 +186,6 @@ function SidebarProfile() {
             />
           </Button>
           <Button
-            onClick={() => {
-              alert('Info button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"

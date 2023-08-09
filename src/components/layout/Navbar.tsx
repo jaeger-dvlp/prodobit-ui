@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { ProdobitAppTheme as t } from '@/theme';
 import { Variant, motion } from 'framer-motion';
-import { Box, Button, Text, useMantineTheme } from '@mantine/core';
+import { Box, Button, Text } from '@mantine/core';
 import { CalendarIcon, NotificationIcon, SearchIcon } from '@/components/icons';
 
 type VariantFor = 'initial' | 'animate' | 'exit';
@@ -64,8 +65,6 @@ function Navbar({
   withButtons?: boolean;
   middleChilds?: React.ReactNode | React.ReactNode[];
 }) {
-  const mantineTheme = useMantineTheme();
-
   const NavbarButtonStyles = {
     margin: 0,
     padding: 6,
@@ -76,8 +75,8 @@ function Navbar({
     backgroundColor: 'transparent',
     transition: 'all 0.1s ease-in-out',
     ':hover': {
-      color: mantineTheme.colors.purple[9],
-      backgroundColor: mantineTheme.colors.purple[1],
+      color: t.colors.gray[9],
+      backgroundColor: t.colors.gray[3],
     },
   };
 
@@ -244,9 +243,6 @@ function Navbar({
           }}
         >
           <Button
-            onClick={() => {
-              alert('Search button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"
@@ -261,9 +257,6 @@ function Navbar({
             />
           </Button>
           <Button
-            onClick={() => {
-              alert('Calendar button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"
@@ -278,9 +271,6 @@ function Navbar({
             />
           </Button>
           <Button
-            onClick={() => {
-              alert('Notification button clicked.');
-            }}
             type="button"
             component="li"
             variant="default"
