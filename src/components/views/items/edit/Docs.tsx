@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Navigation } from 'swiper/modules';
 import { ProdobitAppTheme as t } from '@/theme';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Button, Image, Text } from '@mantine/core';
 import {
   CustomPlusIcon,
@@ -15,9 +17,6 @@ import {
   UploadImageICon,
 } from '@/components/icons';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-// import Swiper styles
 import 'swiper/css';
 
 const motionProps = {
@@ -649,7 +648,7 @@ function SpecTechnicalDraws() {
         <Box
           {...motionProps}
           sx={{
-            gap: 40,
+            gap: 10,
             padding: 0,
             width: '100%',
             display: 'flex',
@@ -672,7 +671,7 @@ function SpecTechnicalDraws() {
             <Box
               sx={{
                 width: '100%',
-                padding: '0px 10px',
+                padding: '0px 35px',
               }}
             >
               <Box
@@ -770,16 +769,177 @@ function SpecTechnicalDraws() {
             <Swiper
               loop
               slidesPerView={2}
+              spaceBetween={25}
               modules={[Navigation]}
               navigation={{
                 prevEl: '.doc-slider-left',
                 nextEl: '.doc-slider-right',
               }}
-              className="doc-slider m-0 p-0 w-full"
+              style={{
+                margin: 0,
+                width: '100%',
+                padding: '20px 20px 30px 20px',
+              }}
             >
               {Array.from({ length: 6 }).map((_, i) => (
-                <SwiperSlide key={`slide-doc-${i}`} className="swiper-slide">
-                  test
+                <SwiperSlide
+                  key={`slide-doc-${i}`}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      gap: 14,
+                      padding: 10,
+                      width: '100%',
+                      height: '100%',
+                      minHeight: 110,
+                      display: 'flex',
+                      borderRadius: 15,
+                      flexDirection: 'row',
+                      alignItems: 'flex-end',
+                      backgroundColor: '#fff',
+                      transition: 'all 0.15s ease',
+                      boxShadow: '0px 17px 20px rgba(48, 57, 104, 0.15)',
+                      ':hover': {
+                        backgroundColor: t.colors.gray[2],
+                      },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        gap: 10,
+                        margin: 0,
+                        padding: 0,
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 1,
+                          opacity: 0.1,
+                          height: '100%',
+                          minHeight: 35,
+                          backgroundColor: '#000',
+                        }}
+                      />
+                      <Text
+                        sx={{
+                          rotate: '180deg',
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '14.4px',
+                          color: t.colors.gray[5],
+                          writingMode: 'vertical-rl',
+                        }}
+                      >
+                        2023
+                      </Text>
+                    </Box>
+                    <Box
+                      sx={{
+                        gap: 15,
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'stretch',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          gap: 25,
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          flexDirection: 'row',
+                          justifyContent: 'flex-start',
+                        }}
+                      >
+                        <Image
+                          src="https://picsum.photos/200/200"
+                          width="100%"
+                          height="100%"
+                          maw={50}
+                          mah={55}
+                          radius={5}
+                          mt="-15%"
+                          fit="cover"
+                          sx={{
+                            borderRadius: 5,
+                            boxShadow: '0px 17px 14px rgba(48, 57, 104, 0.15)',
+                          }}
+                        />
+                        <Text
+                          sx={{
+                            fontWeight: 400,
+                            fontSize: '12px',
+                            lineHeight: '14.4px',
+                            color: t.colors.gray[5],
+                          }}
+                        >
+                          PDF
+                        </Text>
+                      </Box>
+                      <Box
+                        sx={{
+                          gap: 36,
+                          width: '100%',
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'flex-end',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <Text
+                          sx={{
+                            color: '#000',
+                            fontWeight: 600,
+                            fontSize: '12px',
+                            lineHeight: '14.4px',
+                          }}
+                        >
+                          Pdf Dosya Adı Buraya Kısa Bir Şekilde Gelecek
+                        </Text>
+                        <Button
+                          sx={{
+                            height: 'auto',
+                            display: 'flex',
+                            borderRadius: 10,
+                            padding: '6px 10px',
+                            alignItems: 'center',
+                            color: t.colors.gray[6],
+                            backgroundColor: '#fff',
+                            justifyContent: 'center',
+                            transition: 'all 0.15s ease-in-out',
+                            border: '1px solid rgba(0, 0, 0, 0.15)',
+                            ':hover': {
+                              backgroundColor: t.colors.gray[3],
+                            },
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: '100%',
+                              display: 'flex',
+                              alignItems: 'center',
+                              flexDirection: 'column',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <DownloadCloudIcon width={16} height={16} />
+                            <Text mt={2}>İndir</Text>
+                          </Box>
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -789,7 +949,8 @@ function SpecTechnicalDraws() {
             sx={{
               gap: 10,
               margin: 0,
-              padding: 10,
+              padding: 30,
+              marginTop: 50,
               paddingTop: 0,
               width: '100%',
               display: 'flex',
@@ -802,7 +963,7 @@ function SpecTechnicalDraws() {
             {Array.from({ length: 4 }).map((_, i) => (
               <Image
                 w="100%"
-                maw={245}
+                maw={215}
                 radius={15}
                 key={`image-${i}`}
                 sx={{
