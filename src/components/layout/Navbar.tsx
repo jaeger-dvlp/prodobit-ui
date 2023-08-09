@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ProdobitAppTheme as t } from '@/theme';
 import { Variant, motion } from 'framer-motion';
-import { Box, Button, Text } from '@mantine/core';
+import { Box, Button, Sx, Text } from '@mantine/core';
 import { CalendarIcon, NotificationIcon, SearchIcon } from '@/components/icons';
 
 type VariantFor = 'initial' | 'animate' | 'exit';
@@ -55,9 +55,11 @@ const motionVariants: {
 
 function Navbar({
   paths,
+  sx,
   withButtons = true,
   middleChilds = null,
 }: {
+  sx?: Sx;
   paths?: {
     path?: string;
     name: string;
@@ -85,17 +87,20 @@ function Navbar({
       component="nav"
       sx={(theme) => ({
         gap: 20,
+        zIndex: 10,
         width: '100%',
         display: 'flex',
         flexWrap: 'nowrap',
         flexDirection: 'row',
         alignItems: 'center',
+        position: 'relative',
         justifyContent: 'space-between',
         [theme.fn.smallerThan('md')]: {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
         },
+        ...sx,
       })}
     >
       {paths && (
