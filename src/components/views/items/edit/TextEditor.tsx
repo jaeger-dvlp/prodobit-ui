@@ -79,13 +79,22 @@ function EditTextEditor({ sx }: { sx?: Sx }) {
       <RichTextEditor
         editor={editor}
         placeholder="Yorumunu yaz.."
+        styles={{
+          content: {
+            backgroundColor: t.colors.gray[2],
+          },
+        }}
         sx={{
           width: '100%',
           border: 'none',
           borderRadius: 10,
           padding: '10px 20px',
           transition: 'all 0.15s ease',
+          backgroundColor: t.colors.gray[2],
           outline: `1px solid ${t.colors.gray[0]}`,
+          textarea: {
+            backgroundColor: t.colors.gray[2],
+          },
           ':focus-within': {
             outline: `1px solid ${t.colors.gray[3]}`,
           },
