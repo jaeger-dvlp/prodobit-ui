@@ -125,7 +125,7 @@ function Sidebar() {
           position: 'sticky',
           alignItems: 'start',
           flexDirection: 'column',
-          backgroundColor: '#fff',
+          backgroundColor: '#FCFCFD99',
           borderTopRightRadius: 80,
           borderBottomRightRadius: 80,
           justifyContent: 'space-between',

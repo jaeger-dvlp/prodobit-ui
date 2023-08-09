@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Image, Text, Title } from '@mantine/core';
+import { Box, Button, Image, Sx, Text, Title } from '@mantine/core';
 import { EyeIcon, InfoIcon, LockIcon, PencilIcon, SwitchIcon } from '@/components/icons';
 
 const Images = {
@@ -9,14 +9,15 @@ const Images = {
 };
 
 function SidebarProfile() {
-  const ProfileButtonStyles = {
+  const ProfileButtonStyles: Sx = {
     margin: 0,
-    padding: 6,
+    padding: 10,
     border: 'none',
     color: '#AEADAF',
-    borderRadius: 10,
+    borderRadius: 6,
+    width: '100%',
     height: 'fit-content',
-    backgroundColor: 'transparent',
+    backgroundColor: t.colors.gray[2],
     transition: 'all 0.1s ease-in-out',
     ':hover': {
       color: t.colors.gray[9],
@@ -39,9 +40,12 @@ function SidebarProfile() {
         component="section"
         sx={{
           gap: 20,
+          padding: 15,
           width: '100%',
           display: 'flex',
-          maxWidth: '300px',
+          borderRadius: 40,
+          maxWidth: '330px',
+          backgroundColor: '#fff',
           flexDirection: 'column',
         }}
       >
@@ -116,7 +120,15 @@ function SidebarProfile() {
               </Text>
             </Box>
           </Box>
-          <Button type="button" variant="default" sx={ProfileButtonStyles}>
+          <Button
+            type="button"
+            variant="default"
+            sx={{
+              ...ProfileButtonStyles,
+              width: 'auto',
+              backgroundColor: 'transparent',
+            }}
+          >
             <EyeIcon
               style={{
                 width: 20,
@@ -129,15 +141,17 @@ function SidebarProfile() {
         <Box
           component="ul"
           sx={(theme) => ({
-            gap: 36,
+            gap: 5,
             margin: 0,
             padding: 0,
             width: '100%',
+            paddingTop: 15,
             display: 'flex',
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
             alignItems: 'center',
             flexDirection: 'row',
-            justifyContent: 'center',
+            justifyContent: 'stretch',
+            borderTop: `1px solid ${t.colors.gray[2]}`,
             [theme.fn.smallerThan('md')]: {
               gap: 1,
             },
@@ -147,7 +161,11 @@ function SidebarProfile() {
             type="button"
             component="li"
             variant="default"
-            sx={{ ...ProfileButtonStyles, color: 'black' }}
+            sx={{
+              ...ProfileButtonStyles,
+              color: 'black',
+              borderBottomLeftRadius: 25,
+            }}
           >
             <PencilIcon
               style={{
@@ -189,7 +207,11 @@ function SidebarProfile() {
             type="button"
             component="li"
             variant="default"
-            sx={{ ...ProfileButtonStyles, color: 'black' }}
+            sx={{
+              ...ProfileButtonStyles,
+              color: 'black',
+              borderBottomRightRadius: 25,
+            }}
           >
             <InfoIcon
               style={{
