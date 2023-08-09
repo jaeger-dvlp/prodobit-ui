@@ -104,7 +104,7 @@ function FileCtFilter({
               fontSize: '12px',
               fontWeight: 400,
               borderRadius: 100,
-              padding: '9px 18px',
+              padding: '5px 18px',
               lineHeight: '14.4px',
               flexDirection: 'row',
               alignItems: 'center',
@@ -128,7 +128,7 @@ function FileCtFilter({
               {i < 10 ? `0${i + 1}` : i + 1}
             </Text>
             <Text sx={{ whiteSpace: 'pre-wrap' }}>
-              {category.slug === 'all' ? 'Tüm\nKategoriler' : category.name}
+              {category.slug === 'all' ? 'Tüm\nDosyalar' : category.name}
             </Text>
           </Button>
         ))}
@@ -142,7 +142,7 @@ function FileCtFilter({
           fontSize: '12px',
           fontWeight: 400,
           borderRadius: 100,
-          padding: '9px 18px',
+          padding: '5px 18px',
           lineHeight: '14.4px',
           flexDirection: 'row',
           alignItems: 'center',
@@ -454,7 +454,6 @@ function SpecImages() {
               padding: 10,
               maxWidth: 78,
               width: '100%',
-              border: 'none',
               cursor: 'pointer',
               height: '100%',
               display: 'flex',
@@ -467,6 +466,7 @@ function SpecImages() {
               flexDirection: 'column',
               justifyContent: 'center',
               transition: 'all 150ms ease-in-out',
+              border: `1px solid ${t.colors.blue[0]}`,
               color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
               backgroundColor: `${spec.slug === slug ? t.colors.blue[0] : 'transparent'}!important`,
               svg: {
@@ -488,7 +488,7 @@ function SpecImages() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 150ms ease-in-out',
-                backgroundColor: spec.slug === slug ? t.colors.blue[1] : 'transparent',
+                backgroundColor: spec.slug === slug ? t.colors.blue[1] : t.colors.blue[0],
               }}
             >
               {(() => {
@@ -576,7 +576,6 @@ function SpecTechnicalDraws() {
               padding: 10,
               maxWidth: 78,
               width: '100%',
-              border: 'none',
               cursor: 'pointer',
               height: '100%',
               display: 'flex',
@@ -589,6 +588,7 @@ function SpecTechnicalDraws() {
               flexDirection: 'column',
               justifyContent: 'center',
               transition: 'all 150ms ease-in-out',
+              border: `1px solid ${t.colors.blue[0]}`,
               color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
               backgroundColor: `${spec.slug === slug ? t.colors.blue[0] : 'transparent'}!important`,
               svg: {
@@ -610,7 +610,7 @@ function SpecTechnicalDraws() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 150ms ease-in-out',
-                backgroundColor: spec.slug === slug ? t.colors.blue[1] : 'transparent',
+                backgroundColor: spec.slug === slug ? t.colors.blue[1] : t.colors.blue[0],
               }}
             >
               {(() => {
@@ -876,16 +876,42 @@ function SpecTechnicalDraws() {
                             boxShadow: '0px 17px 14px rgba(48, 57, 104, 0.15)',
                           }}
                         />
-                        <Text
+                        <Box
                           sx={{
-                            fontWeight: 400,
-                            fontSize: '12px',
-                            lineHeight: '14.4px',
-                            color: t.colors.gray[5],
+                            gap: 3,
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
                           }}
                         >
-                          PDF
-                        </Text>
+                          <Text
+                            sx={{
+                              fontWeight: 400,
+                              fontSize: '12px',
+                              borderRadius: 50,
+                              padding: '5px 10px',
+                              lineHeight: '14.4px',
+                              color: t.colors.gray[5],
+                              backgroundColor: t.colors.gray[2],
+                            }}
+                          >
+                            PDF
+                          </Text>
+                          <Text
+                            sx={{
+                              fontWeight: 400,
+                              fontSize: '12px',
+                              borderRadius: 50,
+                              padding: '5px 10px',
+                              lineHeight: '14.4px',
+                              color: t.colors.gray[5],
+                              backgroundColor: t.colors.gray[2],
+                            }}
+                          >
+                            Kategori
+                          </Text>
+                        </Box>
                       </Box>
                       <Box
                         sx={{
