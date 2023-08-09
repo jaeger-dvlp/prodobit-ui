@@ -279,7 +279,7 @@ function InfoSpecBox() {
               padding: 10,
               maxWidth: 78,
               width: '100%',
-              border: 'none',
+              border: `1px solid ${t.colors.blue[0]}`,
               cursor: 'pointer',
               height: '100%',
               display: 'flex',
@@ -380,8 +380,8 @@ function SupplierSpecBox() {
     <Box
       {...motionProps}
       sx={{
-        gap: 45,
-        padding: 30,
+        gap: 0,
+        padding: 10,
         display: 'flex',
         borderRadius: 30,
         alignItems: 'center',
@@ -393,6 +393,7 @@ function SupplierSpecBox() {
       <Box
         sx={{
           gap: 20,
+          padding: 30,
           width: '100%',
           display: 'flex',
           alignItems: 'start',
@@ -443,7 +444,7 @@ function SupplierSpecBox() {
         component={motion.ul}
         key={`suppliers-${view}`}
         sx={{
-          gap: 40,
+          gap: 0,
           margin: 0,
           padding: 0,
           width: '100%',
@@ -459,12 +460,15 @@ function SupplierSpecBox() {
             component="li"
             sx={{
               margin: 0,
-              padding: 0,
+              padding: 20,
               width: '100%',
               display: 'flex',
+              borderRadius: 25,
               alignItems: 'center',
               flexDirection: 'column',
               justifyContent: 'center',
+              transition: 'all 150ms ease-in-out',
+              backgroundColor: supplier.isActive ? t.colors.gray[0] : 'transparent',
             }}
           >
             <Box
@@ -756,6 +760,7 @@ function SupplierSpecBox() {
                           flexDirection: 'row',
                           padding: '13px 15px',
                           transition: 'all 150ms ease-in-out',
+                          backgroundColor: 'transparent!important',
                           borderTop: `1px solid ${t.colors.gray[3]}`,
                           ':hover': {
                             opacity: 1,
@@ -815,10 +820,12 @@ function SupplierSpecBox() {
                             <Button
                               variant="default"
                               sx={{
-                                padding: '5px 10px',
                                 color: '#000',
                                 border: 'none',
                                 height: 'auto',
+                                borderRadius: 100,
+                                padding: '5px 15px',
+                                backgroundColor: '#fff!important',
                               }}
                             >
                               <CustomPlusIcon width={18} height={18} />
@@ -860,6 +867,7 @@ function SupplierSpecBox() {
                                       margin: 0,
                                       padding: 0,
                                       border: 'none',
+                                      backgroundColor: 'transparent',
                                     },
                                   }}
                                 />
@@ -936,10 +944,12 @@ function SupplierSpecBox() {
                             <Button
                               variant="default"
                               sx={{
-                                padding: '5px 10px',
                                 color: '#000',
                                 border: 'none',
                                 height: 'auto',
+                                padding: '5px 15px',
+                                borderRadius: 100,
+                                backgroundColor: '#fff!important',
                               }}
                             >
                               <CustomPlusIcon width={18} height={18} />
@@ -981,6 +991,7 @@ function SupplierSpecBox() {
                                       margin: 0,
                                       padding: 0,
                                       border: 'none',
+                                      backgroundColor: 'transparent',
                                     },
                                   }}
                                 />
@@ -1232,10 +1243,12 @@ function ProgressSpecBox() {
                   margin: 0,
                   width: '100%',
                   display: 'flex',
-                  padding: '20px 15px',
+                  borderRadius: 10,
+                  padding: '15px',
                   alignItems: 'center',
                   flexDirection: 'row',
                   justifyContent: 'space-between',
+                  backgroundColor: t.colors.gray[2],
                 }}
               >
                 <Box
@@ -1247,7 +1260,13 @@ function ProgressSpecBox() {
                     justifyContent: 'flex-start',
                   }}
                 >
-                  <Image src={FileTypeImages[file.type]} width={50} height={50} fit="contain" />
+                  <Image
+                    src={FileTypeImages[file.type]}
+                    width={50}
+                    height={50}
+                    mb={-8}
+                    fit="contain"
+                  />
                   <Box
                     sx={{
                       gap: 5,
@@ -1309,6 +1328,7 @@ function ProgressSpecBox() {
                     padding: '9px 18px',
                     color: t.colors.gray[8],
                     border: `1px solid ${t.colors.gray[5]}`,
+                    backgroundColor: 'transparent!important',
                   }}
                 >
                   <DownloadCloudIcon width={16} height={16} />
@@ -1433,9 +1453,11 @@ function ProgressSpecBox() {
                 padding: 15,
                 width: '100%',
                 display: 'flex',
+                borderRadius: 10,
                 alignItems: 'start',
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
+                backgroundColor: t.colors.gray[2],
               }}
             >
               <Text
@@ -1663,11 +1685,14 @@ function NotesSpecBox() {
             </Box>
             <Text
               sx={{
+                padding: 15,
                 color: '#000',
+                marginLeft: 60,
                 fontWeight: 400,
                 fontSize: '15px',
+                borderRadius: 10,
                 lineHeight: '18px',
-                padding: '15px 15px 15px 75px',
+                backgroundColor: t.colors.gray[2],
               }}
             >
               {note.content}
@@ -1819,7 +1844,7 @@ function EditItemInfo() {
             component="li"
             sx={{
               color: t.colors.gray[6],
-              backgroundColor: t.colors.gray[1],
+              backgroundColor: t.colors.gray[2],
             }}
           >
             <Text>Satış</Text>
