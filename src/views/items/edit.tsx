@@ -171,7 +171,7 @@ function EditItem() {
               display: 'grid',
               minWidth: '100%',
               borderRadius: 40,
-              backgroundColor: t.colors.gray[0],
+              backgroundColor: '#fff',
               gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
               [t.fn.smallerThan('md')]: {
                 gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
@@ -195,6 +195,9 @@ function EditItem() {
               x: view === 'info' ? 0 : 'calc(-100% - 20px)',
             }}
             component={motion.section}
+            sx={{
+              backgroundColor: '#fff',
+            }}
             transition={{ duration: 1, ease: 'anticipate' }}
           >
             <EditItemInfo />
