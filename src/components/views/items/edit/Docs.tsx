@@ -8,10 +8,17 @@ import {
   DownloadCloudIcon,
   FolderIllustration,
   ImageIcon,
+  PGCHleft,
+  PGCHright,
   PenToolIcon,
   UploadDocumentIcon,
   UploadImageICon,
 } from '@/components/icons';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+// import Swiper styles
+import 'swiper/css';
 
 const motionProps = {
   component: motion.section,
@@ -342,6 +349,15 @@ function MockImageSpecBox() {
             maw={160}
             radius={15}
             key={`image-${i}`}
+            sx={{
+              borderRadius: 15,
+              transition: 'all 150ms ease-in-out',
+              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0)',
+              ':hover': {
+                transform: 'scale(1.05)',
+                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
+              },
+            }}
             styles={{
               image: {
                 aspectRatio: '1/1',
@@ -514,16 +530,338 @@ function SpecImages() {
   );
 }
 
+function SpecTechnicalDraws() {
+  const ImagesSpecs = [
+    {
+      text: 'Tüm\nGörseller',
+      slug: 'all',
+    },
+    {
+      text: 'Kategori\nAdı',
+      slug: 'mock-ct-0',
+    },
+    {
+      text: 'Kategori\nAdı',
+      slug: 'mock-ct-1',
+    },
+    {
+      icon: CustomPlusIcon,
+      text: 'Yeni\nEkle',
+      slug: 'add-new',
+    },
+  ];
+
+  const [spec, setSpec] = React.useState(ImagesSpecs[0]);
+
+  return (
+    <Box {...motionProps}>
+      <Box
+        component="ul"
+        sx={{
+          gap: 10,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          overflowX: 'auto',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}
+      >
+        {ImagesSpecs.map(({ text, slug, icon: Icon }, index) => (
+          <Box
+            component="button"
+            onClick={() => setSpec(ImagesSpecs[index])}
+            key={`local-spec-${index}`}
+            sx={{
+              gap: 11,
+              padding: 10,
+              maxWidth: 78,
+              width: '100%',
+              border: 'none',
+              cursor: 'pointer',
+              height: '100%',
+              display: 'flex',
+              fontWeight: 400,
+              fontSize: '12px',
+              borderRadius: 100,
+              paddingBottom: 20,
+              alignItems: 'center',
+              lineHeight: '14.4px',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              transition: 'all 150ms ease-in-out',
+              color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
+              backgroundColor: `${spec.slug === slug ? t.colors.blue[0] : 'transparent'}!important`,
+              svg: {
+                width: 24,
+                height: 24,
+                transition: 'all 150ms ease-in-out',
+                color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
+              },
+            }}
+          >
+            <Box
+              sx={{
+                width: 62,
+                height: 62,
+                maxWidth: 62,
+                maxHeight: 62,
+                display: 'flex',
+                borderRadius: 100,
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 150ms ease-in-out',
+                backgroundColor: spec.slug === slug ? t.colors.blue[1] : 'transparent',
+              }}
+            >
+              {(() => {
+                if (Icon) {
+                  return <Icon />;
+                }
+
+                return (
+                  <Text
+                    sx={{
+                      fontSize: '18px',
+                      fontWeight: 500,
+                      lineHeight: '21.6px',
+                      color: spec.slug === text ? t.colors.blue[7] : t.colors.blue[3],
+                    }}
+                  >
+                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                  </Text>
+                );
+              })()}
+            </Box>
+            <Text sx={{ whiteSpace: 'pre-wrap', textAlign: 'center' }}>{text}</Text>
+          </Box>
+        ))}
+      </Box>
+      <Box
+        sx={{
+          marginTop: 20,
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+        }}
+      >
+        <Box
+          {...motionProps}
+          sx={{
+            gap: 40,
+            padding: 0,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <Box
+            sx={{
+              gap: 23,
+              padding: 0,
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <Box
+              sx={{
+                width: '100%',
+                padding: '0px 10px',
+              }}
+            >
+              <Box
+                sx={{
+                  gap: 5,
+                  padding: 0,
+                  width: '100%',
+                  display: 'flex',
+                  paddingBottom: 10,
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  borderBottom: `1px solid ${t.colors.gray[3]}`,
+                }}
+              >
+                <Text
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: '12px',
+                    lineHeight: '14.4px',
+                    color: t.colors.gray[9],
+                  }}
+                >
+                  Dökümanlar
+                </Text>
+                <Box
+                  sx={{
+                    gap: 15,
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      gap: 3,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Button
+                      variant="default"
+                      className="doc-slider-left"
+                      sx={{
+                        height: 'auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 100,
+                        padding: '3px 10px',
+                        color: t.colors.gray[6],
+                        backgroundColor: '#fff!important',
+                        border: `1px solid ${t.colors.gray[4]}`,
+                      }}
+                    >
+                      <PGCHleft width={15} height={15} />
+                    </Button>
+                    <Button
+                      variant="default"
+                      className="doc-slider-right"
+                      sx={{
+                        height: 'auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 100,
+                        padding: '3px 10px',
+                        color: t.colors.gray[6],
+                        backgroundColor: '#fff!important',
+                        border: `1px solid ${t.colors.gray[4]}`,
+                      }}
+                    >
+                      <PGCHright width={15} height={15} />
+                    </Button>
+                  </Box>
+                  <Button
+                    variant="default"
+                    sx={{
+                      color: '#fff',
+                      height: 'auto',
+                      border: 'none',
+                      borderRadius: 100,
+                      padding: '3px 10px',
+                      backgroundColor: '#000!important',
+                    }}
+                  >
+                    <CustomPlusIcon width={15} height={15} />
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
+            <Swiper
+              loop
+              slidesPerView={2}
+              modules={[Navigation]}
+              navigation={{
+                prevEl: '.doc-slider-left',
+                nextEl: '.doc-slider-right',
+              }}
+              className="doc-slider m-0 p-0 w-full"
+            >
+              {Array.from({ length: 6 }).map((_, i) => (
+                <SwiperSlide key={`slide-doc-${i}`} className="swiper-slide">
+                  test
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Box>
+          <Box
+            component="ul"
+            sx={{
+              gap: 10,
+              margin: 0,
+              padding: 10,
+              paddingTop: 0,
+              width: '100%',
+              display: 'flex',
+              flexWrap: 'wrap',
+              listStyle: 'none',
+              alignItems: 'start',
+              justifyContent: 'center',
+            }}
+          >
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Image
+                w="100%"
+                maw={245}
+                radius={15}
+                key={`image-${i}`}
+                sx={{
+                  borderRadius: 15,
+                  transition: 'all 150ms ease-in-out',
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0)',
+                  ':hover': {
+                    transform: 'scale(1.05)',
+                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
+                  },
+                }}
+                styles={{
+                  image: {
+                    aspectRatio: '1.8/1',
+                  },
+                }}
+                src="https://picsum.photos/200/200"
+              />
+            ))}
+          </Box>
+          <Button
+            variant="default"
+            sx={{
+              gap: 22,
+              width: '100%',
+              color: '#000',
+              height: 'auto',
+              display: 'flex',
+              fontWeight: 400,
+              borderRadius: 15,
+              fontSize: '22px',
+              padding: '20px 10px',
+              alignItems: 'center',
+              border: '1px solid #000 ',
+              justifyContent: 'center',
+              backgroundColor: 'transparent!important',
+            }}
+          >
+            <UploadImageICon width={24} height={24} />
+            <Text color="currentColor" ml={22}>
+              Görsel Ekle
+            </Text>
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 const SpecButtons = [
   {
     icon: ImageIcon,
     text: 'Görseller',
-    component: () => <SpecImages key="images-spec" />,
+    component: SpecImages,
   },
   {
     icon: PenToolIcon,
     text: 'Teknik Çizim',
-    component: () => <SpecImages key="tech-images-spec" />,
+    component: SpecTechnicalDraws,
   },
 ];
 
