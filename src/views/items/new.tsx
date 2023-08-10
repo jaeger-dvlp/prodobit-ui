@@ -8,7 +8,11 @@ import { CustomCheckIcon } from '@/components/icons';
 function NewItemStepBar() {
   return (
     <Box
-      component="ul"
+      component={motion.ul}
+      exit={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.2, delay: 0.3 }}
       sx={{
         gap: 0,
         top: 0,
