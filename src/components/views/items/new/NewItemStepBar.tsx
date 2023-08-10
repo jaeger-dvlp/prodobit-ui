@@ -18,6 +18,7 @@ export default function NewItemStepBar() {
         left: 0,
         margin: 0,
         padding: 0,
+        zIndex: 10,
         width: '100%',
         display: 'flex',
         listStyle: 'none',
