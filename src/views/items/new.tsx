@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import NewItemStep1 from '@/components/views/items/new/steps/Step1';
 import NewItemStepBar from '@/components/views/items/new/NewItemStepBar';
 import NewItemWrapper, { useNewItem } from '@/components/context/NewItem.context';
+import NewItemStep2 from '@/components/views/items/new/steps/Step2';
 
 function NewItem() {
   const { currentStep } = useNewItem();
@@ -18,6 +19,7 @@ function NewItem() {
         width: '100%',
         display: 'flex',
         minHeight: '100%',
+        position: 'relative',
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
@@ -25,7 +27,10 @@ function NewItem() {
       }}
     >
       <NewItemStepBar />
-      <AnimatePresence>{currentStep === 0 && <NewItemStep1 />}</AnimatePresence>
+      <AnimatePresence mode="wait">
+        {currentStep === 0 && <NewItemStep1 key="step1" />}
+        {currentStep === 1 && <NewItemStep2 key="step2" />}
+      </AnimatePresence>
     </Box>
   );
 }
