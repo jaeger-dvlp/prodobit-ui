@@ -352,6 +352,41 @@ function DownloadCloudIcon(props: CustomIconProps) {
   );
 }
 
+function UploadCloudIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 25 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M17 16L13 12L9 16"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13 12V21"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M21.3904 18.39C22.3658 17.8583 23.1363 17.0169 23.5803 15.9986C24.0244 14.9804 24.1167 13.8432 23.8427 12.7667C23.5686 11.6901 22.9439 10.7355 22.0671 10.0534C21.1903 9.37137 20.1113 9.00072 19.0004 8.99998H17.7404C17.4378 7.82923 16.8736 6.74232 16.0904 5.82098C15.3072 4.89964 14.3253 4.16783 13.2185 3.68059C12.1118 3.19335 10.909 2.96334 9.70057 3.00787C8.49213 3.05239 7.30952 3.37028 6.24163 3.93765C5.17374 4.50501 4.24836 5.30709 3.53507 6.28357C2.82178 7.26004 2.33914 8.38552 2.12343 9.57538C1.90772 10.7652 1.96455 11.9885 2.28966 13.1532C2.61477 14.318 3.19969 15.3938 4.00045 16.3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17 16L13 12L9 16"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function CustomFilterBarsIcon(props: CustomIconProps) {
   return (
     <svg viewBox="0 0 13 11" fill="none" {...DefaultProps} {...props}>
@@ -467,6 +502,29 @@ function ImageIcon(props: CustomIconProps) {
       />
       <path
         d="M3.90333 11.4676L5.06259 10.3083C6.14593 9.22497 7.90237 9.22498 8.9857 10.3083L10.145 11.4676M10.145 11.4676L10.6145 10.998C11.4796 10.1329 12.9008 10.1974 13.684 11.1372L13.9593 11.4676M10.145 11.4676L11.8788 13.2014M2.99319 10.033C2.67952 8.69583 2.67952 7.30417 2.99319 5.96695C3.42752 4.11534 4.87327 2.66958 6.72489 2.23525C8.06211 1.92158 9.45377 1.92158 10.791 2.23525C12.6426 2.66958 14.0884 4.11534 14.5227 5.96696C14.8364 7.30417 14.8364 8.69583 14.5227 10.033C14.0884 11.8847 12.6426 13.3304 10.791 13.7647C9.45376 14.0784 8.06211 14.0784 6.72489 13.7647C4.87328 13.3304 3.42752 11.8847 2.99319 10.033Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ImageLightIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 46 46" fill="none" {...DefaultProps} {...props}>
+      <rect
+        x="24.917"
+        y="13.4167"
+        width="7.66667"
+        height="7.66667"
+        rx="3.83333"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M9.04301 32.9693L12.3759 29.6364C15.4905 26.5218 20.5402 26.5218 23.6548 29.6364L26.9877 32.9693M26.9877 32.9693L28.3377 31.6193C30.8249 29.1321 34.9107 29.3175 37.1625 32.0196L37.9539 32.9693M26.9877 32.9693L31.9724 37.9539M6.42635 28.845C5.52455 25.0005 5.52455 20.9995 6.42635 17.155C7.67505 11.8316 11.8316 7.67505 17.155 6.42635C20.9995 5.52455 25.0005 5.52455 28.845 6.42635C34.1684 7.67505 38.325 11.8316 39.5737 17.155C40.4754 20.9995 40.4754 25.0005 39.5737 28.845C38.325 34.1684 34.1684 38.325 28.845 39.5737C25.0005 40.4754 20.9995 40.4754 17.155 39.5737C11.8316 38.325 7.67505 34.1684 6.42635 28.845Z"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
@@ -1600,6 +1658,67 @@ function CustomXICon(props: CustomIconProps) {
   );
 }
 
+function CustomRightLongChevronIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M5 12H19"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 5L19 12L12 19"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomBubbleIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M11.6922 9.195C13.8171 9.195 15.5397 7.47242 15.5397 5.3475C15.5397 3.22259 13.8171 1.5 11.6922 1.5C9.56731 1.5 7.84473 3.22259 7.84473 5.3475C7.84473 7.47242 9.56731 9.195 11.6922 9.195Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M4.76995 14.58C6.04573 14.58 7.07996 13.5458 7.07996 12.27C7.07996 10.9942 6.04573 9.96002 4.76995 9.96002C3.49417 9.96002 2.45996 10.9942 2.45996 12.27C2.45996 13.5458 3.49417 14.58 4.76995 14.58Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M12.4649 16.5C13.5253 16.5 14.3849 15.6404 14.3849 14.58C14.3849 13.5196 13.5253 12.66 12.4649 12.66C11.4045 12.66 10.5449 13.5196 10.5449 14.58C10.5449 15.6404 11.4045 16.5 12.4649 16.5Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+      />
+    </svg>
+  );
+}
+
+function CustomXSeperator(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 6" fill="none" {...DefaultProps} {...props}>
+      <line
+        y1="-0.5"
+        x2="12.7279"
+        y2="-0.5"
+        transform="matrix(-0.965926 -0.258819 -0.258819 0.965926 13.1035 5.14459)"
+        stroke="currentColor"
+      />
+      <line x1="0.680161" y1="4.66163" x2="12.9744" y2="1.3674" stroke="currentColor" />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1621,12 +1740,14 @@ export {
   CustomChevronUp,
   CustomChevrons,
   DownloadCloudIcon,
+  UploadCloudIcon,
   CustomFilterBarsIcon,
   PGCHright,
   PGCHEndRight,
   PGCHleft,
   PGCHEndLeft,
   ImageIcon,
+  ImageLightIcon,
   ScanBarcodeIcon,
   TimerIcon,
   ThreeBarsOne,
@@ -1666,4 +1787,7 @@ export {
   CustomCheckIcon,
   ArrowLineIcon,
   CustomXICon,
+  CustomRightLongChevronIcon,
+  CustomBubbleIcon,
+  CustomXSeperator,
 };
