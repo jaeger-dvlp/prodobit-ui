@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
 import NewItemToolbar from '@/components/views/items/new/Toolbar';
 import { useNewItem } from '@/components/context/NewItem.context';
+import { stepContainerMotionProps } from '@/components/views/items/new/steps';
 import { Box, Button, Divider, NumberInput, NumberInputHandlers, Text } from '@mantine/core';
 
 import {
@@ -19,19 +19,7 @@ function NewItemStep1() {
   return (
     <>
       <Box
-        exit={{
-          scale: 0.7,
-          opacity: 0,
-          transition: {
-            delay: 0,
-            duration: 1,
-            ease: 'anticipate',
-          },
-        }}
-        animate={{ opacity: 1, scale: 1 }}
-        initial={{ opacity: 0, scale: 0.7 }}
-        transition={{ duration: 1, ease: 'anticipate', delay: 0.5 }}
-        component={motion.section}
+        {...stepContainerMotionProps}
         sx={{
           padding: 60,
           width: '100%',
