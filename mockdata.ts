@@ -76,6 +76,7 @@ const MockAvatars = {
 const FileTypeImages = {
   ppt: '/assets/img/filetypes/ppt.png',
   doc: '/assets/img/filetypes/doc.png',
+  csv: '/assets/img/filetypes/csv.png',
 };
 
 const MockStockStatuses: MockStockStatus[] = [
