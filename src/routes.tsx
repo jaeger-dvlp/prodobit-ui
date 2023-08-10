@@ -85,6 +85,11 @@ const RoutesMap: RouteMapItem[] = [
         viewInSidebar: false,
       },
       {
+        path: '/items/new',
+        name: 'Öğe Ekle',
+        viewInSidebar: false,
+      },
+      {
         path: '/items/list',
         name: 'Öğe Listesi',
         viewInSidebar: true,
