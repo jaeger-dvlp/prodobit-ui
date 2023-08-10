@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import { Box, Image, Text } from '@mantine/core';
 import { Item } from '@/views/items/list/WithItems';
@@ -13,6 +14,7 @@ function NoItemsView({
   items: Item[];
   paths: { path?: string; name: string }[];
 }) {
+  const Navigate = useNavigate();
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -67,7 +69,7 @@ function NoItemsView({
           justifyContent: 'center',
         }}
       >
-        <AddButtons onItemAdd={() => null} onCategoryAdd={() => null} />
+        <AddButtons onItemAdd={() => Navigate('/items/new')} onCategoryAdd={() => null} />
       </Box>
     </Box>
   );

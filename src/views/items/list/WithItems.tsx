@@ -3,14 +3,15 @@ import { motion } from 'framer-motion';
 import { BsPlusLg } from 'react-icons/bs';
 import { EditIcon } from '@/components/icons';
 import { MockItemsCategories } from 'mockdata';
+import { useNavigate } from 'react-router-dom';
 import { ProdobitAppTheme as t } from '@/theme';
 import Navbar from '@/components/layout/Navbar';
 import ItemsToolbar from '@/components/views/itemslist/Toolbar';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
-import TableWrapper, { useTable } from '@/components/context/Table.context';
 import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';
+import TableWrapper, { useTable } from '@/components/context/Table.context';
 
 export type ItemCategory = {
   id: number;
@@ -260,6 +261,8 @@ function CustomFiltersBar(): React.ReactNode {
 }
 
 function TopBar() {
+  const Navigate = useNavigate();
+
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -335,7 +338,7 @@ function TopBar() {
             justifyContent: 'start',
           }}
         >
-          <AddButtons onItemAdd={() => null} onCategoryAdd={() => null} />
+          <AddButtons onItemAdd={() => Navigate('/items/new')} onCategoryAdd={() => null} />
         </Box>
       </Box>
       <CategoriesBar categories={MockItemsCategories} />
