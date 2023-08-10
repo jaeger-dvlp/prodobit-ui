@@ -11,6 +11,7 @@ function App() {
           <Route path="/dashboard" element={<Views.Dashboard />} />
           <Route path="/items" element={<Views.Items.Index />} />
           <Route path="/items/edit/:id" element={<Views.Items.Edit />} />
+          <Route path="/items/new" element={<Views.Items.New />} />
           <Route path="/items/list" element={<Views.Items.List />} />
           <Route path="/items/categories" element={<Views.Items.Categories.Index />} />
           <Route path="/items/categories/list" element={<Views.Items.Categories.List />} />
