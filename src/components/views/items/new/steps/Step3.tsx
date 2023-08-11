@@ -1,15 +1,43 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
 import NewItemToolbar from '@/components/views/items/new/Toolbar';
 import { useNewItem } from '@/components/context/NewItem.context';
 import { stepContainerMotionProps } from '@/components/views/items/new/steps';
-import { Box, Button, Divider, Text, Title, Tooltip } from '@mantine/core';
+import { Box, Button, Divider, Sx, Text, TextInput, Title, Tooltip } from '@mantine/core';
+
 import {
+  SearchIcon,
+  CustomXICon,
+  CustomSaveIcon,
+  CustomCheckIcon,
+  CustomBackSquareIcon,
   CustomEditPencilStIcon,
   CustomRightLongChevronIcon,
-  CustomXICon,
 } from '@/components/icons';
-import { motion } from 'framer-motion';
+
+const PropFieldListElmSX: Sx = {
+  gap: 8,
+  display: 'flex',
+  borderRadius: 100,
+  padding: '10px 20px',
+  alignItems: 'center',
+  flexDirection: 'row',
+  color: t.colors.gray[8],
+  justifyContent: 'center',
+  border: `1px solid ${t.colors.green[6]}`,
+  '> button': {
+    padding: 0,
+    border: 'none',
+    height: 'auto',
+    color: t.colors.green[9],
+    backgroundColor: 'transparent!important',
+    '> div > span > svg': {
+      width: 14,
+      height: 14,
+    },
+  },
+};
 
 function StepDescription() {
   return (
@@ -301,6 +329,340 @@ function ItemTemplateSelector() {
   );
 }
 
+function ItemPropField() {
+  const mockFields = [
+    '2D Boyut',
+    'Renk',
+    'Beden',
+    'Ürün Alanları',
+    'Model',
+    'Beden',
+    'Renk',
+    '2D Boyut',
+  ];
+  return (
+    <Box
+      sx={{
+        gap: 50,
+        width: '100%',
+        display: 'flex',
+        marginBottom: 40,
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          gap: 35,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'flex-start',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            gap: 5,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text
+            sx={{
+              fontWeight: 500,
+              fontSize: '15px',
+              lineHeight: '18px',
+              color: t.colors.gray[6],
+            }}
+          >
+            Özellik Alanları Belirleyin
+          </Text>
+          <Button
+            variant="default"
+            sx={{
+              padding: 0,
+              height: 'auto',
+              border: 'none',
+              color: t.colors.gray[9],
+              backgroundColor: 'transparent!important',
+              'span > svg': {
+                width: 18,
+                height: 18,
+              },
+            }}
+          >
+            <CustomBackSquareIcon />
+          </Button>
+          <Button
+            variant="default"
+            sx={{
+              padding: 0,
+              height: 'auto',
+              border: 'none',
+              color: t.colors.gray[9],
+              backgroundColor: 'transparent!important',
+              '> div > span': {
+                gap: 7,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                '> svg': {
+                  width: 18,
+                  height: 18,
+                },
+              },
+            }}
+          >
+            <CustomSaveIcon />
+            <Text>Şablon Olarak Kaydet</Text>
+          </Button>
+        </Box>
+        <Box
+          component="ul"
+          sx={{
+            gap: 6,
+            margin: 0,
+            padding: 0,
+            width: '100%',
+            display: 'flex',
+            flexWrap: 'wrap',
+            listStyle: 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '> li': {
+              ...PropFieldListElmSX,
+            },
+          }}
+        >
+          {mockFields.map((field, i) => (
+            <Box key={`item-prop-field-${i}`} component="li">
+              <Text>{field}</Text>
+              <Button variant="default">
+                <CustomXICon />
+              </Button>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+function ItemFieldSearchArea() {
+  return (
+    <Box
+      sx={{
+        gap: 25,
+        width: '100%',
+        display: 'flex',
+        borderRadius: 20,
+        padding: '20px 20px',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        border: `1px solid ${t.colors.gray[3]}`,
+      }}
+    >
+      <TextInput
+        defaultValue="boy"
+        styles={{
+          root: {
+            width: '100%',
+            marginTop: -50,
+          },
+          input: {
+            padding: 30,
+            borderRadius: 100,
+            backgroundColor: t.colors.gray[1],
+            border: `1px solid ${t.colors.gray[2]}`,
+            ':focus': {
+              borderColor: t.colors.green[5],
+            },
+          },
+          rightSection: {
+            padding: 30,
+            width: 'auto',
+            pointerEvents: 'none',
+            svg: {
+              width: 18,
+              height: 18,
+              color: t.colors.gray[8],
+              backgroundColor: t.colors.gray[1],
+            },
+          },
+        }}
+        rightSection={<SearchIcon />}
+      />
+      <Box
+        sx={{
+          gap: 30,
+          padding: 10,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+        }}
+      >
+        <Box
+          sx={{
+            gap: 20,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <Text
+            sx={{
+              fontWeight: 500,
+              fontSize: '15px',
+              lineHeight: '18px',
+              color: t.colors.gray[6],
+            }}
+          >
+            Bunu mu demek istediniz?
+          </Text>
+          <Box
+            component="ul"
+            sx={{
+              gap: 5,
+              margin: 0,
+              padding: 0,
+              width: '100%',
+              display: 'flex',
+              listStyle: 'none',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '> li': {
+                gap: 18,
+                display: 'flex',
+                borderRadius: 10,
+                padding: '12px 23px',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                border: `1px solid ${t.colors.green[1]}`,
+                '> div:nth-of-type(1)': {
+                  padding: 5,
+                  '> svg': {
+                    width: 30,
+                    height: 30,
+                    color: t.colors.green[6],
+                  },
+                },
+                '> div:nth-of-type(2)': {
+                  gap: 8,
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'stretch',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  '> .mantine-Text-root': {
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    lineHeight: '14.4px',
+                    color: t.colors.blue[7],
+                  },
+                  '> ul': {
+                    gap: 3,
+                    margin: 0,
+                    padding: 0,
+                    width: '100%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    listStyle: 'none',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    '> li': {
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      borderRadius: 100,
+                      padding: '5px 15px',
+                      lineHeight: '14.4px',
+                      color: t.colors.gray[8],
+                      backgroundColor: t.colors.gray[2],
+                    },
+                  },
+                },
+                '> div:nth-of-type(3)': {
+                  gap: 3,
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  '> button': {
+                    padding: 0,
+                    width: 'auto',
+                    height: 'auto',
+                    border: 'none',
+                    color: t.colors.blue[5],
+                    '> div > span > svg': {
+                      width: 14,
+                      height: 14,
+                    },
+                  },
+                },
+              },
+            }}
+          >
+            <Box component="li">
+              <Box className="check">
+                <CustomCheckIcon />
+              </Box>
+              <Box>
+                <Text>3D Boyut</Text>
+                <Box component="ul">
+                  <Box component="li">En</Box>
+                  <Box component="li">Boy</Box>
+                  <Box component="li">Derinlik</Box>
+                </Box>
+              </Box>
+              <Box>
+                <Button variant="default">
+                  <CustomEditPencilStIcon />
+                </Button>
+                <Button variant="default">
+                  <CustomXICon />
+                </Button>
+              </Box>
+            </Box>
+            <Box component="li">
+              <Box className="check">
+                <CustomCheckIcon />
+              </Box>
+              <Box>
+                <Text>Kumaş</Text>
+                <Box component="ul">
+                  <Box component="li">Kullanılan Kumaş</Box>
+                  <Box component="li">Sentetik Oranı</Box>
+                  <Box component="li">Pamuk Oranı</Box>
+                </Box>
+              </Box>
+              <Box>
+                <Button variant="default">
+                  <CustomEditPencilStIcon />
+                </Button>
+                <Button variant="default">
+                  <CustomXICon />
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 function NewItemStep3() {
   const { setCurrentStep } = useNewItem();
   const goToNextStep = () => setCurrentStep((c) => c + 1);
@@ -362,6 +724,8 @@ function NewItemStep3() {
             <StepDescription />
             <ItemTemplateSelector />
             <Divider w="100%" color={t.colors.gray[3]} />
+            <ItemPropField />
+            <ItemFieldSearchArea />
           </Box>
         </Box>
       </Box>
