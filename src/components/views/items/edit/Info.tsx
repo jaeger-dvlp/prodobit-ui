@@ -137,15 +137,15 @@ function ProductInfoTable() {
               color: t.colors.gray[5],
               padding: '10px 0px!important',
               transition: 'all 150ms ease-in-out',
-              ':nth-child(1)': {
+              ':nth-of-type(1)': {
                 width: 'fit-content',
                 maxWidth: 200,
               },
-              ':nth-child(2)': {
+              ':nth-of-type(2)': {
                 maxWidth: 150,
                 color: t.colors.gray[9],
               },
-              ':nth-child(3)': {
+              ':nth-of-type(3)': {
                 gao: 10,
                 width: '100%',
                 display: 'flex',
@@ -1791,18 +1791,18 @@ function EditItemInfo() {
                 position: 'absolute',
                 transform: 'translateY(-50%) translateX(50%)',
               },
-              ':nth-child(1)': {
+              ':nth-of-type(1)': {
                 zIndex: 4,
                 borderTopLeftRadius: 50,
                 borderBottomLeftRadius: 50,
               },
-              ':nth-child(2)': {
+              ':nth-of-type(2)': {
                 zIndex: 3,
               },
-              ':nth-child(3)': {
+              ':nth-of-type(3)': {
                 zIndex: 2,
               },
-              ':nth-child(4)': {
+              ':nth-of-type(4)': {
                 zIndex: 1,
                 borderTopRightRadius: 50,
                 borderBottomRightRadius: 50,

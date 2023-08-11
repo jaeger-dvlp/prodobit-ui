@@ -102,11 +102,11 @@ export default function NewItemStepBar() {
                   borderRadius: '50%',
                   backgroundColor: 'transparent',
                   border: `1px solid ${t.colors.gray[5]}`,
-                  ':nth-child(1), :nth-child(2)': {
+                  ':nth-of-type(1), :nth-of-type(2)': {
                     backgroundColor: t.colors.gray[8],
                     border: `1px solid ${t.colors.gray[8]}`,
                   },
-                  ':nth-child(3)': {
+                  ':nth-of-type(3)': {
                     backgroundColor: t.colors.green[6],
                     border: `1px solid ${t.colors.green[6]}`,
                   },

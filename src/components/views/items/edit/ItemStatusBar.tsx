@@ -118,10 +118,10 @@ function ItemStatusBar() {
           display: 'flex',
           alignItems: 'start',
           justifyContent: 'flex-start',
-          ':nth-child(1) button': {
+          ':nth-of-type(1) button': {
             paddingLeft: `0px!important`,
           },
-          ':nth-child(2)': {
+          ':nth-of-type(2)': {
             borderLeft: `1px solid rgba(0,0,0,0.20)`,
             borderRight: `1px solid rgba(0,0,0,0.20)`,
           },
@@ -130,7 +130,7 @@ function ItemStatusBar() {
           },
         },
         '> li': {
-          ':nth-child(4)': {
+          ':nth-of-type(4)': {
             gap: 6,
             display: 'flex',
             alignItems: 'flex-end',

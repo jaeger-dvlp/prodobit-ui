@@ -176,10 +176,10 @@ function EditItem() {
               [t.fn.smallerThan('md')]: {
                 gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
               },
-              ':nth-child(1)': {
+              ':nth-of-type(1)': {
                 cursor: view === 'info' ? 'auto' : 'pointer',
               },
-              ':nth-child(2)': {
+              ':nth-of-type(2)': {
                 cursor: view === 'docs' ? 'auto' : 'pointer',
               },
             },
