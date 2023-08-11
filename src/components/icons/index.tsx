@@ -1737,6 +1737,49 @@ function CustomEditPencilStIcon(props: CustomIconProps) {
   );
 }
 
+function CustomBackSquareIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 19 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M7.25 16.5H11.75C15.5 16.5 17 15 17 11.25V6.75C17 3 15.5 1.5 11.75 1.5H7.25C3.5 1.5 2 3 2 6.75V11.25C2 15 3.5 16.5 7.25 16.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.2498 11.5349H10.9398C12.2148 11.5349 13.2498 10.4999 13.2498 9.22492C13.2498 7.94992 12.2148 6.91492 10.9398 6.91492H5.8623"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.9275 8.07746L5.75 6.89247L6.9275 5.71497"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomSaveIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M14.25 14.4506V5.88372C14.25 4.23111 13.069 2.80867 11.4293 2.48641C9.82547 2.1712 8.17453 2.1712 6.57067 2.48641C4.931 2.80867 3.75 4.2311 3.75 5.88372V14.4506C3.75 15.4529 4.85064 16.0767 5.72562 15.5703L8.11584 14.1869C8.66193 13.8709 9.33807 13.8709 9.88416 14.1869L12.2744 15.5703C13.1494 16.0767 14.25 15.4529 14.25 14.4506Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1809,4 +1852,6 @@ export {
   CustomBubbleIcon,
   CustomXSeperator,
   CustomEditPencilStIcon,
+  CustomBackSquareIcon,
+  CustomSaveIcon,
 };
