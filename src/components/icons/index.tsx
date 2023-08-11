@@ -861,21 +861,21 @@ function RteLinkIcon(props: CustomIconProps) {
       <g opacity="0.5">
         <path
           d="M10.6179 12.8959H11.6875C13.8267 12.8959 15.5833 11.1463 15.5833 9.00008C15.5833 6.86091 13.8338 5.10425 11.6875 5.10425H10.6179"
-          stroke="#292D32"
+          stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M6.375 5.10425H5.3125C3.16625 5.10425 1.41666 6.85383 1.41666 9.00008C1.41666 11.1392 3.16625 12.8959 5.3125 12.8959H6.375"
-          stroke="#292D32"
+          stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M5.66666 9H11.3333"
-          stroke="#292D32"
+          stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -1780,6 +1780,55 @@ function CustomSaveIcon(props: CustomIconProps) {
   );
 }
 
+function CustomProgrammingArrowIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M14.25 12V4.875C14.25 4.05 13.575 3.375 12.75 3.375H9.375"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.25 1.5L9 3.375L11.25 5.25"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.75 6.75V12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.9375 6.375C5.28369 6.375 6.375 5.28369 6.375 3.9375C6.375 2.59131 5.28369 1.5 3.9375 1.5C2.59131 1.5 1.5 2.59131 1.5 3.9375C1.5 5.28369 2.59131 6.375 3.9375 6.375Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.75 16.5C4.99264 16.5 6 15.4926 6 14.25C6 13.0074 4.99264 12 3.75 12C2.50736 12 1.5 13.0074 1.5 14.25C1.5 15.4926 2.50736 16.5 3.75 16.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14.25 16.5C15.4926 16.5 16.5 15.4926 16.5 14.25C16.5 13.0074 15.4926 12 14.25 12C13.0074 12 12 13.0074 12 14.25C12 15.4926 13.0074 16.5 14.25 16.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1854,4 +1903,5 @@ export {
   CustomEditPencilStIcon,
   CustomBackSquareIcon,
   CustomSaveIcon,
+  CustomProgrammingArrowIcon,
 };
