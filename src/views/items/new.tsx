@@ -1,11 +1,14 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { AnimatePresence, motion } from 'framer-motion';
-import NewItemStep1 from '@/components/views/items/new/steps/Step1';
 import NewItemStepBar from '@/components/views/items/new/NewItemStepBar';
 import NewItemWrapper, { useNewItem } from '@/components/context/NewItem.context';
+
+// ? - Steps
+import NewItemStep1 from '@/components/views/items/new/steps/Step1';
 import NewItemStep2 from '@/components/views/items/new/steps/Step2';
 import NewItemStep3 from '@/components/views/items/new/steps/Step3';
+import NewItemStep4 from '@/components/views/items/new/steps/Step4';
 
 function NewItem() {
   const { currentStep } = useNewItem();
@@ -37,6 +40,7 @@ function NewItem() {
         {currentStep === 0 && <NewItemStep1 key="step1" />}
         {currentStep === 1 && <NewItemStep2 key="step2" />}
         {currentStep === 2 && <NewItemStep3 key="step3" />}
+        {currentStep === 3 && <NewItemStep4 key="step4" />}
       </AnimatePresence>
     </Box>
   );
