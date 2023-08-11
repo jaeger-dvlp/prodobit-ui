@@ -9,7 +9,7 @@ import {
   CustomRightLongChevronIcon,
   CustomXICon,
 } from '@/components/icons';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function StepDescription() {
   return (
@@ -54,6 +54,7 @@ function ItemTemplateSelector() {
     {
       id: 0,
       name: 'Fabrika Üretim',
+      isSelected: false,
       subSpecs: [
         {
           id: 3,
@@ -64,6 +65,7 @@ function ItemTemplateSelector() {
     {
       id: 1,
       name: 'Perakende Satış',
+      isSelected: true,
       subSpecs: [
         {
           id: 0,
@@ -86,6 +88,7 @@ function ItemTemplateSelector() {
     {
       id: 2,
       name: 'B2B',
+      isSelected: false,
       subSpecs: [
         {
           id: 0,
@@ -95,13 +98,15 @@ function ItemTemplateSelector() {
     },
   ]);
 
-  const [activeSpec, setActiveSpec] = React.useState(mockSpecs[1]);
+  const activeSpec = React.useMemo(() => mockSpecs.find((spec) => spec.isSelected), [mockSpecs]);
 
   const handleSpecClick = (specId: number) => {
-    const spec = mockSpecs.find((s) => s.id === specId);
-    if (spec) {
-      setActiveSpec(spec);
-    }
+    setMockSpecs((prev) =>
+      prev.map((spec) => ({
+        ...spec,
+        isSelected: spec.id === specId,
+      })),
+    );
   };
 
   return (
@@ -190,12 +195,12 @@ function ItemTemplateSelector() {
                   onClick={() => handleSpecClick(spec.id)}
                   variant="default"
                   sx={{
-                    opacity: `${activeSpec.id === spec.id ? 1 : 0.5}!important`,
+                    opacity: `${spec?.isSelected ? 1 : 0.5}!important`,
                     borderBottom: `1px solid ${
-                      activeSpec.id === spec.id ? t.colors.blue[5] : 'transparent'
+                      spec?.isSelected ? t.colors.blue[5] : 'transparent'
                     }!important`,
                     ':hover': {
-                      opacity: `${activeSpec.id === spec.id ? 1 : 0.7}!important`,
+                      opacity: `${spec.isSelected ? 1 : 0.7}!important`,
                     },
                   }}
                 >
