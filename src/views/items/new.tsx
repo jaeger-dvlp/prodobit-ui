@@ -9,6 +9,11 @@ import NewItemStep3 from '@/components/views/items/new/steps/Step3';
 
 function NewItem() {
   const { currentStep } = useNewItem();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStep]);
+
   return (
     <Box
       exit={{ opacity: 0 }}
