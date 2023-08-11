@@ -1719,6 +1719,24 @@ function CustomXSeperator(props: CustomIconProps) {
   );
 }
 
+function CustomEditPencilStIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M9.625 5.32942C8.56448 5.68293 7.15044 4.2689 7.50395 3.20837M7.93967 2.77266L5.65485 5.05747C4.66155 6.05077 3.95688 7.29535 3.61618 8.65815L3.50578 9.09976C3.47138 9.23735 3.59602 9.36199 3.73362 9.32759L4.17522 9.21719C5.53802 8.87649 6.7826 8.17182 7.7759 7.17852L10.0607 4.89371C10.342 4.61244 10.5 4.23096 10.5 3.83318C10.5 3.00486 9.82851 2.33337 9.00019 2.33337C8.60242 2.33337 8.22094 2.49139 7.93967 2.77266Z"
+        stroke="currentColor"
+      />
+      <path
+        d="M11.0837 11.6666H2.91699"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1790,4 +1808,5 @@ export {
   CustomRightLongChevronIcon,
   CustomBubbleIcon,
   CustomXSeperator,
+  CustomEditPencilStIcon,
 };
