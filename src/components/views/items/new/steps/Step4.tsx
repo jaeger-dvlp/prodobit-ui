@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useNewItem } from '@/components/context/NewItem.context';
 import NewItemToolbar from '@/components/views/items/new/Toolbar';
 import { stepContainerMotionProps } from '@/components/views/items/new/steps';
-import { Box, Button, Divider, NumberInput, Select, Sx, Text, TextInput } from '@mantine/core';
+import { Box, Button, Divider, NumberInput, Select, Sx, Text } from '@mantine/core';
 
 import {
   TrashIcon,
