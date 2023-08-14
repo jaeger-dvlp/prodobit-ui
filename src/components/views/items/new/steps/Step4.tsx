@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useNewItem } from '@/components/context/NewItem.context';
 import NewItemToolbar from '@/components/views/items/new/Toolbar';
 import { stepContainerMotionProps } from '@/components/views/items/new/steps';
-import { Box, Button, Divider, NumberInput, Select, Sx, Text } from '@mantine/core';
+import { Box, Button, Divider, NumberInput, Select, Sx, Text, TextInput } from '@mantine/core';
 
 import {
   TrashIcon,
@@ -340,6 +340,34 @@ function ItemSizeProps() {
 }
 
 function ItemColorProps() {
+  const [mockColors, setMockColors] = React.useState([
+    {
+      id: getRandomUUID(),
+      color: t.colors.orange[5],
+      name: 'Alev Kızılı',
+    },
+    {
+      id: getRandomUUID(),
+      color: t.colors.blue[6],
+      name: 'Gök Mavi',
+    },
+  ]);
+
+  const addNewColor = () => {
+    setMockColors((s) => [
+      ...s,
+      {
+        id: getRandomUUID(),
+        color: '#000',
+        name: 'Siyah',
+      },
+    ]);
+  };
+
+  const deleteColor = (id: string) => {
+    setMockColors((s) => s.filter((color) => color.id !== id));
+  };
+
   return (
     <Box sx={ItemSpecContainerSX}>
       <Box>
@@ -349,12 +377,90 @@ function ItemColorProps() {
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
-          <Button variant="default">
+          <Button onClick={addNewColor} variant="default">
             <CustomPlusIcon />
           </Button>
         </Box>
       </Box>
       <Box />
+      <Box
+        component="ul"
+        sx={{
+          gap: 20,
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          marginTop: 20,
+          display: 'flex',
+          listStyle: 'none',
+          flexWrap: 'wrap',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          '> li': {
+            gap: 14,
+            display: 'flex',
+            borderRadius: 100,
+            flexDirection: 'row',
+            alignItems: 'center',
+            padding: '9.5px 25px',
+            position: 'relative',
+            justifyContent: 'flex-start',
+            border: `1px solid ${t.colors.gray[4]}`,
+            '> button': {
+              padding: 3,
+              height: 'auto',
+              border: 'none',
+              borderRadius: 100,
+              position: 'absolute',
+              color: 'white',
+              top: -5,
+              right: -1,
+              backgroundColor: `${t.colors.red[5]}!important`,
+            },
+            '> div:nth-of-type(1)': {
+              width: 16,
+              height: 16,
+              borderRadius: 100,
+              border: '1px solid #fff',
+            },
+            '> div:nth-of-type(2)': {
+              padding: 0,
+              border: 'none',
+              fontWeight: 700,
+              fontSize: '22px',
+              lineHeight: '26.4px',
+              color: t.colors.gray[8],
+              backgroundColor: 'transparent',
+            },
+          },
+        }}
+      >
+        <AnimatePresence>
+          {mockColors.map((color) => (
+            <Box
+              component={motion.li}
+              key={`color-${color.id}`}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+            >
+              <Button onClick={() => deleteColor(color.id)} variant="default">
+                <CustomXICon width={14} height={14} />
+              </Button>
+              <Box
+                sx={{
+                  width: 30,
+                  height: 30,
+                  borderRadius: 100,
+                  backgroundColor: color.color,
+                  boxShadow: `0px 5px 5px -2px ${color.color}`,
+                }}
+              />
+              <Text contentEditable>{color.name}</Text>
+            </Box>
+          ))}
+        </AnimatePresence>
+      </Box>
     </Box>
   );
 }
