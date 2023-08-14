@@ -1,15 +1,30 @@
 import React from 'react';
+import { SizeSelectOpts } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Divider, Sx, Text } from '@mantine/core';
-import NewItemToolbar from '@/components/views/items/new/Toolbar';
+import { getRandomUUID } from '@/common/utils/misc';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useNewItem } from '@/components/context/NewItem.context';
+import NewItemToolbar from '@/components/views/items/new/Toolbar';
+import { stepContainerMotionProps } from '@/components/views/items/new/steps';
+import { Box, Button, Divider, NumberInput, Select, Sx, Text } from '@mantine/core';
+
 import {
+  TrashIcon,
   CustomXICon,
+  CustomPlusIcon,
+  CustomXSeperator,
   CustomRightLongChevronIcon,
   CustomProgrammingArrowIcon,
-  CustomPlusIcon,
 } from '@/components/icons';
-import { stepContainerMotionProps } from '@/components/views/items/new/steps';
+
+const SizeSelectItem = React.forwardRef<HTMLDivElement, { value: string; text: string }>(
+  ({ value, text, ...others }: { value: string; text: string }, ref) => (
+    <div ref={ref} {...others}>
+      <Text>{value}</Text>
+      <Text>{text}</Text>
+    </div>
+  ),
+);
 
 const ItemSpecContainerSX: Sx = {
   gap: 15,
@@ -100,14 +115,32 @@ function StepDescription() {
 }
 
 function ItemSizeProps() {
-  // const [mockSizes, setMockSizes] = React.useState([
-  //   {
-  //     width: 200,
-  //     height: 200,
-  //     wUnit: 'cm',
-  //     hUnit: 'cm',
-  //   },
-  // ]);
+  const [mockSizes, setMockSizes] = React.useState([
+    {
+      id: getRandomUUID(),
+      width: 200,
+      height: 20,
+      wUnit: 'cm',
+      hUnit: 'cm',
+    },
+  ]);
+
+  const addNewSize = () => {
+    setMockSizes((s) => [
+      ...s,
+      {
+        id: getRandomUUID(),
+        width: 200,
+        height: 20,
+        wUnit: 'cm',
+        hUnit: 'cm',
+      },
+    ]);
+  };
+
+  const deleteSize = (id: string) => {
+    setMockSizes((s) => s.filter((size) => size.id !== id));
+  };
 
   return (
     <Box sx={ItemSpecContainerSX}>
@@ -118,7 +151,7 @@ function ItemSizeProps() {
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
-          <Button variant="default">
+          <Button onClick={addNewSize} variant="default">
             <CustomPlusIcon />
           </Button>
         </Box>
@@ -126,26 +159,181 @@ function ItemSizeProps() {
       <Box
         component="ul"
         sx={{
-          gap: 10,
+          gap: 20,
           margin: 0,
           padding: 0,
           width: '100%',
+          marginTop: 20,
           display: 'flex',
           listStyle: 'none',
+          alignItems: 'stretch',
           flexDirection: 'column',
-          alignItems: 'flex-start',
           justifyContent: 'flex-start',
           '> li': {
             gap: 10,
             width: '100%',
             display: 'flex',
-            alignItems: 'center',
             flexDirection: 'row',
+            alignItems: 'center',
             justifyContent: 'flex-start',
+            '> button': {
+              padding: 5,
+              height: 'auto',
+              border: 'none',
+              color: t.colors.red[5],
+              backgroundColor: `${t.colors.red[0]}!important`,
+            },
+            '> section': {
+              fontWeight: 400,
+              display: 'flex',
+              fontSize: '22px',
+              borderRadius: 100,
+              padding: '0px 25px',
+              lineHeight: '26.4px',
+              alignItems: 'stretch',
+              flexDirection: 'row',
+              border: `1px solid ${t.colors.gray[4]}`,
+              '> div:nth-of-type(1)': {
+                margin: 0,
+                height: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '10px 20px 10px 0px',
+                borderRight: `1px solid ${t.colors.gray[4]}`,
+              },
+              '> div:nth-of-type(2)': {
+                gap: 10,
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                padding: '10px 0px 10px 20px',
+                justifyContent: 'flex-start',
+                '.mantine-NumberInput-root': {
+                  maxWidth: 45,
+                  '.mantine-NumberInput-input': {
+                    padding: 0,
+                    border: 'none',
+                    fontSize: '22px',
+                    fontWeight: 700,
+                    backgroundColor: 'transparent',
+                  },
+                },
+                '.mantine-Select-root': {
+                  padding: 0,
+                  maxWidth: 75,
+                  '.mantine-Select-input': {
+                    padding: 0,
+                    border: 'none',
+                    fontSize: '22px',
+                    fontWeight: 400,
+                    backgroundColor: 'transparent',
+                  },
+                  '.mantine-Select-item': {
+                    gap: 7,
+                    borderRadius: 0,
+                    display: 'flex',
+                    fontSize: '15px',
+                    flexDirection: 'row',
+                    position: 'relative',
+                    color: '#000!important',
+                    padding: '10px 10px 10px 20px',
+                    transition: 'all 0.15s ease-in-out',
+                    backgroundColor: 'transparent!important',
+                    ':hover': {
+                      backgroundColor: `${t.colors.gray[2]}!important`,
+                    },
+                    ':not(:last-of-type)': {
+                      borderBottom: `1px solid ${t.colors.gray[3]}`,
+                    },
+                    '> div:nth-of-type(1)': {
+                      minWidth: 30,
+                      fontWeight: 700,
+                    },
+                    "&[data-selected='true']::after": {
+                      content: '""',
+                      width: 6,
+                      height: 6,
+                      borderRadius: 100,
+                      backgroundColor: t.colors.red[4],
+                      position: 'absolute',
+                      left: 10,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                    },
+                  },
+                  '.mantine-Select-itemsWrapper': {
+                    padding: 0,
+                  },
+                  '.mantine-Select-dropdown': {
+                    padding: 0,
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    width: 'fit-content',
+                    minWidth: 'fit-content',
+                    boxShadow: '0px -6px 54px -13px rgba(177, 109, 92, 0.30)',
+                  },
+                },
+              },
+            },
           },
         }}
       >
-        <Box />
+        <AnimatePresence>
+          {mockSizes.map((size, index) => (
+            <Box
+              component={motion.li}
+              initial={{ opacity: 0, y: 20, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: 'auto' }}
+              exit={{ opacity: 0, y: 20, height: 0 }}
+              key={`size-${size.id}`}
+            >
+              <Box component="section">
+                <Box>
+                  <Text>En</Text>
+                </Box>
+                <Box>
+                  <NumberInput hideControls defaultValue={size.width} min={0} />
+                  <Select
+                    transitionProps={{
+                      transition: 'fade',
+                      duration: 300,
+                    }}
+                    data={SizeSelectOpts}
+                    defaultValue={size.wUnit}
+                    itemComponent={SizeSelectItem}
+                  />
+                </Box>
+              </Box>
+              <CustomXSeperator width={12} height={12} />
+              <Box component="section">
+                <Box>
+                  <Text>Boy</Text>
+                </Box>
+
+                <Box>
+                  <NumberInput hideControls defaultValue={size.height} min={0} />
+
+                  <Select
+                    transitionProps={{
+                      transition: 'fade',
+                      duration: 300,
+                    }}
+                    data={SizeSelectOpts}
+                    defaultValue={size.hUnit}
+                    itemComponent={SizeSelectItem}
+                  />
+                </Box>
+              </Box>
+              {index !== 0 && (
+                <Button onClick={() => deleteSize(size.id)} variant="default">
+                  <TrashIcon width={16} height={16} />
+                </Button>
+              )}
+            </Box>
+          ))}
+        </AnimatePresence>
       </Box>
     </Box>
   );
