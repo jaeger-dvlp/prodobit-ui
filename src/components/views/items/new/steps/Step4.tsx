@@ -466,6 +466,35 @@ function ItemColorProps() {
 }
 
 function ItemSizeCategories() {
+  const [mockSizes, setMockSizes] = React.useState([
+    {
+      id: getRandomUUID(),
+      name: 'S',
+    },
+    {
+      id: getRandomUUID(),
+      name: 'M',
+    },
+    {
+      id: getRandomUUID(),
+      name: 'L',
+    },
+  ]);
+
+  const addNewSize = () => {
+    setMockSizes((s) => [
+      ...s,
+      {
+        id: getRandomUUID(),
+        name: 'XL',
+      },
+    ]);
+  };
+
+  const deleteSize = (id: string) => {
+    setMockSizes((s) => s.filter((size) => size.id !== id));
+  };
+
   return (
     <Box sx={ItemSpecContainerSX}>
       <Box>
@@ -475,12 +504,77 @@ function ItemSizeCategories() {
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
-          <Button variant="default">
+          <Button onClick={addNewSize} variant="default">
             <CustomPlusIcon />
           </Button>
         </Box>
       </Box>
-      <Box />
+      <Box
+        component="ul"
+        sx={{
+          gap: 20,
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          marginTop: 20,
+          display: 'flex',
+          listStyle: 'none',
+          flexWrap: 'wrap',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          '> li': {
+            gap: 10,
+            padding: 10,
+            minWidth: 50,
+            minHeight: 50,
+            border: 'none',
+            display: 'flex',
+            borderRadius: 100,
+            flexDirection: 'row',
+            alignItems: 'center',
+            position: 'relative',
+            justifyContent: 'center',
+            backgroundColor: t.colors.gray[3],
+            '> button': {
+              padding: 3,
+              height: 'auto',
+              border: 'none',
+              borderRadius: 100,
+              position: 'absolute',
+              color: 'white',
+              top: -5,
+              right: -1,
+              backgroundColor: `${t.colors.red[5]}!important`,
+            },
+            '> div:nth-of-type(1)': {
+              padding: 5,
+              border: 'none',
+              fontWeight: 500,
+              fontSize: '15px',
+              lineHeight: '18px',
+              color: t.colors.gray[8],
+              backgroundColor: 'transparent',
+            },
+          },
+        }}
+      >
+        <AnimatePresence>
+          {mockSizes.map((size) => (
+            <Box
+              component={motion.li}
+              key={`color-${size.id}`}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+            >
+              <Button onClick={() => deleteSize(size.id)} variant="default">
+                <CustomXICon width={14} height={14} />
+              </Button>
+              <Text contentEditable>{size.name}</Text>
+            </Box>
+          ))}
+        </AnimatePresence>
+      </Box>
     </Box>
   );
 }
