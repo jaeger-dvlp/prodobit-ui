@@ -580,6 +580,27 @@ function ItemSizeCategories() {
 }
 
 function ItemModel() {
+  const [mockModels, setMockModels] = React.useState([
+    {
+      id: getRandomUUID(),
+      name: 'Yaz Şortu',
+    },
+  ]);
+
+  const addNewModel = () => {
+    setMockModels((s) => [
+      ...s,
+      {
+        id: getRandomUUID(),
+        name: 'Kış Şortu',
+      },
+    ]);
+  };
+
+  const deleteModel = (id: string) => {
+    setMockModels((s) => s.filter((model) => model.id !== id));
+  };
+
   return (
     <Box sx={ItemSpecContainerSX}>
       <Box>
@@ -589,12 +610,76 @@ function ItemModel() {
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
-          <Button variant="default">
+          <Button onClick={addNewModel} variant="default">
             <CustomPlusIcon />
           </Button>
         </Box>
       </Box>
-      <Box />
+      <Box
+        component="ul"
+        sx={{
+          gap: 20,
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          marginTop: 20,
+          display: 'flex',
+          listStyle: 'none',
+          flexWrap: 'wrap',
+
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          '> li': {
+            backgroundColor: 'transparent',
+            border: `1px solid ${t.colors.gray[4]}`,
+            minWidth: 50,
+            padding: '10px 25px',
+            borderRadius: 100,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            '> button': {
+              padding: 3,
+              height: 'auto',
+              border: 'none',
+              borderRadius: 100,
+              position: 'absolute',
+              color: 'white',
+              top: -5,
+              right: -1,
+              backgroundColor: `${t.colors.red[5]}!important`,
+            },
+            '> div:nth-of-type(1)': {
+              padding: 0,
+              border: 'none',
+              fontWeight: 700,
+              fontSize: '22px',
+              lineHeight: '26.4px',
+              color: t.colors.gray[8],
+              backgroundColor: 'transparent',
+            },
+          },
+        }}
+      >
+        <AnimatePresence>
+          {mockModels.map((model) => (
+            <Box
+              component={motion.li}
+              key={`color-${model.id}`}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+            >
+              <Button onClick={() => deleteModel(model.id)} variant="default">
+                <CustomXICon width={14} height={14} />
+              </Button>
+              <Text contentEditable>{model.name}</Text>
+            </Box>
+          ))}
+        </AnimatePresence>
+      </Box>
     </Box>
   );
 }
