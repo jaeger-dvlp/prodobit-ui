@@ -512,6 +512,44 @@ const MockNotesData: TNote[] = [
   },
 ];
 
+const SizeSelectOpts = [
+  {
+    text: 'Metre',
+    value: 'm',
+    label: 'm',
+  },
+  {
+    text: 'Kilometre',
+    value: 'km',
+    label: 'km',
+  },
+  {
+    text: 'Mil',
+    value: 'mil',
+    label: 'mil',
+  },
+  {
+    text: 'Ayak',
+    value: 'ft',
+    label: 'ft',
+  },
+  {
+    text: 'İnç',
+    value: 'in',
+    label: 'in',
+  },
+  {
+    text: 'Santimetre',
+    value: 'cm',
+    label: 'cm',
+  },
+  {
+    text: 'Milimetre',
+    value: 'mm',
+    label: 'mm',
+  },
+];
+
 export {
   MockItemsCategories,
   MockItems,
@@ -523,4 +561,5 @@ export {
   MockAvatars,
   FileTypeImages,
   MockNotesData,
+  SizeSelectOpts,
 };
