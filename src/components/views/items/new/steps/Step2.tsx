@@ -95,6 +95,18 @@ function ItemBrand() {
                 paddingRight: 40,
                 color: t.colors.green[9],
               },
+              '.mantine-Select-item': {
+                marginTop: 5,
+                transition: 'all 0.15s ease-in-out',
+                '&:hover': {
+                  color: t.colors.green[9],
+                  backgroundColor: t.colors.gray[2],
+                },
+                "&[data-selected='true']": {
+                  color: t.colors.green[9],
+                  backgroundColor: t.colors.gray[3],
+                },
+              },
             }}
             styles={{
               input: {
@@ -186,6 +198,7 @@ function ItemName() {
             lineHeight: '76.8px',
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
+            backgroundColor: 'transparent',
           },
         }}
       />
@@ -357,6 +370,7 @@ function ItemCode() {
             lineHeight: '44.4px',
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
+            backgroundColor: 'transparent',
           },
         }}
       />
