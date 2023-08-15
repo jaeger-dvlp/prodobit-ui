@@ -22,6 +22,7 @@ import {
   CustomPlusIcon,
   CustomRightLongChevronIcon,
   CustomSave2Icon,
+  CustomSmoothTooltipIllustration,
   CustomXICon,
   CustomXSeperator,
   ImageLightIcon,
@@ -62,6 +63,18 @@ function ItemBrandImageSelector() {
         boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
       }}
     >
+      <CustomSmoothTooltipIllustration
+        width={30}
+        height={100}
+        style={{
+          left: 0,
+          top: 150,
+          zIndex: 9999,
+          color: 'white',
+          position: 'absolute',
+          transform: 'translateX(-100%)',
+        }}
+      />
       <Box
         sx={{
           gap: 30,
