@@ -237,7 +237,7 @@ function ItemBrandImageSelector() {
   );
 }
 
-function ItemBrand() {
+function ItemBrand({ focusMain, blurMain }: { focusMain: () => void; blurMain: () => void }) {
   return (
     <Box
       sx={{
@@ -249,7 +249,7 @@ function ItemBrand() {
         justifyContent: 'flex-start',
       }}
     >
-      <Menu zIndex={999} position="right">
+      <Menu onOpen={blurMain} onClose={focusMain} zIndex={999} position="right">
         <Menu.Target>
           <Button
             variant="default"
@@ -307,6 +307,8 @@ function ItemBrand() {
           }}
         >
           <Select
+            onDropdownOpen={blurMain}
+            onDropdownClose={focusMain}
             defaultValue="nike"
             rightSectionWidth={50}
             color={t.colors.green[9]}
@@ -608,6 +610,9 @@ function ItemCode() {
 
 function NewItemStep2() {
   const { setCurrentStep } = useNewItem();
+  const [focusedMain, setFocusedMain] = React.useState(true);
+  const focusMain = () => setFocusedMain(true);
+  const blurMain = () => setFocusedMain(false);
   const goToNextStep = () => setCurrentStep((c) => c + 1);
   const goToPrevStep = () => setCurrentStep((c) => c - 1);
   return (
@@ -649,8 +654,9 @@ function NewItemStep2() {
             alignItems: 'center',
             flexDirection: 'column',
             justifyContent: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.82)',
+            transition: 'all 0.15s ease-in-out',
             boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            backgroundColor: focusedMain ? '#fff' : 'rgba(255,255,255,0.5)',
           }}
         >
           <Box
@@ -664,7 +670,7 @@ function NewItemStep2() {
               justifyContent: 'center',
             }}
           >
-            <ItemBrand />
+            <ItemBrand focusMain={focusMain} blurMain={blurMain} />
             <Divider w="100%" color={t.colors.gray[3]} />
             <ItemName />
             <Divider w="100%" color={t.colors.gray[3]} />
