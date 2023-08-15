@@ -1857,6 +1857,17 @@ function CustomProgrammingArrowIcon(props: CustomIconProps) {
   );
 }
 
+function CustomSmoothTooltipIllustration(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 71" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M23.9997 70.9966C24.0376 62.6993 20.1617 54.8239 13.6364 49.5376L10.043 46.6244L2.40493 40.4369C-0.83015 37.814 -0.795697 32.9429 2.47384 30.3673L10.1602 24.3114L13.7674 21.4151C20.3168 16.1559 23.9997 8.29734 23.9997 0V71V70.9966Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1933,4 +1944,5 @@ export {
   CustomSaveIcon,
   CustomSave2Icon,
   CustomProgrammingArrowIcon,
+  CustomSmoothTooltipIllustration,
 };
