@@ -288,6 +288,120 @@ function TemplateMenu({
   );
 }
 
+function ItemSpecDeleteMenu({
+  onCancel,
+  onDelete,
+}: {
+  onCancel: () => void;
+  onDelete: () => void;
+}) {
+  return (
+    <Menu.Dropdown
+      sx={{
+        gap: 10,
+        padding: 0,
+        marginLeft: -35,
+        marginTop: 40,
+        width: 'auto',
+        maxWidth: 417,
+        border: 'none',
+        display: 'flex',
+        borderRadius: 20,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+      }}
+    >
+      <CustomSmoothTooltipIllustration
+        width={30}
+        height={100}
+        style={{
+          left: '50%',
+          top: '0%',
+          zIndex: 9999,
+          color: '#fff',
+          position: 'absolute',
+          transform: 'translateY(-65%) translateX(-50%) rotate(90deg)',
+        }}
+      />
+
+      <Box
+        sx={{
+          gap: 5,
+          display: 'flex',
+          borderRadius: 100,
+          padding: '13px 15px',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          backdropFilter: 'blur(5px)',
+          backgroundColor: 'rgba(255, 255, 255, 0.82)',
+          boxShadow: ' 0px 24px 54px -13px rgba(177, 109, 92, 0.30)',
+          '.mantine-Button-root': {
+            height: 'auto',
+            display: 'flex',
+            fontSize: '22px',
+            fontWeight: 300,
+            borderRadius: 100,
+            padding: '15px 30px',
+            lineHeight: '26.4px',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.15s ease-in-out',
+            '> div > span': {
+              gap: 15,
+              padding: 0,
+              height: 'auto',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              '> svg': {
+                width: 24,
+                height: 24,
+              },
+            },
+          },
+        }}
+      >
+        <Button
+          onClick={onCancel}
+          variant="default"
+          sx={{
+            color: t.colors.red[5],
+            backgroundColor: '#fff',
+            border: `1px solid ${t.colors.red[2]}`,
+            transition: 'all 0.15s ease-in-out',
+            ':hover': {
+              backgroundColor: t.colors.red[0],
+            },
+          }}
+        >
+          <CustomXICon />
+          <Text>İptal</Text>
+        </Button>
+        <Button
+          onClick={onDelete}
+          variant="default"
+          sx={{
+            color: '#fff',
+            backgroundColor: t.colors.green[6],
+            border: `1px solid ${t.colors.green[6]}`,
+            transition: 'all 0.15s ease-in-out',
+            ':hover': {
+              backgroundColor: t.colors.green[5],
+            },
+          }}
+        >
+          <CustomCheckIcon />
+          <Text>Silin</Text>
+        </Button>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 function StepDescription() {
   return (
     <Box
@@ -393,6 +507,25 @@ function ItemTemplateSelector({
   ]);
 
   const activeSpec = React.useMemo(() => mockSpecs.find((spec) => spec.isSelected), [mockSpecs]);
+
+  const deleteSubSpecOfActiveSpec = (subSpecId: number) => {
+    const spec = activeSpec;
+
+    if (spec) {
+      setMockSpecs((prev) =>
+        prev.map((item) => {
+          if (item.id === spec.id) {
+            return {
+              ...item,
+              subSpecs: item.subSpecs.filter((subSpec) => subSpec.id !== subSpecId),
+            };
+          }
+
+          return item;
+        }),
+      );
+    }
+  };
 
   const handleSpecClick = (specId: number) => {
     setMockSpecs((prev) =>
@@ -562,7 +695,7 @@ function ItemTemplateSelector({
                 color: t.colors.blue[7],
                 justifyContent: 'flex-start',
                 backgroundColor: t.colors.blue[0],
-                button: {
+                '> div:nth-of-type(2) > button': {
                   padding: 0,
                   border: 'none',
                   height: 'auto',
@@ -588,9 +721,17 @@ function ItemTemplateSelector({
                 <Button variant="default">
                   <CustomEditPencilStIcon />
                 </Button>
-                <Button variant="default">
-                  <CustomXICon />
-                </Button>
+                <Menu onOpen={blurMain} onClose={focusMain} zIndex={999} position="bottom">
+                  <Menu.Target>
+                    <Button variant="default">
+                      <CustomXICon />
+                    </Button>
+                  </Menu.Target>
+                  <ItemSpecDeleteMenu
+                    onCancel={() => {}}
+                    onDelete={() => deleteSubSpecOfActiveSpec(subSpec.id)}
+                  />
+                </Menu>
               </Box>
             </Box>
           ))}
