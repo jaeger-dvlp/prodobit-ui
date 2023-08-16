@@ -614,8 +614,8 @@ function ThreeBarsOne(props: CustomIconProps) {
   return (
     <svg viewBox="0 0 8 10" fill="none" {...DefaultProps} {...props}>
       <path d="M1 5.5L1 8.50001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M4 3.5L4 8.50002" stroke="#AEADAF" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M7 1.5L7 8.50002" stroke="#AEADAF" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M4 3.5L4 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 1.5L7 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -625,7 +625,7 @@ function ThreeBarsTwo(props: CustomIconProps) {
     <svg viewBox="0 0 8 10" fill="none" {...DefaultProps} {...props}>
       <path d="M1 5.5L1 8.50001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <path d="M4 3.5L4 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M7 1.5L7 8.50002" stroke="#AEADAF" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 1.5L7 8.50002" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -1949,6 +1949,16 @@ function CustomMoveIcon(props: CustomIconProps) {
   );
 }
 
+function CustomSortThreeLine(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 25 13" fill="none" {...DefaultProps} {...props}>
+      <line x1="0.990234" y1="0.5" x2="24.9902" y2="0.5" stroke="currentColor" />
+      <line x1="0.990234" y1="6.5" x2="24.9902" y2="6.5" stroke="currentColor" />
+      <line x1="0.990234" y1="12.5" x2="24.9902" y2="12.5" stroke="currentColor" />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2029,4 +2039,5 @@ export {
   CustomCameraIcon,
   CustomBarcodeLoader,
   CustomMoveIcon,
+  CustomSortThreeLine,
 };
