@@ -1900,6 +1900,55 @@ function CustomBarcodeLoader(props: CustomIconProps) {
   );
 }
 
+function CustomMoveIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 15 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M3.9082 5.25L2.1582 7L3.9082 8.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.24121 2.91667L7.99121 1.16667L9.74121 2.91667"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.74121 11.0833L7.99121 12.8333L6.24121 11.0833"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.0742 5.25L13.8242 7L12.0742 8.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.1582 7H13.8249"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.99121 1.16667V12.8333"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -1979,4 +2028,5 @@ export {
   CustomSmoothTooltipIllustration,
   CustomCameraIcon,
   CustomBarcodeLoader,
+  CustomMoveIcon,
 };
