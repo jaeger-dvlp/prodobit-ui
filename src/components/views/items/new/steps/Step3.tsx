@@ -322,7 +322,7 @@ function ItemSpecDeleteMenu({
           zIndex: 9999,
           color: '#fff',
           position: 'absolute',
-          transform: 'translateY(-65%) translateX(-50%) rotate(90deg)',
+          transform: 'translateY(-62.5%) translateX(-50%) rotate(90deg)',
         }}
       />
 
@@ -741,8 +741,8 @@ function ItemTemplateSelector({
   );
 }
 
-function ItemPropField() {
-  const mockFields = [
+function ItemPropField({ focusMain, blurMain }: { focusMain: () => void; blurMain: () => void }) {
+  const [mockFields, setMockFields] = React.useState<string[]>([
     '2D Boyut',
     'Renk',
     'Beden',
@@ -751,7 +751,12 @@ function ItemPropField() {
     'Beden',
     'Renk',
     '2D Boyut',
-  ];
+  ]);
+
+  const deleteField = (fieldIndex: number) => {
+    setMockFields((prev) => prev.filter((_, i) => i !== fieldIndex));
+  };
+
   return (
     <Box
       sx={{
@@ -855,9 +860,14 @@ function ItemPropField() {
           {mockFields.map((field, i) => (
             <Box key={`item-prop-field-${i}`} component="li">
               <Text>{field}</Text>
-              <Button variant="default">
-                <CustomXICon />
-              </Button>
+              <Menu onOpen={blurMain} onClose={focusMain} zIndex={999} position="bottom">
+                <Menu.Target>
+                  <Button variant="default">
+                    <CustomXICon />
+                  </Button>
+                </Menu.Target>
+                <ItemSpecDeleteMenu onCancel={() => {}} onDelete={() => deleteField(i)} />
+              </Menu>
             </Box>
           ))}
         </Box>
@@ -1139,7 +1149,7 @@ function NewItemStep3() {
             <StepDescription />
             <ItemTemplateSelector focusMain={focusMain} blurMain={blurMain} />
             <Divider w="100%" color={t.colors.gray[3]} />
-            <ItemPropField />
+            <ItemPropField focusMain={focusMain} blurMain={blurMain} />
             <ItemFieldSearchArea />
           </Box>
         </Box>
