@@ -5,7 +5,7 @@ import { getRandomUUID } from '@/common/utils/misc';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNewItem } from '@/components/context/NewItem.context';
 import NewItemToolbar from '@/components/views/items/new/Toolbar';
-import { stepContainerMotionProps } from '@/components/views/items/new/steps';
+import { ItemSpecDeleteMenu, stepContainerMotionProps } from '@/components/views/items/new/steps';
 import { Box, Button, Divider, Menu, NumberInput, Select, Sx, Text } from '@mantine/core';
 
 import {
@@ -418,7 +418,7 @@ function ItemColorProps({ focusMain, blurMain }: { focusMain: () => void; blurMa
               right: -1,
               backgroundColor: `${t.colors.red[5]}!important`,
             },
-            '> div:nth-of-type(1)': {
+            '.color-box': {
               width: 16,
               height: 16,
               borderRadius: 100,
@@ -445,12 +445,19 @@ function ItemColorProps({ focusMain, blurMain }: { focusMain: () => void; blurMa
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
             >
-              <Button onClick={() => deleteColor(color.id)} variant="default">
-                <CustomXICon width={14} height={14} />
-              </Button>
+              <Menu onOpen={blurMain} onClose={focusMain} zIndex={999} position="bottom">
+                <Menu.Target>
+                  <Button variant="default">
+                    <CustomXICon width={14} height={14} />
+                  </Button>
+                </Menu.Target>
+                <ItemSpecDeleteMenu onCancel={() => {}} onDelete={() => deleteColor(color.id)} />
+              </Menu>
+
               <Menu onOpen={blurMain} onClose={focusMain} zIndex={999} position="right">
                 <Menu.Target>
                   <Box
+                    className="color-box"
                     sx={{
                       width: 30,
                       height: 30,
