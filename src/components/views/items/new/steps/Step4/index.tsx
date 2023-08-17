@@ -481,7 +481,13 @@ function ItemColorProps({ focusMain, blurMain }: { focusMain: () => void; blurMa
   );
 }
 
-function ItemSizeCategories() {
+function ItemSizeCategories({
+  focusMain,
+  blurMain,
+}: {
+  focusMain: () => void;
+  blurMain: () => void;
+}) {
   const [mockSizes, setMockSizes] = React.useState([
     {
       id: getRandomUUID(),
@@ -562,7 +568,7 @@ function ItemSizeCategories() {
               right: -1,
               backgroundColor: `${t.colors.red[5]}!important`,
             },
-            '> div:nth-of-type(1)': {
+            '.size-item': {
               padding: 5,
               border: 'none',
               fontWeight: 500,
@@ -577,15 +583,21 @@ function ItemSizeCategories() {
         <AnimatePresence>
           {mockSizes.map((size) => (
             <Box
+              className="size-item"
               component={motion.li}
               key={`color-${size.id}`}
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
             >
-              <Button onClick={() => deleteSize(size.id)} variant="default">
-                <CustomXICon width={14} height={14} />
-              </Button>
+              <Menu onOpen={blurMain} onClose={focusMain} zIndex={999} position="bottom">
+                <Menu.Target>
+                  <Button variant="default">
+                    <CustomXICon width={14} height={14} />
+                  </Button>
+                </Menu.Target>
+                <ItemSpecDeleteMenu onCancel={() => {}} onDelete={() => deleteSize(size.id)} />
+              </Menu>
               <Text contentEditable>{size.name}</Text>
             </Box>
           ))}
@@ -766,7 +778,7 @@ function NewItemStep4() {
             <Divider w="100%" color={t.colors.gray[3]} />
             <ItemColorProps focusMain={focusMain} blurMain={blurMain} />
             <Divider w="100%" color={t.colors.gray[3]} />
-            <ItemSizeCategories />
+            <ItemSizeCategories focusMain={focusMain} blurMain={blurMain} />
             <Divider w="100%" color={t.colors.gray[3]} />
             <ItemModel />
           </Box>
