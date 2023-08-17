@@ -1,6 +1,6 @@
-import { CustomSmoothTooltipIllustration } from '@/components/icons';
-import { Box, ColorPicker, Menu } from '@mantine/core';
 import React from 'react';
+import { Box, ColorPicker, Menu } from '@mantine/core';
+import { CustomSmoothTooltipIllustration } from '@/components/icons';
 
 type T = {
   id: string;
