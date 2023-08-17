@@ -1959,6 +1959,16 @@ function CustomSortThreeLine(props: CustomIconProps) {
   );
 }
 
+function CustomVertical3DotsIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 4 16" fill="none" {...DefaultProps} {...props}>
+      <circle cx="2.49023" cy="2" r="1.5" fill="currentColor" />
+      <circle cx="2.49023" cy="8" r="1.5" fill="currentColor" />
+      <circle cx="2.49023" cy="14" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2040,4 +2050,5 @@ export {
   CustomBarcodeLoader,
   CustomMoveIcon,
   CustomSortThreeLine,
+  CustomVertical3DotsIcon,
 };
