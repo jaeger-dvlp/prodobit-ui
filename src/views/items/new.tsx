@@ -9,6 +9,7 @@ import NewItemStep1 from '@/components/views/items/new/steps/Step1';
 import NewItemStep2 from '@/components/views/items/new/steps/Step2';
 import NewItemStep3 from '@/components/views/items/new/steps/Step3';
 import NewItemStep4 from '@/components/views/items/new/steps/Step4';
+import NewItemStep5 from '@/components/views/items/new/steps/Step5';
 
 function NewItem() {
   const { currentStep } = useNewItem();
@@ -16,6 +17,8 @@ function NewItem() {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentStep]);
+
+  const StepViews = [NewItemStep1, NewItemStep2, NewItemStep3, NewItemStep4, NewItemStep5];
 
   return (
     <Box
@@ -37,10 +40,9 @@ function NewItem() {
     >
       <NewItemStepBar />
       <AnimatePresence mode="wait">
-        {currentStep === 0 && <NewItemStep1 key="step1" />}
-        {currentStep === 1 && <NewItemStep2 key="step2" />}
-        {currentStep === 2 && <NewItemStep3 key="step3" />}
-        {currentStep === 3 && <NewItemStep4 key="step4" />}
+        {StepViews.map(
+          (StepView, index) => currentStep === index && <StepView key={`step-${index}`} />,
+        )}
       </AnimatePresence>
     </Box>
   );

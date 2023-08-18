@@ -21,6 +21,10 @@ export type ItemCategory = {
 
 export type Item = {
   id: number;
+  brand: {
+    id: string;
+    name: string;
+  };
   image: string;
   name: string;
   code: string;
