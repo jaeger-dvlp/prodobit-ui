@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import { SizeSelectOpts } from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
@@ -17,6 +18,7 @@ import {
   CustomProgrammingArrowIcon,
 } from '@/components/icons';
 import ColorPick from './menus/ColorPick';
+import Step4Variations from './variations';
 
 const SizeSelectItem = React.forwardRef<HTMLDivElement, { value: string; text: string }>(
   ({ value, text, ...others }: { value: string; text: string }, ref) => (
@@ -115,7 +117,7 @@ function StepDescription() {
   );
 }
 
-function ItemSizeProps() {
+function ItemSizeProps({ onVariationMenuOpen }: { onVariationMenuOpen: () => void }) {
   const [mockSizes, setMockSizes] = React.useState([
     {
       id: getRandomUUID(),
@@ -148,7 +150,7 @@ function ItemSizeProps() {
       <Box>
         <Text>Boyut</Text>
         <Box>
-          <Button variant="default">
+          <Button onClick={onVariationMenuOpen} variant="default">
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
@@ -340,7 +342,15 @@ function ItemSizeProps() {
   );
 }
 
-function ItemColorProps({ focusMain, blurMain }: { focusMain: () => void; blurMain: () => void }) {
+function ItemColorProps({
+  focusMain,
+  blurMain,
+  onVariationMenuOpen,
+}: {
+  focusMain: () => void;
+  blurMain: () => void;
+  onVariationMenuOpen: () => void;
+}) {
   const [mockColors, setMockColors] = React.useState([
     {
       id: getRandomUUID(),
@@ -374,7 +384,7 @@ function ItemColorProps({ focusMain, blurMain }: { focusMain: () => void; blurMa
       <Box>
         <Text>Renk</Text>
         <Box>
-          <Button variant="default">
+          <Button onClick={onVariationMenuOpen} variant="default">
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
@@ -484,9 +494,11 @@ function ItemColorProps({ focusMain, blurMain }: { focusMain: () => void; blurMa
 function ItemSizeCategories({
   focusMain,
   blurMain,
+  onVariationMenuOpen,
 }: {
   focusMain: () => void;
   blurMain: () => void;
+  onVariationMenuOpen: () => void;
 }) {
   const [mockSizes, setMockSizes] = React.useState([
     {
@@ -522,7 +534,7 @@ function ItemSizeCategories({
       <Box>
         <Text>Beden</Text>
         <Box>
-          <Button variant="default">
+          <Button onClick={onVariationMenuOpen} variant="default">
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
@@ -607,7 +619,7 @@ function ItemSizeCategories({
   );
 }
 
-function ItemModel() {
+function ItemModel({ onVariationMenuOpen }: { onVariationMenuOpen: () => void }) {
   const [mockModels, setMockModels] = React.useState([
     {
       id: getRandomUUID(),
@@ -634,7 +646,7 @@ function ItemModel() {
       <Box>
         <Text>Model</Text>
         <Box>
-          <Button variant="default">
+          <Button onClick={onVariationMenuOpen} variant="default">
             <CustomProgrammingArrowIcon />
             <Text>Varyasyon Değişkeni Yap</Text>
           </Button>
@@ -715,10 +727,47 @@ function ItemModel() {
 function NewItemStep4() {
   const { setCurrentStep } = useNewItem();
   const [focusedMain, setFocusedMain] = React.useState(true);
+  const [variationMenu, setVariationMenu] = React.useState(false);
   const focusMain = () => setFocusedMain(true);
   const blurMain = () => setFocusedMain(false);
   const goToNextStep = () => setCurrentStep((c) => c + 1);
   const goToPrevStep = () => setCurrentStep((c) => c - 1);
+
+  const [itemProps, setItemProps] = React.useState([
+    {
+      id: getRandomUUID(),
+      name: 'Boyut',
+      component: () => <ItemSizeProps onVariationMenuOpen={() => setVariationMenu(true)} />,
+    },
+    {
+      id: getRandomUUID(),
+      name: 'Renk',
+      component: () => (
+        <ItemColorProps
+          focusMain={focusMain}
+          blurMain={blurMain}
+          onVariationMenuOpen={() => setVariationMenu(true)}
+        />
+      ),
+    },
+    {
+      id: getRandomUUID(),
+      name: 'Beden',
+      component: () => (
+        <ItemSizeCategories
+          focusMain={focusMain}
+          blurMain={blurMain}
+          onVariationMenuOpen={() => setVariationMenu(true)}
+        />
+      ),
+    },
+    {
+      id: getRandomUUID(),
+      name: 'Model',
+      component: () => <ItemModel onVariationMenuOpen={() => setVariationMenu(true)} />,
+    },
+  ]);
+
   return (
     <>
       <Box
@@ -749,39 +798,54 @@ function NewItemStep4() {
         </Text>
         <Box
           sx={{
-            gap: 32,
-            padding: 30,
-            width: '100%',
-            maxWidth: 695,
+            gap: 0,
             display: 'flex',
-            borderRadius: 40,
-            alignItems: 'center',
-            flexDirection: 'column',
+            minWidth: '100%',
+            flexDirection: 'row',
+            alignItems: 'flex-start',
             justifyContent: 'center',
-            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
-            backgroundColor: focusedMain ? '#fff' : 'rgba(255,255,255,0.5)',
           }}
         >
           <Box
             sx={{
-              gap: 40,
+              gap: 32,
+              padding: 30,
               width: '100%',
+              maxWidth: 695,
               display: 'flex',
-              padding: '10px 30px',
+              borderRadius: 40,
               alignItems: 'center',
               flexDirection: 'column',
               justifyContent: 'center',
+              boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+              backgroundColor: focusedMain ? '#fff' : 'rgba(255,255,255,0.5)',
             }}
           >
-            <StepDescription />
-            <ItemSizeProps />
-            <Divider w="100%" color={t.colors.gray[3]} />
-            <ItemColorProps focusMain={focusMain} blurMain={blurMain} />
-            <Divider w="100%" color={t.colors.gray[3]} />
-            <ItemSizeCategories focusMain={focusMain} blurMain={blurMain} />
-            <Divider w="100%" color={t.colors.gray[3]} />
-            <ItemModel />
+            <Box
+              sx={{
+                gap: 40,
+                width: '100%',
+                display: 'flex',
+                padding: '10px 30px',
+                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <StepDescription />
+              {itemProps.map(({ component: Component, id }, i) => (
+                <React.Fragment key={`item-prop-${id}`}>
+                  <Component />
+                  {i !== itemProps.length - 1 && <Divider w="100%" color={t.colors.gray[3]} />}
+                </React.Fragment>
+              ))}
+            </Box>
           </Box>
+          <Step4Variations
+            isActive={variationMenu}
+            itemProps={itemProps}
+            setItemProps={setItemProps}
+          />
         </Box>
       </Box>
       <NewItemToolbar>
