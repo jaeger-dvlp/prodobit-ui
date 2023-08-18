@@ -1969,6 +1969,20 @@ function CustomVertical3DotsIcon(props: CustomIconProps) {
   );
 }
 
+function CustomOutlineIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 15 15" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M3.125 7.5H11.875"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2051,4 +2065,5 @@ export {
   CustomMoveIcon,
   CustomSortThreeLine,
   CustomVertical3DotsIcon,
+  CustomOutlineIcon,
 };
