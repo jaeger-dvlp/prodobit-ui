@@ -13,12 +13,6 @@ import { Box, Button, Divider, Text, Title } from '@mantine/core';
 import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';
 import TableWrapper, { useTable } from '@/components/context/Table.context';
 
-export type ItemCategory = {
-  id: number;
-  name: string;
-  slug: string;
-};
-
 export type Item = {
   id: number;
   brand: {
@@ -32,6 +26,14 @@ export type Item = {
   status: string;
   count: number;
   created_at: string;
+};
+
+export type ItemCategory = {
+  id: number | string;
+  name: string;
+  slug: string;
+  products?: Item[];
+  subCategories?: ItemCategory[];
 };
 
 function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
