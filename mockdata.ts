@@ -210,6 +210,10 @@ const MockItemsCategories: ItemCategory[] = [
 const MockItems: Item[] = [
   {
     id: 0,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Gömlek',
     category: 'ust-giyim',
@@ -220,6 +224,10 @@ const MockItems: Item[] = [
   },
   {
     id: 1,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Tişört',
     category: 'ust-giyim',
@@ -230,6 +238,10 @@ const MockItems: Item[] = [
   },
   {
     id: 2,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Jeans',
     category: 'alt-giyim',
@@ -240,6 +252,10 @@ const MockItems: Item[] = [
   },
   {
     id: 3,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Adidas AX2S Terrex Erkek Outdoor Ayakkabı',
     category: 'ayakkabi',
@@ -250,6 +266,10 @@ const MockItems: Item[] = [
   },
   {
     id: 4,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Gömlek',
     category: 'ust-giyim',
@@ -260,6 +280,10 @@ const MockItems: Item[] = [
   },
   {
     id: 5,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Tişört',
     category: 'ust-giyim',
@@ -270,6 +294,10 @@ const MockItems: Item[] = [
   },
   {
     id: 6,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Jeans',
     category: 'alt-giyim',
@@ -280,6 +308,10 @@ const MockItems: Item[] = [
   },
   {
     id: 7,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Nike Air Max',
     category: 'ayakkabi',
@@ -290,6 +322,10 @@ const MockItems: Item[] = [
   },
   {
     id: 8,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Gömlek',
     category: 'ust-giyim',
@@ -300,6 +336,10 @@ const MockItems: Item[] = [
   },
   {
     id: 9,
+    brand: {
+      id: '000',
+      name: 'Mock Marka',
+    },
     image: 'https://source.unsplash.com/random/200',
     name: 'Tişört',
     category: 'ust-giyim',
