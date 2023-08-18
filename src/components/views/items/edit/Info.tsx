@@ -2,26 +2,18 @@
 import 'dayjs/locale/tr';
 import React from 'react';
 import dayjs from 'dayjs';
-import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
-import {
-  FileTypeImages,
-  MockNotesData,
-  MockProgressData,
-  MockStatuses,
-  MockSupplierData,
-  TNote,
-  TProgressData,
-} from 'mockdata';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
+import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
 import EditTextEditor from '@/components/views/items/edit/TextEditor';
 import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
+import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
 import ItemFinancialInfo from '@/components/views/items/edit/ItemFinancialInfo';
 
 import {
   DocIcon,
+  InfoIcon,
   CopyIcon,
   EditIcon,
   NotesIcon,
@@ -30,16 +22,25 @@ import {
   RoutingIcon,
   BarcodeIcon,
   Canlde2Icon,
+  ArrowLineIcon,
   Category2Icon,
   CustomPlusIcon,
   ExternalUrlIcon,
-  CustomChevronDown,
-  InfoIcon,
   CustomCheckIcon,
+  CustomChevronDown,
   DownloadCloudIcon,
-  ArrowLineIcon,
   RightIndicatorArrow,
 } from '@/components/icons';
+
+import {
+  TNote,
+  MockStatuses,
+  MockNotesData,
+  TProgressData,
+  FileTypeImages,
+  MockProgressData,
+  MockSupplierData,
+} from 'mockdata';
 
 dayjs.extend(DayjsRelativeTime);
 dayjs.locale('tr');
@@ -61,7 +62,7 @@ const getRenderedDate = (date: string) => {
   return `${text[0].toUpperCase()}${text.slice(1)}`;
 };
 
-function ProductInfoTable() {
+function ProductInfoTable({ border = true }: { border?: boolean }) {
   const MockValues = [
     {
       definition: 'Ürün Tam Adı',
@@ -107,10 +108,10 @@ function ProductInfoTable() {
     <Box
       {...motionProps}
       sx={{
-        padding: 30,
         width: '100%',
         borderRadius: 30,
-        border: '1px solid #DFDEE1',
+        padding: border ? 30 : 0,
+        border: border ? '1px solid #DFDEE1' : 'none',
       }}
     >
       <Table
@@ -226,12 +227,12 @@ function ProductPlaceholderBox({ text }: { text: string }) {
   );
 }
 
-function InfoSpecBox() {
+export function InfoSpecBox({ noTableBorder = false }: { noTableBorder?: boolean }) {
   const localSpecs = [
     {
       icon: BarcodeIcon,
       text: 'Öğe\nKimliği',
-      component: ProductInfoTable,
+      component: () => <ProductInfoTable border={!noTableBorder} />,
     },
     {
       icon: Category2Icon,
@@ -254,7 +255,16 @@ function InfoSpecBox() {
   const LocalSpecComp = spec.component;
 
   return (
-    <Box {...motionProps}>
+    <Box
+      {...motionProps}
+      sx={{
+        gap: 10,
+        display: 'flex',
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+      }}
+    >
       <Box
         component="ul"
         sx={{
@@ -1737,6 +1747,7 @@ function EditItemInfo() {
       <Box
         component="section"
         sx={{
+          gap: 40,
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -1752,7 +1763,6 @@ function EditItemInfo() {
           sx={{
             width: '100%',
             maxWidth: '100%',
-            marginTop: 40,
           }}
         />
         <Box

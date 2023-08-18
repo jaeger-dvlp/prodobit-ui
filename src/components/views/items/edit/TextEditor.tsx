@@ -82,6 +82,7 @@ function EditTextEditor({ sx }: { sx?: Sx }) {
         styles={{
           content: {
             backgroundColor: t.colors.gray[2],
+            minHeight: 130,
           },
         }}
         sx={{

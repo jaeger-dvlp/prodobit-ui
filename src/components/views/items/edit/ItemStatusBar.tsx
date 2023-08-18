@@ -103,7 +103,6 @@ function ItemStatusBar() {
         gap: 10,
         margin: 0,
         width: '100%',
-        marginTop: 40,
         display: 'flex',
         padding: '18px',
         flexWrap: 'wrap',
@@ -118,7 +117,7 @@ function ItemStatusBar() {
           display: 'flex',
           alignItems: 'start',
           justifyContent: 'flex-start',
-          ':nth-of-type(1) button': {
+          ':nth-of-type(1) > button': {
             paddingLeft: `0px!important`,
           },
           ':nth-of-type(2)': {

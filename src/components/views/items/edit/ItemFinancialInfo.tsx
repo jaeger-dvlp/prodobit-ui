@@ -48,11 +48,10 @@ function ItemFinancialInfo() {
     <Box
       component="ul"
       sx={{
-        gap: 55,
+        gap: 45,
         margin: 0,
         padding: 0,
         width: '100%',
-        marginTop: 40,
         display: 'flex',
         flexWrap: 'wrap',
         listStyle: 'none',

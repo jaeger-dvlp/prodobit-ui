@@ -7,18 +7,26 @@ import { ScanBarcodeIcon, TimerIcon } from '@/components/icons';
 
 import 'dayjs/locale/tr';
 
-function ItemMainInfo() {
+function ItemMainInfo({ withBrand = false }: { withBrand?: boolean }) {
   const { item } = useEdit<Item>();
   return (
-    <>
+    <Box
+      sx={{
+        gap: 20,
+        width: '100%',
+        display: 'flex',
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+      }}
+    >
       <Box
         sx={{
           gap: 6,
           display: 'flex',
           flexWrap: 'wrap',
-          width: 'fit-content',
           alignContent: 'center',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
         }}
       >
         <Box
@@ -44,7 +52,7 @@ function ItemMainInfo() {
               color: t.colors.blue[5],
             }}
           >
-            {item?.code}
+            {item?.code || '? Code'}
           </Text>
         </Box>
         <Box
@@ -74,11 +82,36 @@ function ItemMainInfo() {
               .format('DD MMMM YYYY - HH:mm')}
           </Text>
         </Box>
+        {withBrand && (
+          <Box
+            sx={{
+              gap: 5,
+              borderRadius: 5,
+              display: 'flex',
+              padding: '7px 10px',
+              flexDirection: 'row',
+              alignItems: 'center',
+              color: t.colors.blue[5],
+              justifyContent: 'center',
+              backgroundColor: 'transparent',
+              border: `1px solid ${t.colors.blue[2]}`,
+            }}
+          >
+            <Text
+              sx={{
+                fontWeight: 600,
+                fontSize: '12px',
+                lineHeight: '14.4px',
+              }}
+            >
+              {item?.brand?.name || '? Brand'}
+            </Text>
+          </Box>
+        )}
       </Box>
       <Box
         sx={{
           gap: 20,
-          marginTop: 20,
           display: 'flex',
           flexDirection: 'row',
           wdith: 'fit-content',
@@ -86,7 +119,14 @@ function ItemMainInfo() {
           justifyContent: 'flex-start',
         }}
       >
-        <Image fit="cover" width={58} height={58} radius={100} alt={item?.name} src={item?.image} />
+        <Image
+          fit="cover"
+          width={58}
+          height={58}
+          radius={100}
+          alt={item?.name}
+          src={item?.image || 'https://placehold.co/400'}
+        />
         <Text
           sx={{
             color: '#000',
@@ -100,10 +140,10 @@ function ItemMainInfo() {
             },
           }}
         >
-          {item?.name}
+          {item?.name || '? Product Name'}
         </Text>
       </Box>
-    </>
+    </Box>
   );
 }
 
