@@ -1959,6 +1959,16 @@ function CustomSortThreeLine(props: CustomIconProps) {
   );
 }
 
+function CustomHorizontal3DotsIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 22" fill="none" {...DefaultProps} {...props}>
+      <circle cx="2" cy="11" r="2" fill="currentColor" />
+      <circle cx="9" cy="11" r="2" fill="currentColor" />
+      <circle cx="16" cy="11" r="2" fill="currentColor" />
+    </svg>
+  );
+}
+
 function CustomVertical3DotsIcon(props: CustomIconProps) {
   return (
     <svg viewBox="0 0 4 16" fill="none" {...DefaultProps} {...props}>
@@ -2064,6 +2074,7 @@ export {
   CustomBarcodeLoader,
   CustomMoveIcon,
   CustomSortThreeLine,
+  CustomHorizontal3DotsIcon,
   CustomVertical3DotsIcon,
   CustomOutlineIcon,
 };
