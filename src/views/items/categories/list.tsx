@@ -1,8 +1,13 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
-import RoutesMap, { RouteMapItem } from '@/routes';
+import { ProdobitAppTheme as t } from '@/theme';
 import Navbar from '@/components/layout/Navbar';
+import RoutesMap, { RouteMapItem } from '@/routes';
+import CategoryList from '@/components/views/items/categories/CategoryList';
+
+// * Mock data
+import { MockItemsCategories } from 'mockdata';
 
 function ItemsCategoriesLists() {
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
@@ -21,16 +26,16 @@ function ItemsCategoriesLists() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       component={motion.section}
-      sx={(theme) => ({
+      sx={{
         width: '100%',
         minHeight: '100%',
         padding: 60,
         backgroundColor: 'transparent',
-        [theme.fn.smallerThan('md')]: {
+        [t.fn.smallerThan('md')]: {
           padding: 45,
           paddingTop: 80,
         },
-      })}
+      }}
     >
       <Navbar
         paths={[Route, Route2, Route3].map((route) => ({
@@ -39,6 +44,25 @@ function ItemsCategoriesLists() {
         }))}
         withButtons
       />
+      <Box
+        sx={{
+          gap: 140,
+          padding: 0,
+          width: '100%',
+          height: 'auto',
+          paddingTop: 60,
+          display: 'flex',
+          overflow: 'auto',
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          [t.fn.smallerThan('md')]: {
+            padding: 45,
+          },
+        }}
+      >
+        <CategoryList categories={MockItemsCategories} />
+      </Box>
     </Box>
   );
 }
