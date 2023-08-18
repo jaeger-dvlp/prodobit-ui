@@ -770,7 +770,7 @@ function NewItemStep3() {
             color: t.colors.green[6],
           }}
         >
-          Öğe Kimliği
+          Öğe Özellikleri
         </Text>
         <Box
           sx={{
