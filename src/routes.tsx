@@ -124,9 +124,16 @@ const RoutesMap: RouteMapItem[] = [
     ],
   },
   {
-    path: '/requests',
-    name: 'Talepler',
+    path: '/planning',
+    name: 'Planlama',
     icon: <RequestsIcon {...IconProps} />,
+    subRoutes: [
+      {
+        path: '/planning/workflow',
+        name: 'İş Akışı',
+        viewInSidebar: true,
+      },
+    ],
     viewInSidebar: true,
   },
   {
