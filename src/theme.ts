@@ -117,6 +117,15 @@ export const ProdobitAppTheme: MantineTheme = {
         },
       },
     },
+    Select: {
+      defaultProps: {
+        transitionProps: {
+          duration: 400,
+          exitDuration: 200,
+          transition: 'pop-bottom-left',
+        },
+      },
+    },
   },
   colors: {
     ...DEFAULT_THEME.colors,
