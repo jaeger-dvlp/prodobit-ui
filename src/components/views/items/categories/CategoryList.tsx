@@ -67,6 +67,11 @@ function CategoryList({ categories }: Props) {
           alignItems: 'stretch',
           flexDirection: 'column',
           justifyContent: 'flex-start',
+          '&:has(> li:focus-within)': {
+            '> li:not(:focus-within)': {
+              opacity: 0.3,
+            },
+          },
           '> li': {
             gap: 30,
             display: 'flex',
@@ -168,7 +173,7 @@ function CategoryList({ categories }: Props) {
       </Button>
       <Box component="ul" className="ct-list">
         {categories.map((category, i) => (
-          <Box component="li" key={`category-${i}`}>
+          <Box tabIndex={0} component="li" key={`category-${i}`}>
             <Button variant="default" className="dnd-btn">
               <CustomVertical3DotsIcon />
             </Button>
