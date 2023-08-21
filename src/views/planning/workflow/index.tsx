@@ -1,9 +1,9 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
 import Navbar from '@/components/layout/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Select, Sx, Text } from '@mantine/core';
 import { BoldCalendarIcon, CustomRadarIcon } from '@/components/icons';
 
@@ -12,6 +12,10 @@ import 'dayjs/locale/tr';
 dayjs.locale('tr');
 
 type Views = 'calendar' | 'workflow';
+
+function isWeekend(date: string) {
+  return dayjs(date).day() === 0 || dayjs(date).day() === 6;
+}
 
 function ViewSelector({
   view,
@@ -73,17 +77,106 @@ function ViewSelector({
   );
 }
 
-/* Control Bar | pkg's: dayjs
-Must list the days as a button in a horizontal row. When click to a day, it must be scroll to that day in the calendar & control bar.  (Must be scrollable to right & left)
-After that, must be list the next days to.
-When click to prev day, must be scroll to left. After that, must be list the prev days to.
-7 days must be listed in the control bar. ( Days per view is 7 )
-*/
+function DaysSlider({
+  days,
+  onClick,
+  currentDay,
+  currentMonth,
+}: {
+  days: { value: string; label: string }[];
+  onClick: (day: { value: string; label: string }) => void;
+  currentDay: string;
+  currentMonth: string;
+}) {
+  React.useEffect(() => {
+    (async () => {
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      });
 
-function ControlBar() {
-  const [currentMonth, setCM] = React.useState(dayjs().format('M'));
+      const daysSelector = document.querySelector('.days-selector');
+      const day = daysSelector?.querySelector(`.day-btn:nth-of-type(${currentDay})`);
+
+      if (day) {
+        day.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
+      }
+    })();
+  }, [currentDay]);
   return (
     <Box
+      component={motion.div}
+      className="days-selector"
+      exit={{ opacity: 0, scaleX: 0.7 }}
+      animate={{ opacity: 1, scaleX: 1 }}
+      initial={{ opacity: 0, scaleX: 0.7 }}
+      transition={{
+        duration: 0.6,
+        ease: 'anticipate',
+      }}
+    >
+      {days.map((day, i) => (
+        <Button
+          className="day-btn"
+          component={motion.button}
+          onClick={() => onClick(day)}
+          data-selected-day={currentDay === day.value}
+          key={`day-btn-${i}-${day.value}-${day.label}`}
+          opacity={
+            isWeekend(
+              dayjs()
+                .month(Number(currentMonth) - 1)
+                .date(Number(day.value))
+                .format('YYYY-MM-DD'),
+            )
+              ? 0.4
+              : 1
+          }
+        >
+          <Text className="day-no">{day.value}</Text>
+          <Text className="day-label">{day.label}</Text>
+        </Button>
+      ))}
+    </Box>
+  );
+}
+
+function ControlBar() {
+  const [currentMonth, setCM] = React.useState<string>(dayjs().format('M'));
+  const [currentDay, setCD] = React.useState<string>(dayjs().format('D'));
+
+  const daysToRender = React.useMemo(() => {
+    return Array(
+      dayjs()
+        .month(Number(currentMonth) - 1)
+        .daysInMonth(),
+    )
+      .fill(0)
+      .map((_, i) => {
+        const day = dayjs()
+          .month(Number(currentMonth) - 1)
+          .date(i + 1);
+        return {
+          value: day.format('D'),
+          label: day.format('ddd'),
+        };
+      });
+  }, [currentMonth]);
+
+  React.useEffect(() => {
+    if (Number(currentDay) > daysToRender.length) {
+      setCD('1');
+    }
+  }, [currentDay, currentMonth, daysToRender]);
+
+  return (
+    <Box
+      className="control-bar"
       sx={{
         gap: 40,
         width: '100%',
@@ -123,8 +216,58 @@ function ControlBar() {
             },
           },
         },
+        '> .days-selector': {
+          gap: 60,
+          padding: 0,
+          width: '100%',
+          display: 'flex',
+          borderRadius: 20,
+          overflowX: 'auto',
+          alignItems: 'center',
+          flexDirection: 'row',
+          scrollSnapAlign: 'start',
+          scrollBehavior: 'smooth',
+          scrollPadding: '0px 20px',
+          justifyContent: 'flex-start',
+          transformOrigin: 'left',
+          '> .day-btn': {
+            padding: 20,
+            color: '#000',
+            height: 'auto',
+            minWidth: '97px',
+            borderRadius: 20,
+            transform: 'none!important',
+            transition: 'all 200ms ease-in-out',
+            backgroundColor: 'transparent!important',
+            ':hover': {
+              color: t.colors.green[6],
+            },
+            "&[data-selected-day='true']": {
+              opacity: '1!important',
+              color: '#fff!important',
+              backgroundColor: `${t.colors.green[3]}!important`,
+            },
+            '> div > span': {
+              gap: 10,
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              '> .day-no': {
+                fontWeight: 700,
+                fontSize: '32px',
+                lineHeight: '44.4px',
+              },
+              '> .day-label': {
+                opacity: 0.8,
+                fontWeight: 400,
+                fontSize: '15px',
+                lineHeight: '18px',
+              },
+            },
+          },
+        },
       }}
-      className="control-bar"
     >
       <Box className="month-selector">
         <Text>Ay Seçimi</Text>
@@ -141,6 +284,15 @@ function ControlBar() {
             }))}
         />
       </Box>
+      <AnimatePresence mode="wait">
+        <DaysSlider
+          days={daysToRender}
+          currentDay={currentDay}
+          currentMonth={currentMonth}
+          key={`days-slider-${currentMonth}`}
+          onClick={(day) => setCD(day.value)}
+        />
+      </AnimatePresence>
     </Box>
   );
 }
@@ -161,11 +313,11 @@ function PlanningWorkflow() {
         gap: 50,
         padding: 60,
         width: '100%',
-        display: 'flex',
+        display: 'grid',
         minHeight: '100%',
-        alignItems: 'stretch',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
+        placeItems: 'flex-start',
+        placeContent: 'flex-start',
+        gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
           padding: 45,
