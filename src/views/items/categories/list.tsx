@@ -8,6 +8,7 @@ import CategoryList from '@/components/views/items/categories/CategoryList';
 
 // * Mock data
 import { MockItemsCategories } from 'mockdata';
+import AddCategory from '@/components/views/items/categories/AddCategory';
 
 function ItemsCategoriesLists() {
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
@@ -62,6 +63,7 @@ function ItemsCategoriesLists() {
         }}
       >
         <CategoryList categories={MockItemsCategories} />
+        <AddCategory />
       </Box>
     </Box>
   );
