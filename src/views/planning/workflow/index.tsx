@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 
-function Planning() {
+function PlanningWorkflow() {
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/planning');
-
+  const Route2 = Route?.subRoutes?.find(
+    (route: RouteMapItem) => route.path === '/planning/workflow',
+  );
   return (
     <Box
       exit={{ opacity: 0 }}
@@ -25,7 +27,7 @@ function Planning() {
       })}
     >
       <Navbar
-        paths={[Route].map((route) => ({
+        paths={[Route, Route2].map((route) => ({
           path: route?.path,
           name: route?.name || '?',
         }))}
@@ -33,5 +35,4 @@ function Planning() {
     </Box>
   );
 }
-
-export default Planning;
+export default PlanningWorkflow;
