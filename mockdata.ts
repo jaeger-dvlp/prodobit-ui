@@ -2,6 +2,7 @@ import { ProdobitAppTheme } from '@/theme';
 import { MantineColor, MantineThemeColors } from '@mantine/core';
 import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
 import { ThreeBarsOne, ThreeBarsThree, ThreeBarsTwo } from '@/components/icons';
+import { getRandomUUID } from '@/common/utils/misc';
 
 export type MockStockStatus = {
   id: number;
@@ -536,6 +537,63 @@ const SizeSelectOpts = [
   },
 ];
 
+const MockUsers = [
+  {
+    id: getRandomUUID(),
+    name: 'Ömer',
+    surname: 'KAYALAR',
+    avatar: MockAvatars.bitmojiMan2,
+  },
+  {
+    id: getRandomUUID(),
+    name: 'Fatih',
+    surname: 'GENÇ',
+    avatar: MockAvatars.bitmojiMan1,
+  },
+];
+
+const MockWorkflow = [
+  {
+    id: getRandomUUID(),
+    name: 'CNC 1',
+    jobs: [
+      {
+        id: getRandomUUID(),
+        name: 'PG 7 Metal Somun',
+        category: 'Kategori Adı',
+        drafts: [null, null, null, null],
+        start_date: '2023-08-22 09:00:00',
+        end_date: '2023-08-24 09:00:00',
+        users: [MockUsers[0], MockUsers[1]],
+      },
+      {
+        id: getRandomUUID(),
+        name: 'PG 7 Metal Somun',
+        category: 'Kategori Adı',
+        drafts: [null, null, null, null],
+        start_date: '2023-08-24 09:00:00',
+        end_date: '2023-08-29 09:00:00',
+        users: [MockUsers[0], MockUsers[1]],
+      },
+    ],
+  },
+  {
+    id: getRandomUUID(),
+    name: 'CNC 2',
+    jobs: [
+      {
+        id: getRandomUUID(),
+        name: 'PG 7 Metal Somun',
+        category: 'Kategori Adı',
+        drafts: [null, null, null, null],
+        start_date: '2023-08-23 09:00:00',
+        end_date: '2023-08-29 09:00:00',
+        users: [MockUsers[0], MockUsers[1]],
+      },
+    ],
+  },
+];
+
 export {
   MockItemsCategories,
   MockItems,
@@ -548,4 +606,6 @@ export {
   FileTypeImages,
   MockNotesData,
   SizeSelectOpts,
+  MockUsers,
+  MockWorkflow,
 };
