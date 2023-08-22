@@ -8,6 +8,7 @@ import { Box, Button, Select, Sx, Text } from '@mantine/core';
 import { BoldCalendarIcon, CustomRadarIcon } from '@/components/icons';
 
 import 'dayjs/locale/tr';
+import WorkflowWrapper, { useWorkflow } from '@/components/context/Workflow.context';
 
 dayjs.locale('tr');
 
@@ -80,14 +81,12 @@ function ViewSelector({
 function DaysSlider({
   days,
   onClick,
-  currentDay,
-  currentMonth,
 }: {
   days: { value: string; label: string }[];
   onClick: (day: { value: string; label: string }) => void;
-  currentDay: string;
-  currentMonth: string;
 }) {
+  const { currentDay, currentMonth } = useWorkflow();
+
   React.useEffect(() => {
     (async () => {
       await new Promise<void>((resolve) => {
@@ -147,8 +146,7 @@ function DaysSlider({
 }
 
 function ControlBar() {
-  const [currentMonth, setCM] = React.useState<string>(dayjs().format('M'));
-  const [currentDay, setCD] = React.useState<string>(dayjs().format('D'));
+  const { currentDay, currentMonth, setCurrentDay: setCD, setCurrentMonth: setCM } = useWorkflow();
 
   const daysToRender = React.useMemo(() => {
     return Array(
@@ -172,13 +170,13 @@ function ControlBar() {
     if (Number(currentDay) > daysToRender.length) {
       setCD('1');
     }
-  }, [currentDay, currentMonth, daysToRender]);
+  }, [currentDay, currentMonth, daysToRender, setCD]);
 
   return (
     <Box
       className="control-bar"
       sx={{
-        gap: 40,
+        gap: 43,
         width: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -225,19 +223,16 @@ function ControlBar() {
           overflowX: 'auto',
           alignItems: 'center',
           flexDirection: 'row',
-          scrollSnapAlign: 'start',
-          scrollBehavior: 'smooth',
-          scrollPadding: '0px 20px',
           justifyContent: 'flex-start',
           transformOrigin: 'left',
           '> .day-btn': {
-            padding: 20,
+            padding: 0,
             color: '#000',
+            width: 'auto',
             height: 'auto',
-            minWidth: '97px',
             borderRadius: 20,
+            minWidth: 'calc((100% / 8) - 60px)!important',
             transform: 'none!important',
-            transition: 'all 200ms ease-in-out',
             backgroundColor: 'transparent!important',
             ':hover': {
               color: t.colors.green[6],
@@ -250,6 +245,7 @@ function ControlBar() {
             '> div > span': {
               gap: 10,
               display: 'flex',
+              padding: '20px 7.5px',
               alignItems: 'center',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -287,14 +283,16 @@ function ControlBar() {
       <AnimatePresence mode="wait">
         <DaysSlider
           days={daysToRender}
-          currentDay={currentDay}
-          currentMonth={currentMonth}
           key={`days-slider-${currentMonth}`}
           onClick={(day) => setCD(day.value)}
         />
       </AnimatePresence>
     </Box>
   );
+}
+
+function WorkflowTable() {
+  return <Box>x</Box>;
 }
 
 function PlanningWorkflow() {
@@ -304,48 +302,51 @@ function PlanningWorkflow() {
     (route: RouteMapItem) => route.path === '/planning/workflow',
   );
   return (
-    <Box
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      component={motion.section}
-      sx={(theme) => ({
-        gap: 50,
-        padding: 60,
-        width: '100%',
-        display: 'grid',
-        minHeight: '100%',
-        placeItems: 'flex-start',
-        placeContent: 'flex-start',
-        gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-        backgroundColor: 'transparent',
-        [theme.fn.smallerThan('md')]: {
-          padding: 45,
-          paddingTop: 80,
-        },
-      })}
-    >
-      <Navbar
-        paths={[Route, Route2].map((route) => ({
-          path: route?.path,
-          name: route?.name || '?',
-        }))}
-        middleChilds={<ViewSelector view={view} setView={setView} />}
-      />
+    <WorkflowWrapper>
       <Box
-        sx={{
-          gap: 30,
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        component={motion.section}
+        sx={(theme) => ({
+          gap: 50,
+          padding: 60,
           width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'stretch',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-        }}
+          display: 'grid',
+          minHeight: '100%',
+          placeItems: 'flex-start',
+          placeContent: 'flex-start',
+          gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+          backgroundColor: 'transparent',
+          [theme.fn.smallerThan('md')]: {
+            padding: 45,
+            paddingTop: 80,
+          },
+        })}
       >
-        <ControlBar />
+        <Navbar
+          paths={[Route, Route2].map((route) => ({
+            path: route?.path,
+            name: route?.name || '?',
+          }))}
+          middleChilds={<ViewSelector view={view} setView={setView} />}
+        />
+        <Box
+          sx={{
+            gap: 30,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <ControlBar />
+          <WorkflowTable />
+        </Box>
       </Box>
-    </Box>
+    </WorkflowWrapper>
   );
 }
 export default PlanningWorkflow;
