@@ -5,10 +5,11 @@ import Navbar from '@/components/layout/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Select, Sx, Text } from '@mantine/core';
-import { BoldCalendarIcon, CustomRadarIcon } from '@/components/icons';
+import { BoldCalendarIcon, CustomRadarIcon, EditIcon } from '@/components/icons';
 
 import 'dayjs/locale/tr';
 import WorkflowWrapper, { useWorkflow } from '@/components/context/Workflow.context';
+import { MockWorkflow } from 'mockdata';
 
 dayjs.locale('tr');
 
@@ -17,6 +18,22 @@ type Views = 'calendar' | 'workflow';
 function isWeekend(date: string) {
   return dayjs(date).day() === 0 || dayjs(date).day() === 6;
 }
+
+const calculateJobDuration = (
+  startDate: string,
+  endDate: string,
+  returnAs: 'sentence' | 'number' = 'sentence',
+) => {
+  const start = dayjs(startDate);
+  const end = dayjs(endDate);
+  const duration = end.diff(start, 'day');
+
+  if (returnAs === 'sentence') {
+    return duration > 1 ? `${duration} Gün` : `${end.diff(start, 'hour')} Saat`;
+  }
+
+  return duration;
+};
 
 function ViewSelector({
   view,
@@ -292,7 +309,250 @@ function ControlBar() {
 }
 
 function WorkflowTable() {
-  return <Box>x</Box>;
+  return (
+    <Box
+      sx={{
+        padding: 10,
+        width: '100%',
+        height: '100%',
+        display: 'grid',
+        borderRadius: 40,
+        gridAutoRows: '1fr',
+        backgroundColor: '#fff',
+        placeContent: 'start stretch',
+        gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
+      }}
+    >
+      <Box
+        sx={{
+          gap: 31,
+          width: '100%',
+          height: '100%',
+          display: 'grid',
+          gridAutoRows: '1fr',
+          gridColumn: 'span 1 / span 1',
+          gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+        }}
+      >
+        {MockWorkflow.map((wfItem) => (
+          <Text
+            sx={{
+              width: '100%',
+              height: '100%',
+              fontWeight: 500,
+              fontSize: '18px',
+              lineHeight: '21.6px',
+              color: t.colors.gray[5],
+              padding: '40px 50px 40px 40px',
+            }}
+            key={`wf-item-name-${wfItem.id}`}
+          >
+            {wfItem.name}
+          </Text>
+        ))}
+      </Box>
+      <Box
+        sx={{
+          gap: 31,
+          width: '100%',
+          padding: 0,
+          borderTopRightRadius: 30,
+          borderBottomRightRadius: 30,
+          display: 'grid',
+          minWidth: '100%',
+          overflowX: 'auto',
+          gridAutoRows: '1fr',
+          position: 'relative',
+          gridColumn: 'span 7 / span 7',
+          gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+        }}
+      >
+        {MockWorkflow.map((wfItem) => (
+          <Box
+            key={`wf-item-cont-${wfItem.id}`}
+            sx={{
+              gap: 13,
+              zIndex: 2,
+              height: '100%',
+              display: 'flex',
+              minWidth: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
+              transformOrigin: 'left',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <AnimatePresence>
+              {wfItem.jobs.map((job, x) => (
+                <Box
+                  component={motion.div}
+                  animate={{ scaleX: 1 }}
+                  initial={{ scaleX: 0 }}
+                  transition={{
+                    duration: 0.2,
+                    delay: x * 0.2,
+                  }}
+                  sx={{
+                    gap: 40,
+                    padding: 10,
+                    display: 'flex',
+                    borderRadius: 10,
+                    flexDirection: 'row',
+                    alignItems: 'stretch',
+                    transformOrigin: 'left',
+                    backgroundColor: job.color[1],
+                    justifyContent: 'space-between',
+                    border: `1px solid ${job.color[4]}`,
+                    minWidth: `calc(260px + ${calculateJobDuration(
+                      job.start_date,
+                      job.end_date,
+                      'number',
+                    )} * 50px)`,
+                  }}
+                  key={`wf-item-${wfItem.id}-job-${job.id}`}
+                >
+                  <Box
+                    sx={{
+                      gap: 10,
+                      minWidth: 'fit-content',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        minWidth: 'fit-content',
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: '15px',
+                          lineHeight: '18px',
+                          color: job.color[9],
+                          whiteSpace: 'nowrap',
+                          minWidth: 'fit-content',
+                        }}
+                      >
+                        {job.name}
+                      </Text>
+                      <Text
+                        sx={{
+                          opacity: 0.8,
+                          fontWeight: 400,
+                          fontSize: '12px',
+                          color: job.color[9],
+                          lineHeight: '14.4px',
+                        }}
+                      >
+                        {job.category}
+                      </Text>
+                    </Box>
+                    <Box
+                      sx={{
+                        gap: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                      }}
+                    >
+                      {job.users.map((user) => (
+                        <Box
+                          key={`wf-item-${wfItem.id}-job-${job.id}-user-${user.id}`}
+                          sx={{
+                            '&:not(:first-of-type)': {
+                              marginLeft: -7,
+                            },
+                          }}
+                        >
+                          <img
+                            alt={user.name}
+                            src={user.avatar}
+                            style={{
+                              width: 17,
+                              height: 17,
+                              borderRadius: 100,
+                              objectFit: 'cover',
+                              objectPosition: 'center',
+                              border: `2px solid ${job.color[1]}`,
+                            }}
+                          />
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      gap: 10,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-end',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        padding: 0,
+                        height: 'auto',
+                        color: job.color[9],
+                        border: 'none!important',
+                        backgroundColor: 'transparent!important',
+                        '> div > span > svg': {
+                          width: 16,
+                          height: 16,
+                        },
+                      }}
+                      variant="default"
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Box
+                      sx={{
+                        gap: 20,
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        '.job-metadata': {
+                          gap: 2,
+                          display: 'flex',
+                          alignItems: 'center',
+                          flexDirection: 'column',
+                          justifyContent: 'flex-start',
+                          '> .mantine-Text-root': {
+                            fontWeight: 500,
+                            fontSize: '12px',
+                            textAlign: 'center',
+                            color: job.color[9],
+                            lineHeight: '14.4px',
+                            '&:not(:first-of-type)': {
+                              fontWeight: 300,
+                            },
+                          },
+                        },
+                      }}
+                    >
+                      <Box className="job-metadata">
+                        <Text>İş Süresi</Text>
+                        <Text>{calculateJobDuration(job.start_date, job.end_date)}</Text>
+                      </Box>
+                      <Box className="job-metadata">
+                        <Text>Taslak</Text>
+                        <Text>{job.drafts.length}</Text>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              ))}
+            </AnimatePresence>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
 }
 
 function PlanningWorkflow() {
