@@ -124,6 +124,7 @@ function DaysSlider({
       }
     })();
   }, [currentDay]);
+
   return (
     <Box
       component={motion.div}
@@ -238,19 +239,21 @@ function ControlBar() {
           display: 'flex',
           borderRadius: 20,
           overflowX: 'auto',
+          flexWrap: 'nowrap',
           alignItems: 'center',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
           transformOrigin: 'left',
+          justifyContent: 'flex-start',
+
           '> .day-btn': {
             padding: 0,
             color: '#000',
-            width: 'auto',
             height: 'auto',
             borderRadius: 20,
-            minWidth: 'calc((100% / 8) - 60px)!important',
+            width: 'auto',
             transform: 'none!important',
+            transition: 'all 200ms ease-in-out',
             backgroundColor: 'transparent!important',
+            minWidth: 'calc((100% / 8) - 60px)!important',
             ':hover': {
               color: t.colors.green[6],
             },
@@ -262,7 +265,7 @@ function ControlBar() {
             '> div > span': {
               gap: 10,
               display: 'flex',
-              padding: '20px 7.5px',
+              padding: '20px 15px',
               alignItems: 'center',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -309,6 +312,18 @@ function ControlBar() {
 }
 
 function WorkflowTable() {
+  const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const daysSelector = document.querySelector('.days-selector');
+    const { scrollLeft } = e.currentTarget;
+
+    if (daysSelector) {
+      daysSelector.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -352,6 +367,8 @@ function WorkflowTable() {
         ))}
       </Box>
       <Box
+        onScroll={handleScroll}
+        className="jobs-list"
         sx={{
           gap: 31,
           width: '100%',
@@ -376,7 +393,7 @@ function WorkflowTable() {
               height: '100%',
               display: 'flex',
               minWidth: '100%',
-              flexDirection: 'row',
+              flexWrap: 'nowrap',
               alignItems: 'center',
               transformOrigin: 'left',
               justifyContent: 'flex-start',
@@ -403,6 +420,7 @@ function WorkflowTable() {
                     backgroundColor: job.color[1],
                     justifyContent: 'space-between',
                     border: `1px solid ${job.color[4]}`,
+                    width: 'fit-content',
                     minWidth: `calc(260px + ${calculateJobDuration(
                       job.start_date,
                       job.end_date,
