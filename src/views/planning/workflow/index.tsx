@@ -238,7 +238,7 @@ function ControlBar() {
           width: '100%',
           display: 'flex',
           borderRadius: 20,
-          overflowX: 'auto',
+          overflow: 'hidden',
           flexWrap: 'nowrap',
           alignItems: 'center',
           transformOrigin: 'left',
@@ -312,6 +312,11 @@ function ControlBar() {
 }
 
 function WorkflowTable() {
+  const [isMouseDown, setIsMouseDown] = React.useState(false);
+  const [grabSpecs, setGrabSpecs] = React.useState({
+    startX: 0,
+    scrollLeft: 0,
+  });
   const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const daysSelector = document.querySelector('.days-selector');
     const { scrollLeft } = e.currentTarget;
@@ -323,6 +328,31 @@ function WorkflowTable() {
       });
     }
   };
+
+  const onMouseDown = React.useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setIsMouseDown(true);
+    e.currentTarget.style.cursor = 'grabbing';
+    setGrabSpecs({
+      startX: e.pageX - e.currentTarget.offsetLeft,
+      scrollLeft: e.currentTarget.scrollLeft,
+    });
+  }, []);
+
+  const MouseLeaveEvents = React.useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setIsMouseDown(false);
+    e.currentTarget.style.cursor = 'grab';
+  }, []);
+
+  const onMouseMove = React.useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (!isMouseDown) return;
+      e.preventDefault();
+      const x = e.pageX - e.currentTarget.offsetLeft;
+      const walk = (x - grabSpecs.startX) * 3;
+      e.currentTarget.scrollLeft = grabSpecs.scrollLeft - walk;
+    },
+    [grabSpecs.scrollLeft, grabSpecs.startX, isMouseDown],
+  );
 
   return (
     <Box
@@ -366,6 +396,7 @@ function WorkflowTable() {
           gridAutoRows: '1fr',
           position: 'relative',
           gridColumn: 'span 7 / span 7',
+          cursor: 'grab',
           gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
           '> .wf-job-col': {
             gap: 13,
@@ -448,7 +479,14 @@ function WorkflowTable() {
           <Text key={`wf-item-name-${wfItem.id}`}>{wfItem.name}</Text>
         ))}
       </Box>
-      <Box className="jobs-list" onScroll={handleScroll}>
+      <Box
+        className="jobs-list"
+        onScroll={handleScroll}
+        onMouseDown={onMouseDown}
+        onMouseLeave={MouseLeaveEvents}
+        onMouseUp={MouseLeaveEvents}
+        onMouseMove={onMouseMove}
+      >
         {MockWorkflow.map((wfItem) => (
           <Box className="wf-job-col" key={`wf-item-cont-${wfItem.id}`}>
             <AnimatePresence>
