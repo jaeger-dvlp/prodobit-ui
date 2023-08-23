@@ -116,11 +116,11 @@ function DaysSlider({
       const day = daysSelector?.querySelector(`.day-btn:nth-of-type(${currentDay})`);
 
       if (day) {
-        day.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center',
-        });
+        // day.scrollIntoView({
+        //   behavior: 'smooth',
+        //   block: 'nearest',
+        //   inline: 'center',
+        // });
       }
     })();
   }, [currentDay]);
@@ -242,18 +242,24 @@ function ControlBar() {
           flexWrap: 'nowrap',
           alignItems: 'center',
           transformOrigin: 'left',
-          justifyContent: 'flex-start',
-
+          justifyContent: 'stretch',
           '> .day-btn': {
             padding: 0,
             color: '#000',
             height: 'auto',
             borderRadius: 20,
-            width: 'auto',
+            overflow: 'visible',
             transform: 'none!important',
             transition: 'all 200ms ease-in-out',
             backgroundColor: 'transparent!important',
+            width: 'calc((100% / 8) - 60px)!important',
             minWidth: 'calc((100% / 8) - 60px)!important',
+            maxWidth: 'calc((100% / 8) - 60px)!important',
+            [t.fn.smallerThan('xl')]: {
+              width: 'calc((100% / 4) - 30px)!important',
+              minWidth: 'calc((100% / 4) - 30px)!important',
+              maxWidth: 'calc((100% / 4) - 30px)!important',
+            },
             ':hover': {
               color: t.colors.green[6],
             },
@@ -360,20 +366,23 @@ function WorkflowTable() {
         padding: 10,
         width: '100%',
         height: '100%',
-        display: 'grid',
+        display: 'flex',
         borderRadius: 40,
-        gridAutoRows: '1fr',
+        overflow: 'hidden',
+        flexWrap: 'nowrap',
+        alignItems: 'stretch',
         backgroundColor: '#fff',
-        placeContent: 'start stretch',
-        gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
+        justifyContent: 'stretch',
         '> .workflow-left-col': {
           gap: 31,
           width: '100%',
+          minWidth: 160,
+          maxWidth: 160,
           height: '100%',
-          display: 'grid',
-          gridAutoRows: '1fr',
-          gridColumn: 'span 1 / span 1',
-          gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'stretch',
           '> .mantine-Text-root': {
             width: '100%',
             height: '100%',
@@ -381,26 +390,26 @@ function WorkflowTable() {
             fontSize: '18px',
             lineHeight: '21.6px',
             color: t.colors.gray[5],
-            padding: '40px 50px 40px 40px',
+            padding: '35px',
           },
         },
         '> .jobs-list': {
           gap: 31,
-          width: '100%',
           padding: 0,
+          width: '100%',
+          cursor: 'grab',
+          display: 'flex',
+          paddingRight: 100,
+          overflowX: 'auto',
+          position: 'relative',
+          flexDirection: 'column',
           borderTopRightRadius: 30,
           borderBottomRightRadius: 30,
-          display: 'grid',
-          minWidth: '100%',
-          overflowX: 'auto',
-          gridAutoRows: '1fr',
-          position: 'relative',
-          gridColumn: 'span 7 / span 7',
-          cursor: 'grab',
-          gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
           '> .wf-job-col': {
             gap: 13,
             zIndex: 2,
+            margin: 0,
+            padding: 0,
             height: '100%',
             display: 'flex',
             minWidth: '100%',
@@ -409,7 +418,7 @@ function WorkflowTable() {
             transformOrigin: 'left',
             justifyContent: 'flex-start',
             '> .wfj-item': {
-              gap: 40,
+              gap: 10,
               padding: 10,
               display: 'flex',
               borderRadius: 10,
@@ -501,15 +510,32 @@ function WorkflowTable() {
                   animate={{ scaleX: 1 }}
                   initial={{ scaleX: 0 }}
                   key={`wf-item-${wfItem.id}-job-${job.id}`}
-                  sx={{
-                    backgroundColor: job.color[1],
-                    border: `1px solid ${job.color[4]}`,
-                    minWidth: `calc(260px + ${calculateJobDuration(
-                      job.start_date,
-                      job.end_date,
-                      'number',
-                    )} * 50px)`,
-                  }}
+                  sx={(() => {
+                    const diff = Number(
+                      calculateJobDuration(job.start_date, job.end_date, 'number'),
+                    );
+                    const startDay = Number(dayjs(job.start_date).format('D'));
+                    return {
+                      backgroundColor: job.color[1],
+                      border: `1px solid ${job.color[4]}`,
+                      /*
+                      ? Left & minWidth Calculation Algorithm;
+                      ?  Gap between absolute items : 60px
+                      ? Days per row in control bar : 8
+                      ! - Calculate left value by its % & its start day.
+                      *   Example : start day is 3, then must be relative to control bar 3. day button.
+                      ! - Calculate minWidth value by its % & its duration.
+                      *   Example : start is 3, duration is 5, then must be relative to control bar 5. day button.
+                      */
+                      position: 'absolute',
+                      minWidth: `calc((100% / 8) * ${diff} - 30px)!important`,
+                      left: `calc((100% / 8) * ${startDay} - 90px)!important`,
+                      [t.fn.smallerThan('lg')]: {
+                        minWidth: `calc((100% / 4) * ${diff} - 30px)!important`,
+                        left: `calc((100% / 4) * ${startDay} - 90px)!important`,
+                      },
+                    };
+                  })()}
                 >
                   <Box className="wfj-item-left-col">
                     <Box>
