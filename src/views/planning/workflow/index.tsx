@@ -336,10 +336,7 @@ function WorkflowTable() {
         backgroundColor: '#fff',
         placeContent: 'start stretch',
         gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
-      }}
-    >
-      <Box
-        sx={{
+        '> .workflow-left-col': {
           gap: 31,
           width: '100%',
           height: '100%',
@@ -347,29 +344,17 @@ function WorkflowTable() {
           gridAutoRows: '1fr',
           gridColumn: 'span 1 / span 1',
           gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-        }}
-      >
-        {MockWorkflow.map((wfItem) => (
-          <Text
-            sx={{
-              width: '100%',
-              height: '100%',
-              fontWeight: 500,
-              fontSize: '18px',
-              lineHeight: '21.6px',
-              color: t.colors.gray[5],
-              padding: '40px 50px 40px 40px',
-            }}
-            key={`wf-item-name-${wfItem.id}`}
-          >
-            {wfItem.name}
-          </Text>
-        ))}
-      </Box>
-      <Box
-        onScroll={handleScroll}
-        className="jobs-list"
-        sx={{
+          '> .mantine-Text-root': {
+            width: '100%',
+            height: '100%',
+            fontWeight: 500,
+            fontSize: '18px',
+            lineHeight: '21.6px',
+            color: t.colors.gray[5],
+            padding: '40px 50px 40px 40px',
+          },
+        },
+        '> .jobs-list': {
           gap: 31,
           width: '100%',
           padding: 0,
@@ -382,68 +367,114 @@ function WorkflowTable() {
           position: 'relative',
           gridColumn: 'span 7 / span 7',
           gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-        }}
-      >
-        {MockWorkflow.map((wfItem) => (
-          <Box
-            key={`wf-item-cont-${wfItem.id}`}
-            sx={{
-              gap: 13,
-              zIndex: 2,
-              height: '100%',
+          '> .wf-job-col': {
+            gap: 13,
+            zIndex: 2,
+            height: '100%',
+            display: 'flex',
+            minWidth: '100%',
+            flexWrap: 'nowrap',
+            alignItems: 'center',
+            transformOrigin: 'left',
+            justifyContent: 'flex-start',
+            '> .wfj-item': {
+              gap: 40,
+              padding: 10,
               display: 'flex',
-              minWidth: '100%',
-              flexWrap: 'nowrap',
-              alignItems: 'center',
+              borderRadius: 10,
+              width: 'fit-content',
+              flexDirection: 'row',
+              alignItems: 'stretch',
               transformOrigin: 'left',
-              justifyContent: 'flex-start',
-            }}
-          >
+              justifyContent: 'space-between',
+              '> .wfj-item-left-col': {
+                gap: 10,
+                display: 'flex',
+                minWidth: 'fit-content',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+                '> div': {
+                  minWidth: 'fit-content',
+                },
+              },
+              '> .wfj-item-right-col': {
+                gap: 10,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                justifyContent: 'space-between',
+                '> .wfj-item-edit-btn': {
+                  padding: 0,
+                  height: 'auto',
+                  border: 'none!important',
+                  backgroundColor: 'transparent!important',
+                  '> div > span > svg': {
+                    width: 16,
+                    height: 16,
+                  },
+                },
+                '> .wfj-item-metadata': {
+                  gap: 20,
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  '.wfji-metadata': {
+                    gap: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    '> .mantine-Text-root': {
+                      fontWeight: 500,
+                      fontSize: '12px',
+                      textAlign: 'center',
+                      lineHeight: '14.4px',
+                      '&:not(:first-of-type)': {
+                        fontWeight: 300,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      }}
+    >
+      <Box className="workflow-left-col">
+        {MockWorkflow.map((wfItem) => (
+          <Text key={`wf-item-name-${wfItem.id}`}>{wfItem.name}</Text>
+        ))}
+      </Box>
+      <Box className="jobs-list" onScroll={handleScroll}>
+        {MockWorkflow.map((wfItem) => (
+          <Box className="wf-job-col" key={`wf-item-cont-${wfItem.id}`}>
             <AnimatePresence>
               {wfItem.jobs.map((job, x) => (
                 <Box
-                  component={motion.div}
-                  animate={{ scaleX: 1 }}
-                  initial={{ scaleX: 0 }}
                   transition={{
                     duration: 0.2,
                     delay: x * 0.2,
                   }}
+                  className="wfj-item"
+                  component={motion.div}
+                  animate={{ scaleX: 1 }}
+                  initial={{ scaleX: 0 }}
+                  key={`wf-item-${wfItem.id}-job-${job.id}`}
                   sx={{
-                    gap: 40,
-                    padding: 10,
-                    display: 'flex',
-                    borderRadius: 10,
-                    flexDirection: 'row',
-                    alignItems: 'stretch',
-                    transformOrigin: 'left',
                     backgroundColor: job.color[1],
-                    justifyContent: 'space-between',
                     border: `1px solid ${job.color[4]}`,
-                    width: 'fit-content',
                     minWidth: `calc(260px + ${calculateJobDuration(
                       job.start_date,
                       job.end_date,
                       'number',
                     )} * 50px)`,
                   }}
-                  key={`wf-item-${wfItem.id}-job-${job.id}`}
                 >
-                  <Box
-                    sx={{
-                      gap: 10,
-                      minWidth: 'fit-content',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        minWidth: 'fit-content',
-                      }}
-                    >
+                  <Box className="wfj-item-left-col">
+                    <Box>
                       <Text
                         sx={{
                           fontWeight: 700,
@@ -502,62 +533,32 @@ function WorkflowTable() {
                       ))}
                     </Box>
                   </Box>
-                  <Box
-                    sx={{
-                      gap: 10,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-end',
-                      justifyContent: 'space-between',
-                    }}
-                  >
+                  <Box className="wfj-item-right-col">
                     <Button
                       sx={{
-                        padding: 0,
-                        height: 'auto',
                         color: job.color[9],
-                        border: 'none!important',
-                        backgroundColor: 'transparent!important',
-                        '> div > span > svg': {
-                          width: 16,
-                          height: 16,
-                        },
                       }}
+                      className="wfj-item-edit-btn"
                       variant="default"
                     >
                       <EditIcon />
                     </Button>
-                    <Box
-                      sx={{
-                        gap: 20,
-                        display: 'flex',
-                        alignItems: 'center',
-                        flexDirection: 'row',
-                        justifyContent: 'flex-end',
-                        '.job-metadata': {
-                          gap: 2,
-                          display: 'flex',
-                          alignItems: 'center',
-                          flexDirection: 'column',
-                          justifyContent: 'flex-start',
-                          '> .mantine-Text-root': {
-                            fontWeight: 500,
-                            fontSize: '12px',
-                            textAlign: 'center',
-                            color: job.color[9],
-                            lineHeight: '14.4px',
-                            '&:not(:first-of-type)': {
-                              fontWeight: 300,
-                            },
-                          },
-                        },
-                      }}
-                    >
-                      <Box className="job-metadata">
+                    <Box className="wfj-item-metadata">
+                      <Box
+                        sx={{
+                          color: job.color[9],
+                        }}
+                        className="wfji-metadata"
+                      >
                         <Text>İş Süresi</Text>
                         <Text>{calculateJobDuration(job.start_date, job.end_date)}</Text>
                       </Box>
-                      <Box className="job-metadata">
+                      <Box
+                        sx={{
+                          color: job.color[9],
+                        }}
+                        className="wfji-metadata"
+                      >
                         <Text>Taslak</Text>
                         <Text>{job.drafts.length}</Text>
                       </Box>
