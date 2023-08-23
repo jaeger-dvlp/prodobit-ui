@@ -16,8 +16,8 @@ const WorkflowContext = React.createContext<IWorkflow>({
 });
 
 export default function WorkflowWrapper({ children }: { children: React.ReactNode }) {
-  const [currentDay, setCurrentDay] = React.useState<string>(dayjs().format('D'));
-  const [currentMonth, setCurrentMonth] = React.useState<string>(dayjs().format('M'));
+  const [currentDay, setCurrentDay] = React.useState<string>('1');
+  const [currentMonth, setCurrentMonth] = React.useState<string>('8');
 
   const value = React.useMemo(
     () => ({
