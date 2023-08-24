@@ -102,6 +102,7 @@ function DaysSlider({
   days: { value: string; label: string }[];
   onClick: (day: { value: string; label: string }) => void;
 }) {
+  console.log(onClick);
   const { currentDay, currentMonth } = useWorkflow();
 
   React.useEffect(() => {
@@ -138,10 +139,10 @@ function DaysSlider({
       }}
     >
       {days.map((day, i) => (
-        <Button
-          className="day-btn"
-          component={motion.button}
-          onClick={() => onClick(day)}
+        <Box
+          className="day-elm"
+          component={motion.div}
+          // onClick={() => onClick(day)}
           data-selected-day={currentDay === day.value}
           key={`day-btn-${i}-${day.value}-${day.label}`}
           opacity={
@@ -157,7 +158,7 @@ function DaysSlider({
         >
           <Text className="day-no">{day.value}</Text>
           <Text className="day-label">{day.label}</Text>
-        </Button>
+        </Box>
       ))}
     </Box>
   );
@@ -243,50 +244,47 @@ function ControlBar() {
           alignItems: 'center',
           transformOrigin: 'left',
           justifyContent: 'stretch',
-          '> .day-btn': {
-            padding: 0,
+          '> .day-elm': {
             color: '#000',
             height: 'auto',
             borderRadius: 20,
             overflow: 'visible',
+            padding: '20px 15px',
             transform: 'none!important',
             transition: 'all 200ms ease-in-out',
             backgroundColor: 'transparent!important',
             width: 'calc((100% / 8) - 60px)!important',
             minWidth: 'calc((100% / 8) - 60px)!important',
             maxWidth: 'calc((100% / 8) - 60px)!important',
-            [t.fn.smallerThan('xl')]: {
-              width: 'calc((100% / 4) - 30px)!important',
-              minWidth: 'calc((100% / 4) - 30px)!important',
-              maxWidth: 'calc((100% / 4) - 30px)!important',
-            },
-            ':hover': {
-              color: t.colors.green[6],
-            },
             "&[data-selected-day='true']": {
               opacity: '1!important',
               color: '#fff!important',
               backgroundColor: `${t.colors.green[3]}!important`,
             },
-            '> div > span': {
-              gap: 10,
-              display: 'flex',
-              padding: '20px 15px',
-              alignItems: 'center',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              '> .day-no': {
-                fontWeight: 700,
-                fontSize: '32px',
-                lineHeight: '44.4px',
-              },
-              '> .day-label': {
-                opacity: 0.8,
-                fontWeight: 400,
-                fontSize: '15px',
-                lineHeight: '18px',
-              },
+            gap: 10,
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            '> .day-no': {
+              fontWeight: 700,
+              fontSize: '32px',
+              lineHeight: '44.4px',
             },
+            '> .day-label': {
+              opacity: 0.8,
+              fontWeight: 400,
+              fontSize: '15px',
+              lineHeight: '18px',
+            },
+            [t.fn.smallerThan('xl')]: {
+              width: 'calc((100% / 4) - 30px)!important',
+              minWidth: 'calc((100% / 4) - 30px)!important',
+              maxWidth: 'calc((100% / 4) - 30px)!important',
+            },
+            // ':hover': {
+            //   color: t.colors.green[6],
+            // },
           },
         },
       }}
@@ -325,12 +323,20 @@ function WorkflowTable() {
   });
   const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const daysSelector = document.querySelector('.days-selector');
+    const gridBox = document.querySelector('.grid-box');
     const { scrollLeft } = e.currentTarget;
 
     if (daysSelector) {
       daysSelector.scrollTo({
         left: scrollLeft,
-        behavior: 'smooth',
+        behavior: 'instant',
+      });
+    }
+
+    if (gridBox) {
+      gridBox.scrollTo({
+        left: scrollLeft,
+        behavior: 'instant',
       });
     }
   };
@@ -368,33 +374,37 @@ function WorkflowTable() {
         height: '100%',
         display: 'flex',
         borderRadius: 40,
-        overflow: 'hidden',
         flexWrap: 'nowrap',
+        position: 'relative',
         alignItems: 'stretch',
         backgroundColor: '#fff',
         justifyContent: 'stretch',
         '> .workflow-left-col': {
           gap: 31,
+          zIndex: 6,
           width: '100%',
           minWidth: 160,
           maxWidth: 160,
           height: '100%',
           display: 'flex',
+          position: 'relative',
           alignItems: 'stretch',
+          backgroundColor: '#fff',
           flexDirection: 'column',
           justifyContent: 'stretch',
           '> .mantine-Text-root': {
             width: '100%',
             height: '100%',
             fontWeight: 500,
+            padding: '35px',
             fontSize: '18px',
             lineHeight: '21.6px',
             color: t.colors.gray[5],
-            padding: '35px',
           },
         },
         '> .jobs-list': {
           gap: 31,
+          zIndex: 6,
           padding: 0,
           width: '100%',
           cursor: 'grab',
@@ -481,8 +491,70 @@ function WorkflowTable() {
             },
           },
         },
+        '> .grid-box': {
+          top: -10,
+          right: 0,
+          margin: 0,
+          padding: 0,
+          border: 'none',
+          overflow: 'hidden',
+          position: 'absolute',
+          height: 'calc(100% + 10px)',
+          width: 'calc(100% - 10px)',
+          '> .background-pattern': {
+            top: 0,
+            left: 0,
+            zIndex: 5,
+            scale: '1.01',
+            height: '100%',
+            color: 'black',
+            minWidth: '999%',
+            position: 'absolute',
+            pointerEvents: 'none',
+          },
+        },
       }}
     >
+      <Box className="grid-box">
+        {
+          // We need a SVG Grid that made up of 127x125 squares.
+          // We need to make it responsive.
+          // But the svg's outer borders must be not.
+          // Svg width height is 100% of its parent.
+          /*
+          <svg className="background-pattern">
+            <defs>
+              <pattern id="grid" width="127" height="125" patternUnits="userSpaceOnUse">
+                <rect width="100%" height="100%" fill="none" />
+                <path
+                  d="M 127 0 L 0 0 0 125"
+                  fill="none"
+                  stroke="rgba(0, 0, 0, 0.3)"
+                  strokeWidth="1"
+                />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+           Something like this but NOT this, cuz its acts like svg have border around it because of grid rects.
+          */
+        }
+
+        <svg className="background-pattern">
+          <defs>
+            <pattern id="grid" width="126" height="125" patternUnits="userSpaceOnUse">
+              <rect width="100%" height="100%" fill="none" />
+              <path
+                d="M 126 0 L 0 0 0 125"
+                fill="none"
+                stroke="rgba(0, 0, 0, 0.3)"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </Box>
       <Box className="workflow-left-col">
         {MockWorkflow.map((wfItem) => (
           <Text key={`wf-item-name-${wfItem.id}`}>{wfItem.name}</Text>
