@@ -95,6 +95,45 @@ function ViewSelector({
   );
 }
 
+function StatusIndicator({ pos }: { pos: number }) {
+  return (
+    <Box
+      sx={{
+        top: 0,
+        left: 0,
+        zIndex: 2,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        maxWidth: `${pos}px`,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        borderRight: `1px solid ${t.colors.green[5]}`,
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        component={motion.div}
+        animate={{
+          x: ['-218px', `${pos}px`],
+          opacity: ['0', '1', '0'],
+        }}
+        transition={{
+          duration: 5,
+          ease: 'backInOut',
+          repeat: Infinity,
+        }}
+        sx={{
+          width: '218px',
+          height: '100%',
+          background: t.fn.linearGradient(90, 'transparent', t.colors.green[1]),
+        }}
+      />
+    </Box>
+  );
+}
+
 function DaysSlider({
   days,
   onClick,
@@ -278,9 +317,9 @@ function ControlBar() {
               lineHeight: '18px',
             },
             [t.fn.smallerThan('xl')]: {
-              width: 'calc((100% / 4) - 30px)!important',
-              minWidth: 'calc((100% / 4) - 30px)!important',
-              maxWidth: 'calc((100% / 4) - 30px)!important',
+              width: 'calc((100% / 2) - 30px)!important',
+              minWidth: 'calc((100% / 2) - 30px)!important',
+              maxWidth: 'calc((100% / 2) - 30px)!important',
             },
             // ':hover': {
             //   color: t.colors.green[6],
@@ -426,7 +465,7 @@ function WorkflowTable() {
           width: '900%',
           cursor: 'grab',
           display: 'flex',
-          paddingRight: 100,
+          paddingRight: 200,
           overflowX: 'auto',
           overflowY: 'hidden',
           position: 'relative',
@@ -570,6 +609,7 @@ function WorkflowTable() {
         onMouseUp={MouseLeaveEvents}
         onMouseMove={onMouseMove}
       >
+        <StatusIndicator pos={680} />
         {MockWorkflow.map((wfItem) => (
           <Box className="wf-job-col" key={`wf-item-cont-${wfItem.id}`}>
             <AnimatePresence>
@@ -615,9 +655,9 @@ function WorkflowTable() {
                       position: 'absolute',
                       minWidth: `calc((100% / 8) * ${diff} - 13px)!important`,
                       left: `calc((100% / 8) * ${startDay} - 100px)!important`,
-                      [t.fn.smallerThan('lg')]: {
-                        minWidth: `calc((100% / 4) * ${diff} - 13px)!important`,
-                        left: `calc((100% / 4) * ${startDay} - 100px)!important`,
+                      [t.fn.smallerThan('xl')]: {
+                        minWidth: `calc((100% / 2) * ${diff} - 13px)!important`,
+                        left: `calc((100% / 2) * ${startDay} - 100px)!important`,
                       },
                     };
                   })()}
