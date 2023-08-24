@@ -516,7 +516,7 @@ function WorkflowTable() {
       }}
     >
       <Box className="grid-box">
-        <svg className="background-pattern">
+        <svg className="background-pattern" preserveAspectRatio="none">
           <defs>
             <pattern id="grid" width="126" height="125" patternUnits="userSpaceOnUse">
               <rect width="100%" height="100%" fill="none" />
@@ -576,11 +576,11 @@ function WorkflowTable() {
                       *   Example : start is 3, duration is 5, then must be relative to control bar 5. day button.
                       */
                       position: 'absolute',
-                      minWidth: `calc((100% / 8) * ${diff} - 30px)!important`,
-                      left: `calc((100% / 8) * ${startDay} - 90px)!important`,
+                      minWidth: `calc((100% / 8) * ${diff} - 13px)!important`,
+                      left: `calc((100% / 8) * ${startDay} - 100px)!important`,
                       [t.fn.smallerThan('lg')]: {
-                        minWidth: `calc((100% / 4) * ${diff} - 30px)!important`,
-                        left: `calc((100% / 4) * ${startDay} - 90px)!important`,
+                        minWidth: `calc((100% / 4) * ${diff} - 13px)!important`,
+                        left: `calc((100% / 4) * ${startDay} - 100px)!important`,
                       },
                     };
                   })()}
