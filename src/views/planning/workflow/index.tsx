@@ -499,8 +499,8 @@ function WorkflowTable() {
           border: 'none',
           overflow: 'hidden',
           position: 'absolute',
-          height: 'calc(100% + 10px)',
           width: 'calc(100% - 10px)',
+          height: 'calc(100% + 10px)',
           '> .background-pattern': {
             top: 0,
             left: 0,
@@ -516,30 +516,6 @@ function WorkflowTable() {
       }}
     >
       <Box className="grid-box">
-        {
-          // We need a SVG Grid that made up of 127x125 squares.
-          // We need to make it responsive.
-          // But the svg's outer borders must be not.
-          // Svg width height is 100% of its parent.
-          /*
-          <svg className="background-pattern">
-            <defs>
-              <pattern id="grid" width="127" height="125" patternUnits="userSpaceOnUse">
-                <rect width="100%" height="100%" fill="none" />
-                <path
-                  d="M 127 0 L 0 0 0 125"
-                  fill="none"
-                  stroke="rgba(0, 0, 0, 0.3)"
-                  strokeWidth="1"
-                />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-           Something like this but NOT this, cuz its acts like svg have border around it because of grid rects.
-          */
-        }
-
         <svg className="background-pattern">
           <defs>
             <pattern id="grid" width="126" height="125" patternUnits="userSpaceOnUse">
