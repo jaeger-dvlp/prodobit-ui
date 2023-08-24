@@ -39,6 +39,7 @@ const ToolbarInnerContainerSX: Sx = {
   display: 'flex',
   borderRadius: 15,
   alignItems: 'center',
+  pointerEvents: 'all',
   maxWidth: 'fit-content',
   backdropFilter: 'blur(5px)',
   backgroundColor: 'rgba(255, 255, 255, 0.82)',

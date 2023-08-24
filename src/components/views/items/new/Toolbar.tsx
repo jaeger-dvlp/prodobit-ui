@@ -31,6 +31,7 @@ function NewItemToolbar({ children }: Props) {
         display: 'flex',
         position: 'sticky',
         alignItems: 'center',
+        pointerEvents: 'all',
         justifyContent: 'center',
         button: {
           height: 'auto',

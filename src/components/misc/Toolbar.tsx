@@ -22,6 +22,7 @@ function ToolbarContainer({ children }: { children?: React.ReactNode }) {
         display: 'flex',
         position: 'sticky',
         alignItems: 'center',
+        pointerEvents: 'none',
         justifyContent: 'center',
       }}
     >

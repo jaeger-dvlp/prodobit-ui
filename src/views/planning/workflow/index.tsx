@@ -11,6 +11,7 @@ import ControlBar from '@/components/views/planning/workflow/ControlBar';
 import WorkflowTable from '@/components/views/planning/workflow/WorkflowTable';
 
 import 'dayjs/locale/tr';
+import WorkflowToolbar from '@/components/views/planning/workflow/Toolbar';
 
 dayjs.locale('tr');
 
@@ -126,6 +127,7 @@ function PlanningWorkflow() {
           <ControlBar />
           <WorkflowTable />
         </Box>
+        <WorkflowToolbar />
       </Box>
     </WorkflowWrapper>
   );
