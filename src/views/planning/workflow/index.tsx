@@ -134,7 +134,7 @@ function DaysSlider({
       animate={{ opacity: 1, scaleX: 1 }}
       initial={{ opacity: 0, scaleX: 0.7 }}
       transition={{
-        duration: 0.6,
+        duration: 1,
         ease: 'anticipate',
       }}
     >
@@ -369,7 +369,7 @@ function WorkflowTable() {
   return (
     <Box
       sx={{
-        padding: 10,
+        padding: 0,
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -380,8 +380,9 @@ function WorkflowTable() {
         backgroundColor: '#fff',
         justifyContent: 'stretch',
         '> .workflow-left-col': {
-          gap: 31,
-          zIndex: 6,
+          gap: 0,
+          zIndex: 25,
+          padding: 0,
           width: '100%',
           minWidth: 160,
           maxWidth: 160,
@@ -389,38 +390,60 @@ function WorkflowTable() {
           display: 'flex',
           position: 'relative',
           alignItems: 'stretch',
-          backgroundColor: '#fff',
           flexDirection: 'column',
           justifyContent: 'stretch',
-          '> .mantine-Text-root': {
+          borderRadius: '30px 0px 0px 30px',
+          '.start-gradient': {
+            top: 0,
+            zIndex: 25,
+            left: '100%',
+            width: '15%',
+            position: 'absolute',
+            minHeight: '100%',
+            background: t.fn.linearGradient(90, 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0)'),
+          },
+          backgroundColor: '#fff',
+          '> div': {
+            padding: 10,
             width: '100%',
-            height: '100%',
-            fontWeight: 500,
-            padding: '35px',
-            fontSize: '18px',
-            lineHeight: '21.6px',
-            color: t.colors.gray[5],
+            height: '111.5px',
+            maxHeight: '111.5px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '> .mantine-Text-root': {
+              fontWeight: 500,
+              fontSize: '18px',
+              lineHeight: '21.6px',
+              color: t.colors.gray[5],
+            },
           },
         },
         '> .jobs-list': {
-          gap: 31,
+          gap: 0,
           zIndex: 6,
           padding: 0,
-          width: '100%',
+          width: '900%',
           cursor: 'grab',
           display: 'flex',
           paddingRight: 100,
           overflowX: 'auto',
+          overflowY: 'hidden',
           position: 'relative',
           flexDirection: 'column',
           borderTopRightRadius: 30,
+          justifyContent: 'flex-start',
           borderBottomRightRadius: 30,
+          alignItems: 'flex-start',
           '> .wf-job-col': {
             gap: 13,
             zIndex: 2,
             margin: 0,
             padding: 0,
-            height: '100%',
+            width: '100%',
+            overflow: 'hidden',
+            height: '111.5px',
+            maxHeight: '111.5px',
             display: 'flex',
             minWidth: '100%',
             flexWrap: 'nowrap',
@@ -492,20 +515,20 @@ function WorkflowTable() {
           },
         },
         '> .grid-box': {
-          top: -10,
+          top: 0,
           right: 0,
           margin: 0,
           padding: 0,
+          height: '100%',
           border: 'none',
+          borderRadius: 30,
           overflow: 'hidden',
           position: 'absolute',
           width: 'calc(100% - 10px)',
-          height: 'calc(100% + 10px)',
           '> .background-pattern': {
-            top: 0,
+            top: -1,
             left: 0,
             zIndex: 5,
-            scale: '1.01',
             height: '100%',
             color: 'black',
             minWidth: '999%',
@@ -518,10 +541,10 @@ function WorkflowTable() {
       <Box className="grid-box">
         <svg className="background-pattern" preserveAspectRatio="none">
           <defs>
-            <pattern id="grid" width="126" height="125" patternUnits="userSpaceOnUse">
+            <pattern id="grid" width="126" height="112" patternUnits="userSpaceOnUse">
               <rect width="100%" height="100%" fill="none" />
               <path
-                d="M 126 0 L 0 0 0 125"
+                d="M 126 0 L 0 0 0 112"
                 fill="none"
                 stroke="rgba(0, 0, 0, 0.3)"
                 strokeWidth="1"
@@ -532,8 +555,11 @@ function WorkflowTable() {
         </svg>
       </Box>
       <Box className="workflow-left-col">
+        <Box className="start-gradient" />
         {MockWorkflow.map((wfItem) => (
-          <Text key={`wf-item-name-${wfItem.id}`}>{wfItem.name}</Text>
+          <Box key={`wf-item-name-${wfItem.id}`}>
+            <Text>{wfItem.name}</Text>
+          </Box>
         ))}
       </Box>
       <Box
@@ -547,16 +573,27 @@ function WorkflowTable() {
         {MockWorkflow.map((wfItem) => (
           <Box className="wf-job-col" key={`wf-item-cont-${wfItem.id}`}>
             <AnimatePresence>
-              {wfItem.jobs.map((job, x) => (
+              {wfItem.jobs.map((job) => (
                 <Box
                   transition={{
-                    duration: 0.2,
-                    delay: x * 0.2,
+                    duration: 1,
+                    ease: 'anticipate',
+                    delay: 0.4,
                   }}
                   className="wfj-item"
                   component={motion.div}
-                  animate={{ scaleX: 1 }}
-                  initial={{ scaleX: 0 }}
+                  animate={{
+                    translateX: 0,
+                    translateY: 0,
+                    scaleX: 1,
+                    opacity: 1,
+                  }}
+                  initial={{
+                    translateX: -50,
+                    translateY: Math.floor(Math.random() * 200) - 100,
+                    scaleX: 0.8,
+                    opacity: 0,
+                  }}
                   key={`wf-item-${wfItem.id}-job-${job.id}`}
                   sx={(() => {
                     const diff = Number(
