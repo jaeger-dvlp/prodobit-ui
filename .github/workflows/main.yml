@@ -6,9 +6,8 @@ on:
       - dev
 
 jobs:
-  build-and-lint:
+  lint-and-build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
