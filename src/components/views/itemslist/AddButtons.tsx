@@ -2,18 +2,22 @@ import { BsPlusLg } from 'react-icons/bs';
 import { Button, Text } from '@mantine/core';
 
 function AddButtons({
-  onItemAdd,
-  onCategoryAdd,
+  onPrimaryButtonClick,
+  onSecondaryButtonClick,
+  primaryButtonText,
+  secondaryButtonText,
 }: {
-  onItemAdd?: () => void;
-  onCategoryAdd?: () => void;
+  onPrimaryButtonClick?: () => void;
+  onSecondaryButtonClick?: () => void;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
 }) {
   return (
     <>
       <Button
         type="button"
         variant="default"
-        onClick={onItemAdd}
+        onClick={onPrimaryButtonClick}
         leftIcon={<BsPlusLg width={24} height={24} />}
         sx={(theme) => ({
           color: 'white',
@@ -37,13 +41,13 @@ function AddButtons({
             lineHeight: 1.2,
           }}
         >
-          Öğe Ekle
+          {primaryButtonText}
         </Text>
       </Button>
       <Button
         type="button"
         variant="default"
-        onClick={onCategoryAdd}
+        onClick={onSecondaryButtonClick}
         leftIcon={<BsPlusLg width={24} height={24} />}
         sx={(theme) => ({
           height: 'auto',
@@ -67,7 +71,7 @@ function AddButtons({
             lineHeight: 1.2,
           }}
         >
-          Kategori Ekle
+          {secondaryButtonText}
         </Text>
       </Button>
     </>

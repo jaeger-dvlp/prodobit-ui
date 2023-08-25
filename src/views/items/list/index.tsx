@@ -1,13 +1,15 @@
 import React from 'react';
 import { MockItems } from 'mockdata';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import DevMode from '@/components/misc/DevMode';
-import { Box, Button, Text } from '@mantine/core';
-import NoItemsView from '@/views/items/list/NoItems';
-import WithItemsView from '@/views/items/list/WithItems';
 import RoutesMap, { RouteMapItem } from '@/routes';
+import { Box, Button, Text } from '@mantine/core';
+import GenericNoItemsView from '@/views/global/NoItems';
+import WithItemsView from '@/views/items/list/WithItems';
 
 function ItemsList() {
+  const Navigate = useNavigate();
   const [items, setItems] = React.useState(MockItems);
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
   const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/list');
@@ -33,8 +35,13 @@ function ItemsList() {
       })}
     >
       {items.length === 0 ? (
-        <NoItemsView
+        <GenericNoItemsView
           items={items}
+          text="Etkin ve Modern Bir Öğe Yönetimi İçin"
+          primaryButtonText="Öğe Ekle"
+          secondaryButtonText="Kategori Ekle"
+          onPrimaryButtonClick={() => Navigate('/items/new')}
+          onSecondaryButtonClick={() => Navigate('/items/categories/list')}
           paths={[Route, Route2].map((route) => ({
             path: route?.path,
             name: route?.name || '?',

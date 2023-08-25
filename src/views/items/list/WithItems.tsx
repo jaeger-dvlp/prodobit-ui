@@ -344,7 +344,12 @@ function TopBar() {
             justifyContent: 'start',
           }}
         >
-          <AddButtons onItemAdd={() => Navigate('/items/new')} onCategoryAdd={() => null} />
+          <AddButtons
+            primaryButtonText="Öğe Ekle"
+            secondaryButtonText="Kategori Ekle"
+            onPrimaryButtonClick={() => Navigate('/items/new')}
+            onSecondaryButtonClick={() => Navigate('/items/categories/list')}
+          />
         </Box>
       </Box>
       <CategoriesBar categories={MockItemsCategories} />
