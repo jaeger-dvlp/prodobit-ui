@@ -1,8 +1,8 @@
 import { ProdobitAppTheme } from '@/theme';
+import { getRandomUUID } from '@/common/utils/misc';
 import { MantineColor, MantineThemeColors } from '@mantine/core';
 import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
 import { ThreeBarsOne, ThreeBarsThree, ThreeBarsTwo } from '@/components/icons';
-import { getRandomUUID } from '@/common/utils/misc';
 
 export type MockStockStatus = {
   id: number;
@@ -11,6 +11,19 @@ export type MockStockStatus = {
   color: MantineThemeColors[MantineColor];
   condition: string;
   excount: number;
+};
+
+export type Order<T> = {
+  id: number;
+  orderNo: string;
+  product: T;
+  count: number;
+  customer: string;
+  factory: string;
+  status: string;
+  otherNo: string;
+  created_at: string;
+  requested_at: string;
 };
 
 export type TItemStatus = {
@@ -255,6 +268,21 @@ const MockItems: Item[] = [
     status: 'inspecting',
     count: 20,
     created_at: '2021-05-15 20:30:00',
+  },
+];
+
+const MockOrders: Order<Item>[] = [
+  {
+    id: 0,
+    orderNo: '123123',
+    product: MockItems[0],
+    count: 20,
+    customer: 'Apple',
+    factory: 'Ana Tesis',
+    status: 'waiting',
+    otherNo: '123123',
+    created_at: '2021-05-15 20:30:00',
+    requested_at: '2021-05-15 20:30:00',
   },
 ];
 
@@ -694,6 +722,7 @@ const MockWorkflow = [
 export {
   MockItemsCategories,
   MockItems,
+  MockOrders,
   MockStatuses,
   MockCustomFilters,
   MockStockStatuses,
