@@ -18,6 +18,8 @@ function App() {
           <Route path="/items/categories/deleted" element={<Views.Items.Categories.Deleted />} />
           <Route path="/items/categories/jobs" element={<Views.Items.Categories.Jobs />} />
           <Route path="/items/performance" element={<Views.Items.Performance />} />
+          <Route path="/orders" element={<Views.Orders.Index />} />
+          <Route path="/orders/list" element={<Views.Orders.List />} />
           <Route path="/planning" element={<Views.Planning.Index />} />
           <Route path="/planning/workflow" element={<Views.Planning.Workflow />} />
           <Route path="/tasks" element={<Views.Tasks />} />

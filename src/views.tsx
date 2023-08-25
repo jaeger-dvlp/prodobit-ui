@@ -17,8 +17,12 @@ const ItemsCategoriesDeleted = LoadableWrapper(import('@/views/items/categories/
 const ItemsCategoriesJobs = LoadableWrapper(import('@/views/items/categories/jobs'));
 const ItemsPerformance = LoadableWrapper(import('@/views/items/performance'));
 
+const Orders = LoadableWrapper(import('@/views/orders'));
+const OrdersList = LoadableWrapper(import('@/views/orders/list'));
+
 const Planning = LoadableWrapper(import('@/views/planning'));
 const PlanningWorkflow = LoadableWrapper(import('@/views/planning/workflow'));
+
 const Tasks = LoadableWrapper(import('@/views/tasks'));
 
 const Views = {
@@ -38,6 +42,10 @@ const Views = {
       Jobs: ItemsCategoriesJobs,
     },
     Performance: ItemsPerformance,
+  },
+  Orders: {
+    Index: Orders,
+    List: OrdersList,
   },
   Planning: {
     Index: Planning,
