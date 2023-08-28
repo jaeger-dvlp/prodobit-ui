@@ -7,6 +7,67 @@ import { ScanBarcodeIcon, TimerIcon } from '@/components/icons';
 
 import 'dayjs/locale/tr';
 
+export function ItemBarcode({ barcode }: { barcode: string }) {
+  return (
+    <Box
+      sx={{
+        gap: 10,
+        borderRadius: 5,
+        display: 'flex',
+        padding: '7px 10px',
+        flexDirection: 'row',
+        alignItems: 'center',
+        color: t.colors.blue[7],
+        justifyContent: 'center',
+        backgroundColor: t.colors.blue[0],
+        border: `1px solid ${t.colors.blue[0]}`,
+      }}
+    >
+      <ScanBarcodeIcon width={12} height={12} />
+      <Text
+        sx={{
+          fontWeight: 600,
+          fontSize: '12px',
+          lineHeight: '14.4px',
+          color: t.colors.blue[5],
+        }}
+      >
+        {barcode}
+      </Text>
+    </Box>
+  );
+}
+
+export function ItemDateBox({ date }: { date: string }) {
+  return (
+    <Box
+      sx={{
+        gap: 5,
+        borderRadius: 5,
+        display: 'flex',
+        padding: '7px 10px',
+        flexDirection: 'row',
+        alignItems: 'center',
+        color: t.colors.blue[5],
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+        border: `1px solid ${t.colors.blue[2]}`,
+      }}
+    >
+      <TimerIcon width={12} height={12} />
+      <Text
+        sx={{
+          fontWeight: 600,
+          fontSize: '12px',
+          lineHeight: '14.4px',
+        }}
+      >
+        {date}
+      </Text>
+    </Box>
+  );
+}
+
 function ItemMainInfo({ withBrand = false }: { withBrand?: boolean }) {
   const { item } = useEdit<Item>();
   return (
@@ -29,59 +90,13 @@ function ItemMainInfo({ withBrand = false }: { withBrand?: boolean }) {
           justifyContent: 'flex-start',
         }}
       >
-        <Box
-          sx={{
-            gap: 10,
-            borderRadius: 5,
-            display: 'flex',
-            padding: '7px 10px',
-            flexDirection: 'row',
-            alignItems: 'center',
-            color: t.colors.blue[7],
-            justifyContent: 'center',
-            backgroundColor: t.colors.blue[0],
-            border: `1px solid ${t.colors.blue[0]}`,
-          }}
-        >
-          <ScanBarcodeIcon width={12} height={12} />
-          <Text
-            sx={{
-              fontWeight: 600,
-              fontSize: '12px',
-              lineHeight: '14.4px',
-              color: t.colors.blue[5],
-            }}
-          >
-            {item?.code || '? Code'}
-          </Text>
-        </Box>
-        <Box
-          sx={{
-            gap: 5,
-            borderRadius: 5,
-            display: 'flex',
-            padding: '7px 10px',
-            flexDirection: 'row',
-            alignItems: 'center',
-            color: t.colors.blue[5],
-            justifyContent: 'center',
-            backgroundColor: 'transparent',
-            border: `1px solid ${t.colors.blue[2]}`,
-          }}
-        >
-          <TimerIcon width={12} height={12} />
-          <Text
-            sx={{
-              fontWeight: 600,
-              fontSize: '12px',
-              lineHeight: '14.4px',
-            }}
-          >
-            {dayjs(item?.created_at)
-              .locale('tr')
-              .format('DD MMMM YYYY - HH:mm')}
-          </Text>
-        </Box>
+        <ItemBarcode barcode={item?.code || '? Code'} />
+        <ItemDateBox
+          date={dayjs(item?.created_at)
+            .locale('tr')
+            .format('DD MMMM YYYY - HH:mm')}
+        />
+
         {withBrand && (
           <Box
             sx={{
