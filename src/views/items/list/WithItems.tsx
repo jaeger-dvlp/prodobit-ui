@@ -400,18 +400,23 @@ function NavbarGroup({
   );
 }
 
-function WithItemsView({
-  items,
-  paths,
-}: {
-  items: Item[];
+type WithItemsViewProps<T extends Item> = {
+  items: T[];
   paths: { path?: string; name: string }[];
-}) {
+  controls?: {
+    fastEdit: boolean;
+    drawer: boolean;
+    delete: boolean;
+    fastInspect: boolean;
+  };
+};
+
+function WithItemsView({ items, paths, controls }: WithItemsViewProps<any>) {
   return (
     <TableWrapper>
       <NavbarGroup items={items} paths={paths} />
       <CustomFiltersBar />
-      <ItemsTable />
+      <ItemsTable controls={controls} items={items} />
       <ItemsToolbar />
     </TableWrapper>
   );

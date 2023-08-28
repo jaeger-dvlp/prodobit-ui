@@ -1,13 +1,14 @@
 import React from 'react';
-import { MockItems } from 'mockdata';
+import { MockOrders } from 'mockdata';
 import { motion } from 'framer-motion';
 import DevMode from '@/components/misc/DevMode';
 import { Box, Button, Text } from '@mantine/core';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import GenericNoItemsView from '@/views/global/NoItems';
+import WithItemsView from '@/views/items/list/WithItems';
 
 function OrdersList() {
-  const [orders, setOrders] = React.useState(MockItems);
+  const [orders, setOrders] = React.useState(MockOrders);
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/orders');
   const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/orders/list');
 
@@ -24,6 +25,9 @@ function OrdersList() {
         width: '100%',
         height: '100%',
         display: 'grid',
+        overflow: 'auto',
+        minHeight: '100vh',
+        placeContent: 'start',
         gridTemplateColumns: 'repeat(1, minmax(0, 1fr)',
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {
@@ -44,12 +48,26 @@ function OrdersList() {
             name: route?.name || '?',
           }))}
         />
-      ) : null}
+      ) : (
+        <WithItemsView
+          items={orders}
+          controls={{
+            fastEdit: false,
+            delete: false,
+            drawer: true,
+            fastInspect: true,
+          }}
+          paths={[Route, Route2].map((route) => ({
+            path: route?.path,
+            name: route?.name || '?',
+          }))}
+        />
+      )}
       <DevMode>
         <Button
           type="button"
           variant="default"
-          onClick={() => setOrders(orders?.length === 0 ? MockItems : [])}
+          onClick={() => setOrders(orders?.length === 0 ? MockOrders : [])}
         >
           <Text>Sipariş sayısını {orders?.length === 0 ? 'arttır.' : 'sıfırla.'} </Text>
         </Button>
