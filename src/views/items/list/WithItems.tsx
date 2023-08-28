@@ -12,6 +12,7 @@ import AddButtons from '@/components/views/itemslist/AddButtons';
 import { Box, Button, Divider, Text, Title } from '@mantine/core';
 import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';
 import TableWrapper, { useTable } from '@/components/context/Table.context';
+import Drawer from '@/components/misc/Drawer';
 
 export type Item = {
   id: number;
@@ -418,6 +419,7 @@ function WithItemsView({ items, paths, controls }: WithItemsViewProps<any>) {
       <CustomFiltersBar />
       <ItemsTable controls={controls} items={items} />
       <ItemsToolbar />
+      {controls?.drawer && <Drawer />}
     </TableWrapper>
   );
 }

@@ -2031,6 +2031,27 @@ function CustomRadarIcon(props: CustomIconProps) {
   );
 }
 
+function CustomCurvedBackIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 29 23" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M1 7.8468H21.3768C23.1334 7.8468 24.818 8.58559 26.0601 9.90073C27.3022 11.2159 28 12.9996 28 14.8595C28 16.7194 27.3022 18.5031 26.0601 19.8183C24.818 21.1334 23.1334 21.8722 21.3768 21.8722H2.68345"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.65188 14.6937L1 7.84686L6.64875 1"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2117,4 +2138,5 @@ export {
   CustomVertical3DotsIcon,
   CustomOutlineIcon,
   CustomRadarIcon,
+  CustomCurvedBackIcon,
 };

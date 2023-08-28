@@ -18,6 +18,14 @@ type TableContextProps<T extends Record<string, unknown>> = {
   customFilters: CustomFilter[];
   selectedCF: CustomFilter | null;
   setSelectedCF: React.Dispatch<React.SetStateAction<CustomFilter | null>>;
+  drawer: {
+    item: T | null;
+  };
+  setDrawer: React.Dispatch<
+    React.SetStateAction<{
+      item: T | null;
+    }>
+  >;
 };
 
 const TableContext = React.createContext<TableContextProps<any>>({
@@ -30,6 +38,10 @@ const TableContext = React.createContext<TableContextProps<any>>({
   customFilters: [],
   selectedCF: null,
   setSelectedCF: () => {},
+  drawer: {
+    item: null,
+  },
+  setDrawer: () => {},
 });
 
 export default function TableWrapper({ children }: { children: React.ReactNode }) {
@@ -38,6 +50,9 @@ export default function TableWrapper({ children }: { children: React.ReactNode }
   const [sorting, setSorting] = React.useState<boolean | string>('reset');
   const [customFilters] = React.useState<CustomFilter[]>(MockCustomFilters);
   const [selectedCF, setSelectedCF] = React.useState<CustomFilter | null>(null);
+  const [drawer, setDrawer] = React.useState({
+    item: null,
+  });
 
   const value = React.useMemo(
     () => ({
@@ -50,8 +65,10 @@ export default function TableWrapper({ children }: { children: React.ReactNode }
       customFilters,
       selectedCF,
       setSelectedCF,
+      drawer,
+      setDrawer,
     }),
-    [customFilters, pagination, selectedCF, sorting, table],
+    [customFilters, pagination, selectedCF, sorting, table, drawer],
   );
 
   return <TableContext.Provider value={value}>{children}</TableContext.Provider>;

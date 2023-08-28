@@ -27,7 +27,7 @@ function OrdersList() {
         display: 'grid',
         overflow: 'auto',
         minHeight: '100vh',
-        placeContent: 'start',
+        placeContent: 'start stretch',
         gridTemplateColumns: 'repeat(1, minmax(0, 1fr)',
         backgroundColor: 'transparent',
         [theme.fn.smallerThan('md')]: {

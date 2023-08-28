@@ -60,7 +60,7 @@ function ItemsTable<T extends Item & Order<Item>>({
 }: Props<any>) {
   const t = useMantineTheme();
   const navigate = useNavigate();
-  const { setTable, sorting, pagination } = useTable<T>();
+  const { setTable, sorting, pagination, setDrawer } = useTable<T>();
   const [items, setItems] = React.useState<T[]>(outerItems || MockItems);
 
   const columns = React.useMemo<MRT_ColumnDef<T>[]>(
@@ -249,7 +249,11 @@ function ItemsTable<T extends Item & Order<Item>>({
             {controls.drawer && (
               <Tooltip label="İncele">
                 <Button
-                  onClick={() => null}
+                  onClick={() =>
+                    setDrawer({
+                      item: row.original,
+                    })
+                  }
                   sx={(theme) => ({
                     margin: 0,
                     padding: 6,
