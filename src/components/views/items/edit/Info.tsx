@@ -62,7 +62,7 @@ const getRenderedDate = (date: string) => {
   return `${text[0].toUpperCase()}${text.slice(1)}`;
 };
 
-function ProductInfoTable({ border = true }: { border?: boolean }) {
+export function ProductInfoTable({ border = true }: { border?: boolean }) {
   const MockValues = [
     {
       definition: 'Ürün Tam Adı',
@@ -1070,8 +1070,14 @@ function SupplierSpecBox() {
   );
 }
 
-function ProgressSpecBox() {
-  const [progressDatas] = React.useState<TProgressData[]>(MockProgressData.slice().reverse());
+export function ProgressSpecBox({
+  borderNpadding = true,
+  data = MockProgressData.slice().reverse(),
+}: {
+  borderNpadding?: boolean;
+  data?: TProgressData[];
+}) {
+  const [progressDatas] = React.useState<TProgressData[]>(data);
 
   function ProgressCompByType({ progressData }: { progressData: TProgressData }) {
     const { type, date } = progressData;
@@ -1087,7 +1093,7 @@ function ProgressSpecBox() {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'row',
-            padding: '30px 30px 30px 50px',
+            padding: borderNpadding ? '30px 30px 30px 50px' : '30px 0px 30px 0px',
             justifyContent: 'space-between',
           }}
         >
@@ -1161,7 +1167,7 @@ function ProgressSpecBox() {
             alignItems: 'start',
             flexDirection: 'column',
             justifyContent: 'flex-start',
-            padding: '30px 30px 30px 50px',
+            padding: borderNpadding ? '30px 30px 30px 50px' : '30px 0px 30px 0px',
           }}
         >
           <Box
@@ -1363,7 +1369,7 @@ function ProgressSpecBox() {
             alignItems: 'start',
             flexDirection: 'column',
             justifyContent: 'flex-start',
-            padding: '30px 30px 30px 50px',
+            padding: borderNpadding ? '30px 30px 30px 50px' : '30px 0px 30px 0px',
           }}
         >
           <Box
@@ -1554,7 +1560,7 @@ function ProgressSpecBox() {
         alignItems: 'start',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        border: `1px solid ${t.colors.gray[3]}`,
+        border: borderNpadding ? `1px solid ${t.colors.gray[3]}` : 'none',
         '> li:not(:last-child)': {
           borderBottom: `1px solid ${t.colors.gray[3]}`,
         },
