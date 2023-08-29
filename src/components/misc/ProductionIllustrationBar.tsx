@@ -1,8 +1,8 @@
 import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Text, createStyles } from '@mantine/core';
-import { CustomPlusIcon, SandTimerIcon, TrashIcon } from '../icons';
 import { Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Box, Button, Text, createStyles } from '@mantine/core';
+import { CustomPlusIcon, SandTimerIcon, TrashIcon } from '@/components/icons';
 
 const styles = createStyles({
   container: {
