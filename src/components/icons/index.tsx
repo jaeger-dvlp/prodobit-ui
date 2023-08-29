@@ -625,6 +625,20 @@ function TimerIcon(props: CustomIconProps) {
   );
 }
 
+function SandTimerIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M11.4288 1.5H6.56881C3.74881 1.5 3.53131 4.035 5.05381 5.415L12.9438 12.585C14.4663 13.965 14.2488 16.5 11.4288 16.5H6.56881C3.74881 16.5 3.53131 13.965 5.05381 12.585L12.9438 5.415C14.4663 4.035 14.2488 1.5 11.4288 1.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function ThreeBarsOne(props: CustomIconProps) {
   return (
     <svg viewBox="0 0 8 10" fill="none" {...DefaultProps} {...props}>
@@ -2084,6 +2098,7 @@ export {
   ImageLightIcon,
   ScanBarcodeIcon,
   TimerIcon,
+  SandTimerIcon,
   ThreeBarsOne,
   ThreeBarsTwo,
   ThreeBarsThree,
