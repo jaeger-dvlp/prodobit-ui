@@ -6,6 +6,7 @@ import { Box, Button, Text } from '@mantine/core';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import GenericNoItemsView from '@/views/global/NoItems';
 import WithItemsView from '@/views/items/list/WithItems';
+import ProductionIllustrationBar from '@/components/misc/ProductionIllustrationBar';
 
 function OrdersList() {
   const [orders, setOrders] = React.useState(MockOrders);
@@ -63,6 +64,7 @@ function OrdersList() {
           }))}
         />
       )}
+      <ProductionIllustrationBar />
       <DevMode>
         <Button
           type="button"
