@@ -3,7 +3,6 @@ import { BsXLg } from 'react-icons/bs';
 import { ExportToCsv } from 'export-to-csv';
 import { ProdobitAppColors } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CustomFilter } from '@/views/items/list/WithItems';
 import { useTable } from '@/components/context/Table.context';
 
 import {
@@ -31,6 +30,7 @@ import {
   CustomFilterBarsIcon,
 } from '@/components/icons';
 import ToolbarContainer from '@/components/misc/Toolbar';
+import { CustomFilter } from '@/views/app/items/list/WithItems';
 
 const ToolbarInnerContainerSX: Sx = {
   gap: 5,

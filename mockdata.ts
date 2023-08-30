@@ -1,7 +1,7 @@
 import { ProdobitAppTheme } from '@/theme';
 import { getRandomUUID } from '@/common/utils/misc';
 import { MantineColor, MantineThemeColors } from '@mantine/core';
-import { CustomFilter, Item, ItemCategory } from '@/views/items/list/WithItems';
+import { CustomFilter, Item, ItemCategory } from '@/views/app/items/list/WithItems';
 import { ThreeBarsOne, ThreeBarsThree, ThreeBarsTwo } from '@/components/icons';
 
 export type MockStockStatus = {

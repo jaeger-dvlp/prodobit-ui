@@ -1,7 +1,7 @@
 import React from 'react';
 import { MockCustomFilters } from 'mockdata';
 import { MRT_TableInstance } from 'mantine-react-table';
-import { CustomFilter } from '@/views/items/list/WithItems';
+import { CustomFilter } from '@/views/app/items/list/WithItems';
 
 type TableContextProps<T extends Record<string, unknown>> = {
   table: MRT_TableInstance<T> | null;

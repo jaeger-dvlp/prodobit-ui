@@ -1,5 +1,5 @@
-import { Item } from '@/views/items/list/WithItems';
 import React from 'react';
+import { Item } from '@/views/app/items/list/WithItems';
 
 type EditContextProps<T> = {
   item: T | null;

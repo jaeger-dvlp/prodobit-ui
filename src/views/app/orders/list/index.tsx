@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import DevMode from '@/components/misc/DevMode';
 import { Box, Button, Text } from '@mantine/core';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import GenericNoItemsView from '@/views/global/NoItems';
-import WithItemsView from '@/views/items/list/WithItems';
+import GenericNoItemsView from '@/views/app/global/NoItems';
+import WithItemsView from '@/views/app/items/list/WithItems';
 
 function OrdersList() {
   const [orders, setOrders] = React.useState(MockOrders);

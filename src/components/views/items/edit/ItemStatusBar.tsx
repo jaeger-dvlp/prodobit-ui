@@ -3,8 +3,6 @@ import { ProdobitAppTheme as t } from '@/theme';
 import { CustomChevronDown } from '@/components/icons';
 import { Box, Image, Menu, Sx, Text } from '@mantine/core';
 import { useEdit } from '@/components/context/ItemEdit.context';
-import { Item, ItemCategory } from '@/views/items/list/WithItems';
-
 import {
   TItemStatus,
   MockStatuses,
@@ -12,6 +10,7 @@ import {
   MockStockStatuses,
   MockItemsCategories,
 } from 'mockdata';
+import { Item, ItemCategory } from '@/views/app/items/list/WithItems';
 
 const Images = {
   tempAvatar: '/assets/img/temp-avatar.svg',

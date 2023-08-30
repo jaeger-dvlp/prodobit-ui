@@ -4,7 +4,6 @@ import { MockItems } from 'mockdata';
 import Navbar from '@/components/layout/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import { Item } from '@/views/items/list/WithItems';
 import { Box, Button, Sx, Text } from '@mantine/core';
 import { InfoIcon, ImageIcon } from '@/components/icons';
 import EditItemInfo from '@/components/views/items/edit/Info';
@@ -12,6 +11,7 @@ import EditItemDocs from '@/components/views/items/edit/Docs';
 import ItemsEditToolbar from '@/components/views/items/edit/Toolbar';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import EditWrapper, { useEdit } from '@/components/context/ItemEdit.context';
+import { Item } from '@/views/app/items/list/WithItems';
 
 function ViewSelector({
   view,

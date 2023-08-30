@@ -9,7 +9,7 @@ import {
   CustomVertical3DotsIcon,
   TrashIcon,
 } from '@/components/icons';
-import { ItemCategory } from '@/views/items/list/WithItems';
+import { ItemCategory } from '@/views/app/items/list/WithItems';
 
 type Props = {
   categories: ItemCategory[];

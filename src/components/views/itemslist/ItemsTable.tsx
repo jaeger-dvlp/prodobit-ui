@@ -2,7 +2,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
-import { Item } from '@/views/items/list/WithItems';
 import { useTable } from '@/components/context/Table.context';
 import { MRT_Localization_TR } from 'mantine-react-table/locales/tr';
 import { MockItems, MockItemsCategories, MockStatuses, Order } from 'mockdata';
@@ -38,6 +37,7 @@ import {
 
 import 'dayjs/locale/tr';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { Item } from '@/views/app/items/list/WithItems';
 
 type Props<T extends Record<string, unknown>> = {
   items?: T[];

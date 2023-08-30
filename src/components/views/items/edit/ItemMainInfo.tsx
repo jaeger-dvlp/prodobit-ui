@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import { ProdobitAppTheme as t } from '@/theme';
 import { Box, Image, Text } from '@mantine/core';
-import { Item } from '@/views/items/list/WithItems';
 import { useEdit } from '@/components/context/ItemEdit.context';
 import { ScanBarcodeIcon, TimerIcon } from '@/components/icons';
+import { Item } from '@/views/app/items/list/WithItems';
 
 import 'dayjs/locale/tr';
 
