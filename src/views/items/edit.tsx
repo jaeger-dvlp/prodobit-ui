@@ -91,8 +91,10 @@ function EditItem() {
     })();
   }, [id, navigate, routeItem, setItem]);
 
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
-  const SubRoute = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/edit');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/items');
+  const SubRoute = Route?.subRoutes?.find(
+    (route: RouteMapItem) => route.path === '/app/items/edit',
+  );
 
   return (
     <Box

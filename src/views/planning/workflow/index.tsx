@@ -79,9 +79,9 @@ function ViewSelector({
 
 function PlanningWorkflow() {
   const [view, setView] = React.useState<Views>('workflow');
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/planning');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/planning');
   const Route2 = Route?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/planning/workflow',
+    (route: RouteMapItem) => route.path === '/app/planning/workflow',
   );
   return (
     <WorkflowWrapper>

@@ -11,14 +11,14 @@ import { MockItemsCategories } from 'mockdata';
 import AddCategory from '@/components/views/items/categories/AddCategory';
 
 function ItemsCategoriesLists() {
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/items');
 
   const Route2 = Route?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/items/categories',
+    (route: RouteMapItem) => route.path === '/app/items/categories',
   );
 
   const Route3 = Route2?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/items/categories/list',
+    (route: RouteMapItem) => route.path === '/app/items/categories/list',
   );
 
   return (

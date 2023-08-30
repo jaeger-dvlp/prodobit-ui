@@ -9,8 +9,8 @@ import WithItemsView from '@/views/items/list/WithItems';
 
 function OrdersList() {
   const [orders, setOrders] = React.useState(MockOrders);
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/orders');
-  const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/orders/list');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/orders');
+  const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/app/orders/list');
 
   return (
     <Box

@@ -15,7 +15,7 @@ import {
 
 const mockData = [
   {
-    count: 2024,
+    count: 2025,
     status: 'completed',
     label: 'Tamamlandı',
     color: t.colors.purple[5],
@@ -27,7 +27,7 @@ const mockData = [
     color: t.colors.yellow[5],
   },
   {
-    count: 1221,
+    count: 1220,
     status: 'stopped',
     label: 'Durduruldu',
     color: t.colors.red[5],
@@ -106,9 +106,7 @@ function Graph() {
           component={motion.div}
           key={`graph-col-${i}`}
           className="percent-column"
-          sx={{
-            maxWidth: `${col.percentage}%`,
-          }}
+          maw={`${col.percentage}%`}
         >
           <Text className="count-text">
             {col.count.toLocaleString('tr-TR')}

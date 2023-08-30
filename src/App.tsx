@@ -2,32 +2,39 @@ import React from 'react';
 import Views from '@/views';
 import AppLayout from '@/components/layout';
 import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
+import PodLayout from './components/layout/pod';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout sidebar />}>
-          <Route path="/dashboard" element={<Views.Dashboard />} />
-          <Route path="/items" element={<Views.Items.Index />} />
-          <Route path="/items/edit/:id" element={<Views.Items.Edit />} />
-          <Route path="/items/new" element={<Views.Items.New />} />
-          <Route path="/items/list" element={<Views.Items.List />} />
-          <Route path="/items/categories" element={<Views.Items.Categories.Index />} />
-          <Route path="/items/categories/list" element={<Views.Items.Categories.List />} />
-          <Route path="/items/categories/deleted" element={<Views.Items.Categories.Deleted />} />
-          <Route path="/items/categories/jobs" element={<Views.Items.Categories.Jobs />} />
-          <Route path="/items/performance" element={<Views.Items.Performance />} />
-          <Route path="/orders" element={<Views.Orders.Index />} />
-          <Route path="/orders/list" element={<Views.Orders.List />} />
-          <Route path="/planning" element={<Views.Planning.Index />} />
-          <Route path="/planning/workflow" element={<Views.Planning.Workflow />} />
-          <Route path="/tasks" element={<Views.Tasks />} />
+          <Route path="/app/dashboard" element={<Views.App.Dashboard />} />
+          <Route path="/app/items" element={<Views.App.Items.Index />} />
+          <Route path="/app/items/edit/:id" element={<Views.App.Items.Edit />} />
+          <Route path="/app/items/new" element={<Views.App.Items.New />} />
+          <Route path="/app/items/list" element={<Views.App.Items.List />} />
+          <Route path="/app/items/categories" element={<Views.App.Items.Categories.Index />} />
+          <Route path="/app/items/categories/list" element={<Views.App.Items.Categories.List />} />
+          <Route
+            path="/app/items/categories/deleted"
+            element={<Views.App.Items.Categories.Deleted />}
+          />
+          <Route path="/app/items/categories/jobs" element={<Views.App.Items.Categories.Jobs />} />
+          <Route path="/app/items/performance" element={<Views.App.Items.Performance />} />
+          <Route path="/app/orders" element={<Views.App.Orders.Index />} />
+          <Route path="/app/orders/list" element={<Views.App.Orders.List />} />
+          <Route path="/app/planning" element={<Views.App.Planning.Index />} />
+          <Route path="/app/planning/workflow" element={<Views.App.Planning.Workflow />} />
+          <Route path="/app/tasks" element={<Views.App.Tasks />} />
         </Route>
         <Route element={<AppLayout />}>
-          <Route path="/login" element={<Views.Auth.Login />} />
+          <Route path="/login" element={<Views.App.Auth.Login />} />
         </Route>
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route element={<PodLayout />}>
+          <Route path="/pod" element={<Views.PodApp.Index />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/app/dashboard" />} />
       </Routes>
     </BrowserRouter>
   );

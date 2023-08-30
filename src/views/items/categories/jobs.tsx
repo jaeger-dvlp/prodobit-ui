@@ -5,14 +5,14 @@ import RoutesMap, { RouteMapItem } from '@/routes';
 import Navbar from '@/components/layout/Navbar';
 
 function ItemsCategoriesJobs() {
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/items');
 
   const Route2 = Route?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/items/categories',
+    (route: RouteMapItem) => route.path === '/app/items/categories',
   );
 
   const Route3 = Route2?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/items/categories/jobs',
+    (route: RouteMapItem) => route.path === '/app/items/categories/jobs',
   );
 
   return (

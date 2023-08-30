@@ -6,7 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import ProductionIllustrationBar from '@/components/misc/ProductionIllustrationBar';
 
 function Dashboard() {
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/dashboard');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/dashboard');
 
   return (
     <Box

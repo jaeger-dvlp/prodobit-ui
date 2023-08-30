@@ -5,10 +5,10 @@ import RoutesMap, { RouteMapItem } from '@/routes';
 import Navbar from '@/components/layout/Navbar';
 
 function ItemsCategories() {
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/items');
 
   const Route2 = Route?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/items/categories',
+    (route: RouteMapItem) => route.path === '/app/items/categories',
   );
 
   return (

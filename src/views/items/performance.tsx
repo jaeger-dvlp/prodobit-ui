@@ -5,10 +5,10 @@ import RoutesMap, { RouteMapItem } from '@/routes';
 import Navbar from '@/components/layout/Navbar';
 
 function ItemsPerformance() {
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/items');
 
   const Route2 = Route?.subRoutes?.find(
-    (route: RouteMapItem) => route.path === '/items/performance',
+    (route: RouteMapItem) => route.path === '/app/items/performance',
   );
 
   return (

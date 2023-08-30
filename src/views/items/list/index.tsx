@@ -11,8 +11,8 @@ import WithItemsView from '@/views/items/list/WithItems';
 function ItemsList() {
   const Navigate = useNavigate();
   const [items, setItems] = React.useState(MockItems);
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/items');
-  const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/items/list');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/items');
+  const Route2 = Route?.subRoutes?.find((route: RouteMapItem) => route.path === '/app/items/list');
 
   return (
     <Box

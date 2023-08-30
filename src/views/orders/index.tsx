@@ -5,7 +5,7 @@ import Navbar from '@/components/layout/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 
 function Orders() {
-  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/orders');
+  const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/orders');
 
   return (
     <Box

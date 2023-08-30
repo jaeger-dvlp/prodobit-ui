@@ -26,32 +26,37 @@ const PlanningWorkflow = LoadableWrapper(import('@/views/planning/workflow'));
 const Tasks = LoadableWrapper(import('@/views/tasks'));
 
 const Views = {
-  Auth: {
-    Login,
-  },
-  Dashboard,
-  Items: {
-    Index: Items,
-    List: ItemsList,
-    Edit: ItemsEdit,
-    New: ItemsNew,
-    Categories: {
-      Index: ItemsCategories,
-      List: ItemsCategoriesList,
-      Deleted: ItemsCategoriesDeleted,
-      Jobs: ItemsCategoriesJobs,
+  App: {
+    Auth: {
+      Login,
     },
-    Performance: ItemsPerformance,
+    Dashboard,
+    Items: {
+      Index: Items,
+      List: ItemsList,
+      Edit: ItemsEdit,
+      New: ItemsNew,
+      Categories: {
+        Index: ItemsCategories,
+        List: ItemsCategoriesList,
+        Deleted: ItemsCategoriesDeleted,
+        Jobs: ItemsCategoriesJobs,
+      },
+      Performance: ItemsPerformance,
+    },
+    Orders: {
+      Index: Orders,
+      List: OrdersList,
+    },
+    Planning: {
+      Index: Planning,
+      Workflow: PlanningWorkflow,
+    },
+    Tasks,
   },
-  Orders: {
-    Index: Orders,
-    List: OrdersList,
+  PodApp: {
+    Index: null,
   },
-  Planning: {
-    Index: Planning,
-    Workflow: PlanningWorkflow,
-  },
-  Tasks,
 };
 
 export default Views;

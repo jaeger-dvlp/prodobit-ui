@@ -68,81 +68,81 @@ const IconProps = {
 
 const RoutesMap: RouteMapItem[] = [
   {
-    path: '/dashboard',
+    path: '/app/dashboard',
     name: 'Dashboard',
     icon: <DashboardIcon {...IconProps} />,
     viewInSidebar: true,
   },
   {
-    path: '/items',
+    path: '/app/items',
     name: 'Öğeler',
     icon: <AnalyzesIcon {...IconProps} />,
     viewInSidebar: true,
     subRoutes: [
       {
-        path: '/items/edit',
+        path: '/app/items/edit',
         name: 'Öğe Düzenle',
         viewInSidebar: false,
       },
       {
-        path: '/items/new',
+        path: '/app/items/new',
         name: 'Öğe Ekle',
         viewInSidebar: false,
       },
       {
-        path: '/items/list',
+        path: '/app/items/list',
         name: 'Öğe Listesi',
         viewInSidebar: true,
       },
       {
-        path: '/items/categories',
+        path: '/app/items/categories',
         name: 'Kategoriler',
         viewInSidebar: true,
         subRoutes: [
           {
-            path: '/items/categories/list',
+            path: '/app/items/categories/list',
             name: 'Kategori Listesi',
             viewInSidebar: true,
           },
           {
-            path: '/items/categories/deleted',
+            path: '/app/items/categories/deleted',
             name: 'Silinenler',
             viewInSidebar: true,
           },
           {
-            path: '/items/categories/jobs',
+            path: '/app/items/categories/jobs',
             name: 'İşler',
             viewInSidebar: true,
           },
         ],
       },
       {
-        path: '/items/performance',
+        path: '/app/items/performance',
         name: 'Performans',
         viewInSidebar: true,
       },
     ],
   },
   {
-    path: '/orders',
+    path: '/app/orders',
     name: 'Siparişler',
     icon: <AnalyzesIcon {...IconProps} />,
     viewInSidebar: true,
     subRoutes: [
       {
-        path: '/orders/list',
+        path: '/app/orders/list',
         name: 'Sipariş Listesi',
         viewInSidebar: true,
       },
     ],
   },
   {
-    path: '/planning',
+    path: '/app/planning',
     name: 'Planlama',
     icon: <RequestsIcon {...IconProps} />,
     subRoutes: [
       {
-        path: '/planning/workflow',
+        path: '/app/planning/workflow',
         name: 'İş Akışı',
         viewInSidebar: true,
       },
@@ -150,7 +150,7 @@ const RoutesMap: RouteMapItem[] = [
     viewInSidebar: true,
   },
   {
-    path: '/tasks',
+    path: '/app/tasks',
     name: 'Görevler',
     icon: <TasksIcon {...IconProps} />,
     viewInSidebar: true,
