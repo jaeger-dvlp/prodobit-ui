@@ -13,6 +13,135 @@ import {
   CustomChartIndicatorIcon,
 } from '@/components/icons';
 
+const mockData = [
+  {
+    count: 2024,
+    status: 'completed',
+    label: 'Tamamlandı',
+    color: t.colors.purple[5],
+  },
+  {
+    count: 1755,
+    status: 'pending',
+    label: 'Beklemede',
+    color: t.colors.yellow[5],
+  },
+  {
+    count: 1221,
+    status: 'stopped',
+    label: 'Durduruldu',
+    color: t.colors.red[5],
+  },
+];
+
+const GraphStyle = createStyles({
+  root: {
+    gap: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    '> .percent-column': {
+      padding: 0,
+      width: '100%',
+      minHeight: 50,
+      paddingLeft: 10,
+      display: 'flex',
+      alignItems: 'stretch',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      borderLeft: `0.5px solid ${t.colors.gray[9]}`,
+      '> .count-text': {
+        fontWeight: 500,
+        fontSize: '20px',
+        lineHeight: 0.9,
+        color: t.colors.gray[9],
+        '> span': {
+          fontSize: '12px',
+          fontWeight: 400,
+        },
+      },
+      '> .percent-bar': {
+        gap: 5,
+        display: 'flex',
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        '> .percent-text': {
+          fontSize: '12px',
+          fontWeight: 300,
+          color: t.colors.gray[9],
+        },
+        '> .percent-progress': {
+          height: 34,
+          width: '100%',
+          borderRadius: 5,
+        },
+      },
+    },
+  },
+});
+
+function Graph() {
+  const { classes } = GraphStyle();
+
+  const colsWithPercentages = React.useMemo(() => {
+    const total = mockData.reduce((acc, curr) => acc + curr.count, 0);
+    return mockData.map((col) => ({
+      ...col,
+      percentage: (col.count / total) * 100,
+    }));
+  }, []);
+
+  return (
+    <Box className={classes.root}>
+      {colsWithPercentages.map((col, i) => (
+        <Box
+          initial={{ opacity: 0, height: 110 }}
+          animate={{ opacity: [0, 1], height: `calc(${col.percentage} * 2px + 80px)` }}
+          transition={{
+            delay: i === 0 ? 0.5 : 0.5 + i * 0.2,
+            duration: 1,
+          }}
+          component={motion.div}
+          key={`graph-col-${i}`}
+          className="percent-column"
+          sx={{
+            maxWidth: `${col.percentage}%`,
+          }}
+        >
+          <Text className="count-text">
+            {col.count.toLocaleString('tr-TR')}
+            <Text span> /ADET</Text>
+          </Text>
+          <Box className="percent-bar">
+            <Text className="percent-text">
+              %{Math.round(col.percentage)} {col.label}
+            </Text>
+            <Box
+              initial={{ width: 0 }}
+              component={motion.div}
+              animate={{ width: `100%` }}
+              className="percent-progress"
+              transition={{
+                delay: i === 0 ? 0.5 : 0.5 + i * 0.2,
+                duration: 1,
+              }}
+              sx={{
+                backgroundColor: i === 0 ? col.color : 'transparent',
+                backgroundImage:
+                  i === 0
+                    ? 'none'
+                    : `repeating-linear-gradient(90deg, ${col.color}, ${col.color} 2px, transparent 2px, transparent 4px)`,
+              }}
+            />
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
 const styles = createStyles({
   container: {
     gap: 10,
@@ -29,9 +158,9 @@ const styles = createStyles({
     padding: 30,
     width: '100%',
     height: '100%',
+    minHeight: 413,
     display: 'flex',
     borderRadius: 33,
-    minHeight: '413px',
     gridColumn: 'span 6',
     alignItems: 'stretch',
     flexDirection: 'column',
@@ -43,6 +172,13 @@ const styles = createStyles({
     [t.fn.smallerThan('lg')]: {
       gridColumn: 'span 12',
     },
+  },
+  ccContent: {
+    gap: 30,
+    display: 'flex',
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
   },
   ccMetaTopBar: {
     gap: 10,
@@ -405,6 +541,18 @@ function ProductionIllustrationBar() {
   const [viewSize, setViewSize] = React.useState<Size>(viewSizes[0]);
   const [weekSize, setWeekSize] = React.useState<Size>(weekSizes[0]);
 
+  const colsWithPercentages = React.useMemo(() => {
+    const total = mockData
+      .filter((col) => col.status !== 'stopped')
+      .reduce((acc, curr) => acc + curr.count, 0);
+    return mockData
+      .filter((col) => col.status !== 'stopped')
+      .map((col) => ({
+        ...col,
+        percentage: (col.count / total) * 100,
+      }));
+  }, []);
+
   return (
     <Box className={classes.container}>
       <Box className={classes.cornerColumn}>
@@ -435,7 +583,9 @@ function ProductionIllustrationBar() {
               <Text className="indicator-text">Toplam Üretim</Text>
             </Box>
             <Box className="meta-counts">
-              <Text className="meta-count">15.000</Text>
+              <Text className="meta-count">
+                {mockData.reduce((acc, curr) => acc + curr.count, 0)}
+              </Text>
               <Text className="meta-count-small">ADET</Text>
             </Box>
           </Box>
@@ -453,18 +603,21 @@ function ProductionIllustrationBar() {
             ))}
           </Box>
         </Box>
-        <Box className={classes.ccWeekSizeCont}>
-          {weekSizes.map((size, i) => (
-            <Button
-              variant="default"
-              key={`week-size-${i}`}
-              className="week-size-btn"
-              data-active={weekSize === size}
-              onClick={() => setWeekSize(size)}
-            >
-              {size.label}
-            </Button>
-          ))}
+        <Box className={classes.ccContent}>
+          <Graph />
+          <Box className={classes.ccWeekSizeCont}>
+            {weekSizes.map((size, i) => (
+              <Button
+                variant="default"
+                key={`week-size-${i}`}
+                className="week-size-btn"
+                data-active={weekSize === size}
+                onClick={() => setWeekSize(size)}
+              >
+                {size.label}
+              </Button>
+            ))}
+          </Box>
         </Box>
       </Box>
       <Box className={classes.cornerColumn}>
@@ -487,16 +640,10 @@ function ProductionIllustrationBar() {
                   paddingAngle={5}
                   cx="50%"
                   cy="100%"
-                  data={[
-                    {
-                      value: 68,
-                      fill: t.colors.purple[5],
-                    },
-                    {
-                      value: 32,
-                      fill: t.colors.yellow[5],
-                    },
-                  ]}
+                  data={colsWithPercentages.map((col) => ({
+                    value: col.percentage,
+                    fill: col.color,
+                  }))}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -511,14 +658,15 @@ function ProductionIllustrationBar() {
               animate={{ opacity: 1 }}
               className={classes.rcChartTexts}
             >
-              <Text>%63</Text>
-              <Text>%37</Text>
+              <Text>%{Math.round(colsWithPercentages[0].percentage)}</Text>
+
+              <Text>%{Math.round(colsWithPercentages[1].percentage)}</Text>
             </Box>
             <Box className={classes.rcChartIndicator}>
               <Box
                 component={motion.span}
                 initial={{ rotate: 0 }}
-                animate={{ rotate: 122.5 }}
+                animate={{ rotate: colsWithPercentages[0].percentage * 1.75 }}
                 transition={{
                   duration: 2,
                   ease: 'easeInOut',
