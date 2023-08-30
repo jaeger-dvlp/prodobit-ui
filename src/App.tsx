@@ -1,8 +1,8 @@
 import React from 'react';
 import Views from '@/views';
-import AppLayout from '@/components/layout';
+import AppLayout from '@/components/layout/app';
+import PodLayout from '@/components/layout/pod';
 import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
-import PodLayout from './components/layout/pod';
 
 function App() {
   return (

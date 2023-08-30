@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 
 function Planning() {

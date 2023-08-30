@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import CategoryList from '@/components/views/items/categories/CategoryList';
 

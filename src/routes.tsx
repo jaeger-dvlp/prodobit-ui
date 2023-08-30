@@ -150,8 +150,8 @@ const RoutesMap: RouteMapItem[] = [
     viewInSidebar: true,
   },
   {
-    path: '/app/tasks',
-    name: 'Görevler',
+    path: '/pod',
+    name: 'Pod App',
     icon: <TasksIcon {...IconProps} />,
     viewInSidebar: true,
   },

@@ -5,7 +5,7 @@ import { EditIcon } from '@/components/icons';
 import { MockItemsCategories } from 'mockdata';
 import { useNavigate } from 'react-router-dom';
 import { ProdobitAppTheme as t } from '@/theme';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 import ItemsToolbar from '@/components/views/itemslist/Toolbar';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
@@ -348,8 +348,8 @@ function TopBar() {
           <AddButtons
             primaryButtonText="Öğe Ekle"
             secondaryButtonText="Kategori Ekle"
-            onPrimaryButtonClick={() => Navigate('/items/new')}
-            onSecondaryButtonClick={() => Navigate('/items/categories/list')}
+            onPrimaryButtonClick={() => Navigate('/app/items/new')}
+            onSecondaryButtonClick={() => Navigate('/app/items/categories/list')}
           />
         </Box>
       </Box>

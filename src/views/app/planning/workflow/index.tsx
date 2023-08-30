@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Box, Button, Sx, Text } from '@mantine/core';
 import WorkflowWrapper from '@/components/context/Workflow.context';

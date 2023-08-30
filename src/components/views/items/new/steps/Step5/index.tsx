@@ -11,7 +11,7 @@ import { CustomPlusIcon, CustomRightLongChevronIcon } from '@/components/icons';
 
 function NewItemStep5() {
   const navigate = useNavigate();
-  const goToNextStep = () => navigate('/items/list');
+  const goToNextStep = () => navigate('/app/items/list');
   return (
     <>
       <Box

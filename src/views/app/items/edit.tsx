@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MockItems } from 'mockdata';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 import { ProdobitAppTheme as t } from '@/theme';
 import RoutesMap, { RouteMapItem } from '@/routes';
 import { Box, Button, Sx, Text } from '@mantine/core';
@@ -87,7 +87,7 @@ function EditItem() {
         }
       }
 
-      return navigate('/items');
+      return navigate('/app/items');
     })();
   }, [id, navigate, routeItem, setItem]);
 

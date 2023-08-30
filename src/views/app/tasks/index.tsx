@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mantine/core';
 import { motion } from 'framer-motion';
 import RoutesMap, { RouteMapItem } from '@/routes';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 
 function Tasks() {
   const Route = RoutesMap.find((route: RouteMapItem) => route.path === '/app/tasks');

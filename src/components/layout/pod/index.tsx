@@ -13,40 +13,62 @@ function PodLayout() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={ProdobitAppTheme}>
       <Box
-        variants={{
-          initial: {
-            opacity: 0,
-          },
-          animate: {
-            opacity: 1,
-          },
-          exit: {
-            opacity: 0,
-          },
-        }}
-        exit="exit"
-        initial="initial"
-        animate="animate"
-        transition={{
-          duration: 0.2,
-        }}
+        key={pathname}
         className="app"
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
         component={motion.main}
-        sx={(theme) => ({
+        transition={{
+          duration: 0.5,
+        }}
+        sx={{
           width: '100%',
           display: 'flex',
+          overflow: 'hidden',
           minHeight: '100vh',
           position: 'relative',
           flexDirection: 'row',
           justifyContent: 'start',
-          backgroundImage: theme.fn.gradient({
-            from: '#E6EDEB',
-            to: '#FEEDEE',
-            deg: 130,
-          }),
-        })}
+          backgroundSize: 'cover',
+          backgroundPosition: 'fixed',
+          backdropFilter: 'blur(57.5px)',
+          backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
+        }}
       >
-        <Outlet />
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            zIndex: 2,
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            filter: 'blur(57.5px)',
+            pointerEvents: 'none',
+            transform: 'scale(1.2)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'fixed',
+            backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
+          }}
+        />
+        <Box
+          sx={{
+            zIndex: 3,
+            width: '100%',
+            display: 'flex',
+            overflow: 'hidden',
+            minHeight: '100vh',
+            position: 'relative',
+            flexDirection: 'row',
+            justifyContent: 'start',
+          }}
+        >
+          <Outlet />
+        </Box>
       </Box>
     </MantineProvider>
   );

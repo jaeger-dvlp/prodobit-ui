@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/app/Navbar';
 import { Box, Image, Text } from '@mantine/core';
 import AddButtons from '@/components/views/itemslist/AddButtons';
 import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';

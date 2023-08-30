@@ -40,8 +40,8 @@ function ItemsList() {
           text="Etkin ve Modern Bir Öğe Yönetimi İçin"
           primaryButtonText="Öğe Ekle"
           secondaryButtonText="Kategori Ekle"
-          onPrimaryButtonClick={() => Navigate('/items/new')}
-          onSecondaryButtonClick={() => Navigate('/items/categories/list')}
+          onPrimaryButtonClick={() => Navigate('/app/items/new')}
+          onSecondaryButtonClick={() => Navigate('/app/items/categories/list')}
           paths={[Route, Route2].map((route) => ({
             path: route?.path,
             name: route?.name || '?',

@@ -1,7 +1,6 @@
 import loadable from '@loadable/component';
-import Loader from '@/components/layout/Loader';
+import Loader from '@/components/layout/app/Loader';
 
-// LoadableWrapper is a wrapper for loadable components, its can take props.
 const LoadableWrapper = (component: any) => loadable(() => component, { fallback: <Loader /> });
 
 const Login = LoadableWrapper(import('@/views/app/auth/login'));

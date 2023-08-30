@@ -25,9 +25,6 @@ function AppLayout({ sidebar = false }: Props) {
           animate: {
             opacity: 1,
           },
-          exit: {
-            opacity: 0,
-          },
         }}
         exit="exit"
         initial="initial"
