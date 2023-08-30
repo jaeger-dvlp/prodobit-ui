@@ -26,17 +26,14 @@ function PodLayout() {
           duration: 0.5,
         }}
         sx={{
-          width: '100%',
+          zIndex: 3,
           display: 'flex',
+          minWidth: '100%',
           overflow: 'hidden',
           minHeight: '100vh',
           position: 'relative',
           flexDirection: 'row',
           justifyContent: 'start',
-          backgroundSize: 'cover',
-          backgroundPosition: 'fixed',
-          backdropFilter: 'blur(57.5px)',
-          backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
         }}
       >
         <Box
@@ -49,9 +46,8 @@ function PodLayout() {
             position: 'absolute',
             filter: 'blur(57.5px)',
             pointerEvents: 'none',
-            transform: 'scale(1.2)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'fixed',
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'left bottom',
             backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
           }}
         />
@@ -60,7 +56,6 @@ function PodLayout() {
             zIndex: 3,
             width: '100%',
             display: 'flex',
-            overflow: 'hidden',
             minHeight: '100vh',
             position: 'relative',
             flexDirection: 'row',
