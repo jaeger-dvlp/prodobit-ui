@@ -1,15 +1,26 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ProdobitAppTheme as t } from '@/theme';
 import { Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { Box, Button, Text, createStyles } from '@mantine/core';
-import { CustomPlusIcon, SandTimerIcon, TrashIcon } from '@/components/icons';
+
+import {
+  TrashIcon,
+  SandTimerIcon,
+  CustomPlusIcon,
+  CustomArrowRightUpIcon,
+  CustomArrowRightDownIcon,
+  CustomChartIndicatorIcon,
+} from '@/components/icons';
 
 const styles = createStyles({
   container: {
     gap: 10,
-    padding: 60,
+    padding: 0,
+    marginTop: 60,
     width: '100%',
     display: 'grid',
+    placeItems: 'center',
     placeContent: 'start stretch',
     gridTemplateColumns: 'repeat(12, 1fr)',
   },
@@ -34,6 +45,7 @@ const styles = createStyles({
     height: '100%',
     display: 'flex',
     borderRadius: 33,
+    maxWidth: '290px',
     padding: '50px 30px',
     gridColumn: 'span 3',
     alignItems: 'center',
@@ -50,10 +62,10 @@ const styles = createStyles({
   cornerIdentify: {
     gap: 15,
     display: 'flex',
+    textAlign: 'center',
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
-    textAlign: 'center',
     '> .mantine-Text-root:nth-of-type(1)': {
       fontWeight: 700,
       fontSize: '15px',
@@ -85,14 +97,105 @@ const styles = createStyles({
     justifyContent: 'center',
   },
   rcPieChartCont: {
-    padding: 0,
     margin: 0,
-    height: 80,
+    padding: 0,
+    width: '100%',
+    minHeight: 140,
+    display: 'flex',
+    paddingBottom: 5,
     position: 'relative',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  rcChartTexts: {
+    gap: 15,
     width: '100%',
     display: 'flex',
-    justifyContent: 'center',
+    padding: '0 2.5px',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    '& .mantine-Text-root': {
+      fontSize: '12px',
+      fontWeight: 700,
+      lineHeight: '14.4px',
+      color: t.colors.gray[6],
+    },
+  },
+  rcChartIndicator: {
+    bottom: 0,
+    left: '50%',
+    width: 53,
+    height: 53,
+    display: 'flex',
+    borderRadius: 100,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backdropFilter: 'blur(5px)',
+    transform: 'translateX(-50%)',
+    backgroundColor: t.colors.red[0],
+    border: `3px solid ${t.colors.gray[0]}`,
+    boxShadow: '0px 24px 54px -13px rgba(177, 109, 92, 0.30)',
+    '& span': {
+      width: 25,
+      height: 25,
+      display: 'flex',
+      alignItems: 'center',
+      color: t.colors.gray[6],
+      justifyContent: 'center',
+      transformOrigin: 'center',
+    },
+  },
+  rcMetaData: {
+    gap: 5,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    '> div': {
+      gap: 5,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      '> .mantine-Text-root:nth-of-type(1)': {
+        fontWeight: 500,
+        fontSize: '12px',
+        lineHeight: '14.4px',
+        color: t.colors.gray[9],
+      },
+      '> div': {
+        gap: 5,
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        '> .mantine-Text-root:nth-of-type(1)': {
+          fontWeight: 700,
+          fontSize: '15px',
+          lineHeight: '18px',
+          color: t.colors.gray[8],
+        },
+        '> div': {
+          gap: 1,
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          '> .mantine-Text-root:nth-of-type(1)': {
+            fontSize: '12px',
+            fontWeight: 400,
+            lineHeight: '14.4px',
+          },
+          '> svg': {
+            width: 13,
+            height: 13,
+          },
+        },
+      },
+    },
   },
 });
 
@@ -167,20 +270,14 @@ function ProductionIllustrationBar() {
         <Box className={classes.rightCornerContent}>
           <Box className={classes.rcPieChartCont}>
             <ResponsiveContainer>
-              <PieChart
-                margin={{
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: 0,
-                }}
-              >
+              <PieChart>
                 <Pie
+                  animationDuration={1500}
                   endAngle={0}
                   dataKey="value"
                   startAngle={180}
-                  innerRadius={50}
-                  outerRadius={80}
+                  innerRadius={80}
+                  outerRadius={115}
                   cornerRadius={6}
                   paddingAngle={5}
                   cx="50%"
@@ -188,16 +285,75 @@ function ProductionIllustrationBar() {
                   data={[
                     {
                       value: 68,
-                      fill: t.colors.purple[4],
+                      fill: t.colors.purple[5],
                     },
                     {
                       value: 32,
-                      fill: t.colors.yellow[4],
+                      fill: t.colors.yellow[5],
                     },
                   ]}
                 />
               </PieChart>
             </ResponsiveContainer>
+            <Box
+              transition={{
+                delay: 1,
+                duration: 1,
+                ease: 'easeInOut',
+              }}
+              component={motion.div}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className={classes.rcChartTexts}
+            >
+              <Text>%63</Text>
+              <Text>%37</Text>
+            </Box>
+            <Box className={classes.rcChartIndicator}>
+              <Box
+                component={motion.span}
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 122.5 }}
+                transition={{
+                  duration: 2,
+                  ease: 'easeInOut',
+                }}
+              >
+                <CustomChartIndicatorIcon />
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          transition={{
+            delay: 1,
+            duration: 1,
+            ease: 'easeInOut',
+          }}
+          component={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={classes.rcMetaData}
+        >
+          <Box>
+            <Text>Üretimde</Text>
+            <Box>
+              <Text>2.350</Text>
+              <Box c={t.colors.green[6]}>
+                <Text>+21%</Text>
+                <CustomArrowRightUpIcon />
+              </Box>
+            </Box>
+          </Box>
+          <Box>
+            <Text>Durdurulan</Text>
+            <Box>
+              <Text>512</Text>
+              <Box c={t.colors.red[5]}>
+                <Text>-11%</Text>
+                <CustomArrowRightDownIcon />
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>

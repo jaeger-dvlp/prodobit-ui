@@ -2066,6 +2066,40 @@ function CustomCurvedBackIcon(props: CustomIconProps) {
   );
 }
 
+function CustomChartIndicatorIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 33 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0.0294687 8.99999C0.0294687 8.99999 16.2426 18 23.2426 18C25.6296 18 27.9187 17.0518 29.6066 15.3639C31.2944 13.6761 32.2426 11.3869 32.2426 8.99999C32.2426 6.61304 31.2944 4.32386 29.6066 2.63603C27.9187 0.948201 25.6296 -9.8648e-06 23.2426 -1.10123e-05C16.2426 -9.74789e-06 0.0294687 8.99999 0.0294687 8.99999ZM23.2426 13.5355C20.7377 13.5355 18.7071 11.5049 18.7071 8.99995C18.7071 6.49504 20.7377 4.46441 23.2426 4.46441C25.7476 4.46441 27.7782 6.49504 27.7782 8.99995C27.7782 11.5049 25.7476 13.5355 23.2426 13.5355Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function CustomArrowRightUpIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M3.40865 10.0913C3.62018 10.3029 3.96315 10.3029 4.17468 10.0913L8.66667 5.59937L8.66667 8.625C8.66667 8.92415 8.90918 9.16667 9.20833 9.16667C9.50749 9.16667 9.75 8.92415 9.75 8.625L9.75 4.29167C9.75 3.99251 9.50749 3.75 9.20833 3.75H4.875C4.57585 3.75 4.33333 3.99251 4.33333 4.29167C4.33333 4.59082 4.57585 4.83333 4.875 4.83333H7.90063L3.40865 9.32532C3.19712 9.53685 3.19712 9.87982 3.40865 10.0913Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+function CustomArrowRightDownIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 13 14" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M3.40865 3.90865C3.62018 3.69712 3.96315 3.69712 4.17468 3.90865L8.66667 8.40063L8.66667 5.375C8.66667 5.07585 8.90918 4.83333 9.20833 4.83333C9.50749 4.83333 9.75 5.07585 9.75 5.375L9.75 9.70833C9.75 10.0075 9.50749 10.25 9.20833 10.25H4.875C4.57585 10.25 4.33333 10.0075 4.33333 9.70833C4.33333 9.40918 4.57585 9.16667 4.875 9.16667H7.90063L3.40865 4.67468C3.19712 4.46315 3.19712 4.12018 3.40865 3.90865Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2154,4 +2188,7 @@ export {
   CustomOutlineIcon,
   CustomRadarIcon,
   CustomCurvedBackIcon,
+  CustomChartIndicatorIcon,
+  CustomArrowRightUpIcon,
+  CustomArrowRightDownIcon,
 };
