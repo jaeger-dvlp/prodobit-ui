@@ -719,6 +719,129 @@ const MockWorkflow = [
   },
 ];
 
+const PodMockProdLine = [
+  {
+    id: getRandomUUID(),
+    no: 'CN6',
+    name: 'M20X1.5 EMC BURÇ EURO',
+    status: 'completed',
+    production: [
+      {
+        count: 2000,
+        status: 'waiting',
+      },
+      {
+        count: 6000,
+        status: 'completed',
+      },
+      {
+        count: 3000,
+        status: 'stopped',
+      },
+      {
+        count: 7000,
+        status: 'ready',
+      },
+    ],
+  },
+  {
+    id: getRandomUUID(),
+    no: 'CN6',
+    name: 'M20X1.5 EMC BURÇ EURO',
+    status: 'ready',
+    production: [
+      {
+        count: 7000,
+        status: 'completed',
+      },
+      {
+        count: 2000,
+        status: 'unknown',
+      },
+    ],
+  },
+  {
+    id: getRandomUUID(),
+    no: 'CN6',
+    name: 'M20X1.5 EMC BURÇ EURO',
+    status: 'stopped',
+    production: [
+      {
+        count: 3000,
+        status: 'completed',
+      },
+      {
+        count: 6000,
+        status: 'ready',
+      },
+      {
+        count: 1000,
+        status: 'waiting',
+      },
+    ],
+  },
+  {
+    id: getRandomUUID(),
+    no: 'CN6',
+    name: 'M20X1.5 EMC BURÇ EURO',
+    status: 'stopped',
+    production: [
+      {
+        count: 3000,
+        status: 'completed',
+      },
+      {
+        count: 6000,
+        status: 'ready',
+      },
+      {
+        count: 1000,
+        status: 'waiting',
+      },
+    ],
+  },
+  {
+    id: getRandomUUID(),
+    no: 'CN6',
+    name: 'M20X1.5 EMC BURÇ EURO',
+    status: 'stopped',
+    production: [
+      {
+        count: 3000,
+        status: 'completed',
+      },
+      {
+        count: 6000,
+        status: 'ready',
+      },
+      {
+        count: 1000,
+        status: 'waiting',
+      },
+    ],
+  },
+  {
+    id: getRandomUUID(),
+    no: 'CN6',
+    name: 'M20X1.5 EMC BURÇ EURO',
+    status: 'stopped',
+    production: [
+      {
+        count: 9000,
+        status: 'completed',
+      },
+      {
+        count: 900,
+        status: 'ready',
+      },
+      {
+        count: 1000,
+        status: 'waiting',
+      },
+    ],
+  },
+];
+
 export {
   MockItemsCategories,
   MockItems,
@@ -734,4 +857,5 @@ export {
   SizeSelectOpts,
   MockUsers,
   MockWorkflow,
+  PodMockProdLine,
 };
