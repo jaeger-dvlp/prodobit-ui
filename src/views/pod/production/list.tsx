@@ -1,13 +1,13 @@
 import { Box } from '@mantine/core';
 import PodSidebar from '@/components/pod/sidebar';
 
-function PodIndex() {
+function PaProductionList() {
   return (
     <Box p={10} ta="center" m="auto">
       <PodSidebar />
-      ill not type hello world, just a mock text.
+      p.list
     </Box>
   );
 }
 
-export default PodIndex;
+export default PaProductionList;
