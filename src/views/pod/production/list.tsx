@@ -201,7 +201,7 @@ const Styles = createStyles({
       },
     },
 
-    '> .details-panel': {
+    '> .details-panel-container': {
       padding: 0,
       width: '100%',
       display: 'flex',
@@ -210,12 +210,21 @@ const Styles = createStyles({
       alignItems: 'stretch',
       flexDirection: 'column',
       justifyContent: 'center',
-      '> .content': {
-        padding: '20px 30px',
-      },
     },
   },
 });
+
+const DetailsStyles = createStyles({
+  root: {
+    padding: '20px 30px',
+  },
+});
+
+function DetailsPanel({ item }: { item: any }) {
+  const { classes } = DetailsStyles();
+
+  return <Box className={classes.root}>x</Box>;
+}
 
 export function ProdLine({ item }: { item: any }) {
   const { classes } = Styles();
@@ -267,14 +276,14 @@ export function ProdLine({ item }: { item: any }) {
         {isHovered && (
           <Box
             component={motion.div}
-            className="details-panel"
+            className="details-panel-container"
             transition={{ duration: 0.2 }}
             exit={{ opacity: 0, height: 0 }}
             key={`prod-item${item.id}-details`}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
           >
-            <Box className="content">x</Box>
+            <DetailsPanel item={item} />
           </Box>
         )}
       </AnimatePresence>
