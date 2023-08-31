@@ -55,6 +55,7 @@ const sidebarStyles = createStyles(() => ({
       '& svg': {
         width: 20,
         height: 20,
+        color: t.colors.gray[0],
         margin: '0!important',
       },
     },

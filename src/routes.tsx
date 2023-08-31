@@ -1,6 +1,12 @@
 import { Variant } from 'framer-motion';
 
-import { TasksIcon, RequestsIcon, AnalyzesIcon, DashboardIcon } from '@/components/icons';
+import {
+  TasksIcon,
+  RequestsIcon,
+  AnalyzesIcon,
+  DashboardIcon,
+  CustomHomeIcon,
+} from '@/components/icons';
 
 export const SubRouteAnims: {
   [key: string]: {
@@ -159,15 +165,33 @@ const RoutesMap: RouteMapItem[] = [
 
 export const PodRoutesMap: RouteMapItem[] = [
   {
-    icon: <AnalyzesIcon {...IconProps} />,
+    icon: <CustomHomeIcon {...IconProps} fill="none" color="#fff" />,
+    path: '/pod/dashboard',
+    name: 'Dashboard',
+    viewInSidebar: true,
+  },
+  {
+    icon: <DashboardIcon {...IconProps} />,
     path: '/pod/production/list',
     name: 'Üretim Listesi',
     viewInSidebar: true,
   },
   {
+    icon: <AnalyzesIcon {...IconProps} />,
+    path: '/pod/#',
+    name: 'TODO',
+    viewInSidebar: true,
+  },
+  {
+    icon: <RequestsIcon {...IconProps} />,
+    path: '/pod/#',
+    name: 'TODO',
+    viewInSidebar: true,
+  },
+  {
     icon: <TasksIcon {...IconProps} />,
-    path: '/pod/production/notes',
-    name: 'Üretim Notları',
+    path: '/pod/#',
+    name: 'TODO',
     viewInSidebar: true,
   },
 ];

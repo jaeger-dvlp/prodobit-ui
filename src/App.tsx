@@ -32,8 +32,9 @@ function App() {
           <Route path="/login" element={<Views.App.Auth.Login />} />
         </Route>
         <Route element={<PodLayout />}>
-          <Route path="/pod" element={<Views.PodApp.Index />} />
+          <Route path="/pod/dashboard" element={<Views.PodApp.Index />} />
           <Route path="/pod/production/list" element={<Views.PodApp.Production.List />} />
+          <Route path="/pod/*" element={<Navigate to="/pod/dashboard" />} />
         </Route>
         <Route path="*" element={<Navigate to="/app/dashboard" />} />
       </Routes>
