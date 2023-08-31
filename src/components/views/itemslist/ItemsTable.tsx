@@ -199,7 +199,7 @@ function ItemsTable<T extends Item & Order<Item>>({
               <Tooltip label="Düzenle">
                 <Button
                   onClick={() =>
-                    navigate(`/items/edit/${row.original.id}`, {
+                    navigate(`/app/items/edit/${row.original.id}`, {
                       state: {
                         item: row.original,
                       },
