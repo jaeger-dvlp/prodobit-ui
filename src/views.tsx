@@ -24,7 +24,9 @@ const PlanningWorkflow = LoadableWrapper(import('@/views/app/planning/workflow')
 
 const Tasks = LoadableWrapper(import('@/views/app/tasks'));
 
+// ! POD APP
 const PodAppIndex = LoadableWrapper(import('@/views/pod'));
+const PaProductionList = LoadableWrapper(import('@/views/pod/production/list'));
 
 const Views = {
   App: {
@@ -57,6 +59,9 @@ const Views = {
   },
   PodApp: {
     Index: PodAppIndex,
+    Production: {
+      List: PaProductionList,
+    },
   },
 };
 

@@ -157,4 +157,19 @@ const RoutesMap: RouteMapItem[] = [
   },
 ];
 
+export const PodRoutesMap: RouteMapItem[] = [
+  {
+    icon: <AnalyzesIcon {...IconProps} />,
+    path: '/pod/production/list',
+    name: 'Üretim Listesi',
+    viewInSidebar: true,
+  },
+  {
+    icon: <TasksIcon {...IconProps} />,
+    path: '/pod/production/notes',
+    name: 'Üretim Notları',
+    viewInSidebar: true,
+  },
+];
+
 export default RoutesMap;
