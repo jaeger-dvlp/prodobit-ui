@@ -10,21 +10,18 @@ export const getProdItemPercent = (self: number, total: number) => {
   return percent;
 };
 
-export const getColorByStatus = (status: string, isMachine: boolean = false) => {
+export const getColorByStatus = (status: string) => {
   switch (status) {
     case 'completed':
-      if (isMachine) return t.colors.purple[5];
-      return t.colors.purple[6];
+      return t.colors.purple;
     case 'waiting':
-      return t.colors.yellow[3];
+      return t.colors.yellow;
     case 'ready':
-      if (isMachine) return t.colors.green[5];
-      return t.colors.green[3];
+      return t.colors.green;
     case 'stopped':
-      if (isMachine) return t.colors.red[5];
-      return t.colors.red[3];
+      return t.colors.red;
     default:
-      return t.colors.gray[3];
+      return t.colors.gray;
   }
 };
 
@@ -200,11 +197,11 @@ const Styles = createStyles({
         },
       },
     },
-
     '> .details-panel-container': {
       padding: 0,
       width: '100%',
       display: 'flex',
+      overflow: 'hidden',
       position: 'relative',
       gridColumn: 'span 11',
       alignItems: 'stretch',
@@ -216,14 +213,106 @@ const Styles = createStyles({
 
 const DetailsStyles = createStyles({
   root: {
+    gap: 5,
+    display: 'flex',
+    flexWrap: 'nowrap',
     padding: '20px 30px',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderTop: `1px solid ${t.colors.gray[2]}`,
+    justifyContent: 'space-between',
+    [t.fn.smallerThan('lg')]: {
+      flexWrap: 'wrap',
+    },
+    '> .left-col': {
+      gap: 80,
+      width: '100%',
+      display: 'flex',
+      maxWidth: '45%',
+      flexWrap: 'nowrap',
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'stretch',
+      [t.fn.smallerThan('lg')]: {
+        flexWrap: 'wrap',
+        maxWidth: '100%',
+      },
+      '> .prod-item': {
+        gap: 11,
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        '> .prod-item-status': {
+          borderRadius: 42,
+          padding: '7px 10px',
+          '> .mantine-Text-root': {
+            fontWeight: 400,
+            fontSize: '12px',
+            lineHeight: 1,
+          },
+        },
+        '> .prod-item-name': {
+          lineHeight: 1,
+          fontWeight: 400,
+          fontSize: '12px',
+          color: t.colors.gray[9],
+        },
+        '> .prod-item-count': {
+          marginTop: 14,
+          '> .mantine-Text-root:nth-of-type(1)': {
+            lineHeight: 1,
+            fontWeight: 700,
+            fontSize: '31px',
+            color: t.colors.gray[9],
+          },
+          '> .mantine-Text-root:nth-of-type(2)': {
+            opacity: 0.6,
+            lineHeight: 1,
+            marginLeft: 5,
+            fontWeight: 400,
+            fontSize: '12px',
+            color: t.colors.gray[9],
+          },
+        },
+      },
+    },
   },
 });
 
 function DetailsPanel({ item }: { item: any }) {
   const { classes } = DetailsStyles();
 
-  return <Box className={classes.root}>x</Box>;
+  const TotalProdCount = React.useMemo(() => {
+    return item.production.reduce((a, b) => a + b.count, 0);
+  }, [item]);
+
+  const ItemProductions = React.useMemo(() => {
+    if (item.production.length > 3) {
+      return item.production.slice(0, 3);
+    }
+
+    return item.production;
+  }, [item]);
+
+  return (
+    <Box className={classes.root}>
+      <Box className="left-col">
+        {ItemProductions.map((prod, i) => (
+          <Box key={`prod-item${item.id}-details-${i}`} className="prod-item">
+            <Box className="prod-item-status" bg={getColorByStatus(prod.status)[1]}>
+              <Text c={getColorByStatus(prod.status)[9]}>{prod.label}</Text>
+            </Box>
+            <Text className="prod-item-name">{prod.name}</Text>
+            <Text className="prod-item-count">
+              <Text span>{prod.count.toLocaleString('tr-TR')}</Text>
+              <Text span>/{TotalProdCount.toLocaleString('tr-TR')}</Text>
+            </Text>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
 }
 
 export function ProdLine({ item }: { item: any }) {
@@ -238,7 +327,7 @@ export function ProdLine({ item }: { item: any }) {
     >
       <Box className="main-panel">
         <Box className="left-col">
-          <Box className="line-no" bg={getColorByStatus(item.status, true)}>
+          <Box className="line-no" bg={getColorByStatus(item.status)[5]}>
             {item.no}
           </Box>
           <Text className="line-name">{item.name}</Text>
@@ -262,7 +351,7 @@ export function ProdLine({ item }: { item: any }) {
           {item.production.map((prod, i) => (
             <Box
               className="prod-progress-item"
-              bg={getColorByStatus(prod.status)}
+              bg={getColorByStatus(prod.status)[4]}
               key={`prod-item${item.id}-progress-${i}`}
               maw={`${getProdItemPercent(
                 prod.count,

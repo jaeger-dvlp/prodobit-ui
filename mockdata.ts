@@ -728,19 +728,27 @@ const PodMockProdLine = [
     production: [
       {
         count: 2000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'waiting',
+        label: 'Bekliyor',
       },
       {
         count: 6000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'completed',
+        label: 'Tamamlandı',
       },
       {
         count: 3000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'stopped',
+        label: 'Durduruldu',
       },
       {
         count: 7000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'ready',
+        label: 'Hazır',
       },
     ],
   },
@@ -752,11 +760,15 @@ const PodMockProdLine = [
     production: [
       {
         count: 7000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'completed',
+        label: 'Tamamlandı',
       },
       {
         count: 2000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'unknown',
+        label: 'Bilinmiyor',
       },
     ],
   },
@@ -768,15 +780,21 @@ const PodMockProdLine = [
     production: [
       {
         count: 3000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'completed',
+        label: 'Tamamlandı',
       },
       {
         count: 6000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'ready',
+        label: 'Hazır',
       },
       {
         count: 1000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'waiting',
+        label: 'Bekliyor',
       },
     ],
   },
@@ -788,15 +806,21 @@ const PodMockProdLine = [
     production: [
       {
         count: 3000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'completed',
+        label: 'Tamamlandı',
       },
       {
         count: 6000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'ready',
+        label: 'Hazır',
       },
       {
         count: 1000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'waiting',
+        label: 'Bekliyor',
       },
     ],
   },
@@ -808,15 +832,21 @@ const PodMockProdLine = [
     production: [
       {
         count: 3000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'completed',
+        label: 'Tamamlandı',
       },
       {
         count: 6000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'ready',
+        label: 'Hazır',
       },
       {
         count: 1000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'waiting',
+        label: 'Bekliyor',
       },
     ],
   },
@@ -828,15 +858,21 @@ const PodMockProdLine = [
     production: [
       {
         count: 9000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'completed',
+        label: 'Tamamlandı',
       },
       {
         count: 900,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'ready',
+        label: 'Hazır',
       },
       {
         count: 1000,
+        name: 'M20X1.5 EMC BURÇ EURO',
         status: 'waiting',
+        label: 'Bekliyor',
       },
     ],
   },
