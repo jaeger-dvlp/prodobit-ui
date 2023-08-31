@@ -2089,6 +2089,7 @@ function CustomArrowRightUpIcon(props: CustomIconProps) {
     </svg>
   );
 }
+
 function CustomArrowRightDownIcon(props: CustomIconProps) {
   return (
     <svg viewBox="0 0 13 14" fill="none" {...DefaultProps} {...props}>
@@ -2096,6 +2097,30 @@ function CustomArrowRightDownIcon(props: CustomIconProps) {
         d="M3.40865 3.90865C3.62018 3.69712 3.96315 3.69712 4.17468 3.90865L8.66667 8.40063L8.66667 5.375C8.66667 5.07585 8.90918 4.83333 9.20833 4.83333C9.50749 4.83333 9.75 5.07585 9.75 5.375L9.75 9.70833C9.75 10.0075 9.50749 10.25 9.20833 10.25H4.875C4.57585 10.25 4.33333 10.0075 4.33333 9.70833C4.33333 9.40918 4.57585 9.16667 4.875 9.16667H7.90063L3.40865 4.67468C3.19712 4.46315 3.19712 4.12018 3.40865 3.90865Z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function CustomHomeIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M9.44969 3.265L4.05969 7.465C3.15969 8.165 2.42969 9.655 2.42969 10.785V18.195C2.42969 20.515 4.31969 22.415 6.63969 22.415H18.2197C20.5397 22.415 22.4297 20.515 22.4297 18.205V10.925C22.4297 9.715 21.6197 8.165 20.6297 7.475L14.4497 3.145C13.0497 2.165 10.7997 2.215 9.44969 3.265Z"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <g opacity="0.43">
+        <mask id="path-2-inside-1_1806_15871" fill="currentColor">
+          <path d="M12.4297 16.7813V13.7813V16.7813Z" />
+        </mask>
+        <path
+          d="M10.4297 16.7813C10.4297 17.8859 11.3251 18.7813 12.4297 18.7813C13.5343 18.7813 14.4297 17.8859 14.4297 16.7813H10.4297ZM14.4297 13.7813C14.4297 12.6768 13.5343 11.7813 12.4297 11.7813C11.3251 11.7813 10.4297 12.6768 10.4297 13.7813H14.4297ZM14.4297 16.7813V13.7813H10.4297V16.7813H14.4297Z"
+          fill="currentColor"
+          mask="url(#path-2-inside-1_1806_15871)"
+        />
+      </g>
     </svg>
   );
 }
@@ -2191,4 +2216,5 @@ export {
   CustomChartIndicatorIcon,
   CustomArrowRightUpIcon,
   CustomArrowRightDownIcon,
+  CustomHomeIcon,
 };
