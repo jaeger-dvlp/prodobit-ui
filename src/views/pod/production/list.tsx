@@ -4,6 +4,15 @@ import { ProdobitAppTheme as t } from '@/theme';
 import PodSidebar from '@/components/pod/sidebar';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Text, Title, createStyles } from '@mantine/core';
+import {
+  CustomArrowRightIcon,
+  CustomPauseIcon,
+  CustomRulerIcon,
+  CustomSpeedoMeterIcon,
+  EyeIcon,
+  PenToolIcon,
+  SandTimerIcon,
+} from '@/components/icons';
 
 export const getProdItemPercent = (self: number, total: number) => {
   const percent = (self / total) * 100;
@@ -217,7 +226,7 @@ const DetailsStyles = createStyles({
     display: 'flex',
     flexWrap: 'nowrap',
     padding: '20px 30px',
-    alignItems: 'center',
+    alignItems: 'stretch',
     flexDirection: 'row',
     borderTop: `1px solid ${t.colors.gray[2]}`,
     justifyContent: 'space-between',
@@ -225,10 +234,10 @@ const DetailsStyles = createStyles({
       flexWrap: 'wrap',
     },
     '> .left-col': {
-      gap: 80,
+      gap: 40,
       width: '100%',
       display: 'flex',
-      maxWidth: '45%',
+      maxWidth: '35%',
       flexWrap: 'nowrap',
       alignItems: 'center',
       flexDirection: 'row',
@@ -236,6 +245,7 @@ const DetailsStyles = createStyles({
       [t.fn.smallerThan('lg')]: {
         flexWrap: 'wrap',
         maxWidth: '100%',
+        justifyContent: 'stretch',
       },
       '> .prod-item': {
         gap: 11,
@@ -277,6 +287,87 @@ const DetailsStyles = createStyles({
         },
       },
     },
+    '> .right-col': {
+      gap: 45,
+      width: '100%',
+      maxWidth: '55%',
+      display: 'flex',
+      flexWrap: 'nowrap',
+      alignItems: 'stretch',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      [t.fn.smallerThan('lg')]: {
+        maxWidth: '100%',
+        flexWrap: 'wrap',
+        justifyContent: 'stretch',
+      },
+      '> .info-buttons': {
+        gap: 15,
+        display: 'grid',
+        placeItems: 'stretch',
+        placeContent: 'stretch',
+        gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+        '> .mantine-Button-root': {
+          height: '100%',
+          padding: '14px',
+          borderRadius: 10,
+          fontSize: '12px',
+          fontWeight: 400,
+          maxWidth: 85 + 14,
+          color: t.colors.gray[9],
+          backgroundColor: 'transparent',
+          border: '1px solid rgba(0, 0, 0, 0.10)',
+          '&:hover': {
+            backgroundColor: t.colors.gray[0],
+          },
+          '> div > span': {
+            display: 'flex',
+            whiteSpace: 'pre-wrap',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            '> svg': {
+              width: 18,
+              height: 18,
+            },
+          },
+        },
+      },
+      '> .fast-actions': {
+        gap: 10,
+        display: 'grid',
+        placeItems: 'stretch',
+        placeContent: 'stretch',
+        minWidth: 'fit-content',
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+        gridTemplateRows: 'repeat(2, minmax(0, 1fr))',
+        '> .mantine-Button-root': {
+          height: '100%',
+          padding: '10px',
+          borderRadius: 10,
+          fontSize: '12px',
+          fontWeight: 400,
+          minWidth: 85 + 10,
+          color: t.colors.gray[9],
+          backgroundColor: 'transparent',
+          border: '1px solid rgba(0, 0, 0, 0.10)',
+          '&:hover': {
+            backgroundColor: t.colors.gray[0],
+          },
+          '> div > span': {
+            display: 'flex',
+            whiteSpace: 'pre-wrap',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            '> svg': {
+              width: 18,
+              height: 18,
+            },
+          },
+        },
+      },
+    },
   },
 });
 
@@ -310,6 +401,40 @@ function DetailsPanel({ item }: { item: any }) {
             </Text>
           </Box>
         ))}
+      </Box>
+      <Box className="right-col">
+        <Box className="info-buttons">
+          <Button variant="default">
+            <PenToolIcon />
+            <Text>Teknik Resimler</Text>
+          </Button>
+          <Button variant="default">
+            <CustomRulerIcon />
+            <Text>Ölçü Bilgileri</Text>
+          </Button>
+          <Button variant="default">
+            <EyeIcon />
+            <Text>Tümünü Görüntüle</Text>
+          </Button>
+        </Box>
+        <Box className="fast-actions">
+          <Button variant="default">
+            <CustomPauseIcon />
+            <Text>Duraklat</Text>
+          </Button>
+          <Button variant="default">
+            <SandTimerIcon />
+            <Text>Beklemede</Text>
+          </Button>
+          <Button variant="default">
+            <CustomArrowRightIcon />
+            <Text>İşleniyor</Text>
+          </Button>
+          <Button variant="default">
+            <CustomSpeedoMeterIcon />
+            <Text>Kontrolde</Text>
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

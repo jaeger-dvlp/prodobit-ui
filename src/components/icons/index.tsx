@@ -2125,6 +2125,100 @@ function CustomHomeIcon(props: CustomIconProps) {
   );
 }
 
+function CustomRulerIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <g clipPath="url(#clip0_1566_17780)">
+        <path
+          d="M5 17H19C21 17 22 16 22 14V10C22 8 21 7 19 7H5C3 7 2 8 2 10V14C2 16 3 17 5 17Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <path d="M18 7V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M6 7V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M10.05 7L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M14 7V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+    </svg>
+  );
+}
+
+function CustomPauseIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M7.9875 14.3325V3.6675C7.9875 2.655 7.56 2.25 6.48 2.25H3.7575C2.6775 2.25 2.25 2.655 2.25 3.6675V14.3325C2.25 15.345 2.6775 15.75 3.7575 15.75H6.48C7.56 15.75 7.9875 15.345 7.9875 14.3325Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.7531 14.3325V3.6675C15.7531 2.655 15.3256 2.25 14.2456 2.25H11.5231C10.4506 2.25 10.0156 2.655 10.0156 3.6675V14.3325C10.0156 15.345 10.4431 15.75 11.5231 15.75H14.2456C15.3256 15.75 15.7531 15.345 15.7531 14.3325Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomSpeedoMeterIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M14.355 14.625C15.6825 13.275 16.5 11.415 16.5 9.375C16.5 5.235 13.14 1.875 9 1.875C4.86 1.875 1.5 5.235 1.5 9.375C1.5 11.415 2.31 13.26 3.63 14.6175"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.00375 16.1251C10.4038 16.1251 11.5388 14.9901 11.5388 13.5901C11.5388 12.19 10.4038 11.0551 9.00375 11.0551C7.60371 11.0551 6.46875 12.19 6.46875 13.5901C6.46875 14.9901 7.60371 16.1251 9.00375 16.1251Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.4375 9H12C12.615 9 13.125 8.4975 13.125 7.875C13.125 7.26 12.615 6.75 12 6.75C11.385 6.75 10.875 7.2525 10.875 7.875V8.4375C10.875 8.745 11.13 9 11.4375 9Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomArrowRightIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M10.8203 4.44751L15.3728 9.00001L10.8203 13.5525"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2.625 9H15.2475"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2217,4 +2311,8 @@ export {
   CustomArrowRightUpIcon,
   CustomArrowRightDownIcon,
   CustomHomeIcon,
+  CustomRulerIcon,
+  CustomPauseIcon,
+  CustomSpeedoMeterIcon,
+  CustomArrowRightIcon,
 };
