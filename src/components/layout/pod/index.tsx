@@ -13,7 +13,6 @@ function PodLayout() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={ProdobitAppTheme}>
       <Box
-        key={pathname}
         className="app"
         initial={{
           opacity: 0,
