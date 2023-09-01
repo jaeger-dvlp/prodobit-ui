@@ -13,6 +13,7 @@ import {
   PenToolIcon,
   SandTimerIcon,
 } from '@/components/icons';
+import { NavLink } from 'react-router-dom';
 
 export const getProdItemPercent = (self: number, total: number) => {
   const percent = (self / total) * 100;
@@ -145,6 +146,7 @@ const Styles = createStyles({
           fontWeight: 700,
           whiteSpace: 'pre-wrap',
           color: t.colors.gray[9],
+          textDecoration: 'none',
         },
       },
       '> .center-col': {
@@ -314,6 +316,7 @@ const DetailsStyles = createStyles({
           fontSize: '12px',
           fontWeight: 400,
           maxWidth: 85 + 14,
+          textDecoration: 'none',
           color: t.colors.gray[9],
           backgroundColor: 'transparent',
           border: '1px solid rgba(0, 0, 0, 0.10)',
@@ -404,15 +407,23 @@ function DetailsPanel({ item }: { item: any }) {
       </Box>
       <Box className="right-col">
         <Box className="info-buttons">
-          <Button variant="default">
+          <Button
+            to={`/pod/production/item/${item.id}/files`}
+            component={NavLink}
+            variant="default"
+          >
             <PenToolIcon />
             <Text>Teknik Resimler</Text>
           </Button>
-          <Button variant="default">
+          <Button
+            to={`/pod/production/item/${item.id}/measurements`}
+            component={NavLink}
+            variant="default"
+          >
             <CustomRulerIcon />
             <Text>Ölçü Bilgileri</Text>
           </Button>
-          <Button variant="default">
+          <Button to={`/pod/production/item/${item.id}`} component={NavLink} variant="default">
             <EyeIcon />
             <Text>Tümünü Görüntüle</Text>
           </Button>
@@ -455,7 +466,9 @@ export function ProdLine({ item }: { item: any }) {
           <Box className="line-no" bg={getColorByStatus(item.status)[5]}>
             {item.no}
           </Box>
-          <Text className="line-name">{item.name}</Text>
+          <NavLink to={`/pod/production/item/${item.id}`} className="line-name">
+            {item.name}
+          </NavLink>
         </Box>
         <Box className="center-col">
           <Box className="cc-item">
