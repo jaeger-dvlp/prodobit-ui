@@ -1,22 +1,23 @@
 import React from 'react';
 import { PodMockProdLine } from 'mockdata';
+import { NavLink } from 'react-router-dom';
 import { ProdobitAppTheme as t } from '@/theme';
 import PodSidebar from '@/components/pod/sidebar';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Text, Title, createStyles } from '@mantine/core';
+
 import {
-  CustomArrowRightIcon,
-  CustomPauseIcon,
-  CustomRulerIcon,
-  CustomSpeedoMeterIcon,
   EyeIcon,
   PenToolIcon,
   SandTimerIcon,
+  CustomPauseIcon,
+  CustomRulerIcon,
+  CustomArrowRightIcon,
+  CustomSpeedoMeterIcon,
 } from '@/components/icons';
-import { NavLink } from 'react-router-dom';
 
 export const getProdItemPercent = (self: number, total: number) => {
-  const percent = (self / total) * 100;
+  const percent = Math.round((self / total) * 100);
   return percent;
 };
 
