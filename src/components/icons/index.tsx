@@ -2198,9 +2198,9 @@ function CustomSpeedoMeterIcon(props: CustomIconProps) {
 
 function CustomArrowRightIcon(props: CustomIconProps) {
   return (
-    <svg viewBox="0 0 18 18" fill="none" {...DefaultProps} {...props}>
+    <svg viewBox="0 0 25 25" fill="none" {...DefaultProps} {...props}>
       <path
-        d="M10.8203 4.44751L15.3728 9.00001L10.8203 13.5525"
+        d="M15.0312 18.8229L21.3542 12.5L15.0312 6.1771"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
@@ -2208,7 +2208,7 @@ function CustomArrowRightIcon(props: CustomIconProps) {
         strokeLinejoin="round"
       />
       <path
-        d="M2.625 9H15.2475"
+        d="M3.64844 12.5H21.1797"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
