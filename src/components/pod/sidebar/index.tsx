@@ -2,7 +2,7 @@ import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
 import { NavLink, useMatch } from 'react-router-dom';
 import { PodRoutesMap, RouteMapItem } from '@/routes';
-import { Box, Button, createStyles } from '@mantine/core';
+import { Box, Button, Sx, createStyles } from '@mantine/core';
 
 const sidebarStyles = createStyles(() => ({
   root: {
@@ -78,10 +78,10 @@ function SidebarNavButton({ route, ...rest }: { route: RouteMapItem }) {
   );
 }
 
-function PodSidebar({ ...rest }) {
+function PodSidebar({ sx, ...rest }: { sx?: Sx }) {
   const { classes } = sidebarStyles();
   return (
-    <Box {...rest} className={classes.root}>
+    <Box {...rest} className={classes.root} sx={sx}>
       {PodRoutesMap.map((route, index) => (
         <SidebarNavButton key={`pod-sidebar-${index}`} route={route} />
       ))}
