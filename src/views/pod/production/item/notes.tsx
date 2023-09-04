@@ -39,11 +39,10 @@ function PaProductionItemNotes() {
         sx={{
           top: 0,
           zIndex: 10,
-
           width: '100%',
           height: '100%',
           position: 'sticky',
-          maxWidth: '45%',
+          maxWidth: '47.5%',
           padding: '0px',
           '&:before': {
             top: 0,
