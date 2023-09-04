@@ -34,6 +34,10 @@ function App() {
         <Route element={<PodLayout />}>
           <Route path="/pod/dashboard" element={<Views.PodApp.Index />} />
           <Route path="/pod/production/list" element={<Views.PodApp.Production.List />} />
+          <Route
+            path="/pod/production/item/:id/notes"
+            element={<Views.PodApp.Production.Item.Notes />}
+          />
           <Route path="/pod/*" element={<Navigate to="/pod/dashboard" />} />
         </Route>
         <Route path="*" element={<Navigate to="/app/dashboard" />} />

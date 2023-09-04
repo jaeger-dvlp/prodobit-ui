@@ -27,6 +27,7 @@ const Tasks = LoadableWrapper(import('@/views/app/tasks'));
 // ! POD APP
 const PodAppIndex = LoadableWrapper(import('@/views/pod'));
 const PaProductionList = LoadableWrapper(import('@/views/pod/production/list'));
+const PaProductionItemNotes = LoadableWrapper(import('@/views/pod/production/item/notes'));
 
 const Views = {
   App: {
@@ -61,6 +62,9 @@ const Views = {
     Index: PodAppIndex,
     Production: {
       List: PaProductionList,
+      Item: {
+        Notes: PaProductionItemNotes,
+      },
     },
   },
 };
