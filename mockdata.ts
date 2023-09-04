@@ -721,7 +721,7 @@ const MockWorkflow = [
 
 const PodMockProdLine = [
   {
-    id: getRandomUUID(),
+    id: '60edc911-74a3-4c4b-a515-30c6d4054012',
     no: 'CN6',
     name: 'M20X1.5 EMC BURÇ EURO',
     status: 'completed',
@@ -753,7 +753,7 @@ const PodMockProdLine = [
     ],
   },
   {
-    id: getRandomUUID(),
+    id: '10edc911-74a3-4c4b-a515-30c6d4054012',
     no: 'CN6',
     name: 'M20X1.5 EMC BURÇ EURO',
     status: 'ready',
@@ -773,7 +773,7 @@ const PodMockProdLine = [
     ],
   },
   {
-    id: getRandomUUID(),
+    id: '20edc911-74a3-4c4b-a515-30c6d4054012',
     no: 'CN6',
     name: 'M20X1.5 EMC BURÇ EURO',
     status: 'stopped',
@@ -799,7 +799,7 @@ const PodMockProdLine = [
     ],
   },
   {
-    id: getRandomUUID(),
+    id: '30edc911-74a3-4c4b-a515-30c6d4054012',
     no: 'CN6',
     name: 'M20X1.5 EMC BURÇ EURO',
     status: 'stopped',
@@ -825,7 +825,7 @@ const PodMockProdLine = [
     ],
   },
   {
-    id: getRandomUUID(),
+    id: '00edc911-74a3-4c4b-a515-30c6d4054012',
     no: 'CN6',
     name: 'M20X1.5 EMC BURÇ EURO',
     status: 'stopped',
@@ -851,7 +851,7 @@ const PodMockProdLine = [
     ],
   },
   {
-    id: getRandomUUID(),
+    id: '40edc911-74a3-4c4b-a515-30c6d4054012',
     no: 'CN6',
     name: 'M20X1.5 EMC BURÇ EURO',
     status: 'stopped',
