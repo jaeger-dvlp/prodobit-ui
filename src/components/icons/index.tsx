@@ -2219,6 +2219,29 @@ function CustomArrowRightIcon(props: CustomIconProps) {
   );
 }
 
+function CustomArrowLeftIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 31 31" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M12.3639 7.65958L4.52344 15.5L12.3639 23.3404"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M26.4809 15.5H4.74219"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2315,4 +2338,5 @@ export {
   CustomPauseIcon,
   CustomSpeedoMeterIcon,
   CustomArrowRightIcon,
+  CustomArrowLeftIcon,
 };
