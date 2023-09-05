@@ -27,6 +27,7 @@ const styles = createStyles({
 
 function PaProductionItemNotesContent({ item }: Props) {
   const { classes } = styles();
+  console.log(item);
   return (
     <Box className={classes.root}>
       <PodItemsNavbar />
