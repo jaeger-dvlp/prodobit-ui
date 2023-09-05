@@ -9,12 +9,10 @@ type Props = {
 const styles = createStyles({
   root: {
     gap: 30,
-    paddingTop: 60,
     width: '100%',
-    display: 'flex',
-    alignItems: 'stretch',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    paddingTop: 50,
+    display: 'grid',
+    gridTemplateColumns: '1fr',
   },
   pageHeading: {
     fontWeight: 500,
