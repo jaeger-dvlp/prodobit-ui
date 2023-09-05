@@ -57,7 +57,7 @@ const motionProps = {
   },
 };
 
-const getRenderedDate = (date: string) => {
+export const getRenderedDate = (date: string) => {
   const text = dayjs(date).fromNow();
   return `${text[0].toUpperCase()}${text.slice(1)}`;
 };
