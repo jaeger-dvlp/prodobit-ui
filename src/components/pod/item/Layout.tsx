@@ -71,24 +71,25 @@ function TabsLayout() {
     <Box
       sx={{
         gap: 170,
-        padding: '40px 70px',
-        display: 'flex',
         width: '100%',
         height: '100%',
+        display: 'flex',
+        position: 'relative',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'space-between',
+        padding: '40px 70px 40px 70px',
       }}
     >
       <Box
         sx={{
-          top: 0,
+          top: 40,
           zIndex: 10,
           width: '100%',
-          height: '100%',
-          position: 'sticky',
-          maxWidth: '47.5%',
           padding: '0px',
+          maxWidth: '47.5%',
+          position: 'sticky',
+          height: 'fit-content',
           '&:before': {
             top: 0,
             left: 0,
@@ -139,7 +140,7 @@ function TabsLayout() {
           width: '100%',
           height: '100%',
           maxWidth: '47.5%',
-          padding: '30px 70px 0px 0px',
+          padding: '50px 70px 0px 0px',
         }}
       >
         <PodItemsNavbar items={NavbarTabs} />
