@@ -516,6 +516,18 @@ const MockNotesData: TNote[] = [
   {
     id: 1,
     content:
+      'Ekram enektarlar koltuğun altında kalıp beni ara. Bacım sen enaktarın neyini anlamıyorsun. Enektarlar koltuğun altında dirim. Enaktar enektar koltuğun altında... Lanetler olsun turkcell’e.Ekram enektarlar koltuğun altında kalıp beni ara. Bacım sen enaktarın neyini anlamıyorsun.',
+    date: '2023-08-07 14:00:00',
+    user: {
+      id: 0,
+      name: 'Ömer',
+      surname: 'KAYALAR',
+      avatar: MockAvatars.bitmojiMan2,
+    },
+  },
+  {
+    id: 2,
+    content:
       'Ekram enektarlar koltuğun altında kalıp beni ara. Bacım sen enaktarın neyini anlamıyorsun. Enektarlar koltuğun altında dirim. Enaktar enektar koltuğun altında... Lanetler olsun turkcell’e.',
     date: '2023-08-07 14:00:00',
     user: {
@@ -523,6 +535,18 @@ const MockNotesData: TNote[] = [
       name: 'Ömer',
       surname: 'KAYALAR',
       avatar: MockAvatars.bitmojiMan2,
+    },
+  },
+  {
+    id: 3,
+    content:
+      'Ekram enektarlar koltuğun altında kalıp beni ara. Bacım sen enaktarın neyini anlamıyorsun. Enektarlar koltuğun altında dirim. Enaktar enektar koltuğun altında... Lanetler olsun turkcell’e.',
+    date: '2023-08-07 14:00:00',
+    user: {
+      id: 0,
+      name: 'Fatih',
+      surname: 'GENÇ',
+      avatar: MockAvatars.bitmojiMan1,
     },
   },
 ];
