@@ -1,14 +1,72 @@
-import { Box } from '@mantine/core';
 import React from 'react';
-import PodSidebar from '../sidebar';
-import ItemsSlider from './ItemsSlider';
+import { Box } from '@mantine/core';
+import { PodMockProdLine } from 'mockdata';
+import PodSidebar from '@/components/pod/sidebar';
+import PodItemsNavbar from '@/components/pod/navbar';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate, useParams } from 'react-router-dom';
+import ItemsSlider from '@/components/pod/item/ItemsSlider';
+import PaProductionItemFilesContent from '@/components/pod/item/files';
+import PaProductionItemNotesContent from '@/components/pod/item/notes';
+import PaProductionItemRecordsContent from '@/components/pod/item/records';
+import PaProductionItemMeasurementsContent from '@/components/pod/item/measurements';
 
-type Props = {
-  item: any;
-  children: React.ReactNode;
+const ViewsByTabs = {
+  measurements: PaProductionItemMeasurementsContent,
+  records: PaProductionItemRecordsContent,
+  notes: PaProductionItemNotesContent,
+  files: PaProductionItemFilesContent,
 };
 
-function ItemsLayout({ item, children }: Props) {
+const NavbarTabs = [
+  {
+    name: 'Ölçümler',
+    tab: 'measurements',
+  },
+  {
+    name: 'Üretim Kayıtları',
+    tab: 'records',
+  },
+  {
+    name: 'Notlar',
+    tab: 'notes',
+  },
+  {
+    name: 'Dosyalar',
+    tab: 'files',
+  },
+];
+
+function TabsLayout() {
+  const { id, tab } = useParams();
+  const navigate = useNavigate();
+  const [item, setItem] = React.useState<any>({});
+
+  const CurrentTab = React.useMemo(() => {
+    const foundTab = NavbarTabs.find((elm) => elm.tab === tab);
+
+    if (tab === 'all') return null;
+
+    if (!foundTab) {
+      return () => navigate('/pod/production/list');
+    }
+
+    return ViewsByTabs[tab as string];
+  }, [tab, navigate]);
+
+  React.useEffect(() => {
+    (() => {
+      if (id) {
+        const foundItem = PodMockProdLine.find((elm) => elm.id === id);
+        if (foundItem) {
+          return setItem(foundItem);
+        }
+      }
+
+      return navigate('/app/items');
+    })();
+  }, [id, navigate, setItem]);
+
   return (
     <Box
       sx={{
@@ -84,10 +142,37 @@ function ItemsLayout({ item, children }: Props) {
           padding: '30px 70px 0px 0px',
         }}
       >
-        {children}
+        <PodItemsNavbar items={NavbarTabs} />
+        <AnimatePresence mode="popLayout">
+          <Box
+            key={`${id}-${tab}`}
+            component={motion.div}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                ease: 'anticipate',
+                duration: 1,
+                delay: 0.3,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                ease: 'anticipate',
+                duration: 0.7,
+                delay: 0,
+              },
+            }}
+          >
+            {CurrentTab && <CurrentTab item={item} />}
+          </Box>
+        </AnimatePresence>
       </Box>
     </Box>
   );
 }
 
-export default ItemsLayout;
+export default TabsLayout;

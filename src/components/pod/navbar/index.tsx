@@ -3,29 +3,11 @@ import { Box, Button } from '@mantine/core';
 import { ProdobitAppTheme as t } from '@/theme';
 import { NavLink, useMatch, useParams } from 'react-router-dom';
 
-const NavbarItems = [
-  {
-    name: 'Ölçümler',
-    path: '/pod/production/item/:id/measurements',
-  },
-  {
-    name: 'Üretim Kayıtları',
-    path: '/pod/production/item/:id/records',
-  },
-  {
-    name: 'Notlar',
-    path: '/pod/production/item/:id/notes',
-  },
-  {
-    name: 'Dosyalar',
-    path: '/pod/production/item/:id/files',
-  },
-];
+const BASE_URL = '/pod/production/item';
 
-function NavItem({ name, path }: { name: string; path: string }) {
+function NavItem({ name, tab }: { name: string; tab: string }) {
   const { id } = useParams();
-  const matched = useMatch(path);
-  const UrlTo = path.replace(':id', id as string);
+  const matched = useMatch(`${BASE_URL}/${id}/${tab}`);
   return (
     <Button
       sx={{
@@ -48,13 +30,15 @@ function NavItem({ name, path }: { name: string; path: string }) {
           height: matched ? '2px' : 0,
           transform: 'translateX(-50%)',
           backgroundColor: t.colors.purple[6],
+          transition: 'all 0.2s ease-in-out',
         },
         '&:hover': {
           opacity: 1,
           color: t.colors.purple[6],
         },
       }}
-      to={UrlTo}
+      to={`${BASE_URL}/${id}/${tab}`}
+      replace
       variant="default"
       component={NavLink}
     >
@@ -63,7 +47,14 @@ function NavItem({ name, path }: { name: string; path: string }) {
   );
 }
 
-function PodItemsNavbar() {
+function PodItemsNavbar({
+  items: NavbarItems,
+}: {
+  items: {
+    name: string;
+    tab: string;
+  }[];
+}) {
   return (
     <Box
       sx={{
@@ -78,7 +69,7 @@ function PodItemsNavbar() {
       }}
     >
       {NavbarItems.map((item) => (
-        <NavItem key={item.path} name={item.name} path={item.path} />
+        <NavItem key={item.tab} name={item.name} tab={item.tab} />
       ))}
     </Box>
   );

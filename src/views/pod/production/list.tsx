@@ -424,7 +424,7 @@ function DetailsPanel({ item }: { item: any }) {
             <CustomRulerIcon />
             <Text>Ölçü Bilgileri</Text>
           </Button>
-          <Button to={`/pod/production/item/${item.id}`} component={NavLink} variant="default">
+          <Button to={`/pod/production/item/${item.id}/all`} component={NavLink} variant="default">
             <EyeIcon />
             <Text>Tümünü Görüntüle</Text>
           </Button>

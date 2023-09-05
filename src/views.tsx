@@ -27,7 +27,8 @@ const Tasks = LoadableWrapper(import('@/views/app/tasks'));
 // ! POD APP
 const PodAppIndex = LoadableWrapper(import('@/views/pod'));
 const PaProductionList = LoadableWrapper(import('@/views/pod/production/list'));
-const PaProductionItemNotes = LoadableWrapper(import('@/views/pod/production/item/notes'));
+
+const PaProductionItemTabsLayout = LoadableWrapper(import('@/components/pod/item/Layout'));
 
 const Views = {
   App: {
@@ -63,7 +64,7 @@ const Views = {
     Production: {
       List: PaProductionList,
       Item: {
-        Notes: PaProductionItemNotes,
+        Tabs: PaProductionItemTabsLayout,
       },
     },
   },

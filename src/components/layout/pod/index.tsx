@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ProdobitAppTheme } from '@/theme';
 import { Box, MantineProvider } from '@mantine/core';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -12,58 +12,60 @@ function PodLayout() {
   }, [pathname]);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={ProdobitAppTheme}>
-      <Box
-        className="app"
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        component={motion.main}
-        transition={{
-          duration: 0.5,
-        }}
-        sx={{
-          zIndex: 3,
-          display: 'flex',
-          minWidth: '100%',
-          overflow: 'hidden',
-          minHeight: '100vh',
-          position: 'relative',
-          flexDirection: 'row',
-          justifyContent: 'start',
-        }}
-      >
+      <AnimatePresence mode="popLayout">
         <Box
-          sx={{
-            top: 0,
-            left: 0,
-            zIndex: 2,
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            filter: 'blur(57.5px)',
-            pointerEvents: 'none',
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'left bottom',
-            backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
+          className="app"
+          initial={{
+            opacity: 0,
           }}
-        />
-        <Box
+          animate={{
+            opacity: 1,
+          }}
+          component={motion.main}
+          transition={{
+            duration: 0.5,
+          }}
           sx={{
             zIndex: 3,
-            width: '100%',
             display: 'flex',
+            minWidth: '100%',
+            overflow: 'hidden',
             minHeight: '100vh',
             position: 'relative',
             flexDirection: 'row',
             justifyContent: 'start',
           }}
         >
-          <Outlet />
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              filter: 'blur(57.5px)',
+              pointerEvents: 'none',
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'left bottom',
+              backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
+            }}
+          />
+          <Box
+            sx={{
+              zIndex: 3,
+              width: '100%',
+              display: 'flex',
+              minHeight: '100vh',
+              position: 'relative',
+              flexDirection: 'row',
+              justifyContent: 'start',
+            }}
+          >
+            <Outlet />
+          </Box>
         </Box>
-      </Box>
+      </AnimatePresence>
     </MantineProvider>
   );
 }

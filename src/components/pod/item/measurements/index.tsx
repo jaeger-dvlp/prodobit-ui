@@ -25,16 +25,16 @@ const styles = createStyles({
   },
 });
 
-function PaProductionItemNotesContent({ item }: Props) {
+function PaProductionItemMeasurementsContent({ item }: Props) {
   const { classes } = styles();
   console.log(item);
   return (
     <Box className={classes.root}>
       <Title className={classes.pageHeading} order={1}>
-        Üretim Notları
+        Ölçüm Listesi
       </Title>
     </Box>
   );
 }
 
-export default PaProductionItemNotesContent;
+export default PaProductionItemMeasurementsContent;
