@@ -2242,6 +2242,64 @@ function CustomArrowLeftIcon(props: CustomIconProps) {
   );
 }
 
+function CustomAlertTriangleIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M10.2927 3.85996L1.82271 18C1.64807 18.3024 1.55567 18.6453 1.5547 18.9945C1.55372 19.3437 1.6442 19.6871 1.81713 19.9905C1.99007 20.2939 2.23943 20.5467 2.54041 20.7238C2.8414 20.9009 3.18351 20.9961 3.53271 21H20.4727C20.8219 20.9961 21.164 20.9009 21.465 20.7238C21.766 20.5467 22.0153 20.2939 22.1883 19.9905C22.3612 19.6871 22.4517 19.3437 22.4507 18.9945C22.4497 18.6453 22.3573 18.3024 22.1827 18L13.7127 3.85996C13.5344 3.56607 13.2834 3.32308 12.9839 3.15444C12.6844 2.98581 12.3464 2.89722 12.0027 2.89722C11.659 2.89722 11.321 2.98581 11.0215 3.15444C10.722 3.32308 10.471 3.56607 10.2927 3.85996Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 9V13"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 17H12.01"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomArrowUpIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 17" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M14.2656 10.0432L9.91471 5.6923C9.40088 5.17847 8.56006 5.17847 8.04622 5.6923L3.69531 10.0432"
+        stroke="currentColor"
+        strokeWidth="1.00098"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CustomArrowDownIcon(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 17 17" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M14.2656 6.65149L9.91471 11.0024C9.40088 11.5162 8.56006 11.5162 8.04622 11.0024L3.69531 6.65149"
+        stroke="currentColor"
+        strokeWidth="1.00098"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2339,4 +2397,7 @@ export {
   CustomSpeedoMeterIcon,
   CustomArrowRightIcon,
   CustomArrowLeftIcon,
+  CustomAlertTriangleIcon,
+  CustomArrowDownIcon,
+  CustomArrowUpIcon,
 };
