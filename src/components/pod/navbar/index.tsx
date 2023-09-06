@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button } from '@mantine/core';
+import { Box, Button, Text } from '@mantine/core';
 import { ProdobitAppTheme as t } from '@/theme';
 import { NavLink, useMatch, useParams } from 'react-router-dom';
 
@@ -21,6 +21,9 @@ function NavItem({ name, tab }: { name: string; tab: string }) {
         transition: 'all 0.2s ease-in-out',
         backgroundColor: 'transparent!important',
         color: matched ? t.colors.purple[6] : t.colors.gray[9],
+        '> .mantine-Text-root': {
+          lineHeight: 1,
+        },
         '&:after': {
           bottom: 0,
           left: '50%',
@@ -42,7 +45,7 @@ function NavItem({ name, tab }: { name: string; tab: string }) {
       variant="default"
       component={NavLink}
     >
-      {name}
+      <Text>{name}</Text>
     </Button>
   );
 }
