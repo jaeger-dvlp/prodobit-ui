@@ -37,38 +37,14 @@ function PodLayout() {
             position: 'relative',
             flexDirection: 'row',
             justifyContent: 'start',
+            backgroundColor: '#fff',
+            backgroundSize: '100% 100%',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'left bottom',
+            backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
           }}
         >
-          <Box
-            sx={{
-              top: 0,
-              left: 0,
-              zIndex: 2,
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              filter: 'blur(57.5px)',
-              pointerEvents: 'none',
-              backgroundSize: '100% 100%',
-              backgroundAttachment: 'fixed',
-              backgroundPosition: 'left bottom',
-              backgroundImage: 'url(/assets/img/layout/pod-bg.webp)',
-            }}
-          />
-          <Box
-            sx={{
-              zIndex: 3,
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              minHeight: '100vh',
-              position: 'relative',
-              flexDirection: 'row',
-              justifyContent: 'start',
-            }}
-          >
-            <Outlet />
-          </Box>
+          <Outlet />
         </Box>
       </AnimatePresence>
     </MantineProvider>
