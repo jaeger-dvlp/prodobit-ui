@@ -110,6 +110,12 @@ export const ProdobitAppTheme: MantineTheme = {
       },
     },
     Menu: {
+      styles: {
+        item: {
+          padding: 0,
+          backgroundColor: 'transparent!important',
+        },
+      },
       defaultProps: {
         transitionProps: {
           duration: 300,
