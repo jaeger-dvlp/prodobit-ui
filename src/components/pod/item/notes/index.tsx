@@ -151,6 +151,7 @@ const styles = createStyles({
     width: '100%',
     display: 'flex',
     borderRadius: 40,
+    overflow: 'hidden',
     position: 'relative',
     alignItems: 'stretch',
     justifyContent: 'stretch',
