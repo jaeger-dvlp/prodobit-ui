@@ -214,7 +214,7 @@ const styles = createStyles({
             '> .mantine-Button-root': {
               width: '100%',
               height: '100%',
-              padding: '10px',
+              padding: '0px',
               borderRadius: 10,
               fontSize: '12px',
               fontWeight: 400,
@@ -231,6 +231,8 @@ const styles = createStyles({
               '> div > span': {
                 display: 'flex',
                 width: '100%',
+                height: '100%',
+                padding: '10px',
                 whiteSpace: 'pre-wrap',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
