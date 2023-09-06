@@ -1,6 +1,22 @@
 import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Title, createStyles } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Menu,
+  NumberInput,
+  NumberInputHandlers,
+  Text,
+  Title,
+  createStyles,
+} from '@mantine/core';
+import {
+  CustomAlertTriangleIcon,
+  CustomArrowDownIcon,
+  CustomArrowUpIcon,
+  CustomPlusIcon,
+  CustomSmoothTooltipIllustration,
+} from '@/components/icons';
 
 type Props = {
   item: any;
@@ -17,20 +33,265 @@ const styles = createStyles({
   pageHeading: {
     fontWeight: 500,
     fontSize: '31px',
-    paddingBottom: 30,
     color: t.colors.gray[9],
+  },
+  headingGroup: {
+    gap: 5,
+    display: 'flex',
+    paddingBottom: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottom: `1px solid rgba(0, 0, 0, 0.20)`,
+    '> .heading-buttons': {
+      gap: 10,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      '> .mantine-Button-root': {
+        height: 'auto',
+        borderRadius: 10,
+        padding: '10px',
+        color: t.colors.gray[9],
+        backgroundColor: 'transparent',
+        transition: 'all 0.2s ease-in-out',
+        border: `1px solid ${t.colors.gray[4]}`,
+        boxShadow: '0px 24px 54px -13px rgba(177, 109, 92, 0)',
+        '&[data-menu-open="true"]': {
+          borderColor: '#fff',
+          backgroundColor: '#fff',
+          boxShadow: '0px 24px 54px -13px rgba(177, 109, 92, 0.30)',
+        },
+        '> div > span > svg': {
+          width: 24,
+          height: 24,
+        },
+      },
+    },
   },
 });
 
+const MenuStyles = createStyles({
+  root: {
+    margin: 0,
+    padding: 0,
+    border: 'none',
+    minWidth: 417,
+    height: 'auto',
+    marginLeft: 30,
+    display: 'flex',
+    paddingTop: 30,
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    backgroundColor: 'transparent',
+    '& .menu-content': {
+      gap: 5,
+      margin: 0,
+      padding: 0,
+      display: 'flex',
+      alignItems: 'stretch',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      '& .c-tooltip': {
+        top: 0,
+        zIndex: 2,
+        right: 0,
+        width: 80,
+        height: 80,
+        color: '#FDFEFF',
+        position: 'absolute',
+        transform: 'rotate(90deg) translateX(-28%) translateY(16%)',
+      },
+      '> .menu-inner': {
+        gap: 20,
+        padding: 30,
+        display: 'flex',
+        borderRadius: 20,
+        position: 'relative',
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        backgroundColor: '#FDFEFF',
+        justifyContent: 'flex-start',
+        boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+        '> .menu-inner-title': {
+          fontWeight: 500,
+          fontSize: '15px',
+          color: t.colors.gray[6],
+        },
+        '> .count-inp-container': {
+          gap: 5,
+          padding: 20,
+          display: 'flex',
+          borderRadius: 10,
+          alignItems: 'center',
+          flexDirection: 'row',
+          backgroundColor: '#fff',
+          justifyContent: 'space-between',
+          '> .count-inp': {
+            width: '100%',
+            '& input': {
+              padding: 0,
+              width: '100%',
+              border: 'none',
+              fontWeight: 500,
+              fontSize: '15px',
+            },
+          },
+          '> .count-inp-buttons': {
+            gap: 1,
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            '> .mantine-Button-root': {
+              padding: 0,
+              height: 'auto',
+              border: 'none',
+              backgroundColor: 'transparent!important',
+              '> div > span > svg': {
+                width: 16,
+                height: 16,
+              },
+            },
+          },
+        },
+        '> .old-records': {
+          gap: 10,
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          '> .mantine-Button-root': {
+            height: 'auto',
+            fontWeight: 400,
+            fontSize: '15px',
+            borderRadius: 100,
+            padding: '10px 25px',
+            color: t.colors.gray[9],
+            border: '1px solid rgba(0, 0, 0, 0.20)',
+            backgroundColor: 'transparent!important',
+          },
+        },
+      },
+      '& .menu-save-btn': {
+        border: 'none',
+        width: '100%',
+        height: 'auto',
+        fontSize: '22px',
+        fontWeight: 400,
+        borderRadius: 20,
+        padding: '25px 10px',
+        color: t.colors.gray[0],
+        backgroundColor: t.colors.purple[6],
+        textAlign: 'center',
+        boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+      },
+    },
+  },
+});
+
+function AddRecordMenu() {
+  const { classes } = MenuStyles();
+  const [value, setValue] = React.useState<number | ''>(0);
+  const handlers = React.useRef<NumberInputHandlers>();
+  return (
+    <Menu.Dropdown className={classes.root}>
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Text className="menu-inner-title">Üretim Kaydı Oluştur</Text>
+          <Box className="count-inp-container">
+            <NumberInput
+              min={0}
+              step={1}
+              hideControls
+              value={value}
+              decimalSeparator=","
+              thousandsSeparator="."
+              className="count-inp"
+              handlersRef={handlers}
+              placeholder="Miktar Girin"
+              onChange={(val) => setValue(val)}
+              formatter={(val) => val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+            />
+            <Box className="count-inp-buttons">
+              <Button onClick={() => handlers?.current?.increment()} variant="default">
+                <CustomArrowUpIcon />
+              </Button>
+              <Button onClick={() => handlers?.current?.decrement()} variant="default">
+                <CustomArrowDownIcon />
+              </Button>
+            </Box>
+          </Box>
+          <Box className="old-records">
+            <Button onClick={() => setValue(2412)} variant="default">
+              <Text>2.412</Text>
+            </Button>
+            <Button onClick={() => setValue(300)} variant="default">
+              <Text>300</Text>
+            </Button>
+            <Button onClick={() => setValue(21524)} variant="default">
+              <Text>21.524</Text>
+            </Button>
+            <Button onClick={() => setValue(249)} variant="default">
+              <Text>249</Text>
+            </Button>
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function PaProductionItemRecordsContent({ item }: Props) {
   const { classes } = styles();
-  console.log(item);
+
+  const handleMenuChange = (status: boolean, button: string) => {
+    const btn = document.querySelector(button) as HTMLButtonElement;
+
+    if (btn) btn.dataset.menuOpen = status.toString();
+  };
+
   return (
     <Box className={classes.root}>
-      <Title className={classes.pageHeading} order={1}>
-        Üretim Kayıtları
-      </Title>
+      <Box className={classes.headingGroup}>
+        <Title className={classes.pageHeading} order={1}>
+          Üretim Kayıtları
+        </Title>
+        <Box className="heading-buttons">
+          <Menu
+            position="bottom-end"
+            onOpen={() => handleMenuChange(true, '.alert-record-button')}
+            onClose={() => handleMenuChange(false, '.alert-record-button')}
+          >
+            <Menu.Target>
+              <Button data-menu-open="false" className="alert-record-button" variant="default">
+                <CustomAlertTriangleIcon />
+              </Button>
+            </Menu.Target>
+            <AddRecordMenu />
+          </Menu>
+          <Menu
+            position="bottom-end"
+            onOpen={() => handleMenuChange(true, '.add-record-button')}
+            onClose={() => handleMenuChange(false, '.add-record-button')}
+          >
+            <Menu.Target>
+              <Button data-menu-open="false" className="add-record-button" variant="default">
+                <CustomPlusIcon />
+              </Button>
+            </Menu.Target>
+            <AddRecordMenu />
+          </Menu>
+        </Box>
+      </Box>
     </Box>
   );
 }

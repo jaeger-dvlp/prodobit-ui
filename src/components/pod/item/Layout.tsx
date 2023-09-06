@@ -78,7 +78,7 @@ function TabsLayout() {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'space-between',
-        padding: '40px 70px 40px 70px',
+        padding: '40px 40px 40px 70px',
       }}
     >
       <Box
@@ -140,7 +140,7 @@ function TabsLayout() {
           width: '100%',
           height: '100%',
           maxWidth: '47.5%',
-          padding: '50px 70px 0px 0px',
+          padding: '50px 00px 0px 0px',
         }}
       >
         <PodItemsNavbar items={NavbarTabs} />
