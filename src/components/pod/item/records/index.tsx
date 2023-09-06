@@ -1,4 +1,6 @@
+import 'dayjs/locale/tr';
 import React from 'react';
+import dayjs from 'dayjs';
 import { ProdobitAppTheme as t } from '@/theme';
 import {
   Box,
@@ -16,7 +18,11 @@ import {
   CustomArrowUpIcon,
   CustomPlusIcon,
   CustomSmoothTooltipIllustration,
+  EditIconItem,
+  TrashIcon,
 } from '@/components/icons';
+
+dayjs.locale('tr');
 
 type Props = {
   item: any;
@@ -62,6 +68,118 @@ const styles = createStyles({
           backgroundColor: '#fff',
           boxShadow: '0px 24px 54px -13px rgba(177, 109, 92, 0.30)',
         },
+        '> div > span > svg': {
+          width: 24,
+          height: 24,
+        },
+      },
+    },
+  },
+  recordsContainer: {
+    gap: 15,
+    display: 'flex',
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  recordElement: {
+    gap: 10,
+    padding: 20,
+    display: 'grid',
+    overflow: 'hidden',
+    borderRadius: 100,
+    position: 'relative',
+    placeItems: 'center',
+    placeContent: 'space-between',
+    gridTemplateColumns: 'repeat(12, 1fr)',
+    background: 'rgba(255, 255, 255, 0.10)',
+    boxShadow:
+      ' 0px 18.26189px 22.82736px 0px rgba(0, 0, 0, 0.05), -0.76091px 0.76091px 0.76091px -1.52182px rgba(255, 255, 255, 0.35) inset, 0px 0.76091px 6.0873px 0px rgba(255, 255, 255, 0.35) inset',
+    '&:before': {
+      top: 0,
+      left: 0,
+      zIndex: -1,
+      content: '""',
+      width: '100%',
+      height: '100%',
+      display: 'block',
+      position: 'absolute',
+      pointerEvents: 'none',
+      backdropFilter: 'blur(19px)',
+    },
+    '> .left-col': {
+      width: '100%',
+      display: 'flex',
+      fontWeight: 500,
+      fontSize: '22px',
+      borderRadius: 100,
+      textAlign: 'center',
+      padding: '15px 30px',
+      alignItems: 'center',
+      gridColumn: 'span 3',
+      justifyContent: 'center',
+      color: t.colors.purple[0],
+      backgroundColor: t.colors.purple[5],
+    },
+    '> .center-col': {
+      gap: 0,
+      padding: '0 20px',
+      width: '100%',
+      display: 'grid',
+      gridColumn: 'span 5',
+      placeItems: 'center',
+      placeContent: 'space-between',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      '> .value-box': {
+        gap: 0,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        '> .v-label': {
+          opacity: 0.2,
+          fontWeight: 700,
+          fontSize: '12px',
+          color: t.colors.gray[9],
+        },
+        '> .v-value': {
+          fontWeight: 500,
+          fontSize: '15px',
+          color: t.colors.gray[9],
+        },
+      },
+    },
+    '> .right-col': {
+      width: '100%',
+      display: 'flex',
+      fontWeight: 400,
+      fontSize: '15px',
+      borderRadius: 42,
+      gridColumn: 'span 2',
+      padding: '15px 30px',
+      height: 'fit-content',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: t.colors.purple[7],
+      border: `1px solid ${t.colors.purple[1]}`,
+      '> .mantine-Text-root': {
+        lineHeight: 1,
+      },
+    },
+    '> .controls': {
+      gap: 20,
+      width: '100%',
+      display: 'flex',
+      gridColumn: 'span 2',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      '> .mantine-Button-root': {
+        padding: 2,
+        height: 'auto',
+        border: 'none',
+        color: t.colors.gray[9],
+        backgroundColor: 'transparent!important',
         '> div > span > svg': {
           width: 24,
           height: 24,
@@ -249,9 +367,49 @@ function AddRecordMenu() {
   );
 }
 
+function RecordElement({ record }: { record: any }) {
+  const { classes } = styles();
+  const getDate = (date: string) => dayjs(date).format('DD/MM/YYYY');
+  return (
+    <Box className={classes.recordElement}>
+      <Box className="left-col">
+        <Text>{record.no}</Text>
+      </Box>
+      <Box className="center-col">
+        <Box className="value-box">
+          <Text className="v-label">MİKTAR</Text>
+          <Text className="v-value">{record.count}</Text>
+        </Box>
+        <Box className="value-box">
+          <Text className="v-label">OLUŞTURMA TARİHİ</Text>
+          <Text className="v-value">{getDate(record.created_at)}</Text>
+        </Box>
+      </Box>
+      <Box className="right-col">
+        <Text>{record.status}</Text>
+      </Box>
+      <Box className="controls">
+        <Button variant="default">
+          <EditIconItem />
+        </Button>
+        <Button variant="default">
+          <TrashIcon />
+        </Button>
+      </Box>
+    </Box>
+  );
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function PaProductionItemRecordsContent({ item }: Props) {
   const { classes } = styles();
+
+  const MockRecord = {
+    no: 'IE-2340',
+    count: 3460,
+    created_at: '2023-04-21',
+    status: 'İşleniyor',
+  };
 
   const handleMenuChange = (status: boolean, button: string) => {
     const btn = document.querySelector(button) as HTMLButtonElement;
@@ -291,6 +449,11 @@ function PaProductionItemRecordsContent({ item }: Props) {
             <AddRecordMenu />
           </Menu>
         </Box>
+      </Box>
+      <Box className={classes.recordsContainer}>
+        {Array.from({ length: 20 }).map((_, i) => (
+          <RecordElement key={i} record={MockRecord} />
+        ))}
       </Box>
     </Box>
   );
