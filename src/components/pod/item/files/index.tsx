@@ -1,9 +1,9 @@
 import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
-import { Box, Button, Text, Title, createStyles } from '@mantine/core';
-import { DownloadCloudIcon, ImageIcon, PenToolIcon } from '@/components/icons';
 import { getRandomUUID } from '@/common/utils/misc';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Box, Button, Text, Title, createStyles } from '@mantine/core';
+import { DownloadCloudIcon, ImageIcon, PenToolIcon } from '@/components/icons';
 
 const motionProps = {
   component: motion.section,
