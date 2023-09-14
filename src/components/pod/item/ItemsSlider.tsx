@@ -55,8 +55,9 @@ const styles = createStyles({
     },
     '> .item-line': {
       gap: 23,
-      display: 'flex',
       width: '100%',
+      display: 'flex',
+      overflowX: 'auto',
       alignItems: 'stretch',
       flexDirection: 'column',
       justifyContent: 'stretch',
