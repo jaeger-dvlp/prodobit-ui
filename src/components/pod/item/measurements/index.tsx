@@ -393,8 +393,7 @@ const MenuStyles = createStyles({
               },
             },
           },
-          '> .menu-approve-text': {
-            opacity: 0.6,
+          '& .menu-approve-text': {
             fontWeight: 400,
             fontSize: '15px',
             color: t.colors.gray[9],
@@ -454,7 +453,7 @@ function MenuNoGo() {
               exit={{ opacity: 0 }}
               initial={{ opacity: 0 }}
               animate={{
-                opacity: 1,
+                opacity: 0.6,
                 transition: {
                   duration: 0.5,
                   delay: 0.2,
