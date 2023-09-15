@@ -2300,6 +2300,21 @@ function CustomArrowDownIcon(props: CustomIconProps) {
   );
 }
 
+function CustomSmoothArrowDown(props: CustomIconProps) {
+  return (
+    <svg viewBox="0 0 25 26" fill="none" {...DefaultProps} {...props}>
+      <path
+        d="M12.5036 19.25H15.2848C18.7327 19.25 20.1494 16.8021 18.4202 13.8125L17.0244 11.4063L15.6286 9C13.8994 6.01042 11.0765 6.01042 9.34732 9L7.95149 11.4063L6.55566 13.8125C4.85774 16.8021 6.26399 19.25 9.72232 19.25H12.5036Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   DashboardIcon,
   AnalyzesIcon,
@@ -2400,4 +2415,5 @@ export {
   CustomAlertTriangleIcon,
   CustomArrowDownIcon,
   CustomArrowUpIcon,
+  CustomSmoothArrowDown,
 };
