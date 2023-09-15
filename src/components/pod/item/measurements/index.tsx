@@ -9,19 +9,19 @@ const mockMeasurements = [
     type: 'short',
     name: 'Kısa Boy',
     currentMeasurement: 1.48,
-    measurementHistory: [1.46, 1.43, 1.41, 1.38],
+    measurementHistory: [1.46, 1.43, 1.41, 1.38, 1.36, 1.33, 1.31, 1.28],
   },
   {
     type: 'hole-diamaeter',
     name: 'Delik Çapı',
     currentMeasurement: 1.49,
-    measurementHistory: [1.46, 1.43, 1.41, 1.38],
+    measurementHistory: [1.46, 1.43, 1.41, 1.38, 1.36, 1.33, 1.31, 1.28],
   },
   {
     type: 'outer-diameter',
     name: 'Dış Çap',
     currentMeasurement: 1.54,
-    measurementHistory: [1.46, 1.43, 1.41, 1.38],
+    measurementHistory: [1.46, 1.43, 1.41, 1.38, 1.36, 1.33, 1.31, 1.28],
   },
 ];
 
@@ -180,7 +180,120 @@ const styles = createStyles({
       },
     },
   },
+  chItemContainer: {
+    gap: 0,
+    padding: 0,
+    display: 'flex',
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.10)',
+    paddingBottom: 25,
+    "&[data-history-collapsed='true']": {
+      '& .collapse-history-button': {
+        transform: 'rotateX(180deg)',
+      },
+    },
+    '> .ch-item-top': {
+      gap: 5,
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      '> .ch-item-main-value': {
+        fontWeight: 400,
+        fontSize: '22px',
+        color: t.colors.gray[9],
+      },
+      '> .collapse-history-button': {
+        padding: 1,
+        border: 'none',
+        height: 'auto',
+        color: t.colors.gray[9],
+        backgroundColor: 'transparent',
+        transition: 'all 0.2s ease-in-out',
+        '> div > span > svg': {
+          width: 25,
+          height: 25,
+        },
+      },
+    },
+    '> .collapsable-container': {
+      overflow: 'hidden',
+      '> .ch-item-content': {
+        gap: 10,
+        paddingTop: 25,
+        display: 'flex',
+        flexWrap: 'wrap',
+        overflow: 'hidden',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        '> .ch-item-content-item': {
+          gap: 10,
+          display: 'flex',
+          borderRadius: 100,
+          padding: '10px 20px',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          background: 'rgba(255, 255, 255, 0.60)',
+          boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          '> .ch-item-circle': {
+            width: 8,
+            height: 8,
+            borderRadius: 100,
+            backgroundColor: t.colors.green[5],
+          },
+          '> .ch-item-content-item-value': {
+            fontWeight: 400,
+            fontSize: '22px',
+            color: t.colors.gray[9],
+          },
+        },
+      },
+    },
+  },
 });
+
+function MHistoryColumn({ measurement, date }: { measurement: any; date: string }) {
+  const { classes } = styles();
+  const [isCollapsed, setIsCollapsed] = React.useState<boolean>(false);
+  return (
+    <Box data-history-collapsed={isCollapsed} className={classes.chItemContainer}>
+      <Box className="ch-item-top">
+        <Text className="ch-item-main-value">{`${date}:00`}</Text>
+        <Button
+          variant="default"
+          className="collapse-history-button"
+          onClick={() => setIsCollapsed((prev) => !prev)}
+        >
+          <CustomSmoothArrowDown />
+        </Button>
+      </Box>
+      <AnimatePresence mode="wait">
+        {isCollapsed && (
+          <Box
+            component={motion.div}
+            transition={{ duration: 0.3 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="collapsable-container"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+          >
+            <Box className="ch-item-content">
+              {measurement?.measurementHistory?.map((m: number, i: number) => (
+                <Box key={`measurement-${i}`} className="ch-item-content-item">
+                  <Box className="ch-item-circle" />
+                  <Text className="ch-item-content-item-value">{m}</Text>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        )}
+      </AnimatePresence>
+    </Box>
+  );
+}
 
 function MeasurementColumn({ measurement }: any) {
   const { classes } = styles();
@@ -225,7 +338,15 @@ function MeasurementColumn({ measurement }: any) {
               <Box className="collapsable-heading">
                 <Title order={3}>ÖLÇÜ GEÇMİŞİ</Title>
               </Box>
-              <Box className="collapsable-content">content</Box>
+              <Box className="collapsable-content">
+                {Array.from({ length: 10 }, (_, i) => (
+                  <MHistoryColumn
+                    key={`measurement-${i}`}
+                    measurement={measurement}
+                    date={(i + 9 >= 10 ? i + 9 : `0${i + 9}`).toString()}
+                  />
+                ))}
+              </Box>
             </Box>
           </Box>
         )}
