@@ -399,8 +399,7 @@ const MenuStyles = createStyles({
                 width: '50%',
                 content: '""',
                 position: 'absolute',
-                top: 'calc(50% + 5px)',
-                transform: 'translateY(-50%)',
+                top: 'calc(50% + 4.5px)',
                 backgroundColor: 'rgba(0, 0, 0, 1)',
               },
               '&:nth-of-type(3) > .line-box::after': {
@@ -409,8 +408,7 @@ const MenuStyles = createStyles({
                 width: '50%',
                 content: '""',
                 position: 'absolute',
-                top: 'calc(50% + 5px)',
-                transform: 'translateY(-50%)',
+                top: 'calc(50% + 4.5px)',
                 backgroundColor: 'rgba(0, 0, 0, 1)',
               },
               '> .line-box': {
