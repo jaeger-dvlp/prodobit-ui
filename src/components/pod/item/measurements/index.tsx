@@ -331,6 +331,145 @@ const MenuStyles = createStyles({
           fontSize: '15px',
           color: t.colors.gray[6],
         },
+        '&.menu-tolerance': {
+          '> .pin-group': {
+            gap: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            '> .mantine-PinInput-wrapper': {
+              width: '100%',
+              '&:nth-of-type(1)': {
+                marginRight: 15,
+              },
+              '& .mantine-Input-input': {
+                height: 66,
+                padding: 20,
+                width: '100%',
+                border: 'none',
+                fontSize: '22px',
+                fontWeight: 500,
+                borderRadius: 10,
+                color: t.colors.gray[9],
+                background: 'rgba(255, 255, 255, 0.60)',
+                boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+              },
+            },
+          },
+          '> .menu-paragraph': {
+            opacity: 0.6,
+            fontSize: '15px',
+            fontWeight: 400,
+            color: t.colors.gray[6],
+          },
+          '> .tolerance-area': {
+            gap: 0,
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'stretch',
+            '> .tolerance': {
+              gap: 12,
+              width: '100%',
+              paddingTop: 10,
+              display: 'flex',
+              position: 'relative',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              '> .value': {
+                fontSize: '15px',
+                fontWeight: 400,
+                textAlign: 'center',
+                color: t.colors.gray[9],
+              },
+            },
+            '> .tol-col': {
+              gap: 4,
+              display: 'flex',
+              width: 'fit-content',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              '&:nth-of-type(1) > .line-box::after': {
+                right: 0,
+                height: 1,
+                width: '50%',
+                content: '""',
+                position: 'absolute',
+                top: 'calc(50% + 5px)',
+                transform: 'translateY(-50%)',
+                backgroundColor: 'rgba(0, 0, 0, 1)',
+              },
+              '&:nth-of-type(3) > .line-box::after': {
+                left: 0,
+                height: 1,
+                width: '50%',
+                content: '""',
+                position: 'absolute',
+                top: 'calc(50% + 5px)',
+                transform: 'translateY(-50%)',
+                backgroundColor: 'rgba(0, 0, 0, 1)',
+              },
+              '> .line-box': {
+                height: 36,
+                width: '100%',
+                display: 'flex',
+                position: 'relative',
+                alignItems: 'center',
+                justifyContent: 'center',
+                '> .line': {
+                  width: 1,
+                  height: '100%',
+                  backgroundColor: 'rgba(0, 0, 0, 1)',
+                },
+              },
+              '> .values': {
+                gap: 0,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                '&:nth-of-type(1)': {
+                  '> .mantine-Text-root': {
+                    margin: 0,
+                    padding: 0,
+                    lineHeight: 1.1,
+                    '&.value': {
+                      fontWeight: 700,
+                      fontSize: '15px',
+                      color: t.colors.gray[9],
+                    },
+                    '&.type': {
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      opacity: 0.5,
+                      color: t.colors.gray[9],
+                    },
+                  },
+                },
+                '&:nth-of-type(3)': {
+                  '> .mantine-Text-root': {
+                    margin: 0,
+                    padding: 0,
+                    lineHeight: 1.1,
+                    '&.value': {
+                      fontWeight: 400,
+                      fontSize: '15px',
+                      color: t.colors.gray[9],
+                    },
+                    '&.type': {
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      opacity: 0.5,
+                      color: t.colors.gray[9],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
         '&.menu-range': {
           '> .pin-group': {
             gap: 10,
@@ -601,6 +740,66 @@ function MenuRange() {
   );
 }
 
+function MenuTolerance() {
+  const { classes } = MenuStyles();
+  return (
+    <Menu.Dropdown className={classes.root}>
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner menu-tolerance">
+          <Text className="menu-inner-title">ÖLÇÜ BOYUTU</Text>
+          <PinInput className="pin-group" defaultValue="1300" length={4} placeholder="" />
+          <Text className="menu-paragraph">
+            Girmiş Olduğunuz Değer Maksimum Tölerans Sınırından Çok Fazla Ölçünüzü Lütfen Gözden
+            Geçirin.
+          </Text>
+          <Text className="menu-inner-title" mt={30}>
+            TÖLERANS SINIRI
+          </Text>
+          <Box className="tolerance-area">
+            <Box className="tol-col">
+              <Box className="values">
+                <Text className="value">16.400</Text>
+                <Text className="type">(mm)</Text>
+              </Box>
+              <Box className="line-box">
+                <Box className="line" />
+              </Box>
+              <Box className="values">
+                <Text className="value">-0.100</Text>
+                <Text className="type">(mm)</Text>
+              </Box>
+            </Box>
+            <Box className="tolerance">
+              <Divider orientation="horizontal" color={t.colors.gray[9]} w="100%" h={1} />
+              <Text className="value">16.400</Text>
+              <Divider orientation="horizontal" color={t.colors.gray[9]} w="100%" h={1} />
+            </Box>
+            <Box className="tol-col">
+              <Box className="values">
+                <Text className="value">16.400</Text>
+                <Text className="type">(mm)</Text>
+              </Box>
+              <Box className="line-box">
+                <Box className="line" />
+              </Box>
+              <Box className="values">
+                <Text className="value">+0.100</Text>
+                <Text className="type">(mm)</Text>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 function MHistoryColumn({ measurement, date }: { measurement: any; date: string }) {
   const { classes } = styles();
   const [isCollapsed, setIsCollapsed] = React.useState<boolean>(false);
@@ -715,6 +914,7 @@ function MeasurementColumn({ measurement }: any) {
       </Box>
       {measurement?.type === 'go-or-no-go' && <MenuNoGo />}
       {measurement?.type === 'range' && <MenuRange />}
+      {measurement?.type === 'tolerance' && <MenuTolerance />}
     </Menu>
   );
 }
