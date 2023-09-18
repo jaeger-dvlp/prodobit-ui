@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Box, Button, Divider, Menu, Text, Title, createStyles } from '@mantine/core';
+import { Box, Button, Divider, Menu, PinInput, Text, Title, createStyles } from '@mantine/core';
 
 import {
   CustomXICon,
@@ -331,6 +331,88 @@ const MenuStyles = createStyles({
           fontSize: '15px',
           color: t.colors.gray[6],
         },
+        '&.menu-range': {
+          '> .pin-group': {
+            gap: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            '> .mantine-PinInput-wrapper': {
+              width: '100%',
+              '&:nth-of-type(1)': {
+                marginRight: 15,
+              },
+              '& .mantine-Input-input': {
+                height: 66,
+                padding: 20,
+                width: '100%',
+                border: 'none',
+                fontSize: '22px',
+                fontWeight: 500,
+                borderRadius: 10,
+                color: t.colors.gray[9],
+                background: 'rgba(255, 255, 255, 0.60)',
+                boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+              },
+            },
+          },
+          '> .menu-paragraph': {
+            opacity: 0.6,
+            fontSize: '15px',
+            fontWeight: 400,
+            color: t.colors.gray[6],
+          },
+          '> .range-area': {
+            gap: 12,
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            '> .range-col': {
+              gap: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              '&:nth-of-type(1)': {
+                alignItems: 'flex-end',
+              },
+              '&:nth-of-type(2)': {
+                alignItems: 'flex-start',
+              },
+              '> .mantine-Text-root': {
+                margin: 0,
+                padding: 0,
+                lineHeight: 1.1,
+                '&.value': {
+                  fontWeight: 700,
+                  fontSize: '15px',
+                  color: t.colors.gray[9],
+                },
+                '&.type': {
+                  fontWeight: 500,
+                  fontSize: '15px',
+                  opacity: 0.5,
+                  color: t.colors.gray[9],
+                },
+              },
+            },
+            '> .range': {
+              height: 30,
+              width: '100%',
+              display: 'flex',
+              overflow: 'hidden',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderLeft: '1px solid rgba(0, 0, 0, 1)',
+              borderRight: '1px solid rgba(0, 0, 0, 1)',
+              '> .line': {
+                height: 1,
+                width: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 1)',
+              },
+            },
+          },
+        },
         '&.menu-go-no-go': {
           '> .menu-approve-btns': {
             gap: 0,
@@ -479,6 +561,46 @@ function MenuNoGo() {
   );
 }
 
+function MenuRange() {
+  const { classes } = MenuStyles();
+  return (
+    <Menu.Dropdown className={classes.root}>
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner menu-range">
+          <Text className="menu-inner-title">ÖLÇÜ BOYUTU</Text>
+          <PinInput className="pin-group" defaultValue="1300" length={4} placeholder="" />
+          <Text className="menu-paragraph">
+            Girmiş Olduğunuz Değer Maksimum Tölerans Sınırından Çok Fazla Ölçünüzü Lütfen Gözden
+            Geçirin.
+          </Text>
+          <Text className="menu-inner-title" mt={30}>
+            TÖLERANS SINIRI
+          </Text>
+          <Box className="range-area">
+            <Box className="range-col">
+              <Text className="value">16.400</Text>
+              <Text className="type">(mm)</Text>
+            </Box>
+            <Box className="range">
+              <Box className="line" />
+            </Box>
+            <Box className="range-col">
+              <Text className="value">16.500</Text>
+              <Text className="type">(mm)</Text>
+            </Box>
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 function MHistoryColumn({ measurement, date }: { measurement: any; date: string }) {
   const { classes } = styles();
   const [isCollapsed, setIsCollapsed] = React.useState<boolean>(false);
@@ -592,6 +714,7 @@ function MeasurementColumn({ measurement }: any) {
         </AnimatePresence>
       </Box>
       {measurement?.type === 'go-or-no-go' && <MenuNoGo />}
+      {measurement?.type === 'range' && <MenuRange />}
     </Menu>
   );
 }
