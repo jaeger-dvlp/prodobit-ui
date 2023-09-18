@@ -381,6 +381,8 @@ const MenuStyles = createStyles({
                 fontSize: '15px',
                 fontWeight: 400,
                 textAlign: 'center',
+                whiteSpace: 'nowrap',
+                minWidth: 'fit-content',
                 color: t.colors.gray[9],
               },
             },
@@ -772,7 +774,7 @@ function MenuTolerance() {
             </Box>
             <Box className="tolerance">
               <Divider orientation="horizontal" color={t.colors.gray[9]} w="100%" h={1} />
-              <Text className="value">16.400</Text>
+              <Text className="value">16.4 mm</Text>
               <Divider orientation="horizontal" color={t.colors.gray[9]} w="100%" h={1} />
             </Box>
             <Box className="tol-col">
