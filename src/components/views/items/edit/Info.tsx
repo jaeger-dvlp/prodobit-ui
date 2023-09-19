@@ -8,7 +8,7 @@ import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
 import EditTextEditor from '@/components/views/items/edit/TextEditor';
 import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
-import { Box, Button, Image, Sx, Table, Text, TextInput } from '@mantine/core';
+import { Box, Button, Image, Menu, Sx, Table, Text, TextInput, Textarea } from '@mantine/core';
 import ItemFinancialInfo from '@/components/views/items/edit/ItemFinancialInfo';
 
 import {
@@ -22,6 +22,7 @@ import {
   RoutingIcon,
   BarcodeIcon,
   Canlde2Icon,
+  CustomXICon,
   ArrowLineIcon,
   Category2Icon,
   CustomPlusIcon,
@@ -30,6 +31,7 @@ import {
   CustomChevronDown,
   DownloadCloudIcon,
   RightIndicatorArrow,
+  CustomSmoothTooltipIllustration,
 } from '@/components/icons';
 
 import {
@@ -62,6 +64,141 @@ export const getRenderedDate = (date: string) => {
   return `${text[0].toUpperCase()}${text.slice(1)}`;
 };
 
+function EditMenu() {
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        marginTop: -50,
+        border: 'none',
+        minWidth: 417,
+        maxWidth: 417,
+        height: 'auto',
+        display: 'flex',
+        paddingRight: 30,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        '& .menu-content': {
+          gap: 5,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          '& .menu-inner': {
+            gap: 30,
+            padding: 30,
+            minHeight: 200,
+            display: 'flex',
+            borderRadius: 20,
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            backgroundColor: '#fff',
+            justifyContent: 'flex-start',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            '& .section-title': {
+              opacity: 0.4,
+              fontWeight: 500,
+              fontSize: '15px',
+              color: t.colors.gray[6],
+            },
+            '& .top-section': {
+              gap: 25,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .name-input input': {
+                margin: 0,
+                height: 'auto',
+                border: 'none',
+                fontWeight: 500,
+                borderRadius: 0,
+                fontSize: '31px',
+                color: t.colors.gray[9],
+                padding: '0px 0px 18px 0px',
+                borderBottom: `1px solid ${t.colors.gray[3]}`,
+                '&::placeholder': { color: t.colors.gray[9] },
+              },
+            },
+            '& .bottom-section': {
+              gap: 20,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .description-input': {
+                height: 'auto',
+                '& textarea': {
+                  padding: 20,
+                  minHeight: 90,
+                  border: 'none',
+                  fontWeight: 400,
+                  fontSize: '12px',
+                  borderRadius: 10,
+                  height: 'fit-content',
+                  color: t.colors.gray[9],
+                  backgroundColor: t.colors.gray[1],
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            border: 'none',
+            width: '100%',
+            height: 'auto',
+            fontSize: '22px',
+            fontWeight: 400,
+            borderRadius: 20,
+            padding: '25px 10px',
+            color: t.colors.gray[0],
+            backgroundColor: t.colors.green[6],
+            textAlign: 'center',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          },
+          '& .c-tooltip': {
+            zIndex: 2,
+            width: 80,
+            height: 80,
+            top: '22.5px',
+            right: -22.5,
+            color: '#fff',
+            position: 'absolute',
+            transform: 'rotate(180deg)',
+            filter: 'drop-shadow(0px 7px 44px rgba(104, 48, 48, 0.1))',
+          },
+        },
+      }}
+    >
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Box className="top-section">
+            <Text className="section-title">Özellik Başlığı</Text>
+            <TextInput className="name-input" placeholder="Ürün Tam Adı" />
+          </Box>
+          <Box className="bottom-section">
+            <Text className="section-title">Özellik Açıklaması</Text>
+            <Textarea
+              className="description-input"
+              placeholder="Özellik açıklamasını ve öz şekilde buraya yazın."
+            />
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 export function ProductInfoTable({ border = true }: { border?: boolean }) {
   const MockValues = [
     {
@@ -91,15 +228,25 @@ export function ProductInfoTable({ border = true }: { border?: boolean }) {
       <td>{item.definition}</td>
       <td>{item.value}</td>
       <td>
-        <Button sx={RowButtonsSx} variant="default">
-          <EditIcon width={15} height={15} />
-        </Button>
+        <Menu position="left-start">
+          <Menu.Target>
+            <Button sx={RowButtonsSx} variant="default">
+              <EditIcon width={15} height={15} />
+            </Button>
+          </Menu.Target>
+          <EditMenu />
+        </Menu>
         <Button sx={RowButtonsSx} variant="default">
           <CopyIcon width={15} height={15} />
         </Button>
-        <Button sx={RowButtonsSx} variant="default">
-          <TrashIcon width={15} height={15} />
-        </Button>
+        <Menu position="bottom">
+          <Menu.Target>
+            <Button sx={RowButtonsSx} variant="default">
+              <TrashIcon width={15} height={15} />
+            </Button>
+          </Menu.Target>
+          <DeleteMenu />
+        </Menu>
       </td>
     </tr>
   ));
@@ -119,7 +266,7 @@ export function ProductInfoTable({ border = true }: { border?: boolean }) {
           width: '100%!important',
           margin: 0,
           padding: 0,
-          th: {
+          '> th': {
             fontWeight: 700,
             fontsize: '12px',
             lineHeight: '14.4px',
@@ -127,10 +274,11 @@ export function ProductInfoTable({ border = true }: { border?: boolean }) {
             padding: '0px!important',
             paddingBottom: '10px!important',
           },
-          'tbody tr': {
+          '> tbody > tr': {
             position: 'relative',
             transition: 'all 150ms ease-in-out',
-            td: {
+            '> td': {
+              position: 'relative',
               width: 'fit-content',
               maxWidth: '200px',
               fontsize: '12px',
@@ -147,18 +295,17 @@ export function ProductInfoTable({ border = true }: { border?: boolean }) {
                 color: t.colors.gray[9],
               },
               ':nth-of-type(3)': {
-                gao: 10,
+                gap: 3,
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'end',
               },
-              button: {
+              '> button': {
                 color: t.colors.gray[5],
               },
             },
             ':hover': {
-              transform: 'scale(1.02)',
-              td: {
+              '> td': {
                 color: t.colors.gray[9],
                 button: {
                   color: t.colors.gray[9],
