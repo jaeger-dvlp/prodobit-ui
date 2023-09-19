@@ -1,26 +1,26 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Navigation } from 'swiper/modules';
+import { Dropzone } from '@mantine/dropzone';
 import { ProdobitAppTheme as t } from '@/theme';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Image, Menu, Text, TextInput } from '@mantine/core';
 import {
-  CustomChevronRight,
-  CustomPlusIcon,
-  DownloadCloudIcon,
-  FolderIllustration,
-  ImageIcon,
   PGCHleft,
+  ImageIcon,
   PGCHright,
   PenToolIcon,
+  CustomPlusIcon,
   UploadCloudIcon,
-  UploadDocumentIcon,
   UploadImageICon,
+  CustomChevronRight,
+  DownloadCloudIcon,
+  FolderIllustration,
+  UploadDocumentIcon,
 } from '@/components/icons';
 
 import 'swiper/css';
-import { Dropzone } from '@mantine/dropzone';
 
 const motionProps = {
   component: motion.section,
