@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BsPlusLg } from 'react-icons/bs';
-import { EditIcon } from '@/components/icons';
+import Drawer from '@/components/misc/Drawer';
 import { MockItemsCategories } from 'mockdata';
 import { useNavigate } from 'react-router-dom';
 import { ProdobitAppTheme as t } from '@/theme';
@@ -9,10 +9,10 @@ import Navbar from '@/components/layout/app/Navbar';
 import ItemsToolbar from '@/components/views/itemslist/Toolbar';
 import ItemsTable from '@/components/views/itemslist/ItemsTable';
 import AddButtons from '@/components/views/itemslist/AddButtons';
-import { Box, Button, Divider, Text, Title } from '@mantine/core';
 import ItemCountDisplay from '@/components/views/items/ItemCountDisplay';
 import TableWrapper, { useTable } from '@/components/context/Table.context';
-import Drawer from '@/components/misc/Drawer';
+import { CustomSmoothTooltipIllustration, EditIcon } from '@/components/icons';
+import { Box, Button, Checkbox, Divider, Menu, Text, TextInput, Title } from '@mantine/core';
 
 export type Item = {
   id: number;
@@ -37,6 +37,167 @@ export type ItemCategory = {
   subCategories?: ItemCategory[];
 };
 
+function AddCategoryMenu() {
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        marginTop: -100,
+        border: 'none',
+        minWidth: 417,
+        maxWidth: 417,
+        height: 'auto',
+        display: 'flex',
+        paddingRight: 30,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        '& .menu-content': {
+          gap: 5,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          '& .menu-inner': {
+            gap: 30,
+            padding: 30,
+            display: 'flex',
+            borderRadius: 20,
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            backgroundColor: '#fff',
+            justifyContent: 'flex-start',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            '& .menu-header': {
+              gap: 15,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .menu-title': {
+                lineHeight: 1,
+                fontSize: '15px',
+                fontWeight: 500,
+                color: t.colors.gray[6],
+                '& strong': {
+                  fontWeight: 700,
+                },
+              },
+              '& .search-bar input': {
+                padding: 20,
+                lineHeight: 1,
+                height: 'auto',
+                border: 'none',
+                fontWeight: 400,
+                fontSize: '15px',
+                borderRadius: 10,
+                color: t.colors.gray[9],
+                backgroundColor: t.colors.gray[1],
+                '&::placeholder': {
+                  opacity: 0.5,
+                  color: t.colors.gray[9],
+                },
+              },
+            },
+            '& .categories': {
+              gap: 0,
+              maxHeight: 150,
+              display: 'flex',
+              overflowY: 'auto',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .category-checkbox': {
+                width: '100%',
+                lineHeight: 1,
+                fontWeight: 400,
+                fontSize: '15px',
+                backgroundColor: 'transparent',
+                '&:not(:last-child)': {
+                  borderBottom: `1px solid rgba(0, 0, 0, 0.10)`,
+                },
+                "& input[type='checkbox']:checked": {
+                  borderColor: '#000',
+                  backgroundColor: '#000',
+                },
+                '& .mantine-Checkbox-inner': {
+                  paddingTop: 20,
+                  paddingBottom: 20,
+                  '& svg': {
+                    marginTop: 25.5,
+                  },
+                },
+                '& .mantine-Checkbox-labelWrapper': {
+                  width: '100%',
+                  '& .mantine-Checkbox-label': {
+                    paddingTop: 20,
+                    paddingBottom: 20,
+                  },
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            border: 'none',
+            width: '100%',
+            height: 'auto',
+            fontSize: '22px',
+            fontWeight: 400,
+            borderRadius: 20,
+            padding: '25px 10px',
+            color: t.colors.gray[0],
+            backgroundColor: t.colors.green[6],
+            textAlign: 'center',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          },
+          '& .c-tooltip': {
+            zIndex: 2,
+            width: 80,
+            height: 80,
+            top: '85px',
+            right: -22.5,
+            color: '#fff',
+            position: 'absolute',
+            transform: 'rotate(180deg)',
+            filter: 'drop-shadow(0px 7px 44px rgba(104, 48, 48, 0.1))',
+          },
+        },
+      }}
+    >
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Box className="menu-header">
+            <Text className="menu-title">
+              <strong>10</strong> Tane Ekleme Hakkından <strong>8</strong> Tane Kaldı
+            </Text>
+            <TextInput className="search-bar" placeholder="Kategori Ara..." />
+          </Box>
+          <Box className="categories">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <Checkbox
+                className="category-checkbox"
+                key={`menu-category-${i}`}
+                label="Deneme"
+                labelPosition="left"
+              />
+            ))}
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
   const [selectedCs, setSelectedCs] = React.useState<ItemCategory[]>([]);
 
@@ -50,22 +211,21 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
         margin: 0,
         padding: 0,
         top: '100%',
-        display: 'flex',
+        minWidth: '100%',
         maxWidth: '100%',
-        overflow: 'hidden',
+        display: 'flex',
         position: 'relative',
         alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'stretch',
         transform: 'translateY(50%)',
       }}
     >
       <Box
-        component="section"
         sx={{
           gap: 10,
-          width: '100%',
           display: 'flex',
-          maxWidth: '100%',
-          overflowX: 'scroll',
+          overflowX: 'auto',
           overflowY: 'hidden',
           flexDirection: 'row',
           WebkitOverflowScrolling: 'touch',
@@ -111,30 +271,35 @@ function CategoriesBar({ categories }: { categories: ItemCategory[] }) {
           </Button>
         ))}
       </Box>
-      <Button
-        type="button"
-        variant="default"
-        sx={(theme) => ({
-          marginTop: 2,
-          height: 'auto',
-          marginBottom: 2,
-          fontWeight: 400,
-          lineHeight: 1.2,
-          fontSize: '15px',
-          color: '#FFD973',
-          minHeight: '53px',
-          borderRadius: 100,
-          padding: '15px 40px',
-          border: 'none!important',
-          transition: 'all .15s ease',
-          backgroundColor: `${theme.colors.green[9]}!important`,
-          ':hover': {
-            filter: 'brightness(1.2)',
-          },
-        })}
-      >
-        <BsPlusLg size={24} />
-      </Button>
+      <Menu position="left-start">
+        <Menu.Target>
+          <Button
+            type="button"
+            variant="default"
+            sx={(theme) => ({
+              marginTop: 2,
+              height: 'auto',
+              marginBottom: 2,
+              fontWeight: 400,
+              lineHeight: 1.2,
+              fontSize: '15px',
+              color: '#FFD973',
+              minHeight: '53px',
+              borderRadius: 100,
+              padding: '15px 40px',
+              border: 'none!important',
+              transition: 'all .15s ease',
+              backgroundColor: `${theme.colors.green[9]}!important`,
+              ':hover': {
+                filter: 'brightness(1.2)',
+              },
+            })}
+          >
+            <BsPlusLg size={24} />
+          </Button>
+        </Menu.Target>
+        <AddCategoryMenu />
+      </Menu>
     </Box>
   );
 }
