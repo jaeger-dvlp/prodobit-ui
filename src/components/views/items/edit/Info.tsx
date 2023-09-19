@@ -64,6 +64,108 @@ export const getRenderedDate = (date: string) => {
   return `${text[0].toUpperCase()}${text.slice(1)}`;
 };
 
+function DeleteMenu({ onCancel, onConfirm }: { onCancel?: () => void; onConfirm?: () => void }) {
+  return (
+    <Menu.Dropdown
+      sx={{
+        gap: 10,
+        padding: 0,
+        marginTop: 40,
+        width: 'auto',
+        maxWidth: 417,
+        border: 'none',
+        display: 'flex',
+        borderRadius: 20,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        '& .c-tooltip': {
+          top: '0%',
+          width: 30,
+          left: '50%',
+          height: 100,
+          zIndex: 9999,
+          color: '#fff',
+          position: 'absolute',
+          transform: 'translateY(-62.5%) translateX(-50%) rotate(90deg)',
+        },
+        '& .menu-content': {
+          gap: 5,
+          display: 'flex',
+          borderRadius: 100,
+          padding: '13px 15px',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          backdropFilter: 'blur(5px)',
+          backgroundColor: 'rgba(255, 255, 255, 0.82)',
+          boxShadow: ' 0px 24px 54px -13px rgba(177, 109, 92, 0.30)',
+          '& .mantine-Button-root': {
+            height: 'auto',
+            display: 'flex',
+            fontSize: '22px',
+            fontWeight: 300,
+            borderRadius: 100,
+            padding: '15px 30px',
+            lineHeight: '26.4px',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.15s ease-in-out',
+            '> div > span': {
+              gap: 15,
+              padding: 0,
+              height: 'auto',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              '> svg': {
+                width: 24,
+                height: 24,
+              },
+            },
+            '&.cancel-button': {
+              backgroundColor: '#fff!important',
+              color: `${t.colors.red[5]}!important`,
+              border: `1px solid ${t.colors.red[2]}!important`,
+              transition: 'all 0.15s ease-in-out',
+              ':hover': {
+                backgroundColor: `${t.colors.red[0]}!important`,
+              },
+            },
+            '&.confirm-button': {
+              color: '#fff',
+              backgroundColor: t.colors.green[6],
+              border: `1px solid ${t.colors.green[6]}`,
+              transition: 'all 0.15s ease-in-out',
+              ':hover': {
+                backgroundColor: t.colors.green[5],
+              },
+            },
+          },
+        },
+      }}
+    >
+      <CustomSmoothTooltipIllustration className="c-tooltip" />
+      <Box className="menu-content">
+        <Menu.Item closeMenuOnClick>
+          <Button className="cancel-button" onClick={onCancel} variant="default">
+            <CustomXICon />
+            <Text>İptal</Text>
+          </Button>
+        </Menu.Item>
+        <Menu.Item closeMenuOnClick>
+          <Button className="confirm-button" onClick={onConfirm} variant="default">
+            <CustomCheckIcon />
+            <Text>Silin</Text>
+          </Button>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 function EditMenu() {
   return (
     <Menu.Dropdown
