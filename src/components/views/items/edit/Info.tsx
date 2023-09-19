@@ -166,7 +166,7 @@ function DeleteMenu({ onCancel, onConfirm }: { onCancel?: () => void; onConfirm?
   );
 }
 
-function EditMenu() {
+function NewSpecMenu() {
   return (
     <Menu.Dropdown
       sx={{
@@ -287,13 +287,145 @@ function EditMenu() {
             <Text className="section-title">Özellik Açıklaması</Text>
             <Textarea
               className="description-input"
-              placeholder="Özellik açıklamasını ve öz şekilde buraya yazın."
+              placeholder="Özelliği kısa ve öz şekilde buraya yazın."
             />
           </Box>
         </Box>
         <Menu.Item closeMenuOnClick>
           <Box className="menu-save-btn">
             <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
+function EditMenu() {
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        marginTop: -50,
+        border: 'none',
+        minWidth: 417,
+        maxWidth: 417,
+        height: 'auto',
+        display: 'flex',
+        paddingRight: 30,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        '& .menu-content': {
+          gap: 5,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          '& .menu-inner': {
+            gap: 30,
+            padding: 30,
+            minHeight: 200,
+            display: 'flex',
+            borderRadius: 20,
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            backgroundColor: '#fff',
+            justifyContent: 'flex-start',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            '& .section-title': {
+              opacity: 0.4,
+              fontWeight: 500,
+              fontSize: '15px',
+              color: t.colors.gray[6],
+            },
+            '& .top-section': {
+              gap: 25,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .name-input input': {
+                margin: 0,
+                height: 'auto',
+                border: 'none',
+                fontWeight: 500,
+                borderRadius: 0,
+                fontSize: '31px',
+                color: t.colors.gray[9],
+                padding: '0px 0px 18px 0px',
+                borderBottom: `1px solid ${t.colors.gray[3]}`,
+                '&::placeholder': { color: t.colors.gray[9] },
+              },
+            },
+            '& .bottom-section': {
+              gap: 20,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .description-input': {
+                height: 'auto',
+                '& textarea': {
+                  padding: 20,
+                  minHeight: 90,
+                  border: 'none',
+                  fontWeight: 400,
+                  fontSize: '12px',
+                  borderRadius: 10,
+                  height: 'fit-content',
+                  color: t.colors.gray[9],
+                  backgroundColor: t.colors.gray[1],
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            border: 'none',
+            width: '100%',
+            height: 'auto',
+            fontSize: '22px',
+            fontWeight: 400,
+            borderRadius: 20,
+            padding: '25px 10px',
+            color: t.colors.gray[0],
+            backgroundColor: t.colors.green[6],
+            textAlign: 'center',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          },
+          '& .c-tooltip': {
+            zIndex: 2,
+            width: 80,
+            height: 80,
+            top: '22.5px',
+            right: -22.5,
+            color: '#fff',
+            position: 'absolute',
+            transform: 'rotate(180deg)',
+            filter: 'drop-shadow(0px 7px 44px rgba(104, 48, 48, 0.1))',
+          },
+        },
+      }}
+    >
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Box className="top-section">
+            <Text className="section-title">Özellik Başlığı</Text>
+            <TextInput className="name-input" placeholder="Ürün Tam Adı" />
+          </Box>
+          <Box className="bottom-section">
+            <Text className="section-title">Özellik Açıklaması</Text>
+            <Textarea className="description-input" placeholder="Özellik açıklamasını.." />
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Bilgileri Güncelle</Text>
           </Box>
         </Menu.Item>
       </Box>
@@ -427,19 +559,24 @@ export function ProductInfoTable({ border = true }: { border?: boolean }) {
                 justifyContent: 'end',
               }}
             >
-              <Button
-                variant="default"
-                sx={{
-                  border: 'none',
-                  height: 'auto',
-                  borderRadius: 100,
-                  padding: '5px 10px',
-                  color: t.colors.gray[0],
-                  backgroundColor: `${t.colors.gray[8]}!important`,
-                }}
-              >
-                <CustomPlusIcon width={15} height={15} />
-              </Button>
+              <Menu position="left-start">
+                <Menu.Target>
+                  <Button
+                    variant="default"
+                    sx={{
+                      border: 'none',
+                      height: 'auto',
+                      borderRadius: 100,
+                      padding: '5px 10px',
+                      color: t.colors.gray[0],
+                      backgroundColor: `${t.colors.gray[8]}!important`,
+                    }}
+                  >
+                    <CustomPlusIcon width={15} height={15} />
+                  </Button>
+                </Menu.Target>
+                <NewSpecMenu />
+              </Menu>
             </th>
           </tr>
         </thead>
