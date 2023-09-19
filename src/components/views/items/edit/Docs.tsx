@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Navigation } from 'swiper/modules';
 import { ProdobitAppTheme as t } from '@/theme';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Box, Button, Image, Text } from '@mantine/core';
+import { Box, Button, Image, Menu, Text, TextInput } from '@mantine/core';
 import {
+  CustomChevronRight,
   CustomPlusIcon,
   DownloadCloudIcon,
   FolderIllustration,
@@ -13,11 +14,13 @@ import {
   PGCHleft,
   PGCHright,
   PenToolIcon,
+  UploadCloudIcon,
   UploadDocumentIcon,
   UploadImageICon,
 } from '@/components/icons';
 
 import 'swiper/css';
+import { Dropzone } from '@mantine/dropzone';
 
 const motionProps = {
   component: motion.section,
@@ -30,6 +33,486 @@ const motionProps = {
     stiffness: 200,
   },
 };
+
+function AddDocMenu() {
+  const mockDocCategories = Array.from({ length: 6 }).map((_, i) => ({
+    name: `Kategori Adı ${i + 1}`,
+    docCount: 15,
+  }));
+  const [SC, setSc] = React.useState(0);
+  const [addNewView, setAddNewView] = React.useState<boolean>(false);
+
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        maxWidth: 800,
+        border: 'none',
+        display: 'flex',
+        marginTop: -60,
+        boxShadow: 'none',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+        '& .menu-inner': {
+          gap: 48,
+          minWidth: 800,
+          padding: 30,
+          width: '100%',
+          minHeight: 200,
+          display: 'flex',
+          borderRadius: 20,
+          paddingBottom: 60,
+          position: 'relative',
+          flexDirection: 'row',
+          alignItems: 'stretch',
+          backgroundColor: '#fff',
+          justifyContent: 'stretch',
+          boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          '& .menu-column': {
+            width: '50%',
+            height: 390,
+            display: 'flex',
+            overflowY: 'auto',
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            '&.categories': {
+              gap: 0,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .search-bar': {
+                top: 0,
+                gap: 10,
+                zIndex: 2,
+                display: 'flex',
+                paddingBottom: 14,
+                position: 'sticky',
+                alignItems: 'center',
+                flexDirection: 'row',
+                backgroundColor: '#fff',
+                justifyContent: 'stretch',
+                '& .search-input': {
+                  width: '100%',
+                  '& input': {
+                    width: '100%',
+                    border: 'none',
+                    fontWeight: 500,
+                    fontSize: '12px',
+                    borderRadius: 10,
+                    padding: '14px 20px',
+                    color: t.colors.gray[5],
+                    backgroundColor: t.colors.gray[1],
+                  },
+                },
+                '& .add-new-btn': {
+                  border: 'none',
+                  height: 'auto',
+                  padding: '6px',
+                  borderRadius: 10,
+                  color: t.colors.gray[9],
+                  backgroundColor: `${t.colors.gray[1]}!important`,
+                  '& svg': {
+                    width: 24,
+                    height: 24,
+                  },
+                },
+              },
+              '& .category-elm-container': {
+                gap: 4,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .category-elm': {
+                  gap: 18,
+                  opacity: 0.5,
+                  display: 'flex',
+                  borderRadius: 10,
+                  cursor: 'pointer',
+                  padding: '14px 20px',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  transition: 'all 200ms ease-in-out',
+                  border: `1px solid ${t.colors.green[1]}`,
+                  "&[data-selected='false']": {
+                    '&:hover': {
+                      opacity: 1,
+                    },
+                  },
+                  "&[data-selected='true']": {
+                    opacity: 1,
+                    '& .arrow-btn': {
+                      opacity: 1,
+                      transform: 'translateX(0px)',
+                    },
+                  },
+                  '& .arrow-btn': {
+                    padding: 5,
+                    border: 'none',
+                    height: 'auto',
+                    color: t.colors.gray[9],
+                    transform: 'translateX(-10px)',
+                    transition: 'all 200ms ease-in-out',
+                    backgroundColor: 'transparent!important',
+                    opacity: 0,
+                    '& svg': {
+                      width: 24,
+                      height: 24,
+                    },
+                  },
+                  '& .category-content': {
+                    gap: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                    '& .category-name': {
+                      fontWeight: 500,
+                      fontSize: '12px',
+                      color: t.colors.blue[7],
+                    },
+                    '& .category-docs-count': {
+                      lineHeight: 1,
+                      fontWeight: 400,
+                      fontSize: '12px',
+                      borderRadius: 100,
+                      padding: '5px 6px',
+                      color: t.colors.gray[9],
+                      border: `1px solid ${t.colors.gray[3]}`,
+                    },
+                  },
+                },
+              },
+            },
+            '&.category-docs': {
+              gap: 15,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .category-header': {
+                gap: 5,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .category-name': {
+                  opacity: 0.5,
+                  lineHeight: 1,
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  color: t.colors.blue[7],
+                },
+                '& .category-label': {
+                  lineHeight: 1,
+                  fontSize: '22px',
+                  fontWeight: 500,
+                  color: t.colors.gray[9],
+                },
+              },
+              '& .section-title': {
+                opacity: 0.5,
+                fontSize: '15px',
+                fontWeight: 500,
+                color: t.colors.gray[6],
+              },
+              '& .category-name-group': {
+                gap: 25,
+                paddingTop: 10,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .doc-name-input input': {
+                  padding: 0,
+                  border: 'none',
+                  height: 'auto',
+                  fontWeight: 500,
+                  borderRadius: 0,
+                  fontSize: '31px',
+                  paddingBottom: 18,
+                  color: t.colors.gray[9],
+                  backgroundColor: 'transparent',
+                  borderBottom: `1px solid ${t.colors.gray[3]}`,
+                  '&::placeholder': { color: t.colors.gray[9] },
+                },
+              },
+              '& .category-file-group': {
+                gap: 10,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .doc-dropzone': {
+                  padding: 20,
+                  border: 'none',
+                  display: 'flex',
+                  borderRadius: 20,
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  backgroundColor: t.colors.gray[1],
+                  '& .mantine-Dropzone-inner': {
+                    gap: 20,
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    '& svg': {
+                      width: 40,
+                      height: 40,
+                      color: '#FF7B7B',
+                    },
+                    '& .dropzone-label': {
+                      opacity: 0.5,
+                      lineHeight: 1,
+                      fontWeight: 400,
+                      fontSize: '12px',
+                      color: t.colors.gray[9],
+                    },
+                    '& .dropzone-types': {
+                      gap: 10,
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      '& .mantine-Text-root': {
+                        fontWeight: 400,
+                        fontSize: '15px',
+                        color: t.colors.gray[9],
+                        '&:not(:last-child)::after': {
+                          opacity: 0.2,
+                          marginLeft: 10,
+                          position: 'relative',
+                          content: '"/"',
+                          fontWeight: 400,
+                          fontSize: '15px',
+                          color: t.colors.gray[9],
+                        },
+                      },
+                    },
+                  },
+                  '&:hover': {
+                    backgroundColor: t.colors.gray[2],
+                  },
+                },
+              },
+            },
+            '&.add-new': {
+              gap: 50,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .add-new-header': {
+                gap: 5,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .label': {
+                  opacity: 0.5,
+                  lineHeight: 1,
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  color: t.colors.blue[7],
+                },
+                '& .title': {
+                  lineHeight: 1,
+                  fontSize: '22px',
+                  fontWeight: 500,
+                  color: t.colors.gray[9],
+                },
+              },
+              '& .section-title': {
+                opacity: 0.5,
+                fontSize: '15px',
+                fontWeight: 500,
+                color: t.colors.gray[6],
+              },
+              '& .category-name-group': {
+                gap: 25,
+                paddingTop: 10,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .category-name-input input': {
+                  padding: 0,
+                  border: 'none',
+                  height: 'auto',
+                  fontWeight: 500,
+                  borderRadius: 0,
+                  fontSize: '31px',
+                  paddingBottom: 18,
+                  color: t.colors.gray[9],
+                  backgroundColor: 'transparent',
+                  borderBottom: `1px solid ${t.colors.gray[3]}`,
+                  '&::placeholder': { color: t.colors.gray[9] },
+                },
+              },
+              '& .save-btn': {
+                height: 'auto',
+                lineHeight: 1,
+                fontSize: '22px',
+                fontWeight: 400,
+                borderRadius: 20,
+                textAlign: 'center',
+                padding: '20px 10px',
+                color: t.colors.green[6],
+                backgroundColor: 'transparent',
+                transition: 'all 0.2s ease-in-out',
+                border: `1px solid ${t.colors.green[6]}`,
+                boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+                '&:hover': {
+                  backgroundColor: t.colors.green[1],
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            bottom: 0,
+            left: '50%',
+            transform: 'translateX(-50%) translateY(50%)',
+            position: 'absolute',
+            minWidth: 417,
+            maxWidth: 417,
+            '& .mantine-Button-root': {
+              width: '100%',
+              border: 'none',
+              height: 'auto',
+              fontSize: '22px',
+              fontWeight: 400,
+              borderRadius: 20,
+              padding: '25px 10px',
+              color: t.colors.gray[0],
+              backgroundColor: t.colors.green[6],
+              textAlign: 'center',
+              boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+              '> div > span': {
+                gap: 20,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                '& svg': {
+                  width: 24,
+                  height: 24,
+                },
+              },
+            },
+          },
+        },
+      }}
+    >
+      <Box className="menu-inner">
+        <Box className="menu-column categories">
+          <Box className="search-bar">
+            <TextInput className="search-input" placeholder="Kategori Ara" />
+            <Button
+              onClick={() => setAddNewView(!addNewView)}
+              variant="default"
+              className="add-new-btn"
+            >
+              <CustomPlusIcon />
+            </Button>
+          </Box>
+          <Box className="category-elm-container">
+            {mockDocCategories.map((category, i) => (
+              <Box
+                data-selected={SC === i}
+                onClick={() => {
+                  if (addNewView) setAddNewView(false);
+                  setSc(i);
+                }}
+                className="category-elm"
+                key={`ct-elm-${i}`}
+              >
+                <Box className="category-content">
+                  <Text className="category-name">{category.name}</Text>
+                  <Text className="category-docs-count">Toplam {category.docCount} Dosya</Text>
+                </Box>
+                <Button variant="default" className="arrow-btn">
+                  <CustomChevronRight />
+                </Button>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+        <AnimatePresence mode="popLayout">
+          {!addNewView && (
+            <Box
+              exit={{ opacity: 0 }}
+              component={motion.div}
+              key={`for-ct-elm-${SC}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="menu-column category-docs"
+              transition={{ damping: 30, type: 'spring', stiffness: 200 }}
+            >
+              <Box className="category-header">
+                <Text className="category-name">{mockDocCategories[SC].name} için</Text>
+                <Text className="category-label">Döküman Ekle</Text>
+              </Box>
+              <Box className="category-name-group">
+                <Text className="section-title">Dosya Adı</Text>
+                <TextInput className="doc-name-input" placeholder="Text" />
+              </Box>
+              <Box className="category-file-group">
+                <Text className="section-title">Dosya Yükleyin</Text>
+                <Dropzone className="doc-dropzone" onDrop={() => null}>
+                  <UploadCloudIcon />
+                  <Text className="dropzone-label">DESTEKLENEN İÇERİKLER</Text>
+                  <Text className="dropzone-types">
+                    <Text span>Word</Text>
+                    <Text span>Excel</Text>
+                    <Text span>PDF</Text>
+                  </Text>
+                </Dropzone>
+              </Box>
+            </Box>
+          )}
+          {addNewView && (
+            <Box
+              key="add-new-ct"
+              exit={{ opacity: 0 }}
+              component={motion.div}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="menu-column add-new"
+              transition={{ damping: 30, type: 'spring', stiffness: 200 }}
+            >
+              <Box className="add-new-header">
+                <Text className="label">Dökümanlar İçin</Text>
+                <Text className="title">Yeni Kategori Ekle</Text>
+              </Box>
+              <Box className="category-name-group">
+                <Text className="section-title">Kategori Adı Belirleyin</Text>
+                <TextInput className="category-name-input" placeholder="Text" />
+              </Box>
+              <Button variant="default" className="save-btn">
+                <Text>Kategoriyi Kaydet</Text>
+              </Button>
+            </Box>
+          )}
+        </AnimatePresence>
+        <Menu.Item closeMenuOnClick className="menu-save-btn">
+          <Button variant="default">
+            <CustomPlusIcon />
+            <Text>Döküman Ekle</Text>
+          </Button>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
 
 const mockFolderCt = [
   {
@@ -287,29 +770,34 @@ function FilesByCategory() {
           </Box>
         ))}
       </Box>
-      <Button
-        variant="default"
-        sx={{
-          gap: 22,
-          width: '100%',
-          color: '#000',
-          height: 'auto',
-          display: 'flex',
-          fontWeight: 400,
-          borderRadius: 15,
-          fontSize: '22px',
-          padding: '20px 10px',
-          alignItems: 'center',
-          border: '1px solid #000 ',
-          justifyContent: 'center',
-          backgroundColor: 'transparent!important',
-        }}
-      >
-        <UploadDocumentIcon width={24} height={24} />
-        <Text color="currentColor" ml={22}>
-          Döküman Ekle
-        </Text>
-      </Button>
+      <Menu position="top">
+        <Menu.Target>
+          <Button
+            variant="default"
+            sx={{
+              gap: 22,
+              width: '100%',
+              color: '#000',
+              height: 'auto',
+              display: 'flex',
+              fontWeight: 400,
+              borderRadius: 15,
+              fontSize: '22px',
+              padding: '20px 10px',
+              alignItems: 'center',
+              border: '1px solid #000 ',
+              justifyContent: 'center',
+              backgroundColor: 'transparent!important',
+            }}
+          >
+            <UploadDocumentIcon width={24} height={24} />
+            <Text color="currentColor" ml={22}>
+              Döküman Ekle
+            </Text>
+          </Button>
+        </Menu.Target>
+        <AddDocMenu />
+      </Menu>
     </Box>
   );
 }
