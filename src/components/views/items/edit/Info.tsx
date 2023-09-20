@@ -2,6 +2,7 @@
 import 'dayjs/locale/tr';
 import React from 'react';
 import dayjs from 'dayjs';
+import { Dropzone } from '@mantine/dropzone';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
 import allUserIcons from '@/components/icons/user.icons';
@@ -10,7 +11,18 @@ import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
 import EditTextEditor from '@/components/views/items/edit/TextEditor';
 import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
 import ItemFinancialInfo from '@/components/views/items/edit/ItemFinancialInfo';
-import { Box, Button, Image, Menu, Sx, Table, Text, TextInput, Textarea } from '@mantine/core';
+import {
+  Sx,
+  Box,
+  Menu,
+  Text,
+  Image,
+  Table,
+  Button,
+  Checkbox,
+  Textarea,
+  TextInput,
+} from '@mantine/core';
 
 import {
   DocIcon,
@@ -33,6 +45,8 @@ import {
   DownloadCloudIcon,
   RightIndicatorArrow,
   CustomSmoothTooltipIllustration,
+  ImageLightIcon,
+  CustomChevronRight,
 } from '@/components/icons';
 
 import {
@@ -616,6 +630,425 @@ function AddNewInfoCtgMenu() {
   );
 }
 
+function AddNewSupplierMenu() {
+  const [suppliedItemsMenu, setSuppliedItemsMenu] = React.useState<boolean>(false);
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        marginTop: -55,
+        border: 'none',
+        minWidth: 417,
+        maxWidth: 417,
+        height: 'auto',
+        display: 'flex',
+        paddingRight: 30,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        '& .menu-content': {
+          gap: 5,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          '& .menu-inner': {
+            gap: 20,
+            padding: 30,
+            display: 'flex',
+            borderRadius: 20,
+            overflow: 'hidden',
+            position: 'relative',
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            backgroundColor: '#fff',
+            justifyContent: 'flex-start',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            '& .supplied-items-menu': {
+              gap: 30,
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              padding: 30,
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              borderRadius: 20,
+              position: 'absolute',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              backgroundColor: '#fff',
+              justifyContent: 'flex-start',
+              '& .menu-header': {
+                gap: 15,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                '& .back-button': {
+                  padding: 5,
+                  border: 'none',
+                  height: 'auto',
+                  borderRadius: 100,
+                  color: t.colors.gray[9],
+                  backgroundColor: `${t.colors.gray[2]}!important`,
+                  '& svg': {
+                    width: 24,
+                    height: 24,
+                    transform: 'rotate(180deg)',
+                  },
+                },
+                '& .section-title': {
+                  fontWeight: 500,
+                  fontSize: '15px',
+                  color: t.colors.gray[6],
+                },
+              },
+              '& .selected-products': {
+                gap: 10,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                '& .s-product-item': {
+                  gap: 8,
+                  display: 'flex',
+                  fontWeight: 400,
+                  fontSize: '15px',
+                  borderRadius: 100,
+                  padding: '10px 13px',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  color: t.colors.blue[7],
+                  backgroundColor: t.colors.blue[0],
+                  '& .mantine-Button-root': {
+                    padding: 0,
+                    height: 'auto',
+                    border: 'none',
+                    color: t.colors.blue[5],
+                    backgroundColor: 'transparent!important',
+                    '& svg': {
+                      width: 14,
+                      height: 14,
+                    },
+                  },
+                },
+              },
+              '& .checkboxes-area': {
+                gap: 10,
+                display: 'flex',
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                '& .search-input input': {
+                  padding: 20,
+                  border: 'none',
+                  height: 'auto',
+                  lineHeight: 1,
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  borderRadius: 10,
+                  color: 'rgba(0,0,0,0.5)',
+                  backgroundColor: t.colors.gray[1],
+                },
+                '& .checkboxes-container': {
+                  gap: 10,
+                  display: 'flex',
+                  maxHeight: 500,
+                  overflowY: 'auto',
+                  borderRadius: 10,
+                  alignItems: 'stretch',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  '& .checkbox-item': {
+                    width: '100%',
+                    lineHeight: 1,
+                    fontWeight: 400,
+                    fontSize: '15px',
+                    backgroundColor: 'transparent',
+                    "& input[type='checkbox']:checked": {
+                      borderColor: '#000',
+                      backgroundColor: '#000',
+                    },
+                    '& .mantine-Checkbox-inner': {
+                      padding: 10,
+                      paddingLeft: 0,
+                      '& svg': {
+                        marginTop: 15.5,
+                      },
+                    },
+                    '& .mantine-Checkbox-labelWrapper': {
+                      width: '100%',
+                      '& .mantine-Checkbox-label': {
+                        padding: 10,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            '& .section-title': {
+              opacity: 0.5,
+              lineHeight: 1,
+              fontWeight: 500,
+              fontSize: '15px',
+              color: t.colors.gray[6],
+            },
+            '& .logo-dropzone': {
+              padding: 20,
+              minHeight: 120,
+              border: 'none',
+              display: 'flex',
+              borderRadius: 20,
+              textAlign: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              backgroundColor: t.colors.gray[1],
+              '& .mantine-Dropzone-inner': {
+                gap: 10,
+                color: '#000',
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                '& svg': {
+                  width: 60,
+                  height: 60,
+                },
+                '& .drop-text': {
+                  lineHeight: 1.2,
+                  fontWeight: 400,
+                  fontSize: '22px',
+                  textAlign: 'left',
+                  whiteSpace: 'pre-wrap',
+                },
+              },
+            },
+            '& .menu-header': {
+              gap: 25,
+              display: 'flex',
+              paddingTop: 10,
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .supplier-name input': {
+                padding: 0,
+                height: 'auto',
+                border: 'none',
+                lineHeight: 1,
+                fontWeight: 400,
+                fontSize: '22px',
+                paddingBottom: 18,
+                borderBottom: `1px solid ${t.colors.gray[3]}`,
+              },
+            },
+            '& .input-section': {
+              gap: 15,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .section-header': {
+                gap: 5,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                '& .section-button': {
+                  padding: 0,
+                  opacity: 0.5,
+                  height: 'auto',
+                  border: 'none',
+                  borderRadius: 0,
+                  color: t.colors.gray[9],
+                  textDecoration: 'underline',
+                  backgroundColor: 'transparent!important',
+                },
+              },
+              '& .section-input input': {
+                padding: 20,
+                border: 'none',
+                height: 'auto',
+                lineHeight: 1,
+                fontSize: '15px',
+                fontWeight: 500,
+                borderRadius: 10,
+                color: 'rgba(0,0,0,0.5)',
+                backgroundColor: t.colors.gray[1],
+              },
+              '& .view-change-btn': {
+                padding: 20,
+                border: 'none',
+                height: 'auto',
+                color: '#000',
+                borderRadius: 10,
+                backgroundColor: t.colors.gray[1],
+                transition: 'all 0.2s ease-in-out',
+                '> div > span': {
+                  gap: 5,
+                  width: '100%',
+                  lineHeight: 1,
+                  display: 'flex',
+                  fontWeight: 500,
+                  fontSize: '15px',
+                  alignItems: 'center',
+                  color: 'rgba(0,0,0,0.5)',
+                  justifyContent: 'space-between',
+                  '& svg': {
+                    width: 24,
+                    height: 24,
+                  },
+                },
+                '&:hover': {
+                  backgroundColor: t.colors.gray[3],
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            border: 'none',
+            width: '100%',
+            height: 'auto',
+            fontSize: '22px',
+            fontWeight: 400,
+            borderRadius: 20,
+            padding: '25px 10px',
+            color: t.colors.gray[0],
+            backgroundColor: t.colors.green[6],
+            textAlign: 'center',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          },
+          '& .c-tooltip': {
+            zIndex: 2,
+            width: 80,
+            height: 80,
+            top: '25px',
+            right: -22.5,
+            color: '#fff',
+            position: 'absolute',
+            transform: 'rotate(180deg)',
+            filter: 'drop-shadow(0px 7px 44px rgba(104, 48, 48, 0.1))',
+          },
+        },
+      }}
+    >
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Dropzone className="logo-dropzone" onDrop={() => null}>
+            <ImageLightIcon />
+            <Text className="drop-text">{'Logo\nEkle'}</Text>
+          </Dropzone>
+          <Box className="menu-header">
+            <Text className="section-title">Tedarikçi Adı</Text>
+            <TextInput className="supplier-name" placeholder="Tedarikçi Adı" />
+          </Box>
+          <Box className="input-section">
+            <Box className="section-header">
+              <Text className="section-title">Tedarikçi Yetkilisi</Text>
+            </Box>
+            <TextInput className="section-input" defaultValue="Ömer Reis El-Murtaza" />
+          </Box>
+          <Box className="input-section">
+            <Box className="section-header">
+              <Text className="section-title">Tedarikçi Telefon</Text>
+            </Box>
+            <TextInput className="section-input" defaultValue="0850 123 45 67" />
+          </Box>
+          <Box className="input-section">
+            <Box className="section-header">
+              <Text className="section-title">Tedarikçi Web Sitesi</Text>
+            </Box>
+            <TextInput className="section-input" defaultValue="www.omereiselmurtaza.com" />
+          </Box>
+          <Box className="input-section">
+            <Box className="section-header">
+              <Text className="section-title">Google Maps Url</Text>
+              <Button variant="default" className="section-button">
+                Url Al
+              </Button>
+            </Box>
+            <TextInput
+              className="section-input"
+              defaultValue="https://www.google.com/maps/place/Ayasofya+Camii..."
+            />
+          </Box>
+          <Box className="input-section">
+            <Box className="section-header">
+              <Text className="section-title">Tedarik Edilen Ürünleri Belirle</Text>
+            </Box>
+            <Button onClick={() => setSuppliedItemsMenu(true)} className="view-change-btn">
+              <Text>Tedarik Edilen Ürünler</Text>
+              <CustomChevronRight />
+            </Button>
+          </Box>
+          <AnimatePresence mode="popLayout">
+            {suppliedItemsMenu && (
+              <Box
+                component={motion.div}
+                exit={{ opacity: 0, x: 300 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="supplied-items-menu"
+                initial={{ opacity: 0, x: 300 }}
+                transition={{ duration: 0.7, ease: 'anticipate' }}
+              >
+                <Box className="menu-header">
+                  <Button
+                    variant="default"
+                    className="back-button"
+                    onClick={() => setSuppliedItemsMenu(false)}
+                  >
+                    <CustomChevronRight />
+                  </Button>
+                  <Text className="menu-title">Tedarik Edilen Ürünleri Belirle</Text>
+                </Box>
+                <Box className="selected-products">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Box key={`selected-product-${index}`} className="s-product-item">
+                      <Text>Metal</Text>
+                      <Button variant="default">
+                        <CustomXICon />
+                      </Button>
+                    </Box>
+                  ))}
+                </Box>
+                <Box className="checkboxes-area">
+                  <TextInput className="search-input" placeholder="Ara..." />
+                  <Box className="checkboxes-container">
+                    {Array.from({ length: 20 }).map((_, index) => (
+                      <Checkbox
+                        labelPosition="left"
+                        className="checkbox-item"
+                        key={`checkbox-${index}`}
+                        label="Deneme"
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+            )}
+          </AnimatePresence>
+        </Box>
+        <Menu.Item closeMenuOnClick={!suppliedItemsMenu}>
+          <Button
+            variant="default"
+            onClick={suppliedItemsMenu ? () => setSuppliedItemsMenu(false) : () => null}
+            className="menu-save-btn"
+          >
+            <Text>{suppliedItemsMenu ? 'Tedarik Öğelerini Kaydet' : 'Kaydet'}</Text>
+          </Button>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 export function ProductInfoTable({ border = true }: { border?: boolean }) {
   const MockValues = [
     {
@@ -1017,52 +1450,84 @@ function SupplierSpecBox() {
     >
       <Box
         sx={{
-          gap: 20,
+          gap: 5,
           padding: 30,
           width: '100%',
           display: 'flex',
-          alignItems: 'start',
-          justifyContent: 'center',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <Button
-          variant="default"
-          onClick={() => setView('suppliers')}
+        <Box
           sx={{
-            margin: 0,
-            padding: 0,
-            border: 'none',
-            height: 'auto',
-            fontWeight: 600,
-            fontSize: '18px',
-            lineHeight: '21.6px',
-            transition: 'all 150ms ease-in-out',
-            opacity: view === 'suppliers' ? 1 : 0.5,
-            backgroundColor: 'transparent!important',
-            color: view === 'suppliers' ? t.colors.blue[6] : '#000',
+            gap: 20,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
           }}
         >
-          <Text>Tedarikçi Detayları</Text>
-        </Button>
-        <Button
-          variant="default"
-          onClick={() => setView('manufacturers')}
-          sx={{
-            margin: 0,
-            padding: 0,
-            border: 'none',
-            height: 'auto',
-            fontWeight: 600,
-            fontSize: '18px',
-            lineHeight: '21.6px',
-            transition: 'all 150ms ease-in-out',
-            opacity: view === 'manufacturers' ? 1 : 0.5,
-            backgroundColor: 'transparent!important',
-            color: view === 'manufacturers' ? t.colors.blue[6] : '#000',
-          }}
-        >
-          <Text>Üretici Detayları</Text>
-        </Button>
+          <Button
+            variant="default"
+            onClick={() => setView('suppliers')}
+            sx={{
+              margin: 0,
+              padding: 0,
+              border: 'none',
+              height: 'auto',
+              fontWeight: 600,
+              fontSize: '18px',
+              lineHeight: '21.6px',
+              transition: 'all 150ms ease-in-out',
+              opacity: view === 'suppliers' ? 1 : 0.5,
+              backgroundColor: 'transparent!important',
+              color: view === 'suppliers' ? t.colors.blue[6] : '#000',
+            }}
+          >
+            <Text>Tedarikçi Detayları</Text>
+          </Button>
+          <Button
+            variant="default"
+            onClick={() => setView('manufacturers')}
+            sx={{
+              margin: 0,
+              padding: 0,
+              border: 'none',
+              height: 'auto',
+              fontWeight: 600,
+              fontSize: '18px',
+              lineHeight: '21.6px',
+              transition: 'all 150ms ease-in-out',
+              opacity: view === 'manufacturers' ? 1 : 0.5,
+              backgroundColor: 'transparent!important',
+              color: view === 'manufacturers' ? t.colors.blue[6] : '#000',
+            }}
+          >
+            <Text>Üretici Detayları</Text>
+          </Button>
+        </Box>
+        <Menu position="left-start">
+          <Menu.Target>
+            <Button
+              variant="default"
+              sx={{
+                color: '#fff',
+                border: 'none',
+                height: 'auto',
+                borderRadius: 100,
+                padding: '4px 10px',
+                backgroundColor: '#000!important',
+                '> div > span > svg': {
+                  width: 15,
+                  height: 15,
+                },
+              }}
+            >
+              <CustomPlusIcon />
+            </Button>
+          </Menu.Target>
+          <AddNewSupplierMenu />
+        </Menu>
       </Box>
       <Box
         {...motionProps}
