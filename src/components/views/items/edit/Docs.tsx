@@ -18,6 +18,7 @@ import {
   DownloadCloudIcon,
   FolderIllustration,
   UploadDocumentIcon,
+  CustomSmoothTooltipIllustration,
 } from '@/components/icons';
 
 import 'swiper/css';
@@ -514,6 +515,117 @@ function AddDocMenu() {
   );
 }
 
+function AddImgCtgMenu() {
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        marginTop: -20,
+        border: 'none',
+        minWidth: 417,
+        maxWidth: 417,
+        height: 'auto',
+        display: 'flex',
+        paddingRight: 30,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        transform: 'translateX(-100%)!important',
+        '& .menu-content': {
+          gap: 5,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          '& .menu-inner': {
+            gap: 30,
+            padding: 30,
+            display: 'flex',
+            borderRadius: 20,
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            backgroundColor: '#fff',
+            justifyContent: 'flex-start',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            '& .menu-header': {
+              gap: 15,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .menu-title': {
+                opacity: 0.5,
+                lineHeight: 1,
+                fontWeight: 500,
+                fontSize: '15px',
+                color: t.colors.gray[6],
+              },
+              '& .search-bar input': {
+                padding: 20,
+                lineHeight: 1,
+                height: 'auto',
+                border: 'none',
+                fontWeight: 400,
+                fontSize: '15px',
+                borderRadius: 10,
+                color: t.colors.gray[9],
+                backgroundColor: t.colors.gray[1],
+                '&::placeholder': {
+                  opacity: 0.5,
+                  color: t.colors.gray[9],
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            border: 'none',
+            width: '100%',
+            height: 'auto',
+            fontSize: '22px',
+            fontWeight: 400,
+            borderRadius: 20,
+            padding: '25px 10px',
+            color: t.colors.gray[0],
+            backgroundColor: t.colors.green[6],
+            textAlign: 'center',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          },
+          '& .c-tooltip': {
+            zIndex: 2,
+            width: 80,
+            height: 80,
+            top: '25px',
+            right: -22.5,
+            color: '#fff',
+            position: 'absolute',
+            transform: 'rotate(180deg)',
+            filter: 'drop-shadow(0px 7px 44px rgba(104, 48, 48, 0.1))',
+          },
+        },
+      }}
+    >
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Box className="menu-header">
+            <Text className="menu-title">Kategori Adı Belirle</Text>
+            <TextInput className="search-bar" placeholder="Kategori Adı" />
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Box className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Box>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
+
 const mockFolderCt = [
   {
     id: 0,
@@ -881,6 +993,93 @@ function MockImageSpecBox() {
   );
 }
 
+function ImageSpecButton({
+  text,
+  slug,
+  index,
+  onClick,
+  spec,
+  icon: Icon,
+}: {
+  text: string;
+  slug: string;
+  index: number;
+  onClick?: () => void;
+  icon?: React.ComponentType;
+  spec: { text: string; slug: string };
+}) {
+  return (
+    <Button
+      onClick={onClick}
+      sx={{
+        padding: 0,
+        height: '100%',
+        fontWeight: 400,
+        fontSize: '12px',
+        cursor: 'pointer',
+        borderRadius: 100,
+        position: 'relative',
+        transition: 'all 150ms ease-in-out',
+        border: `1px solid ${t.colors.blue[0]}`,
+        color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
+        backgroundColor: `${spec.slug === slug ? t.colors.blue[0] : 'transparent'}!important`,
+        '> div > span': {
+          gap: 11,
+          padding: 10,
+          maxWidth: 78,
+          display: 'flex',
+          alignItems: 'center',
+          lineHeight: '14.4px',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          paddingBottom: 20,
+          '& svg': {
+            width: 24,
+            height: 24,
+            transition: 'all 150ms ease-in-out',
+            color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
+          },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: 62,
+          height: 62,
+          maxWidth: 62,
+          maxHeight: 62,
+          display: 'flex',
+          borderRadius: 100,
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 150ms ease-in-out',
+          backgroundColor: spec.slug === slug ? t.colors.blue[1] : t.colors.blue[0],
+        }}
+      >
+        {(() => {
+          if (Icon) {
+            return <Icon />;
+          }
+
+          return (
+            <Text
+              sx={{
+                fontSize: '18px',
+                fontWeight: 500,
+                lineHeight: '21.6px',
+                color: spec.slug === text ? t.colors.blue[7] : t.colors.blue[3],
+              }}
+            >
+              {index + 1 < 10 ? `0${index + 1}` : index + 1}
+            </Text>
+          );
+        })()}
+      </Box>
+      <Text sx={{ whiteSpace: 'pre-wrap', textAlign: 'center' }}>{text}</Text>
+    </Button>
+  );
+}
+
 function SpecImages() {
   const ImagesSpecs = [
     {
@@ -908,112 +1107,77 @@ function SpecImages() {
       slug: 'mock-ct-3',
       component: () => <MockImageSpecBox key="mock-ct-3" />,
     },
-    {
-      icon: CustomPlusIcon,
-      text: 'Yeni\nEkle',
-      slug: 'add-new',
-      component: () => <MockImageSpecBox key="add-new" />,
-    },
   ];
 
   const [spec, setSpec] = React.useState(ImagesSpecs[0]);
   const SpecComp = spec.component;
 
   return (
-    <Box {...motionProps}>
+    <>
       <Box
-        component="ul"
+        {...motionProps}
         sx={{
-          gap: 10,
-          margin: 0,
-          padding: 0,
-          display: 'flex',
-          overflowX: 'auto',
-          flexDirection: 'row',
+          position: 'relative',
+          width: '100%',
         }}
       >
-        {ImagesSpecs.map(({ text, slug, icon: Icon }, index) => (
-          <Box
-            component="button"
-            onClick={() => setSpec(ImagesSpecs[index])}
-            key={`local-spec-${index}`}
-            sx={{
-              gap: 11,
-              padding: 10,
-              maxWidth: 78,
-              width: '100%',
-              cursor: 'pointer',
+        <Box
+          sx={{
+            gap: 10,
+            height: '100%',
+            display: 'flex',
+            maxWidth: '100%',
+            minWidth: '100%',
+            position: 'relative',
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            '& .overflow-bar': {
+              gap: 10,
               height: '100%',
               display: 'flex',
-              fontWeight: 400,
-              fontSize: '12px',
-              borderRadius: 100,
-              paddingBottom: 20,
+              overflowX: 'auto',
+              overflowY: 'hidden',
               alignItems: 'center',
-              lineHeight: '14.4px',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              transition: 'all 150ms ease-in-out',
-              border: `1px solid ${t.colors.blue[0]}`,
-              color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
-              backgroundColor: `${spec.slug === slug ? t.colors.blue[0] : 'transparent'}!important`,
-              svg: {
-                width: 24,
-                height: 24,
-                transition: 'all 150ms ease-in-out',
-                color: spec.slug === slug ? t.colors.blue[7] : t.colors.blue[3],
-              },
-            }}
-          >
-            <Box
-              sx={{
-                width: 62,
-                height: 62,
-                maxWidth: 62,
-                maxHeight: 62,
-                display: 'flex',
-                borderRadius: 100,
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 150ms ease-in-out',
-                backgroundColor: spec.slug === slug ? t.colors.blue[1] : t.colors.blue[0],
-              }}
-            >
-              {(() => {
-                if (Icon) {
-                  return <Icon />;
-                }
-
-                return (
-                  <Text
-                    sx={{
-                      fontSize: '18px',
-                      fontWeight: 500,
-                      lineHeight: '21.6px',
-                      color: spec.slug === text ? t.colors.blue[7] : t.colors.blue[3],
-                    }}
-                  >
-                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                  </Text>
-                );
-              })()}
-            </Box>
-            <Text sx={{ whiteSpace: 'pre-wrap', textAlign: 'center' }}>{text}</Text>
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+            },
+            '& .new-container': {
+              height: '100%',
+              position: 'relative',
+            },
+          }}
+        >
+          <Box className="overflow-bar">
+            {ImagesSpecs.map(({ text, slug }, index) => (
+              <ImageSpecButton
+                slug={slug}
+                spec={spec}
+                text={text}
+                index={index}
+                key={`local-spec-${index}`}
+                onClick={() => setSpec(ImagesSpecs[index])}
+              />
+            ))}
           </Box>
-        ))}
+          <Box className="new-container">
+            <Menu position="left">
+              <Menu.Target>
+                <ImageSpecButton
+                  slug="add-new"
+                  spec={spec}
+                  text={'Yeni\nEkle'}
+                  icon={CustomPlusIcon}
+                  index={ImagesSpecs.length}
+                />
+              </Menu.Target>
+              <AddImgCtgMenu />
+            </Menu>
+          </Box>
+        </Box>
       </Box>
-      <Box
-        sx={{
-          marginTop: 20,
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'start',
-        }}
-      >
-        <SpecComp />
-      </Box>
-    </Box>
+      <SpecComp />
+    </>
   );
 }
 
@@ -1555,6 +1719,7 @@ function EditItemDocs() {
           width: '100%',
           height: '100%',
           display: 'flex',
+          position: 'relative',
           alignItems: 'center',
           flexDirection: 'column',
           justifyContent: 'flex-start',
@@ -1573,6 +1738,7 @@ function EditItemDocs() {
           width: '100%',
           height: '100%',
           display: 'flex',
+          position: 'relative',
           flexDirection: 'column',
           alignContent: 'flex-start',
           justifyContent: 'flex-start',
