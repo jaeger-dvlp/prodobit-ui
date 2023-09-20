@@ -4,12 +4,13 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { ProdobitAppTheme as t } from '@/theme';
 import { AnimatePresence, motion } from 'framer-motion';
+import allUserIcons from '@/components/icons/user.icons';
 import DayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import ItemMainInfo from '@/components/views/items/edit/ItemMainInfo';
 import EditTextEditor from '@/components/views/items/edit/TextEditor';
 import ItemStatusBar from '@/components/views/items/edit/ItemStatusBar';
-import { Box, Button, Image, Menu, Sx, Table, Text, TextInput, Textarea } from '@mantine/core';
 import ItemFinancialInfo from '@/components/views/items/edit/ItemFinancialInfo';
+import { Box, Button, Image, Menu, Sx, Table, Text, TextInput, Textarea } from '@mantine/core';
 
 import {
   DocIcon,
@@ -432,6 +433,188 @@ function EditMenu() {
     </Menu.Dropdown>
   );
 }
+function AddNewInfoCtgMenu() {
+  const Icons = allUserIcons.map((Icon, index) => ({
+    name: `Icon-${index}`,
+    icon: Icon,
+  }));
+
+  const [scIcon, setScIcon] = React.useState(0);
+
+  return (
+    <Menu.Dropdown
+      sx={{
+        margin: 0,
+        padding: 0,
+        marginTop: -20,
+        border: 'none',
+        minWidth: 417,
+        maxWidth: 417,
+        height: 'auto',
+        display: 'flex',
+        paddingRight: 30,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        transform: 'translateX(-100%)!important',
+        '& .menu-content': {
+          gap: 5,
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          '& .menu-inner': {
+            gap: 40,
+            padding: 30,
+            display: 'flex',
+            borderRadius: 20,
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            backgroundColor: '#fff',
+            justifyContent: 'flex-start',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+            '& .menu-title': {
+              opacity: 0.5,
+              lineHeight: 1,
+              fontWeight: 500,
+              fontSize: '15px',
+              color: t.colors.gray[6],
+            },
+            '& .menu-header': {
+              gap: 15,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .ctg-name input': {
+                padding: 20,
+                lineHeight: 1,
+                height: 'auto',
+                border: 'none',
+                fontWeight: 400,
+                fontSize: '15px',
+                borderRadius: 10,
+                color: t.colors.gray[9],
+                backgroundColor: t.colors.gray[1],
+                '&::placeholder': {
+                  opacity: 0.5,
+                  color: t.colors.gray[9],
+                },
+              },
+            },
+            '& .icon-area': {
+              gap: 25,
+              display: 'flex',
+              alignItems: 'stretch',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              '& .icon-name': {
+                margin: 0,
+                height: 'auto',
+                border: 'none',
+                fontWeight: 500,
+                borderRadius: 0,
+                fontSize: '31px',
+                color: t.colors.gray[9],
+                padding: '0px 0px 18px 0px',
+                borderBottom: `1px solid ${t.colors.gray[3]}`,
+              },
+              '& .icons': {
+                gap: 25,
+                marginTop: 20,
+                maxHeight: 294,
+                display: 'flex',
+                borderRadius: 10,
+                flexWrap: 'wrap',
+                overflowY: 'auto',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                '& .icon-btn': {
+                  padding: 10,
+                  height: 'auto',
+                  border: 'none',
+                  borderRadius: 10,
+                  backgroundColor: 'transparent',
+                  transition: 'all 0.2s ease-in-out',
+                  "&[data-selected-icon='true']": {
+                    backgroundColor: t.colors.gray[3],
+                  },
+                  "&[data-selected-icon='false']:hover": {
+                    backgroundColor: t.colors.gray[2],
+                  },
+                  '& svg': {
+                    width: 24,
+                    height: 24,
+                    color: t.colors.gray[9],
+                  },
+                },
+              },
+            },
+          },
+          '& .menu-save-btn': {
+            border: 'none',
+            width: '100%',
+            height: 'auto',
+            fontSize: '22px',
+            fontWeight: 400,
+            borderRadius: 20,
+            padding: '25px 10px',
+            color: t.colors.gray[0],
+            backgroundColor: t.colors.green[6],
+            textAlign: 'center',
+            boxShadow: '0px 37px 44px -13px rgba(104, 48, 48, 0.10)',
+          },
+          '& .c-tooltip': {
+            zIndex: 2,
+            width: 80,
+            height: 80,
+            top: '25px',
+            right: -22.5,
+            color: '#fff',
+            position: 'absolute',
+            transform: 'rotate(180deg)',
+            filter: 'drop-shadow(0px 7px 44px rgba(104, 48, 48, 0.1))',
+          },
+        },
+      }}
+    >
+      <Box className="menu-content">
+        <CustomSmoothTooltipIllustration className="c-tooltip" />
+        <Box className="menu-inner">
+          <Box className="menu-header">
+            <Text className="menu-title">İsim Belirleyin</Text>
+            <TextInput className="ctg-name" placeholder="Kategori İsmi (Maks 2 Kelime)" />
+          </Box>
+          <Box className="icon-area">
+            <Text className="menu-title">İcon Belirleyin</Text>
+            <Text className="icon-name">{Icons[scIcon] && Icons[scIcon].name}</Text>
+            <Box className="icons">
+              {Icons.map(({ icon: Icon }, index) => (
+                <Button
+                  className="icon-btn"
+                  key={`icon-selector-${index}`}
+                  onClick={() => setScIcon(index)}
+                  data-selected-icon={scIcon === index}
+                >
+                  <Icon />
+                </Button>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+        <Menu.Item closeMenuOnClick>
+          <Button variant="default" className="menu-save-btn">
+            <Text>Kaydet</Text>
+          </Button>
+        </Menu.Item>
+      </Box>
+    </Menu.Dropdown>
+  );
+}
 
 export function ProductInfoTable({ border = true }: { border?: boolean }) {
   const MockValues = [
@@ -613,6 +796,73 @@ function ProductPlaceholderBox({ text }: { text: string }) {
   );
 }
 
+function InfoSpecButton({
+  Icon,
+  text,
+  spec,
+  onClick,
+}: {
+  Icon: React.FC<any>;
+  text: string;
+  spec: { text: string };
+  onClick?: () => void;
+}) {
+  return (
+    <Button
+      variant="default"
+      component="button"
+      onClick={onClick}
+      sx={{
+        padding: 0,
+        height: '100%',
+        fontWeight: 400,
+        fontSize: '12px',
+        cursor: 'pointer',
+        borderRadius: 100,
+        lineHeight: '14.4px',
+        border: `1px solid ${t.colors.blue[0]}`,
+        transition: 'all 150ms ease-in-out',
+        color: spec.text === text ? t.colors.blue[7] : t.colors.blue[3],
+        backgroundColor: `${spec.text === text ? t.colors.blue[0] : 'transparent'}!important`,
+        '> div > span': {
+          gap: 11,
+          padding: 10,
+          maxWidth: 78,
+          display: 'flex',
+          paddingBottom: 20,
+          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          '& svg': {
+            width: 24,
+            height: 24,
+            transition: 'all 150ms ease-in-out',
+            color: spec.text === text ? t.colors.blue[7] : t.colors.blue[3],
+          },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: 62,
+          height: 62,
+          maxWidth: 62,
+          maxHeight: 62,
+          display: 'flex',
+          borderRadius: 100,
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 150ms ease-in-out',
+          backgroundColor: spec.text === text ? t.colors.blue[1] : 'transparent',
+        }}
+      >
+        <Icon />
+      </Box>
+      <Text sx={{ whiteSpace: 'pre-wrap', textAlign: 'center' }}>{text}</Text>
+    </Button>
+  );
+}
+
 export function InfoSpecBox({ noTableBorder = false }: { noTableBorder?: boolean }) {
   const localSpecs = [
     {
@@ -629,11 +879,6 @@ export function InfoSpecBox({ noTableBorder = false }: { noTableBorder?: boolean
       icon: Canlde2Icon,
       text: 'Öğe\nSeçeneği',
       component: () => <ProductPlaceholderBox text="Seçenekler henüz eklenmedi" />,
-    },
-    {
-      icon: CustomPlusIcon,
-      text: 'Yeni\nEkle',
-      component: () => <ProductPlaceholderBox text="Yeni özellik eklemek için tıklayın" />,
     },
   ];
   const [spec, setSpec] = React.useState(localSpecs[0]);
@@ -652,71 +897,55 @@ export function InfoSpecBox({ noTableBorder = false }: { noTableBorder?: boolean
       }}
     >
       <Box
-        component="ul"
         sx={{
           gap: 10,
-          margin: 0,
-          padding: 0,
           width: '100%',
           display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'start',
+          maxWidth: '100%',
+          minWidth: '100%',
+          alignItems: 'center',
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
         }}
       >
-        {localSpecs.map(({ icon: Icon, text }, index) => (
-          <Box
-            component="button"
-            onClick={() => setSpec(localSpecs[index])}
-            key={`local-spec-${index}`}
-            sx={{
-              gap: 11,
-              padding: 10,
-              maxWidth: 78,
-              width: '100%',
-              border: `1px solid ${t.colors.blue[0]}`,
-              cursor: 'pointer',
-              height: '100%',
-              display: 'flex',
-              fontWeight: 400,
-              fontSize: '12px',
-              borderRadius: 100,
-              paddingBottom: 20,
-              alignItems: 'center',
-              lineHeight: '14.4px',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              transition: 'all 150ms ease-in-out',
-              color: spec.text === text ? t.colors.blue[7] : t.colors.blue[3],
-              backgroundColor: `${spec.text === text ? t.colors.blue[0] : 'transparent'}!important`,
-              svg: {
-                width: 24,
-                height: 24,
-                transition: 'all 150ms ease-in-out',
-                color: spec.text === text ? t.colors.blue[7] : t.colors.blue[3],
-              },
-            }}
-          >
-            <Box
-              sx={{
-                width: 62,
-                height: 62,
-                maxWidth: 62,
-                maxHeight: 62,
-                display: 'flex',
-                borderRadius: 100,
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 150ms ease-in-out',
-                backgroundColor: spec.text === text ? t.colors.blue[1] : 'transparent',
-              }}
-            >
-              <Icon />
-            </Box>
-            <Text sx={{ whiteSpace: 'pre-wrap', textAlign: 'center' }}>{text}</Text>
-          </Box>
-        ))}
+        <Box
+          component="ul"
+          sx={{
+            gap: 10,
+            margin: 0,
+            padding: 0,
+            width: 'auto',
+            display: 'flex',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            alignItems: 'start',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+          }}
+        >
+          {localSpecs.map(({ icon: Icon, text }, index) => (
+            <InfoSpecButton
+              Icon={Icon}
+              text={text}
+              spec={spec}
+              key={`local-spec-${index}`}
+              onClick={() => setSpec(localSpecs[index])}
+            />
+          ))}
+        </Box>
+        <Box
+          sx={{
+            height: '100%',
+            position: 'relative',
+          }}
+        >
+          <Menu position="left">
+            <Menu.Target>
+              <InfoSpecButton Icon={CustomPlusIcon} text={'Yeni\nEkle'} spec={spec} />
+            </Menu.Target>
+            <AddNewInfoCtgMenu />
+          </Menu>
+        </Box>
       </Box>
       <Box
         sx={{
